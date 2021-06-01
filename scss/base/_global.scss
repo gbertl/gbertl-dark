@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  outline: none;
 }
 
 body {
@@ -17,6 +18,7 @@ body {
 
 img {
   max-width: 100%;
+  display: block;
 }
 
 h1,
@@ -55,4 +57,12 @@ h2 {
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--clr-primary);
+}
+
+button {
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: 16px;
+  display: inline-block;
+  cursor: pointer;
 }

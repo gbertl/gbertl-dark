@@ -1,5 +1,7 @@
-@import "root";
-@import "global";
-@import "utilities";
-@import "about";
-@import "bg-animation-effect";
+@import "mixins";
+@import "base/root";
+@import "base/global";
+@import "base/utilities";
+@import "components/about";
+@import "components/bg-animation-effect";
+@import "components/portfolio";

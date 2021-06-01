@@ -16,7 +16,7 @@
   <body>
     <div class="bg-animation-effect"></div>
 
-    <section class="about">
+    <section class="about hidden">
       <div class="container about__container">
         <div class="px-15">
           <img src="img/me.jpg" alt="" class="about__img" />
@@ -44,6 +44,207 @@
               <li class="skills__item">Css</li>
               <li class="skills__item">Javascript</li>
             </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio">
+      <div class="container portfolio__container">
+        <h2 class="portfolio__heading">Recent Works</h2>
+
+        <ul class="flex justify-center filter">
+          <li>
+            <button
+              title="Show All Works"
+              data-filter="all"
+              class="filter__button filter__button--active"
+            >
+              All
+            </button>
+          </li>
+          <li>
+            <button
+              title="Filter by React"
+              data-filter="react"
+              class="filter__button"
+            >
+              React
+            </button>
+          </li>
+          <li>
+            <button
+              title="Filter by Django"
+              data-filter="django"
+              class="filter__button"
+            >
+              Django
+            </button>
+          </li>
+          <li>
+            <button
+              title="Filter by PHP"
+              data-filter="php"
+              class="filter__button"
+            >
+              Php
+            </button>
+          </li>
+        </ul>
+
+        <div class="portfolio-item-wrapper">
+          <div data-category="django" class="portfolio-item">
+            <div class="portfolio-item__thumbnail">
+              <img src="img/dili/dashboard.png" alt="" />
+              <div class="portfolio-item__btn center">
+                <button class="btn btn-primary">More Info</button>
+              </div>
+            </div>
+            <h3 class="portfolio-item__heading">Barangay Dili System</h3>
+            <div class="portfolio-item__details hidden">
+              <p class="portfolio-item__desc">
+                This was a project I developed in 2017. The system stored
+                residents data in the barangay for officials and admins to view,
+                and manage. This is our thesis back in college, we were consist
+                of 3 individuals and I am the lead developer and designer of
+                this project.
+              </p>
+              <ul class="portfolio-item__general-info">
+                <li>Created - <span>2017</span></li>
+                <li>
+                  Technologies Used -
+                  <span>Python, Django, jQuery, MySQL, Google Maps API</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div data-category="django" class="portfolio-item">
+            <div class="portfolio-item__thumbnail">
+              <img src="img/sjnhs/vote.png" alt="" />
+              <div class="portfolio-item__btn center">
+                <button class="btn btn-primary">More Info</button>
+              </div>
+            </div>
+            <h3 class="portfolio-item__heading">SJNHS Voting System</h3>
+            <div class="portfolio-item__details hidden">
+              <p class="portfolio-item__desc">
+                A college student asked me to build a voting system for their
+                thesis. I used native PHP for the backend and Bootstrap for
+                styling.
+              </p>
+              <ul class="portfolio-item__general-info">
+                <li>Created - <span>2017</span></li>
+                <li>
+                  Technologies Used -
+                  <span>PHP, jQuery, MySQL, Bootstrap</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div data-category="django" class="portfolio-item">
+            <div class="portfolio-item__thumbnail">
+              <img src="img/amazon/landing.png" alt="" />
+              <div class="portfolio-item__btn center">
+                <button class="btn btn-primary">More Info</button>
+              </div>
+            </div>
+            <h3 class="portfolio-item__heading">Amazon Clone</h3>
+            <div class="portfolio-item__details hidden">
+              <p class="portfolio-item__desc">
+                A project where you can create a product, add products to cart,
+                do a payment, and watch your order history. Inspired from
+                <a
+                  href="https://www.youtube.com/watch?v=RDV3Z1KCBvo"
+                  target="_blank"
+                  >this</a
+                >
+                8hrs youtube video by Clever Programmer.
+              </p>
+              <ul class="portfolio-item__general-info">
+                <li>Created - <span>2021</span></li>
+                <li>
+                  Technologies Used -
+                  <span>React, StripeJS, Firebase</span>
+                </li>
+                <li>
+                  View Online -
+                  <span
+                    ><a href="https://clone-1e474.web.app/" target="_blank"
+                      >https://clone-1e474.web.app/</a
+                    ></span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div data-category="django" class="portfolio-item">
+            <div class="portfolio-item__thumbnail">
+              <img src="img/netflix/landing.png" alt="" />
+              <div class="portfolio-item__btn center">
+                <button class="btn btn-primary">More Info</button>
+              </div>
+            </div>
+            <h3 class="portfolio-item__heading">Netflix Clone</h3>
+            <div class="portfolio-item__details hidden">
+              <p class="portfolio-item__desc">
+                Built using React and Redux. The data used was fetched from
+                themoviedb API using Axios. User authentication implemented,
+                subscription plan implemented using StripeJS. Inspired from
+                <a
+                  href="https://www.youtube.com/watch?v=CLMo0W7mTVo&list=PLf16UKl7nR5DaxECWIwHr82oXtQWgI4Ri"
+                  target="_blank"
+                  >this</a
+                >
+                youtube playlist by Sonny Sangha.
+              </p>
+              <ul class="portfolio-item__general-info">
+                <li>Created - <span>2021</span></li>
+                <li>
+                  Technologies Used -
+                  <span>React, StripeJS, Firebase</span>
+                </li>
+                <li>
+                  View Online
+                  <span
+                    ><a
+                      href="https://netflixclone-d2648.web.app/"
+                      target="_blank"
+                      >https://netflixclone-d2648.web.app/</a
+                    ></span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div data-category="django" class="portfolio-item">
+            <div class="portfolio-item__thumbnail">
+              <img src="img/portfolio/landing.png" alt="" />
+              <div class="portfolio-item__btn center">
+                <button class="btn btn-primary">More Info</button>
+              </div>
+            </div>
+            <h3 class="portfolio-item__heading">Portfolio Website</h3>
+            <div class="portfolio-item__details hidden">
+              <p class="portfolio-item__desc">
+                A minimalist portfolio website I made to showcase my skills,
+                past projects and more.
+              </p>
+              <ul class="portfolio-item__general-info">
+                <li>Created - <span>2021</span></li>
+                <li>
+                  Technologies Used -
+                  <span>React, HTML5, SCSS, CSS3</span>
+                </li>
+                <li>
+                  View Online
+                  <span>
+                    <a href="https://devgilbertlc.web.app/" target="_blank"
+                      >https://devgilbertlc.web.app/</a
+                    ></span
+                  >
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
