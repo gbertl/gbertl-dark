@@ -19,7 +19,8 @@ body {
   font-weight: 300;
   background-color: var(--clr-dark);
   color: var(--clr-light-white);
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  overflow-y: hidden; }
 
 img {
   max-width: 100%;
@@ -120,6 +121,24 @@ button {
   .btn-primary {
     --bg-btn: var(--clr-primary);
     --clr-btn: var(--clr-white); }
+
+.align-center {
+  align-items: center; }
+
+.justify-between {
+  justify-content: space-between; }
+
+.mr-5 {
+  margin-right: 5px; }
+
+.mb-10 {
+  margin-bottom: 10px; }
+
+.mt-30 {
+  margin-top: 30px; }
+
+.mb-15 {
+  margin-bottom: 15px; }
 
 .about {
   text-align: center; }
@@ -259,8 +278,78 @@ button {
   font-size: 20px;
   margin: 10px 0 5px; }
 
-.portfolio-item img {
+.portfolio-item__img {
   width: 100%;
   height: 200px;
   object-fit: cover;
   object-position: top left; }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999; }
+  .modal::before, .modal::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background-color: var(--clr-light-dark);
+    z-index: -1; }
+  .modal::before {
+    top: 0;
+    left: 0; }
+  .modal::after {
+    right: 0;
+    bottom: 0; }
+  .modal__overlay {
+    height: 100vh;
+    overflow-y: auto; }
+  .modal__content {
+    max-width: 850px;
+    margin: 50px auto 60px; }
+  .modal__header {
+    position: relative; }
+  .modal__counter-wrapper {
+    margin-bottom: 15px;
+    padding-right: 50px;
+    gap: 10px;
+    font-size: 20px; }
+  .modal__close {
+    width: 40px;
+    height: 40px;
+    background-color: var(--clr-dark);
+    border: none;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0; }
+    .modal__close::before, .modal__close::after {
+      content: "";
+      width: 20px;
+      height: 2px;
+      background-color: var(--clr-light-white);
+      position: absolute;
+      transition: transform 0.3s; }
+    .modal__close::before {
+      transform: rotate(45deg); }
+    .modal__close::after {
+      transform: rotate(-45deg); }
+    .modal__close:hover::before, .modal__close:hover::after {
+      transform: rotate(0); }
+  .modal__thumbnail {
+    padding: 20px 0; }
+  .modal__body {
+    padding: 15px 0; }
+  .modal__footer {
+    padding: 40px 0 0; }
+  .modal__small-img {
+    max-width: 120px; }
+  .modal__next-work {
+    flex-direction: column;
+    align-items: flex-end; }
+
+.portfolio-item__desc {
+  margin-bottom: 30px; }
