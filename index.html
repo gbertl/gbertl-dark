@@ -70,6 +70,24 @@
           </li>
           <li>
             <button
+              title="Filter by Front-End"
+              data-filter="front-end"
+              class="filter__button"
+            >
+              Front-End
+            </button>
+          </li>
+          <li>
+            <button
+              title="Filter by Back-End"
+              data-filter="back-end"
+              class="filter__button"
+            >
+              Back-End
+            </button>
+          </li>
+          <li>
+            <button
               title="Filter by Bootstrap"
               data-filter="bootstrap"
               class="filter__button"
@@ -77,133 +95,14 @@
               Bootstrap
             </button>
           </li>
-          <li>
-            <button
-              title="Filter by React"
-              data-filter="react"
-              class="filter__button"
-            >
-              React
-            </button>
-          </li>
-          <li>
-            <button
-              title="Filter by Django"
-              data-filter="django"
-              class="filter__button"
-            >
-              Django
-            </button>
-          </li>
-          <li>
-            <button
-              title="Filter by PHP"
-              data-filter="php"
-              class="filter__button"
-            >
-              Php
-            </button>
-          </li>
         </ul>
 
+        <div class="portfolio__filter-status center">
+          <p></p>
+        </div>
+
         <div class="portfolio-item-wrapper">
-          <div data-category="django,bootstrap" class="portfolio-item">
-            <div class="portfolio-item__thumbnail">
-              <img
-                src="img/dili/dashboard.png"
-                alt=""
-                class="portfolio-item__img"
-              />
-              <div class="portfolio-item__btn center">
-                <button class="btn btn-primary">More Info</button>
-              </div>
-            </div>
-            <h3 class="portfolio-item__heading">Barangay Dili System</h3>
-            <div class="portfolio-item__details hidden">
-              <p class="portfolio-item__desc">
-                This was a project I developed in 2017. The system stored
-                residents data in the barangay for officials and admins to view,
-                and manage. This is our thesis back in college, we were consist
-                of 3 individuals and I am the lead developer and designer of
-                this project.
-              </p>
-              <ul class="portfolio-item__general-info">
-                <li>Created - <span>2017</span></li>
-                <li>
-                  Technologies Used -
-                  <span>Python, Django, jQuery, MySQL, Google Maps API</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div data-category="php,bootstrap" class="portfolio-item">
-            <div class="portfolio-item__thumbnail">
-              <img
-                src="img/sjnhs/vote.png"
-                alt=""
-                class="portfolio-item__img"
-              />
-              <div class="portfolio-item__btn center">
-                <button class="btn btn-primary">More Info</button>
-              </div>
-            </div>
-            <h3 class="portfolio-item__heading">SJNHS Voting System</h3>
-            <div class="portfolio-item__details hidden">
-              <p class="portfolio-item__desc">
-                A college student asked me to build a voting system for their
-                thesis. I used native PHP for the backend and Bootstrap for
-                styling.
-              </p>
-              <ul class="portfolio-item__general-info">
-                <li>Created - <span>2017</span></li>
-                <li>
-                  Technologies Used -
-                  <span>PHP, jQuery, MySQL, Bootstrap</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div data-category="react" class="portfolio-item">
-            <div class="portfolio-item__thumbnail">
-              <img
-                src="img/amazon/landing.png"
-                alt=""
-                class="portfolio-item__img"
-              />
-              <div class="portfolio-item__btn center">
-                <button class="btn btn-primary">More Info</button>
-              </div>
-            </div>
-            <h3 class="portfolio-item__heading">Amazon Clone</h3>
-            <div class="portfolio-item__details hidden">
-              <p class="portfolio-item__desc">
-                A project where you can create a product, add products to cart,
-                do a payment, and watch your order history. Inspired from
-                <a
-                  href="https://www.youtube.com/watch?v=RDV3Z1KCBvo"
-                  target="_blank"
-                  >this</a
-                >
-                8hrs youtube video by Clever Programmer.
-              </p>
-              <ul class="portfolio-item__general-info">
-                <li>Created - <span>2021</span></li>
-                <li>
-                  Technologies Used -
-                  <span>React, StripeJS, Firebase</span>
-                </li>
-                <li>
-                  View Online -
-                  <span
-                    ><a href="https://clone-1e474.web.app/" target="_blank"
-                      >https://clone-1e474.web.app/</a
-                    ></span
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div data-category="react" class="portfolio-item">
+          <div data-category="front-end,back-end" class="portfolio-item">
             <div class="portfolio-item__thumbnail">
               <img
                 src="img/netflix/landing.png"
@@ -223,33 +122,35 @@
                 <a
                   href="https://www.youtube.com/watch?v=CLMo0W7mTVo&list=PLf16UKl7nR5DaxECWIwHr82oXtQWgI4Ri"
                   target="_blank"
+                  class="text-primary"
                   >this</a
                 >
                 youtube playlist by Sonny Sangha.
               </p>
-              <ul class="portfolio-item__general-info">
-                <li>Created - <span>2021</span></li>
-                <li>
-                  Technologies Used -
-                  <span>React, StripeJS, Firebase</span>
+              <ul>
+                <li class="mb-10">
+                  <span class="text-bold mr-5">Created -</span> 2021
                 </li>
-                <li>
-                  View Online
-                  <span
-                    ><a
-                      href="https://netflixclone-d2648.web.app/"
-                      target="_blank"
-                      >https://netflixclone-d2648.web.app/</a
-                    ></span
+                <li class="mb-10">
+                  <span class="text-bold mr-5">Technologies Used -</span>
+                  React, StripeJS, Firebase
+                </li>
+                <li class="mb-10">
+                  <span class="text-bold">View Online -</span>
+                  <a
+                    href="https://netflixclone-d2648.web.app/"
+                    target="_blank"
+                    class="text-primary"
+                    >https://netflixclone-d2648.web.app/</a
                   >
                 </li>
               </ul>
             </div>
           </div>
-          <div data-category="react" class="portfolio-item">
+          <div data-category="front-end,back-end" class="portfolio-item">
             <div class="portfolio-item__thumbnail">
               <img
-                src="img/portfolio/landing.png"
+                src="img/amazon/landing.png"
                 alt=""
                 class="portfolio-item__img"
               />
@@ -257,25 +158,101 @@
                 <button class="btn btn-primary">More Info</button>
               </div>
             </div>
-            <h3 class="portfolio-item__heading">Portfolio Website</h3>
+            <h3 class="portfolio-item__heading">Amazon Clone</h3>
             <div class="portfolio-item__details hidden">
               <p class="portfolio-item__desc">
-                A minimalist portfolio website I made to showcase my skills,
-                past projects and more.
+                A project where you can create a product, add products to cart,
+                do a payment, and watch your order history. Inspired from
+                <a
+                  href="https://www.youtube.com/watch?v=RDV3Z1KCBvo"
+                  target="_blank"
+                  class="text-primary"
+                  >this</a
+                >
+                8hrs youtube video by Clever Programmer.
               </p>
-              <ul class="portfolio-item__general-info">
-                <li>Created - <span>2021</span></li>
-                <li>
-                  Technologies Used -
-                  <span>React, HTML5, SCSS, CSS3</span>
+              <ul>
+                <li class="mb-10">
+                  <span class="text-bold mr-5">Created -</span> 2021
                 </li>
-                <li>
-                  View Online
-                  <span>
-                    <a href="https://devgilbertlc.web.app/" target="_blank"
-                      >https://devgilbertlc.web.app/</a
-                    ></span
+                <li class="mb-10">
+                  <span class="text-bold mr-5">Technologies Used -</span>
+                  React, StripeJS, Firebase
+                </li>
+                <li class="mb-10">
+                  <span class="text-bold">View Online -</span>
+                  <a
+                    href="https://clone-1e474.web.app/"
+                    target="_blank"
+                    class="text-primary"
+                    >https://clone-1e474.web.app/</a
                   >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            data-category="front-end,back-end,bootstrap"
+            class="portfolio-item"
+          >
+            <div class="portfolio-item__thumbnail">
+              <img
+                src="img/dili/dashboard.png"
+                alt=""
+                class="portfolio-item__img"
+              />
+              <div class="portfolio-item__btn center">
+                <button class="btn btn-primary">More Info</button>
+              </div>
+            </div>
+            <h3 class="portfolio-item__heading">Barangay Dili System</h3>
+            <div class="portfolio-item__details hidden">
+              <p class="portfolio-item__desc">
+                This was a project I developed in 2017. The system stored
+                residents data in the barangay for officials and admins to view,
+                and manage. This is our thesis back in college, we were consist
+                of 3 individuals and I am the lead developer and designer of
+                this project.
+              </p>
+              <ul>
+                <li class="mb-10">
+                  <span class="text-bold mr-5">Created -</span> 2017
+                </li>
+                <li class="mb-10">
+                  <span class="text-bold mr-5">Technologies Used -</span>
+                  Python, Django, jQuery, MySQL, Google Maps API
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            data-category="front-end,back-end,bootstrap"
+            class="portfolio-item"
+          >
+            <div class="portfolio-item__thumbnail">
+              <img
+                src="img/sjnhs/vote.png"
+                alt=""
+                class="portfolio-item__img"
+              />
+              <div class="portfolio-item__btn center">
+                <button class="btn btn-primary">More Info</button>
+              </div>
+            </div>
+            <h3 class="portfolio-item__heading">SJNHS Voting System</h3>
+            <div class="portfolio-item__details hidden">
+              <p class="portfolio-item__desc">
+                A college student asked me to build a voting system for their
+                thesis. I used native PHP for the backend and Bootstrap for
+                styling.
+              </p>
+              <ul>
+                <li class="mb-10">
+                  <span class="text-bold mr-5">Created -</span> 2017
+                </li>
+                <li class="mb-10">
+                  <span class="text-bold mr-5">Technologies Used -</span>
+                  PHP, jQuery, MySQL, Bootstrap
                 </li>
               </ul>
             </div>
@@ -284,70 +261,49 @@
       </div>
     </section>
 
-    <div class="modal hidden">
+    <div class="modal">
+      <div class="modal__transition"></div>
       <div class="modal__overlay px-15">
         <div class="modal__content">
           <div class="modal__header">
             <div class="modal__counter-wrapper flex align-center flex-wrap">
-              <h2 class="modal__counter">7 of 7</h2>
-              <p>( All )</p>
+              <h2 class="modal__counter"></h2>
+              <p class="modal__filter-title"></p>
             </div>
 
             <button class="modal__close center" title="close"></button>
-            <div class="modal__thumbnail">
-              <img src="img/netflix/landing.png" alt="" />
-            </div>
-            <h1>Netflix Clone</h1>
+            <img src="" alt="" class="modal__thumbnail" />
+
+            <h1 class="modal__heading"></h1>
           </div>
-          <div class="modal__body">
-            <p class="portfolio-item__desc">
-              Built using React and Redux. The data used was fetched from
-              themoviedb API using Axios. User authentication implemented,
-              subscription plan implemented using StripeJS. Inspired from
-              <a
-                href="https://www.youtube.com/watch?v=CLMo0W7mTVo&list=PLf16UKl7nR5DaxECWIwHr82oXtQWgI4Ri"
-                target="_blank"
-                class="text-primary"
-                >this</a
-              >
-              youtube playlist by Sonny Sangha.
-            </p>
-            <ul>
-              <li class="mb-10">
-                <span class="text-bold mr-5">Created -</span> 2021
-              </li>
-              <li class="mb-10">
-                <span class="text-bold mr-5">Technologies Used -</span>
-                React, StripeJS, Firebase
-              </li>
-              <li class="mb-10">
-                <span class="text-bold">View Online -</span>
-                <a
-                  href="https://netflixclone-d2648.web.app/"
-                  target="_blank"
-                  class="text-primary"
-                  >https://netflixclone-d2648.web.app/</a
-                >
-              </li>
-            </ul>
-          </div>
+          <div class="modal__body"></div>
           <div class="modal__footer flex justify-between">
-            <div>
-              <button class="btn btn-primary" title="Prev Work">
+            <div class="modal__prev-work invisible">
+              <button
+                class="btn btn-primary modal__prev-work-btn"
+                title="Prev Work"
+              >
                 <i class="fas fa-arrow-left"></i>
               </button>
-              <h2 class="mt-30 mb-15">Prev Work Title</h2>
+              <h2 class="mt-30 mb-15 modal__prev-work-title">
+                Prev Work Title
+              </h2>
               <img
                 src="img/amazon/landing.png"
                 alt=""
                 class="modal__small-img"
               />
             </div>
-            <div class="modal__next-work flex">
-              <button class="btn btn-primary" title="Next Work">
+            <div class="modal__next-work flex invisible">
+              <button
+                class="btn btn-primary modal__next-work-btn"
+                title="Next Work"
+              >
                 <i class="fas fa-arrow-right"></i>
               </button>
-              <h2 class="mt-30 mb-15">Next Work Title</h2>
+              <h2 class="mt-30 mb-15 modal__next-work-title">
+                Next Work Title
+              </h2>
               <img
                 src="img/portfolio/landing.png"
                 alt=""

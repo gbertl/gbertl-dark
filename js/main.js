@@ -13,20 +13,40 @@ const bgAnimationItems = () => {
 
 bgAnimationItems();
 
+const toggleBodyScroll = () => {
+  document.body.classList.toggle("overflow-y-hidden");
+};
+
 const filter = document.querySelector(".filter");
 const filterBtns = filter.querySelectorAll(".filter__button");
 
 filterBtns.forEach((item) => {
   item.addEventListener("click", (e) => {
     if (!e.target.classList.contains("filter__button--active")) {
+      toggleBodyScroll();
+
+      const filterStatus = document.querySelector(".portfolio__filter-status");
+
+      filterStatus.classList.add("portfolio__filter-status--open");
+      filterStatus.querySelector(
+        "p"
+      ).innerHTML = `Filtering <span class='text-bold'>${e.target.innerHTML}</span> Works`;
+
       filter
         .querySelector(".filter__button--active")
         .classList.remove("filter__button--active");
       e.target.classList.add("filter__button--active");
-      filterItems(e.target);
+
+      setTimeout(() => {
+        filterItems(e.target);
+        filterStatus.classList.remove("portfolio__filter-status--open");
+        toggleBodyScroll();
+      }, 800);
     }
   });
 });
+
+let portfolioItems;
 
 const filterItems = (filterBtn) => {
   const selectedCategory = filterBtn.getAttribute("data-filter");
@@ -42,6 +62,128 @@ const filterItems = (filterBtn) => {
       item.classList.remove("portfolio-item--show");
     }
   });
+
+  portfolioItems = document.querySelectorAll(".portfolio-item--show");
 };
 
 filterItems(document.querySelector(".filter__button--active"));
+
+const modal = document.querySelector(".modal");
+
+let currentItemIndex;
+
+const setModalBody = (currentItem) => {
+  modal.querySelector(".modal__thumbnail").src = currentItem.querySelector(
+    ".portfolio-item__img"
+  ).src;
+
+  modal.querySelector(".modal__heading").innerHTML = currentItem.querySelector(
+    ".portfolio-item__heading"
+  ).innerHTML;
+
+  modal.querySelector(".modal__body").innerHTML = currentItem.querySelector(
+    ".portfolio-item__details"
+  ).innerHTML;
+
+  currentItemIndex = Array.from(portfolioItems).indexOf(currentItem);
+
+  modal.querySelector(".modal__counter").innerHTML = `${
+    currentItemIndex + 1
+  } of ${portfolioItems.length}`;
+
+  modal.querySelector(".modal__filter-title").innerHTML = `( ${
+    document.querySelector(".filter__button--active").innerHTML
+  } )`;
+};
+
+const updatePrevNextItem = () => {
+  if (currentItemIndex !== 0) {
+    document.querySelector(".modal__prev-work").classList.remove("invisible");
+
+    document.querySelector(
+      ".modal__prev-work-title"
+    ).innerHTML = portfolioItems[currentItemIndex - 1].querySelector(
+      ".portfolio-item__heading"
+    ).innerHTML;
+    document
+      .querySelector(".modal__prev-work")
+      .querySelector(".modal__small-img").src = portfolioItems[
+      currentItemIndex - 1
+    ].querySelector(".portfolio-item__img").src;
+  } else {
+    document.querySelector(".modal__prev-work").classList.add("invisible");
+  }
+
+  // if not equal to the last item
+  if (currentItemIndex + 1 !== portfolioItems.length) {
+    document.querySelector(".modal__next-work").classList.remove("invisible");
+    document.querySelector(
+      ".modal__next-work-title"
+    ).innerHTML = portfolioItems[currentItemIndex + 1].querySelector(
+      ".portfolio-item__heading"
+    ).innerHTML;
+    document
+      .querySelector(".modal__next-work")
+      .querySelector(".modal__small-img").src = portfolioItems[
+      currentItemIndex + 1
+    ].querySelector(".portfolio-item__img").src;
+  } else {
+    document.querySelector(".modal__next-work").classList.add("invisible");
+  }
+};
+
+const updateModal = (currentItem) => {
+  setModalBody(currentItem);
+  updatePrevNextItem();
+};
+
+const toggleModal = () => {
+  modal.classList.toggle("modal--open");
+  toggleBodyScroll();
+};
+
+document.querySelectorAll(".portfolio-item").forEach((item) => {
+  item.addEventListener("click", (e) => {
+    updateModal(e.target.closest(".portfolio-item"));
+    toggleModal();
+  });
+});
+
+const handleNextPrev = (direction) => {
+  if (direction === "next") {
+    currentItemIndex++;
+  } else if (direction === "prev") {
+    currentItemIndex--;
+  } else {
+    return;
+  }
+
+  document
+    .querySelector(".modal__transition")
+    .classList.add(`modal__transition--${direction}`);
+
+  setTimeout(() => {
+    document.querySelector(".modal__overlay").scrollTop = 0;
+    updateModal(portfolioItems[currentItemIndex]);
+  }, 400);
+
+  setTimeout(() => {
+    document
+      .querySelector(".modal__transition")
+      .classList.remove(`modal__transition--${direction}`);
+  }, 1000);
+};
+
+document
+  .querySelector(".modal__prev-work-btn")
+  .addEventListener("click", () => {
+    handleNextPrev("prev");
+  });
+
+document
+  .querySelector(".modal__next-work-btn")
+  .addEventListener("click", () => {
+    handleNextPrev("next");
+  });
+
+document.querySelector(".modal__close").addEventListener("click", toggleModal);
