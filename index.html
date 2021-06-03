@@ -70,6 +70,15 @@
           </li>
           <li>
             <button
+              title="Filter by Bootstrap"
+              data-filter="bootstrap"
+              class="filter__button"
+            >
+              Bootstrap
+            </button>
+          </li>
+          <li>
+            <button
               title="Filter by React"
               data-filter="react"
               class="filter__button"
@@ -98,7 +107,7 @@
         </ul>
 
         <div class="portfolio-item-wrapper">
-          <div data-category="django" class="portfolio-item">
+          <div data-category="django,bootstrap" class="portfolio-item">
             <div class="portfolio-item__thumbnail">
               <img
                 src="img/dili/dashboard.png"
@@ -127,7 +136,7 @@
               </ul>
             </div>
           </div>
-          <div data-category="django" class="portfolio-item">
+          <div data-category="php,bootstrap" class="portfolio-item">
             <div class="portfolio-item__thumbnail">
               <img
                 src="img/sjnhs/vote.png"
@@ -154,7 +163,7 @@
               </ul>
             </div>
           </div>
-          <div data-category="django" class="portfolio-item">
+          <div data-category="react" class="portfolio-item">
             <div class="portfolio-item__thumbnail">
               <img
                 src="img/amazon/landing.png"
@@ -194,7 +203,7 @@
               </ul>
             </div>
           </div>
-          <div data-category="django" class="portfolio-item">
+          <div data-category="react" class="portfolio-item">
             <div class="portfolio-item__thumbnail">
               <img
                 src="img/netflix/landing.png"
@@ -237,7 +246,7 @@
               </ul>
             </div>
           </div>
-          <div data-category="django" class="portfolio-item">
+          <div data-category="react" class="portfolio-item">
             <div class="portfolio-item__thumbnail">
               <img
                 src="img/portfolio/landing.png"
@@ -275,7 +284,7 @@
       </div>
     </section>
 
-    <div class="modal">
+    <div class="modal hidden">
       <div class="modal__overlay px-15">
         <div class="modal__content">
           <div class="modal__header">

@@ -19,8 +19,7 @@ body {
   font-weight: 300;
   background-color: var(--clr-dark);
   color: var(--clr-light-white);
-  overflow-x: hidden;
-  overflow-y: hidden; }
+  overflow-x: hidden; }
 
 img {
   max-width: 100%;
@@ -233,56 +232,54 @@ button {
       color: var(--clr-white);
       cursor: auto; }
 
-.portfolio-item-wrapper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px; }
-
-.portfolio-item__thumbnail {
-  position: relative; }
-  .portfolio-item__thumbnail::before, .portfolio-item__thumbnail::after {
-    content: "";
+.portfolio-item {
+  display: none; }
+  .portfolio-item--show {
+    display: block; }
+  .portfolio-item-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px; }
+  .portfolio-item__thumbnail {
+    position: relative; }
+    .portfolio-item__thumbnail::before, .portfolio-item__thumbnail::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      height: 0;
+      width: 100%;
+      background-color: var(--clr-light-dark);
+      opacity: 0.8;
+      transition: height 0.3s; }
+    .portfolio-item__thumbnail::before {
+      top: 0; }
+    .portfolio-item__thumbnail::after {
+      bottom: 0; }
+  .portfolio-item:hover .portfolio-item__thumbnail::before,
+  .portfolio-item:hover .portfolio-item__thumbnail::after {
+    height: 50%; }
+  .portfolio-item__btn {
     position: absolute;
+    top: 0;
     left: 0;
-    height: 0;
     width: 100%;
-    background-color: var(--clr-light-dark);
-    opacity: 0.8;
-    transition: height 0.3s; }
-  .portfolio-item__thumbnail::before {
-    top: 0; }
-  .portfolio-item__thumbnail::after {
-    bottom: 0; }
-
-.portfolio-item:hover .portfolio-item__thumbnail::before,
-.portfolio-item:hover .portfolio-item__thumbnail::after {
-  height: 50%; }
-
-.portfolio-item__btn {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  opacity: 0;
-  transform: scale(0.5);
-  transition: 0.3s; }
-
-.portfolio-item:hover .portfolio-item__btn {
-  transition-delay: 0.2s;
-  opacity: 1;
-  transform: scale(1); }
-
-.portfolio-item__heading {
-  font-size: 20px;
-  margin: 10px 0 5px; }
-
-.portfolio-item__img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  object-position: top left; }
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: 0.3s; }
+  .portfolio-item:hover .portfolio-item__btn {
+    transition-delay: 0.2s;
+    opacity: 1;
+    transform: scale(1); }
+  .portfolio-item__heading {
+    font-size: 20px;
+    margin: 10px 0 5px; }
+  .portfolio-item__img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: top left; }
 
 .modal {
   position: fixed;
