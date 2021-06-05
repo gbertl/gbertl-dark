@@ -1,5 +1,8 @@
 .about {
-  text-align: center;
+  &__details {
+    text-align: center;
+    flex-direction: column;
+  }
 
   &__img {
     max-width: 150px;

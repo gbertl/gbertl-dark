@@ -146,6 +146,7 @@ document.querySelectorAll(".portfolio-item").forEach((item) => {
   item.addEventListener("click", (e) => {
     updateModal(e.target.closest(".portfolio-item"));
     toggleModal();
+    document.querySelector(".modal__overlay").scrollTop = 0;
   });
 });
 
@@ -163,8 +164,8 @@ const handleNextPrev = (direction) => {
     .classList.add(`modal__transition--${direction}`);
 
   setTimeout(() => {
-    document.querySelector(".modal__overlay").scrollTop = 0;
     updateModal(portfolioItems[currentItemIndex]);
+    document.querySelector(".modal__overlay").scrollTop = 0;
   }, 400);
 
   setTimeout(() => {
@@ -186,4 +187,27 @@ document
     handleNextPrev("next");
   });
 
+// closing of modal
 document.querySelector(".modal__close").addEventListener("click", toggleModal);
+
+document.querySelector(".modal").addEventListener("click", (e) => {
+  if (!e.target.closest(".modal__content")) {
+    toggleModal();
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (document.querySelector(".modal--open") && e.key === "Escape") {
+    toggleModal();
+  }
+});
+
+// smooth scroll for anchor tag starts with #
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.querySelector(e.target.getAttribute("href")).scrollIntoView({
+      behavior: "smooth",
+    });
+  });
+});

@@ -1,6 +1,7 @@
 .portfolio {
   &__container {
     margin-top: 100px;
+    margin-bottom: 50px;
   }
 
   &__heading {
@@ -94,6 +95,10 @@
     margin: 0 15px;
 
     @include mq(small) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mq(medium) {
       grid-template-columns: repeat(3, 1fr);
     }
   }

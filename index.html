@@ -21,10 +21,14 @@
   <body>
     <div class="bg-animation-effect"></div>
 
-    <section class="about hidden">
+    <section class="about">
       <div class="container about__container">
-        <div class="px-15">
-          <img src="img/me.jpg" alt="" class="about__img" />
+        <div class="px-15 about__details center">
+          <img
+            src="https://avatars.githubusercontent.com/u/25029583?v=4"
+            alt=""
+            class="about__img"
+          />
           <h1 class="about__heading">Hi, My name is Gilbert Lacasandile.</h1>
           <p>
             I'm a <span class="text-bold">Fullstack Developer</span> living in
@@ -33,32 +37,37 @@
             <span class="text-bold">React</span>, and
             <span class="text-bold">Django</span>. Check out my latest work on
             the
-            <a href="#" class="text-bold text-primary about__link"
+            <a href="#portfolio" class="text-bold text-primary about__link"
               >Portfolio Page</a
             >. Want to talk about a project? You can get in touch with me
-            <a href="#" class="text-bold text-primary about__link">here</a>.
+            <a
+              href="https://www.upwork.com/freelancers/~0110dcf905a3a19183"
+              class="text-bold text-primary about__link"
+              target="_blank"
+              >here</a
+            >.
           </p>
 
           <div class="skills">
             <h2 class="skills__heading">Skills</h2>
             <ul class="flex justify-center gap-4 flex-wrap">
-              <li class="skills__item">Nodejs</li>
+              <li class="skills__item">NodeJS</li>
               <li class="skills__item">React</li>
               <li class="skills__item">Django</li>
-              <li class="skills__item">Html</li>
-              <li class="skills__item">Css</li>
-              <li class="skills__item">Javascript</li>
+              <li class="skills__item">HTML</li>
+              <li class="skills__item">CSS</li>
+              <li class="skills__item">JavaScript</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="portfolio">
+    <section class="portfolio" id="portfolio">
       <div class="container portfolio__container">
         <h2 class="portfolio__heading">Recent Works</h2>
 
-        <ul class="flex justify-center filter">
+        <ul class="flex justify-center filter flex-wrap">
           <li>
             <button
               title="Show All Works"
@@ -88,11 +97,11 @@
           </li>
           <li>
             <button
-              title="Filter by Bootstrap"
-              data-filter="bootstrap"
+              title="Filter by Figma to HTML"
+              data-filter="figma-to-html"
               class="filter__button"
             >
-              Bootstrap
+              Figma to HTML
             </button>
           </li>
         </ul>
@@ -138,10 +147,10 @@
                 <li class="mb-10">
                   <span class="text-bold">View Online -</span>
                   <a
-                    href="https://netflixclone-d2648.web.app/"
+                    href="https://netflixclone-d2648.firebaseapp.com/"
                     target="_blank"
                     class="text-primary"
-                    >https://netflixclone-d2648.web.app/</a
+                    >https://netflixclone-d2648.firebaseapp.com/</a
                   >
                 </li>
               </ul>
@@ -182,19 +191,16 @@
                 <li class="mb-10">
                   <span class="text-bold">View Online -</span>
                   <a
-                    href="https://clone-1e474.web.app/"
+                    href="https://clone-1e474.firebaseapp.com/"
                     target="_blank"
                     class="text-primary"
-                    >https://clone-1e474.web.app/</a
+                    >https://clone-1e474.firebaseapp.com/</a
                   >
                 </li>
               </ul>
             </div>
           </div>
-          <div
-            data-category="front-end,back-end,bootstrap"
-            class="portfolio-item"
-          >
+          <div data-category="front-end,back-end" class="portfolio-item">
             <div class="portfolio-item__thumbnail">
               <img
                 src="img/dili/dashboard.png"
@@ -225,10 +231,7 @@
               </ul>
             </div>
           </div>
-          <div
-            data-category="front-end,back-end,bootstrap"
-            class="portfolio-item"
-          >
+          <div data-category="front-end,back-end" class="portfolio-item">
             <div class="portfolio-item__thumbnail">
               <img
                 src="img/sjnhs/vote.png"

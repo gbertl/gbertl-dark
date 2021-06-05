@@ -61,6 +61,7 @@
       animation: prevItem 1s;
     }
 
+    // 0 -> from left to right 40 (covered) -> wait 60 -> to the right 100
     @keyframes nextItem {
       0% {
         transform: translateX(-100%);
@@ -144,11 +145,11 @@
       transition: transform 0.3s;
     }
 
-    &::before {
+    .modal--open &::before {
       transform: rotate(45deg);
     }
 
-    &::after {
+    .modal--open &::after {
       transform: rotate(-45deg);
     }
 
@@ -177,6 +178,7 @@
   &__next-work {
     flex-direction: column;
     align-items: flex-end;
+    text-align: right;
   }
 }
 
