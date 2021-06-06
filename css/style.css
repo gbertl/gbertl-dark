@@ -374,9 +374,9 @@ button {
     .modal__transition--prev, .modal__transition--next {
       display: block; }
     .modal__transition--next {
-      animation: nextItem 1s; }
+      animation: nextItem 1s forwards; }
     .modal__transition--prev {
-      animation: prevItem 1s; }
+      animation: prevItem 1s forwards; }
 
 @keyframes nextItem {
   0% {

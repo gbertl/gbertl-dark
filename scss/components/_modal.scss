@@ -54,11 +54,11 @@
     }
 
     &--next {
-      animation: nextItem 1s;
+      animation: nextItem 1s forwards;
     }
 
     &--prev {
-      animation: prevItem 1s;
+      animation: prevItem 1s forwards;
     }
 
     // 0 -> from left to right 40 (covered) -> wait 60 -> to the right 100
