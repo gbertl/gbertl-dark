@@ -23,7 +23,7 @@
   <body>
     <div class="bg-animation-effect"></div>
 
-    <section class="about">
+    <section class="about hidden">
       <div class="container about__container">
         <div class="px-15 about__details center">
           <img
@@ -64,9 +64,9 @@
       </div>
     </section>
 
-    <section class="portfolio" id="portfolio">
+    <section class="portfolio hidden" id="portfolio">
       <div class="container portfolio__container">
-        <h2 class="portfolio__heading">Recent Works</h2>
+        <h2 class="section-heading">Recent Works</h2>
 
         <ul class="flex justify-center filter flex-wrap">
           <li>
@@ -240,6 +240,76 @@
       </div>
     </section>
 
+    <section class="contact">
+      <div
+        class="container center flex-column text-center min-h-screen contact__container"
+      >
+        <h1 class="section-heading">Contact Me</h1>
+        <p class="contact__desc">
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+          ipsum dolor sit amet.
+        </p>
+
+        <p class="text-md text-bold mb-10">
+          Email me on gilbertlcsndle@gmail.com
+        </p>
+
+        <div class="text-md text-bold mb-10 flex">
+          <span class="mr-15">Find me on</span>
+          <ul class="flex contact__social-list">
+            <li>
+              <a href="" class="contact__social center"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+            </li>
+            <li>
+              <a href="" class="contact__social center"
+                ><i class="fab fa-github"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <button class="btn btn-primary mt-30 contact__send-btn">
+          Send Message
+        </button>
+      </div>
+
+      <div class="contact-form">
+        <div class="contact-form__container min-h-screen">
+          <div class="w-full contact-form__content">
+            <button class="close-btn contact-form__close"></button>
+            <form class="contact-form__form" action="">
+              <div class="contact-form__input-wrapper">
+                <input type="" class="contact-form__input" required />
+                <label class="contact-form__label">
+                  <span class="contact-form__span">Your Name</span>
+                </label>
+              </div>
+              <div class="contact-form__input-wrapper">
+                <input type="" class="contact-form__input" required />
+                <label class="contact-form__label">
+                  <span class="contact-form__span">Your Email</span>
+                </label>
+              </div>
+              <div class="contact-form__input-wrapper">
+                <textarea
+                  class="contact-form__input contact-form__textarea"
+                  required
+                ></textarea>
+                <label class="contact-form__label">
+                  <span class="contact-form__span">Message</span>
+                </label>
+              </div>
+              <button class="btn btn-primary mt-15">Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="modal">
       <div class="modal__transition"></div>
       <div class="modal__overlay px-15">
@@ -250,7 +320,7 @@
               <p class="modal__filter-title"></p>
             </div>
 
-            <button class="modal__close center" title="close"></button>
+            <button class="modal__close close-btn" title="close"></button>
             <img src="" alt="" class="modal__thumbnail" />
 
             <h1 class="modal__heading"></h1>

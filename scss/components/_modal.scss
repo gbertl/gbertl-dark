@@ -126,30 +126,17 @@
   }
 
   &__close {
-    width: 40px;
-    height: 40px;
-    background-color: var(--clr-dark);
-    border: none;
-    border-radius: 50%;
     position: absolute;
     top: 0;
     right: 0;
+  }
 
-    &::before,
-    &::after {
-      content: "";
-      width: 20px;
-      height: 2px;
-      background-color: var(--clr-light-white);
-      position: absolute;
-      transition: transform 0.3s;
-    }
-
-    .modal--open &::before {
+  &--open &__close {
+    &::before {
       transform: rotate(45deg);
     }
 
-    .modal--open &::after {
+    &::after {
       transform: rotate(-45deg);
     }
 

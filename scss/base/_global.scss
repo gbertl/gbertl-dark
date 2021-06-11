@@ -66,3 +66,12 @@ button {
   display: inline-block;
   cursor: pointer;
 }
+
+input,
+textarea {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-family: inherit;
+}
