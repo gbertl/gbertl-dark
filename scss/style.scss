@@ -2,8 +2,10 @@
 @import "base/root";
 @import "base/global";
 @import "base/utilities";
-@import "components/about";
+@import "layouts/_header";
 @import "components/bg-animation-effect";
+@import "components/overlay-effect";
+@import "components/about";
 @import "components/portfolio";
 @import "components/modal";
 @import "components/contact";

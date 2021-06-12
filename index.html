@@ -23,7 +23,29 @@
   <body>
     <div class="bg-animation-effect"></div>
 
-    <section class="about">
+    <div class="overlay-effect"></div>
+
+    <header class="header">
+      <div class="container flex justify-end">
+        <button class="navbar-toggler mr-15">
+          <span class="navbar-toggler__icon"></span>
+        </button>
+
+        <nav class="navbar center">
+          <ul class="text-center">
+            <li><a href="#about" class="navbar__link text-bold">About</a></li>
+            <li>
+              <a href="#portfolio" class="navbar__link text-bold">Portfolio</a>
+            </li>
+            <li>
+              <a href="#contact" class="navbar__link text-bold">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="about" id="about">
       <div class="container about__container">
         <div class="px-15 about__details center">
           <img
@@ -64,7 +86,7 @@
       </div>
     </section>
 
-    <section class="portfolio" id="portfolio">
+    <section class="portfolio hidden" id="portfolio">
       <div class="container portfolio__container">
         <h2 class="section-heading">Recent Works</h2>
 
@@ -240,7 +262,7 @@
       </div>
     </section>
 
-    <section class="contact">
+    <section class="contact hidden" id="contact">
       <div class="container text-center min-h-screen contact__container px-15">
         <h1 class="section-heading">Contact Me</h1>
         <p class="contact__desc">
