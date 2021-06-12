@@ -35,7 +35,8 @@ h6 {
   font-weight: 600; }
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+  color: inherit; }
 
 ul {
   list-style: none; }
@@ -488,7 +489,7 @@ textarea {
   margin-bottom: 30px; }
 
 .contact__container {
-  max-width: 700px;
+  max-width: 620px;
   padding-top: 80px;
   padding-bottom: 50px; }
 
