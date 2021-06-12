@@ -281,19 +281,30 @@
             <button class="close-btn contact-form__close"></button>
             <form class="contact-form__form" action="">
               <div class="contact-form__input-wrapper">
-                <input type="" class="contact-form__input" required />
+                <input
+                  type="text"
+                  name="name"
+                  class="contact-form__input"
+                  required
+                />
                 <label class="contact-form__label">
                   <span class="contact-form__span">Your Name</span>
                 </label>
               </div>
               <div class="contact-form__input-wrapper">
-                <input type="" class="contact-form__input" required />
+                <input
+                  type="email"
+                  name="email"
+                  class="contact-form__input"
+                  required
+                />
                 <label class="contact-form__label">
                   <span class="contact-form__span">Your Email</span>
                 </label>
               </div>
               <div class="contact-form__input-wrapper">
                 <textarea
+                  name="message"
                   class="contact-form__input contact-form__textarea"
                   required
                 ></textarea>
@@ -301,7 +312,9 @@
                   <span class="contact-form__span">Message</span>
                 </label>
               </div>
-              <button class="btn btn-primary mt-15">Send</button>
+              <button class="btn btn-primary mt-15 contact-form__send-form">
+                Send
+              </button>
             </form>
           </div>
         </div>
@@ -365,6 +378,10 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-analytics.js"></script>
     <script src="js/firebase.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"
+    ></script>
     <script src="js/main.js"></script>
   </body>
 </html>

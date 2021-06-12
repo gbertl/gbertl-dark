@@ -232,3 +232,28 @@ document.querySelector(".contact-form").addEventListener("click", (e) => {
     toggleContactForm();
   }
 });
+
+document
+  .querySelector(".contact-form__form")
+  .addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_2ml4lwk",
+        "template_e0ppieo",
+        e.target,
+        "user_jmQ3lowI4xMVTboiORnz4"
+      )
+      .then(
+        (result) => {
+          alert(
+            "Your message has been sent successfully, I hope to respond within 24 hours. Thanks!"
+          );
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    e.target.reset();
+  });
