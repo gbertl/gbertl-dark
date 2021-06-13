@@ -373,14 +373,15 @@ textarea {
     transform: translateX(0); }
 
 .about__details {
-  text-align: center;
-  flex-direction: column; }
+  text-align: center; }
 
 .about__img {
   max-width: 150px;
   border-radius: 50%;
   border: 5px solid var(--clr-light-dark);
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  margin-left: 50%;
+  transform: translateX(-50%); }
 
 .about__container {
   max-width: 620px;
@@ -632,9 +633,7 @@ textarea {
   margin-bottom: 30px; }
 
 .contact__container {
-  max-width: 620px;
-  padding-top: 80px;
-  padding-bottom: 50px; }
+  max-width: 620px; }
 
 .contact__desc {
   margin-bottom: 30px; }
