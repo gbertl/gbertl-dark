@@ -1,7 +1,6 @@
 .about {
   &__details {
     text-align: center;
-    flex-direction: column;
   }
 
   &__img {
@@ -9,6 +8,8 @@
     border-radius: 50%;
     border: 5px solid var(--clr-light-dark);
     margin-bottom: 15px;
+    margin-left: 50%;
+    transform: translateX(-50%);
   }
 
   &__container {
