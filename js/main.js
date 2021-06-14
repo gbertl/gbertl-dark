@@ -1,3 +1,9 @@
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.querySelector(".loader").classList.add("loader--hide");
+  }, 500);
+});
+
 const bgAnimationItems = () => {
   const rows = 7,
     cols = 10;
