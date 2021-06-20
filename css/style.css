@@ -633,7 +633,8 @@ textarea {
     max-width: 850px;
     margin: 50px auto 60px; }
   .modal__header {
-    position: relative; }
+    position: relative;
+    overflow-x: hidden; }
   .modal__counter-wrapper {
     margin-bottom: 15px;
     padding-right: 50px;
@@ -649,8 +650,6 @@ textarea {
     transform: rotate(-45deg); }
   .modal--open .modal__close:hover::before, .modal--open .modal__close:hover::after {
     transform: rotate(0); }
-  .modal__thumbnail {
-    padding: 20px 0; }
   .modal__body {
     padding: 15px 0; }
   .modal__footer {
@@ -661,9 +660,38 @@ textarea {
     flex-direction: column;
     align-items: flex-end;
     text-align: right; }
+  .modal__carousel-btn-wrapper {
+    gap: 15px;
+    margin-bottom: 20px; }
+  .modal__carousel-prev-btn, .modal__carousel-next-btn {
+    background: none;
+    border: none;
+    color: var(--clr-white);
+    padding: 10px 15px; }
+    .modal__carousel-prev-btn:hover, .modal__carousel-next-btn:hover {
+      color: var(--clr-primary); }
 
 .portfolio-item__desc {
   margin-bottom: 30px; }
+
+.modal__thumbnails-wrapper {
+  position: relative;
+  margin: 20px 0 10px; }
+
+.dot-indicators {
+  display: flex;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 10px; }
+  .dot-indicators__item {
+    padding: 8px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--clr-light-dark); }
+    .dot-indicators__item:hover, .dot-indicators__item--active {
+      background-color: var(--clr-primary); }
 
 .contact__container {
   max-width: 620px; }

@@ -50,7 +50,7 @@
       </div>
     </header>
 
-    <section class="about" id="about">
+    <section class="about hidden" id="about">
       <div class="container about__container">
         <div class="px-15 about__details">
           <img
@@ -88,7 +88,7 @@
       </div>
     </section>
 
-    <section class="portfolio hidden" id="portfolio">
+    <section class="portfolio" id="portfolio">
       <div class="container portfolio__container">
         <h2 class="section-heading">Recent Works</h2>
 
@@ -130,10 +130,63 @@
           <div data-category="html-css" class="portfolio-item">
             <div class="portfolio-item__thumbnail">
               <img
+                src="img/archmove/1.png"
+                alt=""
+                class="portfolio-item__img"
+              />
+              <div class="hidden portfolio-item__screenshots">
+                <img src="img/archmove/1.png" alt="" />
+                <img src="img/archmove/2.png" alt="" />
+                <img src="img/archmove/3.png" alt="" />
+                <img src="img/archmove/4.png" alt="" />
+                <img src="img/archmove/5.png" alt="" />
+                <img src="img/archmove/6.png" alt="" />
+              </div>
+              <div class="portfolio-item__btn center">
+                <button class="btn btn-primary">More Info</button>
+              </div>
+            </div>
+            <h3 class="portfolio-item__heading">Arch Move</h3>
+            <div class="portfolio-item__details hidden">
+              <p class="portfolio-item__desc">
+                Built a landing page from client's Figma file to HTML/CSS.
+                Client gave me permission to share the preview channel I gave
+                her. You can check out the link below.
+              </p>
+              <ul>
+                <li class="mb-10">
+                  <span class="text-bold mr-5">Created -</span> 2021
+                </li>
+                <li class="mb-10">
+                  <span class="text-bold mr-5">Technologies Used -</span>
+                  HTML5, CSS3 - preprocessed with SASS, JavaScript
+                </li>
+                <li class="mb-10">
+                  <span class="text-bold mr-5">Role -</span>
+                  Front-End, Figma to HTML
+                </li>
+                <li class="mb-10">
+                  <span class="text-bold mr-5">View site -</span>
+                  <a
+                    href="https://archmove-gilbertlc.vercel.app/"
+                    target="_blank"
+                    class="text-primary"
+                    >https://archmove-gilbertlc.vercel.app/</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div data-category="html-css" class="portfolio-item">
+            <div class="portfolio-item__thumbnail">
+              <img
                 src="img/portfolio/landing.png"
                 alt=""
                 class="portfolio-item__img"
               />
+              <div class="hidden portfolio-item__screenshots">
+                <img src="img/portfolio/landing.png" alt="" />
+              </div>
               <div class="portfolio-item__btn center">
                 <button class="btn btn-primary">More Info</button>
               </div>
@@ -197,6 +250,9 @@
                 alt=""
                 class="portfolio-item__img"
               />
+              <div class="hidden portfolio-item__screenshots">
+                <img src="img/dili/dashboard.png" alt="" />
+              </div>
               <div class="portfolio-item__btn center">
                 <button class="btn btn-primary">More Info</button>
               </div>
@@ -231,6 +287,9 @@
                 alt=""
                 class="portfolio-item__img"
               />
+              <div class="hidden portfolio-item__screenshots">
+                <img src="img/sjnhs/vote.png" alt="" />
+              </div>
               <div class="portfolio-item__btn center">
                 <button class="btn btn-primary">More Info</button>
               </div>
@@ -365,7 +424,20 @@
             </div>
 
             <button class="modal__close close-btn" title="close"></button>
-            <img src="" alt="" class="modal__thumbnail" />
+
+            <div class="modal__thumbnails-wrapper">
+              <div class="modal__thumbnails flex"></div>
+              <ul class="dot-indicators hidden"></ul>
+            </div>
+
+            <div class="flex justify-end modal__carousel-btn-wrapper hidden">
+              <button class="modal__carousel-prev-btn">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="modal__carousel-next-btn">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
 
             <h1 class="modal__heading"></h1>
           </div>

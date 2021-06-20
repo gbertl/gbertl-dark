@@ -114,6 +114,7 @@
 
   &__header {
     position: relative;
+    overflow-x: hidden;
   }
 
   &__counter {
@@ -146,10 +147,6 @@
     }
   }
 
-  &__thumbnail {
-    padding: 20px 0;
-  }
-
   &__body {
     padding: 15px 0;
   }
@@ -167,8 +164,51 @@
     align-items: flex-end;
     text-align: right;
   }
+
+  &__carousel-btn-wrapper {
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  &__carousel-prev-btn,
+  &__carousel-next-btn {
+    background: none;
+    border: none;
+    color: var(--clr-white);
+    padding: 10px 15px;
+
+    &:hover {
+      color: var(--clr-primary);
+    }
+  }
 }
 
 .portfolio-item__desc {
   margin-bottom: 30px;
+}
+
+.modal__thumbnails-wrapper {
+  position: relative;
+  margin: 20px 0 10px;
+}
+
+.dot-indicators {
+  display: flex;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 10px;
+
+  &__item {
+    padding: 8px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--clr-light-dark);
+
+    &:hover,
+    &--active {
+      background-color: var(--clr-primary);
+    }
+  }
 }

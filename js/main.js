@@ -86,12 +86,118 @@ filterItems(document.querySelector(".filter__button--active"));
 
 const modal = document.querySelector(".modal");
 
+const updateDotIndicators = (current) => {
+  document
+    .querySelector(".dot-indicators__item--active")
+    .classList.remove("dot-indicators__item--active");
+  current.classList.add("dot-indicators__item--active");
+};
+
+// Carousel
+const carousel = () => {
+  const thumbnailWrapper = document.querySelector(".modal__thumbnails");
+  const thumbnails = thumbnailWrapper.querySelectorAll("img");
+  const thumbnailNextBtn = document.querySelector(".modal__carousel-next-btn");
+  const thumbnailPrevBtn = document.querySelector(".modal__carousel-prev-btn");
+
+  const size = thumbnailWrapper.querySelector("img").clientWidth;
+  let counter = 0;
+
+  // reset position
+  thumbnailWrapper.style.transition = "none";
+  thumbnailWrapper.style.transform = `translateX(0)`;
+
+  const apply = () => {
+    thumbnailWrapper.style.transition = "0.4s";
+    thumbnailWrapper.style.transform = `translateX(${-size * counter}px)`;
+  };
+
+  const slideNext = () => {
+    if (counter == thumbnails.length - 1) {
+      counter = 0;
+    } else {
+      counter++;
+    }
+    apply();
+  };
+
+  const slidePrev = () => {
+    if (counter == 0) {
+      counter = thumbnails.length - 1;
+    } else {
+      counter--;
+    }
+    apply();
+  };
+
+  thumbnailNextBtn.addEventListener("click", () => {
+    slideNext();
+
+    updateDotIndicators(
+      document.querySelector(`.dot-indicators__item[value='${counter}']`)
+    );
+  });
+
+  thumbnailPrevBtn.addEventListener("click", () => {
+    slidePrev();
+
+    updateDotIndicators(
+      document.querySelector(`.dot-indicators__item[value='${counter}']`)
+    );
+  });
+
+  if (thumbnails.length > 1) {
+    document
+      .querySelector(".modal__carousel-btn-wrapper")
+      .classList.remove("hidden");
+    document.querySelector(".dot-indicators").classList.remove("hidden");
+
+    let dotsList = [];
+
+    for (let x = 0; x < thumbnails.length; x++) {
+      let button = document.createElement("button");
+      button.className = "dot-indicators__item";
+      button.value = x;
+
+      let li = document.createElement("li");
+      li.innerHTML = button.outerHTML;
+
+      dotsList.push(li.outerHTML);
+    }
+
+    document.querySelector(".dot-indicators").innerHTML = dotsList.join("");
+
+    const firstDot = document.querySelector(".dot-indicators__item");
+    firstDot.classList.add("dot-indicators__item--active");
+
+    document.querySelectorAll(".dot-indicators__item").forEach((indicator) => {
+      indicator.addEventListener("click", (e) => {
+        counter = e.target.value;
+        apply();
+
+        updateDotIndicators(e.target);
+      });
+    });
+  } else {
+    document
+      .querySelector(".modal__carousel-btn-wrapper")
+      .classList.add("hidden");
+    document.querySelector(".dot-indicators").classList.add("hidden");
+  }
+};
+
 let currentItemIndex;
 
 const setModalBody = (currentItem) => {
-  modal.querySelector(".modal__thumbnail").src = currentItem.querySelector(
-    ".portfolio-item__img"
-  ).src;
+  let thumbnails = [];
+
+  currentItem
+    .querySelectorAll(".portfolio-item__screenshots img")
+    .forEach((img) => {
+      thumbnails.push(img.outerHTML);
+    });
+
+  modal.querySelector(".modal__thumbnails").innerHTML = thumbnails.join("");
 
   modal.querySelector(".modal__heading").innerHTML = currentItem.querySelector(
     ".portfolio-item__heading"
@@ -110,6 +216,8 @@ const setModalBody = (currentItem) => {
   modal.querySelector(".modal__filter-title").innerHTML = `( ${
     document.querySelector(".filter__button--active").innerHTML
   } )`;
+
+  carousel();
 };
 
 const updatePrevNextItem = () => {
@@ -217,16 +325,6 @@ document.addEventListener("keydown", (e) => {
     toggleModal();
   }
 });
-
-// smooth scroll for anchor tag starts with #
-// document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-//   anchor.addEventListener("click", function (e) {
-//     e.preventDefault();
-//     document.querySelector(e.target.getAttribute("href")).scrollIntoView({
-//       behavior: "smooth",
-//     });
-//   });
-// });
 
 const toggleContactForm = () => {
   document
