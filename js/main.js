@@ -86,104 +86,95 @@ filterItems(document.querySelector(".filter__button--active"));
 
 const modal = document.querySelector(".modal");
 
-const updateDotIndicators = (current) => {
-  document
-    .querySelector(".dot-indicators__item--active")
-    .classList.remove("dot-indicators__item--active");
-  current.classList.add("dot-indicators__item--active");
-};
-
-// Carousel
 const carousel = () => {
-  const thumbnailWrapper = document.querySelector(".modal__thumbnails");
-  const thumbnails = thumbnailWrapper.querySelectorAll("img");
-  const thumbnailNextBtn = document.querySelector(".modal__carousel-next-btn");
-  const thumbnailPrevBtn = document.querySelector(".modal__carousel-prev-btn");
-
-  const size = thumbnailWrapper.querySelector("img").clientWidth;
+  const wrapper = document.querySelector(".modal__thumbnails");
+  const images = wrapper.querySelectorAll("img");
+  const btnWrapper = document.querySelector(".modal__carousel-btn-wrapper");
+  const nextBtn = document.querySelector(".modal__carousel-next-btn");
+  const prevBtn = document.querySelector(".modal__carousel-prev-btn");
+  const dotIndicators = document.querySelector(".dot-indicators");
+  const size = images[0].clientWidth;
   let counter = 0;
 
   // reset position
-  thumbnailWrapper.style.transition = "none";
-  thumbnailWrapper.style.transform = `translateX(0)`;
+  wrapper.style.transition = "none";
+  wrapper.style.transform = "translateX(0)";
+
+  if (images.length > 1) {
+    btnWrapper.classList.remove("hidden");
+    dotIndicators.classList.remove("hidden");
+  } else {
+    btnWrapper.classList.add("hidden");
+    dotIndicators.classList.add("hidden");
+  }
 
   const apply = () => {
-    thumbnailWrapper.style.transition = "0.4s";
-    thumbnailWrapper.style.transform = `translateX(${-size * counter}px)`;
+    wrapper.style.transition = "0.4s";
+    wrapper.style.transform = `translateX(${-size * counter}px)`;
+  };
+
+  const updateDotIndicators = () => {
+    document
+      .querySelector(".dot-indicators__item--active")
+      .classList.remove("dot-indicators__item--active");
+
+    document
+      .querySelector(`.dot-indicators__item[value='${counter}']`)
+      .classList.add("dot-indicators__item--active");
   };
 
   const slideNext = () => {
-    if (counter == thumbnails.length - 1) {
+    if (counter == images.length - 1) {
       counter = 0;
     } else {
       counter++;
     }
     apply();
+    updateDotIndicators();
   };
 
   const slidePrev = () => {
     if (counter == 0) {
-      counter = thumbnails.length - 1;
+      counter = images.length - 1;
     } else {
       counter--;
     }
     apply();
+    updateDotIndicators();
   };
 
-  thumbnailNextBtn.addEventListener("click", () => {
-    slideNext();
+  // saved for removeEventListener outside this function
+  slideNextHandler = slideNext;
+  slidePrevHandler = slidePrev;
 
-    updateDotIndicators(
-      document.querySelector(`.dot-indicators__item[value='${counter}']`)
-    );
-  });
+  nextBtn.addEventListener("click", slideNextHandler);
+  prevBtn.addEventListener("click", slidePrevHandler);
 
-  thumbnailPrevBtn.addEventListener("click", () => {
-    slidePrev();
+  // create dots
+  let dotsList = [];
 
-    updateDotIndicators(
-      document.querySelector(`.dot-indicators__item[value='${counter}']`)
-    );
-  });
+  for (let x = 0; x < images.length; x++) {
+    let button = document.createElement("button");
+    button.className = `dot-indicators__item ${
+      x == 0 ? "dot-indicators__item--active" : ""
+    }`;
+    button.value = x;
 
-  if (thumbnails.length > 1) {
-    document
-      .querySelector(".modal__carousel-btn-wrapper")
-      .classList.remove("hidden");
-    document.querySelector(".dot-indicators").classList.remove("hidden");
+    let li = document.createElement("li");
+    li.innerHTML = button.outerHTML;
 
-    let dotsList = [];
+    dotsList.push(li.outerHTML);
 
-    for (let x = 0; x < thumbnails.length; x++) {
-      let button = document.createElement("button");
-      button.className = "dot-indicators__item";
-      button.value = x;
-
-      let li = document.createElement("li");
-      li.innerHTML = button.outerHTML;
-
-      dotsList.push(li.outerHTML);
-    }
-
-    document.querySelector(".dot-indicators").innerHTML = dotsList.join("");
-
-    const firstDot = document.querySelector(".dot-indicators__item");
-    firstDot.classList.add("dot-indicators__item--active");
-
-    document.querySelectorAll(".dot-indicators__item").forEach((indicator) => {
-      indicator.addEventListener("click", (e) => {
-        counter = e.target.value;
-        apply();
-
-        updateDotIndicators(e.target);
-      });
-    });
-  } else {
-    document
-      .querySelector(".modal__carousel-btn-wrapper")
-      .classList.add("hidden");
-    document.querySelector(".dot-indicators").classList.add("hidden");
+    dotIndicators.innerHTML = dotsList.join("");
   }
+
+  dotIndicators.querySelectorAll(".dot-indicators__item").forEach((dot) => {
+    dot.addEventListener("click", (e) => {
+      counter = e.target.value;
+      apply();
+      updateDotIndicators();
+    });
+  });
 };
 
 let currentItemIndex;
@@ -216,8 +207,6 @@ const setModalBody = (currentItem) => {
   modal.querySelector(".modal__filter-title").innerHTML = `( ${
     document.querySelector(".filter__button--active").innerHTML
   } )`;
-
-  carousel();
 };
 
 const updatePrevNextItem = () => {
@@ -256,8 +245,23 @@ const updatePrevNextItem = () => {
   }
 };
 
+// use to addEventListener & removeEventListener for carousel
+let slideNextHandler;
+let slidePrevHandler;
+
 const updateModal = (currentItem) => {
   setModalBody(currentItem);
+
+  // remove old eventlisteners for carousel (prevent duplication)
+  document
+    .querySelector(".modal__carousel-next-btn")
+    .removeEventListener("click", slideNextHandler);
+  document
+    .querySelector(".modal__carousel-prev-btn")
+    .removeEventListener("click", slidePrevHandler);
+
+  carousel();
+
   updatePrevNextItem();
 };
 
