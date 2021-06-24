@@ -86,6 +86,8 @@ filterItems(document.querySelector(".filter__button--active"));
 
 const modal = document.querySelector(".modal");
 
+let timer;
+
 const carousel = () => {
   const wrapper = document.querySelector(".modal__thumbnails");
   const images = wrapper.querySelectorAll("img");
@@ -143,8 +145,32 @@ const carousel = () => {
     updateDotIndicators();
   };
 
+  // autoplay
+  clearInterval(timer);
+  if (images.length > 1) {
+    timer = setInterval(() => {
+      slideNext();
+      updateDotIndicators();
+    }, 5000);
+  }
+
+  const resetTimer = () => {
+    if (images.length == 1) return;
+
+    clearInterval(timer);
+
+    timer = setInterval(() => {
+      slideNext();
+      updateDotIndicators();
+    }, 5000);
+  };
+
   // saved for removeEventListener outside this function
-  slideNextHandler = slideNext;
+  slideNextHandler = () => {
+    resetTimer();
+    slideNext();
+  };
+
   slidePrevHandler = slidePrev;
 
   nextBtn.addEventListener("click", slideNextHandler);
