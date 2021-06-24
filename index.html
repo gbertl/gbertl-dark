@@ -434,17 +434,19 @@
 
             <div class="modal__thumbnails-wrapper">
               <div class="modal__thumbnails flex"></div>
-              <ul class="dot-indicators hidden"></ul>
+              <div
+                class="flex justify-between modal__carousel-btn-wrapper hidden"
+              >
+                <button class="modal__carousel-prev-btn">
+                  <span class="chevron-left"></span>
+                </button>
+                <button class="modal__carousel-next-btn">
+                  <span class="chevron-right"></span>
+                </button>
+              </div>
             </div>
 
-            <div class="flex justify-end modal__carousel-btn-wrapper hidden">
-              <button class="modal__carousel-prev-btn">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <button class="modal__carousel-next-btn">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
+            <ul class="dot-indicators hidden"></ul>
 
             <h1 class="modal__heading"></h1>
           </div>

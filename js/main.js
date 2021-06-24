@@ -111,7 +111,8 @@ const carousel = () => {
   }
 
   const apply = () => {
-    wrapper.style.transition = "0.4s";
+    wrapper.style.transition = ".4s";
+    wrapper.style.transitionDelay = ".8s";
     wrapper.style.transform = `translateX(${-size * counter}px)`;
   };
 
@@ -167,11 +168,34 @@ const carousel = () => {
 
   // saved for removeEventListener outside this function
   slideNextHandler = () => {
+    document
+      .querySelector(".chevron-right")
+      .classList.add("chevron-right--active");
+
+    setTimeout(() => {
+      document
+        .querySelector(".chevron-right")
+        .classList.remove("chevron-right--active");
+    }, 1200);
+
     resetTimer();
     slideNext();
   };
 
-  slidePrevHandler = slidePrev;
+  slidePrevHandler = () => {
+    document
+      .querySelector(".chevron-left")
+      .classList.add("chevron-left--active");
+
+    setTimeout(() => {
+      document
+        .querySelector(".chevron-left")
+        .classList.remove("chevron-left--active");
+    }, 1200);
+
+    resetTimer();
+    slidePrev();
+  };
 
   nextBtn.addEventListener("click", slideNextHandler);
   prevBtn.addEventListener("click", slidePrevHandler);
