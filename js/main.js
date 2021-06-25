@@ -221,6 +221,7 @@ const carousel = () => {
   dotIndicators.querySelectorAll(".dot-indicators__item").forEach((dot) => {
     dot.addEventListener("click", (e) => {
       counter = e.target.value;
+      resetTimer();
       apply();
       updateDotIndicators();
     });
