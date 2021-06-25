@@ -95,7 +95,6 @@ const carousel = () => {
   const nextBtn = document.querySelector(".modal__carousel-next-btn");
   const prevBtn = document.querySelector(".modal__carousel-prev-btn");
   const dotIndicators = document.querySelector(".dot-indicators");
-  const size = images[0].clientWidth;
   let counter = 0;
 
   // reset position
@@ -111,6 +110,8 @@ const carousel = () => {
   }
 
   const apply = () => {
+    const size = images[counter].clientWidth;
+
     wrapper.style.transition = ".4s";
     wrapper.style.transitionDelay = ".8s";
     wrapper.style.transform = `translateX(${-size * counter}px)`;
