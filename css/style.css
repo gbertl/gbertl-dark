@@ -635,6 +635,8 @@ textarea {
   .modal__header {
     position: relative;
     overflow-x: hidden; }
+  .modal__heading {
+    margin-top: 30px; }
   .modal__counter-wrapper {
     margin-bottom: 15px;
     padding-right: 50px;
@@ -748,14 +750,9 @@ textarea {
 
 .modal__thumbnails-wrapper {
   position: relative;
-  margin: 20px 0 10px; }
+  margin: 30px 0 15px; }
 
 .dot-indicators {
-  display: flex;
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
   gap: 10px; }
   .dot-indicators__item {
     width: 12px;

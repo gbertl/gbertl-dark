@@ -117,6 +117,10 @@
     overflow-x: hidden;
   }
 
+  &__heading {
+    margin-top: 30px;
+  }
+
   &__counter {
     &-wrapper {
       margin-bottom: 15px;
@@ -308,15 +312,10 @@
 
 .modal__thumbnails-wrapper {
   position: relative;
-  margin: 20px 0 10px;
+  margin: 30px 0 15px;
 }
 
 .dot-indicators {
-  display: flex;
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
   gap: 10px;
 
   &__item {
