@@ -683,14 +683,16 @@ textarea {
       opacity: 1; }
   .modal__carousel-prev-btn {
     background: linear-gradient(to right, rgba(0, 0, 0, 0.65) 0px, rgba(0, 0, 0, 0) 100%) rgba(0, 0, 0, 0); }
-    .modal__carousel-prev-btn:hover .chevron-left::before,
+    .modal__carousel-prev-btn:hover .chevron-left::before {
+      transform: rotate(25deg); }
     .modal__carousel-prev-btn:hover .chevron-left::after {
-      transform: rotate(90deg); }
+      transform: rotate(155deg); }
   .modal__carousel-next-btn {
     background: linear-gradient(to right, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0.65) 100%) rgba(0, 0, 0, 0); }
-    .modal__carousel-next-btn:hover .chevron-right::before,
+    .modal__carousel-next-btn:hover .chevron-right::before {
+      transform: rotate(-25deg); }
     .modal__carousel-next-btn:hover .chevron-right::after {
-      transform: rotate(-90deg); }
+      transform: rotate(-155deg); }
 
 .chevron-left,
 .chevron-right {
@@ -704,11 +706,17 @@ textarea {
   .chevron-right::after {
     content: "";
     position: absolute;
-    top: -50%;
     width: 2px;
     height: 100%;
     background-color: var(--clr-light-white);
-    transition: 0.4s; }
+    transition: 0.4s;
+    transform-origin: bottom; }
+  .chevron-left::before,
+  .chevron-right::before {
+    top: -50%; }
+  .chevron-left::after,
+  .chevron-right::after {
+    top: calc(-50% - 1px); }
   .chevron-left--active,
   .chevron-right--active {
     transition-delay: 0.4s; }
@@ -717,8 +725,7 @@ textarea {
   right: 50%;
   transform: translateX(50%); }
   .chevron-left::before, .chevron-left::after {
-    left: 0;
-    transform-origin: left bottom; }
+    left: 0; }
   .chevron-left::before {
     transform: rotate(45deg); }
   .chevron-left::after {
@@ -727,14 +734,13 @@ textarea {
     right: 100%;
     transform: translateX(0); }
   .chevron-left--active::before, .chevron-left--active::after {
-    transform: rotate(90deg); }
+    transform: rotate(90deg) !important; }
 
 .chevron-right {
   left: 50%;
   transform: translateX(-50%); }
   .chevron-right::before, .chevron-right::after {
-    right: 0;
-    transform-origin: right bottom; }
+    right: 0; }
   .chevron-right::before {
     transform: rotate(-45deg); }
   .chevron-right::after {
@@ -743,7 +749,7 @@ textarea {
     left: 100%;
     transform: translateX(0); }
   .chevron-right--active::before, .chevron-right--active::after {
-    transform: rotate(-90deg); }
+    transform: rotate(-90deg) !important; }
 
 .portfolio-item__desc {
   margin-bottom: 30px; }

@@ -203,9 +203,12 @@
       )
       rgba(0, 0, 0, 0);
 
-    &:hover .chevron-left::before,
+    &:hover .chevron-left::before {
+      transform: rotate(25deg);
+    }
+
     &:hover .chevron-left::after {
-      transform: rotate(90deg);
+      transform: rotate(155deg);
     }
   }
 
@@ -217,9 +220,12 @@
       )
       rgba(0, 0, 0, 0);
 
-    &:hover .chevron-right::before,
+    &:hover .chevron-right::before {
+      transform: rotate(-25deg);
+    }
+
     &:hover .chevron-right::after {
-      transform: rotate(-90deg);
+      transform: rotate(-155deg);
     }
   }
 }
@@ -236,11 +242,19 @@
   &::after {
     content: "";
     position: absolute;
-    top: -50%;
     width: 2px;
     height: 100%;
     background-color: var(--clr-light-white);
     transition: 0.4s;
+    transform-origin: bottom;
+  }
+
+  &::before {
+    top: -50%;
+  }
+
+  &::after {
+    top: calc(-50% - 1px);
   }
 
   &--active {
@@ -255,7 +269,6 @@
   &::before,
   &::after {
     left: 0;
-    transform-origin: left bottom;
   }
 
   &::before {
@@ -273,7 +286,7 @@
 
   &--active::before,
   &--active::after {
-    transform: rotate(90deg);
+    transform: rotate(90deg) !important;
   }
 }
 
@@ -284,7 +297,6 @@
   &::before,
   &::after {
     right: 0;
-    transform-origin: right bottom;
   }
 
   &::before {
@@ -302,7 +314,7 @@
 
   &--active::before,
   &--active::after {
-    transform: rotate(-90deg);
+    transform: rotate(-90deg) !important;
   }
 }
 
