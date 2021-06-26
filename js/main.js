@@ -87,6 +87,8 @@ filterItems(document.querySelector(".filter__button--active"));
 const modal = document.querySelector(".modal");
 
 let timer;
+let handleHoldWrapper;
+let handleReleaseWrapper;
 
 const carousel = () => {
   const wrapper = document.querySelector(".modal__thumbnails");
@@ -154,6 +156,24 @@ const carousel = () => {
       slideNext();
       updateDotIndicators();
     }, 5000);
+  }
+
+  // hold wrapper to pause autoplay
+  if (images.length > 1) {
+    handleHoldWrapper = () => {
+      clearInterval(timer);
+    };
+    handleReleaseWrapper = () => {
+      timer = setInterval(() => {
+        slideNext();
+        updateDotIndicators();
+      }, 5000);
+    };
+
+    btnWrapper.addEventListener("mousedown", handleHoldWrapper);
+    btnWrapper.addEventListener("touchstart", handleHoldWrapper);
+    btnWrapper.addEventListener("mouseup", handleReleaseWrapper);
+    btnWrapper.addEventListener("touchend", handleReleaseWrapper);
   }
 
   const resetTimer = () => {
@@ -311,6 +331,13 @@ const updateModal = (currentItem) => {
   document
     .querySelector(".modal__carousel-prev-btn")
     .removeEventListener("click", slidePrevHandler);
+
+  const btnWrapper = document.querySelector(".modal__carousel-btn-wrapper");
+
+  btnWrapper.removeEventListener("mousedown", handleHoldWrapper);
+  btnWrapper.removeEventListener("touchstart", handleHoldWrapper);
+  btnWrapper.removeEventListener("mouseup", handleReleaseWrapper);
+  btnWrapper.removeEventListener("touchend", handleReleaseWrapper);
 
   carousel();
 
