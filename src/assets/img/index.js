@@ -1,0 +1,18 @@
+export default {
+  archmove1: require("./archmove/1.png").default,
+  archmove2: require("./archmove/2.png").default,
+  archmove3: require("./archmove/3.png").default,
+  archmove4: require("./archmove/4.png").default,
+  archmove5: require("./archmove/5.png").default,
+  archmove6: require("./archmove/6.png").default,
+  portfolioLanding: require("./portfolio/landing.png").default,
+  diliDashboard: require("./dili/dashboard.png").default,
+  diliCertificates: require("./dili/certificates.png").default,
+  diliEvents: require("./dili/events.png").default,
+  diliResidents: require("./dili/residents.png").default,
+  sjnhsCandidates: require("./sjnhs/candidates.png").default,
+  sjnhsLogin: require("./sjnhs/login.png").default,
+  sjnhsResults: require("./sjnhs/results.png").default,
+  sjnhsStudents: require("./sjnhs/students.png").default,
+  sjnhsVote: require("./sjnhs/vote.png").default,
+};
