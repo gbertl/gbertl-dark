@@ -60,14 +60,14 @@ class Contact extends Component {
             <p className="contact__desc">
               If you wanna get in touch, talk to me about a project
               collaboration or just say hi, click the button below and fill up
-              the awesome form or hire me on
+              the awesome form or hire me on{" "}
               <a
                 href="https://www.upwork.com/freelancers/~0110dcf905a3a19183"
                 target="_blank"
                 className="text-bold"
               >
                 Upwork
-              </a>
+              </a>{" "}
               and let's talk.
             </p>
 

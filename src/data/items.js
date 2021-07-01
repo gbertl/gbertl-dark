@@ -2,7 +2,7 @@ import img from "../assets/img";
 
 const items = [
   {
-    categories: ["html-css"],
+    categories: ["front-end"],
     thumbnail: img.archmove1,
     screenshots: [
       img.archmove1,
@@ -20,14 +20,14 @@ const items = [
     url: "https://archmove-gilbertlc.vercel.app/",
   },
   {
-    categories: ["html-css"],
+    categories: ["front-end"],
     thumbnail: img.portfolioLanding,
     screenshots: [img.portfolioLanding],
     title: "Personal Portfolio",
     description: `
-    Built with custom VanillaJS and written entirely on HTML, and
-    CSS. This website is a showcase of my recent projects as a
-    Full-Stack Web Developer.
+    Built with custom VanillaJS and written entirely on HTML, 
+    CSS and React. This website is a showcase of my recent projects as a
+    Front-End & Back-End Web Developer.
     <br />
     <br />
     The idea behind this project was to create a showcase of
@@ -35,7 +35,6 @@ const items = [
     <a
       href="https://www.youtube.com/watch?v=nAHc42DKpuI"
       target="_blank"
-      className="text-primary"
     >
       this
     </a>
@@ -49,12 +48,17 @@ const items = [
     You can check out the link to my source code below.
     `,
     created: "2021",
-    technologies: ["HTML5", "CSS3 - preprocessed with SASS", "JavaScript"],
+    technologies: [
+      "HTML5",
+      "CSS3 - preprocessed with SASS",
+      "JavaScript",
+      "React",
+    ],
     role: ["Front-End"],
     url: "https://github.com/gilbertlc/portfolio",
   },
   {
-    categories: ["full-stack"],
+    categories: ["front-end", "back-end"],
     thumbnail: img.diliDashboard,
     screenshots: [
       img.diliDashboard,
@@ -67,17 +71,19 @@ const items = [
       "The system stored residents' data in the barangay for officials and admins to view, and manage. This is our thesis back in college, we were consist of 3 individuals and I am the lead developer and designer of this project.",
     created: "2017",
     technologies: [
-      "Python",
-      "Django",
+      "HTML",
+      "CSS",
       "jQuery",
       "Bootstrap",
+      "Python",
+      "Django",
       "MySQL",
       "Google Maps API",
     ],
     role: ["Front-End", "Back-End"],
   },
   {
-    categories: ["full-stack"],
+    categories: ["front-end", "back-end"],
     thumbnail: img.sjnhsLogin,
     screenshots: [
       img.sjnhsLogin,
@@ -90,7 +96,7 @@ const items = [
     description:
       "A college student asked me to build a voting system for their thesis. I used native PHP for the backend and Bootstrap for styling.",
     created: "2017",
-    technologies: ["PHP", "jQuery", "MySQL", "Bootstrap"],
+    technologies: ["HTML", "CSS", "jQuery", "Bootstrap", "PHP", "MySQL"],
     role: ["Front-End", "Back-End"],
   },
 ];

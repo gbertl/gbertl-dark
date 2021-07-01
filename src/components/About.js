@@ -13,19 +13,18 @@ class About extends React.Component {
             />
             <h1 className="about__heading">Hi, My name is Gilbert.</h1>
             <p>
-              I'm a <span className="text-bold">Full-Stack Developer</span>{" "}
-              living in the Philippines. I make web apps usually with
-              <span className="text-bold">React JS</span>, and
-              <span className="text-bold">Django</span>. Check out my latest
-              work on the
-              <a
-                href="#portfolio"
-                className="text-bold text-primary about__link"
-              >
+              I'm a <span class="text-bold">Front-End Developer</span> living in
+              the Philippines. I make web apps usually with{" "}
+              <span class="text-bold">HTML</span>,{" "}
+              <span class="text-bold">CSS</span>, and{" "}
+              <span class="text-bold">JavaScript</span>. Check out my latest
+              work on the{" "}
+              <a href="#portfolio" class="text-bold text-primary about__link">
                 Portfolio Page
               </a>
               . Want to talk about a project? You can get in touch with me
-              <a href="#contact" className="text-bold text-primary about__link">
+              <a href="#contact" class="text-bold text-primary about__link">
+                {" "}
                 here
               </a>
               .

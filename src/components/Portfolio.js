@@ -24,20 +24,20 @@ const Portfolio = () => {
             </li>
             <li>
               <button
-                title="Filter by HTML/CSS"
-                data-filter="html-css"
-                className="filter__button"
+                title="Filter by Front-End"
+                data-filter="front-end"
+                class="filter__button"
               >
-                HTML/CSS
+                Front-End
               </button>
             </li>
             <li>
               <button
-                title="Filter by Full-Stack"
-                data-filter="full-stack"
-                className="filter__button"
+                title="Filter by Back-End"
+                data-filter="back-end"
+                class="filter__button"
               >
-                Full-Stack
+                Back-End
               </button>
             </li>
           </ul>
@@ -69,7 +69,10 @@ const Portfolio = () => {
                 </div>
                 <h3 className="portfolio-item__heading">{d.title}</h3>
                 <div className="portfolio-item__details hidden">
-                  <p className="portfolio-item__desc">{d.description}</p>
+                  <p
+                    className="portfolio-item__desc"
+                    dangerouslySetInnerHTML={{__html: d.description}}
+                  ></p>
                   <ul>
                     <li className="mb-10">
                       <span className="text-bold mr-5">Created -</span>{" "}
