@@ -2,9 +2,11 @@ import {useEffect} from "react";
 
 export const useApp = () => {
   useEffect(() => {
-    setTimeout(() => {
-      document.querySelector(".loader").classList.add("loader--hide");
-    }, 500);
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.querySelector(".loader").classList.add("loader--hide");
+      }, 500);
+    });
 
     const bgAnimationItems = () => {
       const rows = 7,
