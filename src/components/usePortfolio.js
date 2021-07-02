@@ -1,4 +1,5 @@
 import {useEffect} from "react";
+import {analytics} from "../firebase";
 import {toggleBodyScroll} from "./helper";
 
 export default function usePortfolio() {
@@ -300,6 +301,14 @@ export default function usePortfolio() {
     let slidePrevHandler;
 
     const updateModal = (currentItem) => {
+      const currentTitle = currentItem
+        .querySelector(".portfolio-item__heading")
+        .textContent.split(" ")
+        .join("_")
+        .toLowerCase();
+
+      analytics.logEvent(`${currentTitle}_opened`);
+
       setModalBody(currentItem);
 
       // remove old eventlisteners for carousel (prevent duplication)

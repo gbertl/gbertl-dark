@@ -1,4 +1,5 @@
 import {useEffect} from "react";
+import {analytics} from "../firebase";
 
 const useHeader = () => {
   useEffect(() => {
@@ -31,6 +32,8 @@ const useHeader = () => {
     });
 
     const toggleSection = (hash) => {
+      analytics.logEvent(`${hash.replace("#", "")}_navigated`);
+
       // hide section that doesnt have .hidden (shown sections)
       document.querySelectorAll("section:not(.hidden)").forEach((section) => {
         section.classList.add("hidden");
