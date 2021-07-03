@@ -15,4 +15,7 @@ export default {
   sjnhsResults: require("./sjnhs/results.png").default,
   sjnhsStudents: require("./sjnhs/students.png").default,
   sjnhsVote: require("./sjnhs/vote.png").default,
+  pigly1: require("./pigly/1.png").default,
+  pigly2: require("./pigly/2.png").default,
+  pigly3: require("./pigly/3.png").default,
 };

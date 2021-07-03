@@ -99,6 +99,18 @@ const items = [
     technologies: ["HTML", "CSS", "jQuery", "Bootstrap", "PHP", "MySQL"],
     role: ["Front-End", "Back-End"],
   },
+  {
+    categories: ["front-end", "back-end", "personal"],
+    thumbnail: img.pigly1,
+    screenshots: [img.pigly1, img.pigly2, img.pigly3],
+    title: "Pigly",
+    description:
+      "Built a url shortener using Ruby on Rails in the back-end. Gifs are from giphy & tenor.",
+    created: "2018",
+    technologies: ["HTML5", "CSS3", "SCSS", "JavaScript", "Ruby on Rails"],
+    role: ["Front-End", "Back-End"],
+    url: "https://pig-ly.herokuapp.com/",
+  },
 ];
 
 export default items;

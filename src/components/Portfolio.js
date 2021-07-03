@@ -40,6 +40,15 @@ const Portfolio = () => {
                 Back-End
               </button>
             </li>
+            <li>
+              <button
+                title="Filter by Personal"
+                data-filter="personal"
+                class="filter__button"
+              >
+                Personal
+              </button>
+            </li>
           </ul>
 
           <div className="portfolio__filter-status center">
