@@ -111,6 +111,24 @@ const items = [
     role: ["Front-End", "Back-End"],
     url: "https://pig-ly.herokuapp.com/",
   },
+  {
+    categories: ["front-end", "back-end", "personal"],
+    thumbnail: img.booking1,
+    screenshots: [
+      img.booking1,
+      img.booking2,
+      img.booking3,
+      img.booking4,
+      img.booking5,
+      img.booking6,
+    ],
+    title: "Online Booking Form",
+    description: `Built an online booking form using Ruby on Rails in the back-end. It has cool features like email notification (for client, and admin), admin panel (with filters, scopes, etc) and more. Still a bit rough around the edges but all important features are implemented. You can check out the admin panel at <a href='https://stormy-earth-93721.herokuapp.com/admin' target='_blank'>https://stormy-earth-93721.herokuapp.com/admin</a> and use 'admin@example.com', 'password' for credentials.`,
+    created: "2018",
+    technologies: ["HTML5", "CSS3", "SCSS", "JavaScript", "Ruby on Rails"],
+    role: ["Front-End", "Back-End"],
+    url: "https://stormy-earth-93721.herokuapp.com/",
+  },
 ];
 
 export default items;

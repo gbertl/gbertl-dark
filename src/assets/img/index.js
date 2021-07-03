@@ -18,4 +18,10 @@ export default {
   pigly1: require("./pigly/1.png").default,
   pigly2: require("./pigly/2.png").default,
   pigly3: require("./pigly/3.png").default,
+  booking1: require("./booking/1.png").default,
+  booking2: require("./booking/2.png").default,
+  booking3: require("./booking/3.png").default,
+  booking4: require("./booking/4.png").default,
+  booking5: require("./booking/5.png").default,
+  booking6: require("./booking/6.png").default,
 };
