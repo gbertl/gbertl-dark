@@ -2,6 +2,7 @@ import img from "../assets/img";
 
 const items = [
   {
+    id: 1,
     categories: ["front-end"],
     thumbnail: img.archmove1,
     screenshots: [
@@ -20,6 +21,7 @@ const items = [
     url: "https://archmove-gilbertlc.vercel.app/",
   },
   {
+    id: 2,
     categories: ["front-end"],
     thumbnail: img.portfolioLanding,
     screenshots: [img.portfolioLanding],
@@ -58,6 +60,7 @@ const items = [
     url: "https://github.com/gilbertlc/portfolio",
   },
   {
+    id: 3,
     categories: ["front-end", "back-end"],
     thumbnail: img.diliDashboard,
     screenshots: [
@@ -83,6 +86,7 @@ const items = [
     role: ["Front-End", "Back-End"],
   },
   {
+    id: 4,
     categories: ["front-end", "back-end"],
     thumbnail: img.sjnhsLogin,
     screenshots: [
@@ -100,6 +104,7 @@ const items = [
     role: ["Front-End", "Back-End"],
   },
   {
+    id: 5,
     categories: ["front-end", "back-end", "personal"],
     thumbnail: img.pigly1,
     screenshots: [img.pigly1, img.pigly2, img.pigly3],
@@ -112,6 +117,7 @@ const items = [
     url: "https://pig-ly.herokuapp.com/",
   },
   {
+    id: 6,
     categories: ["front-end", "back-end", "personal"],
     thumbnail: img.booking1,
     screenshots: [

@@ -60,6 +60,7 @@ const Portfolio = () => {
               <div
                 data-category={d.categories.join()}
                 className="portfolio-item"
+                key={d.id}
               >
                 <div className="portfolio-item__thumbnail">
                   <img
@@ -69,7 +70,7 @@ const Portfolio = () => {
                   />
                   <div className="hidden portfolio-item__screenshots">
                     {d.screenshots.map((sc) => (
-                      <img src={sc} alt="" />
+                      <img src={sc} alt="" key={sc} />
                     ))}
                   </div>
                   <div className="portfolio-item__btn center">
