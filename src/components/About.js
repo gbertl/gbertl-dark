@@ -1,9 +1,26 @@
 import React from "react";
+import {closeNavbar, hideToggler, showToggler} from "./helper";
+import {openOverlayEffect, closeOverlayEffect} from "./overlayEffect";
 
 class About extends React.Component {
+  componentDidMount() {
+    showToggler();
+    closeNavbar();
+    closeOverlayEffect();
+  }
+
+  handleAboutLink(path) {
+    hideToggler();
+    openOverlayEffect();
+
+    setTimeout(() => {
+      this.props.history.push(path);
+    }, 950);
+  }
+
   render() {
     return (
-      <section className="about hidden" id="about">
+      <section className="about" id="about">
         <div className="container about__container">
           <div className="px-15 about__details">
             <img
@@ -19,17 +36,19 @@ class About extends React.Component {
               <span className="text-bold">CSS</span>, and{" "}
               <span className="text-bold">JavaScript</span>. Check out my latest
               work on the{" "}
-              <a
-                href="#portfolio"
+              <button
                 className="text-bold text-primary about__link"
+                onClick={() => this.handleAboutLink("/portfolio")}
               >
                 Portfolio Page
-              </a>
-              . Want to talk about a project? You can get in touch with me
-              <a href="#contact" className="text-bold text-primary about__link">
-                {" "}
+              </button>
+              . Want to talk about a project? You can get in touch with me{" "}
+              <button
+                className="text-bold text-primary about__link"
+                onClick={() => this.handleAboutLink("/contact")}
+              >
                 here
-              </a>
+              </button>
               .
             </p>
 

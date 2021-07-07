@@ -1,9 +1,14 @@
 import {useEffect} from "react";
 import {analytics} from "../firebase";
-import {toggleBodyScroll} from "./helper";
+import {toggleBodyScroll, closeNavbar, showToggler} from "./helper";
+import {closeOverlayEffect} from "./overlayEffect";
 
 export default function usePortfolio() {
   useEffect(() => {
+    showToggler();
+    closeNavbar();
+    closeOverlayEffect();
+
     const filter = document.querySelector(".filter");
     const filterBtns = filter.querySelectorAll(".filter__button");
 

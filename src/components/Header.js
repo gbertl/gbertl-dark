@@ -1,31 +1,36 @@
-import useHeader from "./useHeader";
+import {Link} from "react-router-dom";
+import {toggleOverlayEffect} from "./overlayEffect";
+import {toggleNavbar} from "./helper";
 
 const Header = () => {
-  useHeader();
+  const handleToggler = () => {
+    toggleNavbar();
+    toggleOverlayEffect();
+  };
 
   return (
     <header className="header">
       <div className="container flex justify-end">
-        <button className="navbar-toggler mr-15">
+        <button className="navbar-toggler mr-15" onClick={handleToggler}>
           <span className="navbar-toggler__icon"></span>
         </button>
 
         <nav className="navbar center">
           <ul className="text-center">
             <li>
-              <a href="#about" class="navbar__link text-bold">
+              <Link to="/" className="navbar__link text-bold">
                 About
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#portfolio" class="navbar__link text-bold">
+              <Link to="/portfolio" className="navbar__link text-bold">
                 Portfolio
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#contact" class="navbar__link text-bold">
+              <Link to="/contact" className="navbar__link text-bold">
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

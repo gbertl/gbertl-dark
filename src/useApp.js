@@ -1,4 +1,5 @@
 import {useEffect} from "react";
+import {generateOverlayEffect} from "./components/overlayEffect";
 
 export const useApp = () => {
   useEffect(() => {
@@ -22,5 +23,7 @@ export const useApp = () => {
     };
 
     bgAnimationItems();
+
+    generateOverlayEffect();
   }, []);
 };

@@ -4,6 +4,7 @@ import About from "./components/About";
 import Header from "./components/Header";
 import Contact from "./components/Contact";
 import {useApp} from "./useApp";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 const App = () => {
   useApp();
@@ -16,14 +17,18 @@ const App = () => {
           <p>Loading</p>
         </div>
       </div>
-      <div className="App">
-        <div class="bg-animation-effect"></div>
-        <div class="overlay-effect"></div>
-        <Header />
-        <Portfolio />
-        <About />
-        <Contact />
-      </div>
+      <Router>
+        <div className="App">
+          <div className="bg-animation-effect"></div>
+          <div className="overlay-effect"></div>
+          <Header />
+          <Switch>
+            <Route path="/contact" component={Contact} />
+            <Route path="/portfolio" component={Portfolio} />
+            <Route path="/" component={About} />
+          </Switch>
+        </div>
+      </Router>
     </>
   );
 };

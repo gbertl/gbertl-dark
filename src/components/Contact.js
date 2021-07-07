@@ -1,9 +1,15 @@
 import {Component} from "react";
 import {toggleBodyScroll} from "./helper";
 import emailjs from "emailjs-com";
+import {closeNavbar, showToggler} from "./helper";
+import {closeOverlayEffect} from "./overlayEffect";
 
 class Contact extends Component {
   componentDidMount() {
+    showToggler();
+    closeNavbar();
+    closeOverlayEffect();
+
     const toggleContactForm = () => {
       document
         .querySelector(".contact-form")
@@ -53,7 +59,7 @@ class Contact extends Component {
 
   render() {
     return (
-      <section className="contact hidden" id="contact">
+      <section className="contact" id="contact">
         <div className="container text-center min-h-screen contact__container px-15 center">
           <div>
             <h1 className="section-heading">Contact Me</h1>
