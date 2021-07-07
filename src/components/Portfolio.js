@@ -26,7 +26,7 @@ const Portfolio = () => {
               <button
                 title="Filter by Front-End"
                 data-filter="front-end"
-                class="filter__button"
+                className="filter__button"
               >
                 Front-End
               </button>
@@ -35,7 +35,7 @@ const Portfolio = () => {
               <button
                 title="Filter by Back-End"
                 data-filter="back-end"
-                class="filter__button"
+                className="filter__button"
               >
                 Back-End
               </button>
@@ -44,7 +44,7 @@ const Portfolio = () => {
               <button
                 title="Filter by Personal"
                 data-filter="personal"
-                class="filter__button"
+                className="filter__button"
               >
                 Personal
               </button>

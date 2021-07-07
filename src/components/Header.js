@@ -4,14 +4,14 @@ const Header = () => {
   useHeader();
 
   return (
-    <header class="header">
-      <div class="container flex justify-end">
-        <button class="navbar-toggler mr-15">
-          <span class="navbar-toggler__icon"></span>
+    <header className="header">
+      <div className="container flex justify-end">
+        <button className="navbar-toggler mr-15">
+          <span className="navbar-toggler__icon"></span>
         </button>
 
-        <nav class="navbar center">
-          <ul class="text-center">
+        <nav className="navbar center">
+          <ul className="text-center">
             <li>
               <a href="#about" class="navbar__link text-bold">
                 About

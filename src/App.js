@@ -10,9 +10,9 @@ const App = () => {
 
   return (
     <>
-      <div class="loader center">
-        <div class="loader__body flex align-center">
-          <div class="loader__icon"></div>
+      <div className="loader center">
+        <div className="loader__body flex align-center">
+          <div className="loader__icon"></div>
           <p>Loading</p>
         </div>
       </div>

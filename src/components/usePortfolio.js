@@ -19,7 +19,7 @@ export default function usePortfolio() {
           filterStatus.classList.add("portfolio__filter-status--open");
           filterStatus.querySelector(
             "p"
-          ).innerHTML = `Filtering <span class='text-bold'>${e.target.innerHTML}</span> Works`;
+          ).innerHTML = `Filtering <span className='text-bold'>${e.target.innerHTML}</span> Works`;
 
           filter
             .querySelector(".filter__button--active")
