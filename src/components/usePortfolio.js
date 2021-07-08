@@ -402,5 +402,9 @@ export default function usePortfolio() {
         toggleModal();
       }
     });
+
+    return () => {
+      clearInterval(timer);
+    };
   }, []);
 }
