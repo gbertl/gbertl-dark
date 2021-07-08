@@ -3,8 +3,8 @@ import data from "../data/items";
 import usePortfolio from "./usePortfolio";
 import Modal from "./Modal";
 
-const Portfolio = () => {
-  usePortfolio();
+const Portfolio = (props) => {
+  usePortfolio(props);
 
   return (
     <>

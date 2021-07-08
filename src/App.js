@@ -5,8 +5,12 @@ import Header from "./components/Header";
 import Contact from "./components/Contact";
 import {useApp} from "./useApp";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {useState} from "react";
 
 const App = () => {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isOverlayActive, setIsOverlayActive] = useState(false);
+
   useApp();
 
   return (
@@ -21,11 +25,37 @@ const App = () => {
         <div className="App">
           <div className="bg-animation-effect"></div>
           <div className="overlay-effect"></div>
-          <Header />
+          <Header
+            isNavOpen={isNavOpen}
+            setIsNavOpen={setIsNavOpen}
+            isOverlayActive={isOverlayActive}
+            setIsOverlayActive={setIsOverlayActive}
+          />
           <Switch>
-            <Route path="/contact" component={Contact} />
-            <Route path="/portfolio" component={Portfolio} />
-            <Route path="/" component={About} />
+            <Route path="/contact">
+              <Contact
+                isNavOpen={isNavOpen}
+                setIsNavOpen={setIsNavOpen}
+                isOverlayActive={isOverlayActive}
+                setIsOverlayActive={setIsOverlayActive}
+              />
+            </Route>
+            <Route path="/portfolio">
+              <Portfolio
+                isNavOpen={isNavOpen}
+                setIsNavOpen={setIsNavOpen}
+                isOverlayActive={isOverlayActive}
+                setIsOverlayActive={setIsOverlayActive}
+              />
+            </Route>
+            <Route path="/">
+              <About
+                isNavOpen={isNavOpen}
+                setIsNavOpen={setIsNavOpen}
+                isOverlayActive={isOverlayActive}
+                setIsOverlayActive={setIsOverlayActive}
+              />
+            </Route>
           </Switch>
         </div>
       </Router>

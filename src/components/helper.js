@@ -16,13 +16,6 @@ export const closeNavbar = () => {
   document.querySelector(".navbar").classList.remove("navbar--open");
 };
 
-export const toggleNavbar = () => {
-  document
-    .querySelector(".navbar-toggler")
-    .classList.toggle("navbar-toggler--active");
-  document.querySelector(".navbar").classList.toggle("navbar--open");
-};
-
 export const hideToggler = () => {
   document
     .querySelector(".navbar-toggler")

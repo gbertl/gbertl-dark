@@ -7,8 +7,16 @@ import {closeOverlayEffect} from "./overlayEffect";
 class Contact extends Component {
   componentDidMount() {
     showToggler();
-    closeNavbar();
-    closeOverlayEffect();
+
+    if (this.props.isNavOpen) {
+      closeNavbar();
+      this.props.setIsNavOpen(false);
+    }
+
+    if (this.props.isOverlayActive) {
+      closeOverlayEffect();
+      this.props.setIsOverlayActive(false);
+    }
 
     const toggleContactForm = () => {
       document

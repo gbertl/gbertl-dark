@@ -3,11 +3,19 @@ import {analytics} from "../firebase";
 import {toggleBodyScroll, closeNavbar, showToggler} from "./helper";
 import {closeOverlayEffect} from "./overlayEffect";
 
-export default function usePortfolio() {
+export default function usePortfolio(props) {
   useEffect(() => {
     showToggler();
-    closeNavbar();
-    closeOverlayEffect();
+
+    if (props.isNavOpen) {
+      closeNavbar();
+      props.setIsNavOpen(false);
+    }
+
+    if (props.isOverlayActive) {
+      closeOverlayEffect();
+      props.setIsOverlayActive(false);
+    }
 
     const filter = document.querySelector(".filter");
     const filterBtns = filter.querySelectorAll(".filter__button");

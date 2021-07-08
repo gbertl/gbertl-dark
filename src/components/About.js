@@ -1,17 +1,28 @@
 import React from "react";
 import {closeNavbar, hideToggler, showToggler} from "./helper";
 import {openOverlayEffect, closeOverlayEffect} from "./overlayEffect";
+import {withRouter} from "react-router-dom";
 
 class About extends React.Component {
   componentDidMount() {
     showToggler();
-    closeNavbar();
-    closeOverlayEffect();
+
+    if (this.props.isNavOpen) {
+      closeNavbar();
+      this.props.setIsNavOpen(false);
+    }
+
+    if (this.props.isOverlayActive) {
+      closeOverlayEffect();
+      this.props.setIsOverlayActive(false);
+    }
   }
 
   handleAboutLink(path) {
     hideToggler();
+
     openOverlayEffect();
+    this.props.setIsOverlayActive(true);
 
     setTimeout(() => {
       this.props.history.push(path);
@@ -70,4 +81,4 @@ class About extends React.Component {
   }
 }
 
-export default About;
+export default withRouter(About);

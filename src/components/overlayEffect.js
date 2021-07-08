@@ -17,9 +17,3 @@ export const closeOverlayEffect = () => {
     .querySelector(".overlay-effect")
     .classList.remove("overlay-effect--active");
 };
-
-export const toggleOverlayEffect = () => {
-  document
-    .querySelector(".overlay-effect")
-    .classList.toggle("overlay-effect--active");
-};
