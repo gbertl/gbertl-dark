@@ -2,9 +2,38 @@ import img from "../assets/img";
 import data from "../data/items";
 import usePortfolio from "./usePortfolio";
 import Modal from "./Modal";
+import {useState, useEffect} from "react";
+import {closeNavbar, showToggler} from "./helper";
+import {closeOverlayEffect} from "./overlayEffect";
 
 const Portfolio = (props) => {
+  const [imgLen, setImgLen] = useState(null);
+  const [counter, setCounter] = useState(0);
+
   usePortfolio(props);
+
+  useEffect(() => {
+    setImgLen(
+      document.querySelectorAll(".portfolio-item__img").length +
+        document.querySelectorAll(".portfolio-item__screenshots img").length
+    );
+  }, []);
+
+  useEffect(() => {
+    if (imgLen === counter) {
+      showToggler();
+
+      if (props.isNavOpen) {
+        closeNavbar();
+        props.setIsNavOpen(false);
+      }
+
+      if (props.isOverlayActive) {
+        closeOverlayEffect();
+        props.setIsOverlayActive(false);
+      }
+    }
+  }, [counter]);
 
   return (
     <>
@@ -67,10 +96,16 @@ const Portfolio = (props) => {
                     src={d.thumbnail}
                     alt=""
                     className="portfolio-item__img"
+                    onLoad={() => setCounter(counter + 1)}
                   />
                   <div className="hidden portfolio-item__screenshots">
                     {d.screenshots.map((sc) => (
-                      <img src={sc} alt="" key={sc} />
+                      <img
+                        src={sc}
+                        alt=""
+                        key={sc}
+                        onLoad={() => setCounter(counter + 1)}
+                      />
                     ))}
                   </div>
                   <div className="portfolio-item__btn center">
