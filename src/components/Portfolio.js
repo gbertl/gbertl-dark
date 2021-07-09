@@ -13,10 +13,7 @@ const Portfolio = (props) => {
   usePortfolio(props);
 
   useEffect(() => {
-    setImgLen(
-      document.querySelectorAll(".portfolio-item__img").length +
-        document.querySelectorAll(".portfolio-item__screenshots img").length
-    );
+    setImgLen(document.querySelectorAll(".portfolio-item__screenshots").length);
   }, []);
 
   useEffect(() => {
@@ -96,7 +93,6 @@ const Portfolio = (props) => {
                     src={d.thumbnail}
                     alt=""
                     className="portfolio-item__img"
-                    onLoad={() => setCounter(counter + 1)}
                   />
                   <div className="hidden portfolio-item__screenshots">
                     {d.screenshots.map((sc) => (
@@ -104,7 +100,11 @@ const Portfolio = (props) => {
                         src={sc}
                         alt=""
                         key={sc}
-                        onLoad={() => setCounter(counter + 1)}
+                        onLoad={() => {
+                          if (d.screenshots[0] === sc) {
+                            setCounter(counter + 1);
+                          }
+                        }}
                       />
                     ))}
                   </div>
