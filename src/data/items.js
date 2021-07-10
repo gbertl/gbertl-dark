@@ -5,14 +5,7 @@ const items = [
     id: 1,
     categories: ["front-end"],
     thumbnail: img.archmove1,
-    screenshots: [
-      img.archmove1,
-      img.archmove2,
-      img.archmove3,
-      img.archmove4,
-      img.archmove5,
-      img.archmove6,
-    ],
+    screenshots: [img.archmove1],
     title: "Arch Move",
     description:
       "Help client build his landing page by converting his Figma design to HTML, CSS, and JavaScript.",
@@ -24,8 +17,8 @@ const items = [
   {
     id: 2,
     categories: ["front-end"],
-    thumbnail: img.portfolioLanding,
-    screenshots: [img.portfolioLanding],
+    thumbnail: img.portfolio1,
+    screenshots: [img.portfolio1, img.portfolio2, img.portfolio3],
     title: "Personal Portfolio",
     description:
       "Built a portfolio website to showcase my recent projects as a front-end web developer. I've used React, styled and animate it with CSS (used SASS to organized it), and custom VanillaJS for building modal, slider, pagination, navigation, etc. You can check out the link to my source code below",
