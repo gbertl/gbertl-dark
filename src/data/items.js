@@ -14,10 +14,11 @@ const items = [
       img.archmove6,
     ],
     title: "Arch Move",
-    description: "Built a landing page from client's Figma file to HTML/CSS.",
+    description:
+      "Help client build his landing page by converting his Figma design to HTML, CSS, and JavaScript.",
     created: "2021",
-    technologies: ["HTML5", "CSS3 - preprocessed with SASS", "JavaScript"],
-    role: ["Front-End", "Figma to HTML"],
+    technologies: ["HTML", "CSS", "JavaScript"],
+    role: ["Front-End"],
     url: "https://archmove-gilbertlc.vercel.app/",
   },
   {
@@ -26,36 +27,10 @@ const items = [
     thumbnail: img.portfolioLanding,
     screenshots: [img.portfolioLanding],
     title: "Personal Portfolio",
-    description: `
-    Built with custom VanillaJS and written entirely on HTML, 
-    CSS and React. This website is a showcase of my recent projects as a
-    Front-End & Back-End Web Developer.
-    <br />
-    <br />
-    The idea behind this project was to create a showcase of
-    everything I've worked on in the past few years. Inspired from
-    <a
-      href="https://www.youtube.com/watch?v=nAHc42DKpuI"
-      target="_blank"
-    >
-      this
-    </a>
-    portfolio design by Upvesh. Implemented it on my own way, added
-    custom hover effects, custom components, etc. I used BEM in
-    naming CSS classes for maintainability. Made utility classes for
-    paddings. margins, etc to DRY out the stylesheet. Then
-    preprocessed it with SASS and organized styles using 7-1
-    pattern. Finally, to avoid code duplication I extract bits of
-    code that do the same thing into a function in my JavaScript.
-    You can check out the link to my source code below.
-    `,
+    description:
+      "Built a portfolio website to showcase my recent projects as a front-end web developer. I've used React, styled and animate it with CSS (used SASS to organized it), and custom VanillaJS for building modal, slider, pagination, navigation, etc. You can check out the link to my source code below",
     created: "2021",
-    technologies: [
-      "HTML5",
-      "CSS3 - preprocessed with SASS",
-      "JavaScript",
-      "React",
-    ],
+    technologies: ["HTML", "CSS", "SCSS", "JavaScript", "React"],
     role: ["Front-End"],
     url: "https://github.com/gilbertlc/portfolio",
   },
@@ -98,7 +73,7 @@ const items = [
     ],
     title: "SJNHS Voting System",
     description:
-      "A college student asked me to build a voting system for their thesis. I used native PHP for the backend and Bootstrap for styling.",
+      "Help client with their thesis by building a voting system for a local secondary school as well as help them write a documentation for it. Built with PHP in the back-end and Bootstrap for styling.",
     created: "2017",
     technologies: ["HTML", "CSS", "jQuery", "Bootstrap", "PHP", "MySQL"],
     role: ["Front-End", "Back-End"],
@@ -109,10 +84,9 @@ const items = [
     thumbnail: img.pigly1,
     screenshots: [img.pigly1, img.pigly2, img.pigly3],
     title: "Pigly",
-    description:
-      "Built a url shortener using Ruby on Rails in the back-end. Gifs are from giphy & tenor.",
+    description: "Built a url shortener using Ruby on Rails in the back-end.",
     created: "2018",
-    technologies: ["HTML5", "CSS3", "SCSS", "JavaScript", "Ruby on Rails"],
+    technologies: ["HTML", "CSS", "SCSS", "JavaScript", "Ruby on Rails"],
     role: ["Front-End", "Back-End"],
     url: "https://pig-ly.herokuapp.com/",
   },
@@ -131,7 +105,7 @@ const items = [
     title: "Online Booking Form",
     description: `Built an online booking form using Ruby on Rails in the back-end. It has cool features like email notification (for client, and admin), admin panel (with filters, scopes, etc) and more. Still a bit rough around the edges but all important features are implemented. You can check out the admin panel at <a href='https://stormy-earth-93721.herokuapp.com/admin' target='_blank'>https://stormy-earth-93721.herokuapp.com/admin</a> and use 'admin@example.com', 'password' for credentials.`,
     created: "2018",
-    technologies: ["HTML5", "CSS3", "SCSS", "JavaScript", "Ruby on Rails"],
+    technologies: ["HTML", "CSS", "SCSS", "JavaScript", "Ruby on Rails"],
     role: ["Front-End", "Back-End"],
     url: "https://stormy-earth-93721.herokuapp.com/",
   },

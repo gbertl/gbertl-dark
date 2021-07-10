@@ -59,11 +59,11 @@ const Portfolio = (props) => {
             </li>
             <li>
               <button
-                title="Filter by Back-End"
+                title="Filter by With Back-End"
                 data-filter="back-end"
                 className="filter__button"
               >
-                Back-End
+                With Back-End
               </button>
             </li>
             <li>
