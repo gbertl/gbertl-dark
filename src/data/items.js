@@ -59,10 +59,10 @@ const items = [
     thumbnail: img.sjnhsLogin,
     screenshots: [
       img.sjnhsLogin,
+      img.sjnhsVote,
       img.sjnhsResults,
       img.sjnhsStudents,
       img.sjnhsCandidates,
-      img.sjnhsVote,
     ],
     title: "SJNHS Voting System",
     description:
