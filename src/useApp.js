@@ -1,12 +1,10 @@
 import {useEffect} from "react";
 import {generateOverlayEffect} from "./components/overlayEffect";
 
-export const useApp = () => {
+export const useApp = ({isLoading, setIsLoading}) => {
   useEffect(() => {
     window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.querySelector(".loader").classList.add("loader--hide");
-      }, 500);
+      setIsLoading(false);
     });
 
     const bgAnimationItems = () => {

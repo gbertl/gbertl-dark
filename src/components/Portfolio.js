@@ -2,33 +2,50 @@ import img from "../assets/img";
 import data from "../data/items";
 import usePortfolio from "./usePortfolio";
 import Modal from "./Modal";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import {closeNavbar, showToggler} from "./helper";
 import {closeOverlayEffect} from "./overlayEffect";
 
 const Portfolio = (props) => {
   const [imgLen, setImgLen] = useState(null);
   const [counter, setCounter] = useState(0);
+  const refCounter = useRef(0);
 
   usePortfolio(props);
 
   useEffect(() => {
+    showToggler();
+
+    if (props.isNavOpen) {
+      closeNavbar();
+      props.setIsNavOpen(false);
+    }
+
+    if (props.isOverlayActive) {
+      closeOverlayEffect();
+      props.setIsOverlayActive(false);
+    }
+
     setImgLen(document.querySelectorAll(".portfolio-item__screenshots").length);
   }, []);
 
   useEffect(() => {
-    if (imgLen === counter) {
-      showToggler();
-
-      if (props.isNavOpen) {
-        closeNavbar();
-        props.setIsNavOpen(false);
+    let timeout = setTimeout(() => {
+      if (imgLen !== refCounter.current) {
+        props.setIsLoading(true);
       }
+    }, 1000);
 
-      if (props.isOverlayActive) {
-        closeOverlayEffect();
-        props.setIsOverlayActive(false);
-      }
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [imgLen]);
+
+  useEffect(() => {
+    refCounter.current = counter;
+
+    if (imgLen === refCounter.current) {
+      props.setIsLoading(false);
     }
   }, [counter]);
 

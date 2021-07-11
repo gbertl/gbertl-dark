@@ -5,13 +5,30 @@ import Header from "./components/Header";
 import Contact from "./components/Contact";
 import {useApp} from "./useApp";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const App = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isOverlayActive, setIsOverlayActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  useApp();
+  useApp({isLoading, setIsLoading});
+
+  useEffect(() => {
+    let timeout;
+
+    if (isLoading) {
+      document.querySelector(".loader").classList.remove("loader--hide");
+    } else {
+      timeout = setTimeout(() => {
+        document.querySelector(".loader").classList.add("loader--hide");
+      }, 500);
+    }
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isLoading]);
 
   return (
     <>
@@ -46,6 +63,8 @@ const App = () => {
                 setIsNavOpen={setIsNavOpen}
                 isOverlayActive={isOverlayActive}
                 setIsOverlayActive={setIsOverlayActive}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
               />
             </Route>
             <Route path="/">
