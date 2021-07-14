@@ -21,12 +21,12 @@ export default function usePortfolio(props) {
             "p"
           ).innerHTML = `Filtering <span className='text-bold'>${e.target.innerHTML}</span> Works`;
 
-          filter
-            .querySelector(".filter__button--active")
-            .classList.remove("filter__button--active");
-          e.target.classList.add("filter__button--active");
-
           setTimeout(() => {
+            filter
+              .querySelector(".filter__button--active")
+              .classList.remove("filter__button--active");
+            e.target.classList.add("filter__button--active");
+
             filterItems(e.target);
             filterStatus.classList.remove("portfolio__filter-status--open");
             toggleBodyScroll();
