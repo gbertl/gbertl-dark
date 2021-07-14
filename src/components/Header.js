@@ -1,16 +1,32 @@
 import {Link, useLocation} from "react-router-dom";
 import {closeOverlayEffect, openOverlayEffect} from "./overlayEffect";
-import {closeNavbar, openNavbar} from "./helper";
+import {
+  closeNavbar,
+  hideBodyScroll,
+  openNavbar,
+  showBodyScroll,
+} from "./helper";
 import {useEffect} from "react";
 
 const Header = (props) => {
   const location = useLocation();
 
   useEffect(() => {
-    if (props.isNavOpen) openNavbar();
-    if (props.isOverlayActive) openOverlayEffect();
-    if (!props.isNavOpen) closeNavbar();
-    if (!props.isOverlayActive) closeOverlayEffect();
+    if (props.isNavOpen) {
+      openNavbar();
+      hideBodyScroll();
+    } else {
+      closeNavbar();
+      showBodyScroll();
+    }
+
+    if (props.isOverlayActive) {
+      openOverlayEffect();
+      hideBodyScroll();
+    } else {
+      closeOverlayEffect();
+      showBodyScroll();
+    }
   }, [props.isNavOpen, props.isOverlayActive]);
 
   const handleToggler = () => {

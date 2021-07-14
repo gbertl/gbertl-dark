@@ -6,6 +6,7 @@ import Contact from "./components/Contact";
 import {useApp} from "./useApp";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {toggleBodyScroll} from "./components/helper";
 
 const App = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -18,9 +19,11 @@ const App = () => {
     let timeout;
 
     if (isLoading) {
+      toggleBodyScroll();
       document.querySelector(".loader").classList.remove("loader--hide");
     } else {
       timeout = setTimeout(() => {
+        toggleBodyScroll();
         document.querySelector(".loader").classList.add("loader--hide");
       }, 500);
     }

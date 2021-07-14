@@ -2,6 +2,14 @@ export const toggleBodyScroll = () => {
   document.body.classList.toggle("overflow-y-hidden");
 };
 
+export const hideBodyScroll = () => {
+  document.body.classList.add("overflow-y-hidden");
+};
+
+export const showBodyScroll = () => {
+  document.body.classList.remove("overflow-y-hidden");
+};
+
 export const openNavbar = () => {
   document
     .querySelector(".navbar-toggler")
