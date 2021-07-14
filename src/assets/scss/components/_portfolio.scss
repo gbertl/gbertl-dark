@@ -121,9 +121,11 @@
     }
   }
 
-  &:hover &__thumbnail::before,
-  &:hover &__thumbnail::after {
-    height: 50%;
+  @include mq(medium) {
+    &:hover &__thumbnail::before,
+    &:hover &__thumbnail::after {
+      height: 50%;
+    }
   }
 
   &__btn {
@@ -138,10 +140,12 @@
     transition: 0.3s;
   }
 
-  &:hover &__btn {
-    transition-delay: 0.2s;
-    opacity: 1;
-    transform: scale(1);
+  @include mq(medium) {
+    &:hover &__btn {
+      transition-delay: 0.2s;
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   &__heading {
