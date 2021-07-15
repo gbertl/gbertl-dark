@@ -41,12 +41,13 @@ class About extends React.Component {
             />
             <h1 className="about__heading">Hi, My name is Gilbert.</h1>
             <p>
-              I'm a <span className="text-bold">Front-End Developer</span>{" "}
-              living in the Philippines. I make web apps usually with{" "}
+              I'm a <span className="text-bold">Full-Stack Developer</span>{" "}
+              living in the Philippines. I make web applications using{" "}
               <span className="text-bold">HTML</span>,{" "}
-              <span className="text-bold">CSS</span>, and{" "}
-              <span className="text-bold">JavaScript</span>. Check out my latest
-              work on the{" "}
+              <span className="text-bold">CSS</span>,{" "}
+              <span className="text-bold">JavaScript</span> and{" "}
+              <span className="text-bold">React</span>. Check out my latest work
+              on the{" "}
               <button
                 className="text-bold text-primary about__link"
                 onClick={() => this.handleAboutLink("/portfolio")}
