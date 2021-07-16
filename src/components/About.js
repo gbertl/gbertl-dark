@@ -41,7 +41,7 @@ class About extends React.Component {
             />
             <h1 className="about__heading">Hi, My name is Gilbert.</h1>
             <p>
-              I'm a <span className="text-bold">Full-Stack Developer</span>{" "}
+              I'm a <span className="text-bold">Front-end Developer</span>{" "}
               living in the Philippines. I make web applications using{" "}
               <span className="text-bold">HTML</span>,{" "}
               <span className="text-bold">CSS</span>,{" "}
@@ -71,8 +71,8 @@ class About extends React.Component {
                 <li className="skills__item">CSS</li>
                 <li className="skills__item">JavaScript</li>
                 <li className="skills__item">React</li>
-
-                <li className="skills__item">Django</li>
+                <li className="skills__item">Git</li>
+                <li className="skills__item">Figma</li>
               </ul>
             </div>
           </div>
