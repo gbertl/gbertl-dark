@@ -7,12 +7,11 @@ const items = [
     thumbnail: img.archmove1,
     screenshots: [img.archmove1],
     title: "Arch Move",
-    description:
-      "Help client build his landing page by converting his Figma design to HTML, CSS, and Javascript.",
+    description: "Figma to HTML Conversion",
     created: "2021",
     technologies: ["HTML", "CSS", "JavaScript"],
     role: ["Front-End"],
-    url: "https://archmove-gilbertlc.vercel.app/",
+    url: "https://gilbertlc.github.io/archmove/",
   },
   {
     id: 2,
