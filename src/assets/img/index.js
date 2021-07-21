@@ -1,5 +1,6 @@
 export default {
   archmove1: require("./archmove/1.png").default,
+  archmove2: require("./archmove/2.png").default,
   portfolio1: require("./portfolio/1.png").default,
   portfolio2: require("./portfolio/2.png").default,
   portfolio3: require("./portfolio/3.png").default,
