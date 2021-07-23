@@ -24,7 +24,7 @@ const items = [
     created: "2021",
     technologies: ["HTML", "CSS (preprocessed w/ SASS)", "JavaScript", "React"],
     role: ["Front-End"],
-    url: "https://github.com/gilbertlc/portfolio",
+    url: "https://github.com/gilbertlc/gilbert-portfolio",
   },
   {
     id: 3,
