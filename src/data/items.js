@@ -7,7 +7,7 @@ const items = [
     thumbnail: img.archmove1,
     screenshots: [img.archmove1, img.archmove2],
     title: "Arch Move",
-    description: `Converted a figma design <a href='https://www.figma.com/file/bPXoHMcjOkFyxR3McYJRZQ/Archmove---Architech-Marketplace?node-id=1%3A2' target='_blank'>here</a> to HTML. Fully responsive using pure CSS.`,
+    description: `Converted <a href='https://www.figma.com/file/bPXoHMcjOkFyxR3McYJRZQ/Archmove---Architech-Marketplace?node-id=1%3A2' target='_blank'>this</a> figma design to HTML. Built with custom vanillaJS components. Source code at <a href="https://github.com/gilbertlc/archmove" target='_blank'>https://github.com/gilbertlc/archmove</a>`,
     created: "2021",
     technologies: ["HTML5", "CSS3 (SASS)", "JavaScript (ES6)"],
     role: ["Front-End"],
