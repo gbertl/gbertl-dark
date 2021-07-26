@@ -19,7 +19,7 @@ export default function usePortfolio(props) {
           filterStatus.classList.add("portfolio__filter-status--open");
           filterStatus.querySelector(
             "p"
-          ).innerHTML = `Filtering <span className='text-bold'>${e.target.innerHTML}</span> Works`;
+          ).innerHTML = `Filtering <span class='text-bold'>${e.target.innerHTML}</span> Works`;
 
           setTimeout(() => {
             filter
@@ -235,11 +235,8 @@ export default function usePortfolio(props) {
 
       modal.querySelector(".modal__thumbnails").innerHTML = thumbnails.join("");
 
-      modal.querySelector(
-        ".modal__heading"
-      ).innerHTML = currentItem.querySelector(
-        ".portfolio-item__heading"
-      ).innerHTML;
+      modal.querySelector(".modal__heading").innerHTML =
+        currentItem.querySelector(".portfolio-item__heading").innerHTML;
 
       modal.querySelector(".modal__body").innerHTML = currentItem.querySelector(
         ".portfolio-item__details"
@@ -262,11 +259,10 @@ export default function usePortfolio(props) {
           .querySelector(".modal__prev-work")
           .classList.remove("invisible");
 
-        document.querySelector(
-          ".modal__prev-work-title"
-        ).innerHTML = portfolioItems[currentItemIndex - 1].querySelector(
-          ".portfolio-item__heading"
-        ).innerHTML;
+        document.querySelector(".modal__prev-work-title").innerHTML =
+          portfolioItems[currentItemIndex - 1].querySelector(
+            ".portfolio-item__heading"
+          ).innerHTML;
         document
           .querySelector(".modal__prev-work")
           .querySelector(".modal__small-img").src = portfolioItems[
@@ -281,11 +277,10 @@ export default function usePortfolio(props) {
         document
           .querySelector(".modal__next-work")
           .classList.remove("invisible");
-        document.querySelector(
-          ".modal__next-work-title"
-        ).innerHTML = portfolioItems[currentItemIndex + 1].querySelector(
-          ".portfolio-item__heading"
-        ).innerHTML;
+        document.querySelector(".modal__next-work-title").innerHTML =
+          portfolioItems[currentItemIndex + 1].querySelector(
+            ".portfolio-item__heading"
+          ).innerHTML;
         document
           .querySelector(".modal__next-work")
           .querySelector(".modal__small-img").src = portfolioItems[

@@ -67,11 +67,20 @@ const Portfolio = (props) => {
             </li>
             <li>
               <button
-                title="Filter by Pure CSS"
-                data-filter="pure-css"
+                title="Filter by HTML/CSS"
+                data-filter="html-css"
                 className="filter__button"
               >
-                Pure CSS
+                HTML/CSS
+              </button>
+            </li>
+            <li>
+              <button
+                title="Filter by React"
+                data-filter="react"
+                className="filter__button"
+              >
+                React
               </button>
             </li>
             <li>
@@ -85,20 +94,11 @@ const Portfolio = (props) => {
             </li>
             <li>
               <button
-                title="Filter by With Back-End"
-                data-filter="back-end"
+                title="Filter by Full-Stack"
+                data-filter="full-stack"
                 className="filter__button"
               >
-                With Back-End
-              </button>
-            </li>
-            <li>
-              <button
-                title="Filter by Personal"
-                data-filter="personal"
-                className="filter__button"
-              >
-                Personal
+                Full-Stack
               </button>
             </li>
           </ul>

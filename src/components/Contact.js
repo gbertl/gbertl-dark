@@ -88,30 +88,6 @@ class Contact extends Component {
             <button className="btn btn-primary mt-15 contact__send-btn">
               Send Message
             </button>
-
-            <div className="mt-30 flex align-center justify-center">
-              <span className="mr-15 text-bold">also find me on</span>
-              <ul className="flex contact__social-list">
-                <li>
-                  <a
-                    href="https://www.linkedin.com/in/gilbertlcsndle"
-                    target="_blank"
-                    className="contact__social center"
-                  >
-                    <i className="fab fa-linkedin"></i>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/gilbertlc"
-                    target="_blank"
-                    className="contact__social center"
-                  >
-                    <i className="fab fa-github"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
 
