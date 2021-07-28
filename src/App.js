@@ -25,7 +25,7 @@ const App = () => {
       timeout = setTimeout(() => {
         toggleBodyScroll();
         document.querySelector(".loader").classList.add("loader--hide");
-      }, 500);
+      }, 200);
     }
 
     return () => {
