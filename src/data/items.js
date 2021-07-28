@@ -33,12 +33,7 @@ let items = [
   {
     categories: ["react", "full-stack"],
     thumbnail: img.amazonclone1,
-    screenshots: [
-      img.amazonclone1,
-      img.amazonclone2,
-      img.amazonclone3,
-      img.amazonclone4,
-    ],
+    screenshots: [img.amazonclone1, img.amazonclone2, img.amazonclone3],
     title: "Amazon Clone",
     description:
       "A working simple amazon clone built with react, firebase, and stripe. Inspired from <a href='https://www.youtube.com/watch?v=RDV3Z1KCBvo' target='_blank'>Let's Build a Full-Stack AMAZON Clone with REACT JS for Beginners (Full E-Comm Store in 8 Hrs) 2021</a>.",
@@ -49,13 +44,8 @@ let items = [
   },
   {
     categories: ["react", "full-stack"],
-    thumbnail: img.netflixclone2,
-    screenshots: [
-      img.netflixclone1,
-      img.netflixclone2,
-      img.netflixclone3,
-      img.netflixclone4,
-    ],
+    thumbnail: img.netflixclone1,
+    screenshots: [img.netflixclone1, img.netflixclone2, img.netflixclone3],
     title: "Netflix Clone",
     description:
       "A simple netflix clone built with react, firebase, and stripe. Inspired from <a href='https://www.youtube.com/watch?v=CLMo0W7mTVo&list=PLf16UKl7nR5DaxECWIwHr82oXtQWgI4Ri' target='_blank'>NETFLIX REACT.JS 5-Day Challenge</a>.",
@@ -67,12 +57,7 @@ let items = [
   {
     categories: ["bootstrap", "full-stack"],
     thumbnail: img.diliDashboard,
-    screenshots: [
-      img.diliDashboard,
-      img.diliResidents,
-      img.diliEvents,
-      img.diliCertificates,
-    ],
+    screenshots: [img.diliDashboard, img.diliResidents, img.diliEvents],
     title: "Dili Management System",
     description:
       "DMS is a system for collecting, sorting, retrieving and processing information of the residents in barangay which is used, or desired, by one of more managers, in the performance of their duties. This is our thesis back in college, we were consist of 3 individuals and I am the lead developer and designer of this project.",
@@ -88,7 +73,6 @@ let items = [
       img.sjnhsVote,
       img.sjnhsResults,
       img.sjnhsStudents,
-      img.sjnhsCandidates,
     ],
     title: "SJNHS Voting System",
     description:
