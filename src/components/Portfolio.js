@@ -5,12 +5,14 @@ import Modal from "./Modal";
 import { useState, useEffect, useRef } from "react";
 import { closeNavbar, showToggler } from "./helper";
 import { closeOverlayEffect } from "./overlayEffect";
+import useDocumentTitle from "../useDocumentTitle";
 
 const Portfolio = (props) => {
   const [imgLen, setImgLen] = useState(null);
   const [counter, setCounter] = useState(0);
   const refCounter = useRef(0);
 
+  useDocumentTitle("Portfolio");
   usePortfolio(props);
 
   useEffect(() => {
