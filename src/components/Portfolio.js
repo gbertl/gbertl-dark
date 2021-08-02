@@ -2,9 +2,9 @@ import img from "../assets/img";
 import data from "../data/items";
 import usePortfolio from "./usePortfolio";
 import Modal from "./Modal";
-import {useState, useEffect, useRef} from "react";
-import {closeNavbar, showToggler} from "./helper";
-import {closeOverlayEffect} from "./overlayEffect";
+import { useState, useEffect, useRef } from "react";
+import { closeNavbar, showToggler } from "./helper";
+import { closeOverlayEffect } from "./overlayEffect";
 
 const Portfolio = (props) => {
   const [imgLen, setImgLen] = useState(null);
@@ -142,7 +142,7 @@ const Portfolio = (props) => {
                 <div className="portfolio-item__details hidden">
                   <p
                     className="portfolio-item__desc"
-                    dangerouslySetInnerHTML={{__html: d.description}}
+                    dangerouslySetInnerHTML={{ __html: d.description }}
                   ></p>
                   <ul>
                     <li className="mb-10">
@@ -159,15 +159,27 @@ const Portfolio = (props) => {
                       <span className="text-bold mr-5">Role -</span>
                       {d.role.join(", ")}
                     </li>
-                    {d.url && (
+                    {d.livePreview && (
                       <li className="mb-10">
-                        <span className="text-bold mr-5">Url -</span>
+                        <span className="text-bold mr-5">Live Preview -</span>
                         <a
-                          href={d.url}
+                          href={d.livePreview}
                           target="_blank"
                           className="text-primary"
                         >
-                          {d.url}
+                          {d.livePreview}
+                        </a>
+                      </li>
+                    )}
+                    {d.sourceCode && (
+                      <li className="mb-10">
+                        <span className="text-bold mr-5">Source Code -</span>
+                        <a
+                          href={d.sourceCode}
+                          target="_blank"
+                          className="text-primary"
+                        >
+                          {d.sourceCode}
                         </a>
                       </li>
                     )}

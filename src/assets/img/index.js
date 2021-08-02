@@ -1,4 +1,5 @@
 const imgs = {
+  covid19tracker: require("./covid19tracker/1.png").default,
   archmove1: require("./archmove/1.png").default,
   archmove2: require("./archmove/2.png").default,
   portfolio1: require("./portfolio/1.png").default,
