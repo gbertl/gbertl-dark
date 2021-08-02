@@ -60,7 +60,6 @@ const Portfolio = (props) => {
           <ul className="flex justify-center filter flex-wrap">
             <li>
               <button
-                title="Show All Works"
                 data-filter="all"
                 className="filter__button filter__button--active"
               >
@@ -68,38 +67,22 @@ const Portfolio = (props) => {
               </button>
             </li>
             <li>
-              <button
-                title="Filter by React"
-                data-filter="react"
-                className="filter__button"
-              >
+              <button data-filter="react" className="filter__button">
                 React
               </button>
             </li>
             <li>
-              <button
-                title="Filter by HTML/CSS"
-                data-filter="html-css"
-                className="filter__button"
-              >
+              <button data-filter="html-css" className="filter__button">
                 HTML/CSS
               </button>
             </li>
             <li>
-              <button
-                title="Filter by Bootstrap"
-                data-filter="bootstrap"
-                className="filter__button"
-              >
+              <button data-filter="bootstrap" className="filter__button">
                 Bootstrap
               </button>
             </li>
             <li>
-              <button
-                title="Filter by Full-Stack"
-                data-filter="full-stack"
-                className="filter__button"
-              >
+              <button data-filter="full-stack" className="filter__button">
                 Full-Stack
               </button>
             </li>
