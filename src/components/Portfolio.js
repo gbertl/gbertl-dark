@@ -69,20 +69,20 @@ const Portfolio = (props) => {
             </li>
             <li>
               <button
-                title="Filter by HTML/CSS"
-                data-filter="html-css"
-                className="filter__button"
-              >
-                HTML/CSS
-              </button>
-            </li>
-            <li>
-              <button
                 title="Filter by React"
                 data-filter="react"
                 className="filter__button"
               >
                 React
+              </button>
+            </li>
+            <li>
+              <button
+                title="Filter by HTML/CSS"
+                data-filter="html-css"
+                className="filter__button"
+              >
+                HTML/CSS
               </button>
             </li>
             <li>
