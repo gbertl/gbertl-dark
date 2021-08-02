@@ -42,11 +42,9 @@ const About = (props) => {
           <p>
             I'm a <span className="text-bold">Full-Stack Web Developer</span>{" "}
             based in the Philippines. My expertise is currently focused on{" "}
-            <span className="text-bold">HTML5</span>,{" "}
-            <span className="text-bold">CSS3</span>,{" "}
-            <span className="text-bold">JavaScript</span> and{" "}
-            <span className="text-bold">React</span>. Feel free to take a look
-            at my latest works on the{" "}
+            <span className="text-bold">React</span>, and{" "}
+            <span className="text-bold">Front-End Development</span>. Feel free
+            to take a look at my latest works on the{" "}
             <button
               className="text-bold text-primary about__link"
               onClick={() => handleAboutLink("/portfolio")}
