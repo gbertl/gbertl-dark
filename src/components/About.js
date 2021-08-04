@@ -41,9 +41,8 @@ const About = (props) => {
           <h1 className="about__heading">Hi, my name is Gilbert.</h1>
           <p>
             I'm a <span className="text-bold">Full-Stack Web Developer</span>{" "}
-            based in the Philippines. My expertise is currently focused on{" "}
-            <span className="text-bold">MERN Stack Development</span>. Feel free
-            to take a look at my latest works on the{" "}
+            based in the Philippines. Feel free to take a look at my latest
+            works on the{" "}
             <button
               className="text-bold text-primary about__link"
               onClick={() => handleAboutLink("/portfolio")}
