@@ -1,18 +1,22 @@
-import {Link, useLocation} from "react-router-dom";
-import {closeOverlayEffect, openOverlayEffect} from "./overlayEffect";
+import { Link, useLocation } from "react-router-dom";
+import { closeOverlayEffect, openOverlayEffect } from "./overlayEffect";
 import {
   closeNavbar,
   hideBodyScroll,
   openNavbar,
   showBodyScroll,
 } from "./helper";
-import {useEffect} from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { closeIsNav, toggleIsNav } from "../state/actions";
 
 const Header = (props) => {
   const location = useLocation();
+  const isNavOpen = useSelector((state) => state.isNavOpen);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (props.isNavOpen) {
+    if (isNavOpen) {
       openNavbar();
       hideBodyScroll();
     } else {
@@ -27,10 +31,10 @@ const Header = (props) => {
       closeOverlayEffect();
       showBodyScroll();
     }
-  }, [props.isNavOpen, props.isOverlayActive]);
+  }, [isNavOpen, props.isOverlayActive]);
 
   const handleToggler = () => {
-    props.setIsNavOpen(!props.isNavOpen);
+    dispatch(toggleIsNav());
     props.setIsOverlayActive(!props.isOverlayActive);
   };
 
@@ -38,7 +42,7 @@ const Header = (props) => {
     if (location.pathname === e.target.getAttribute("href")) {
       closeNavbar();
       closeOverlayEffect();
-      props.setIsNavOpen(false);
+      dispatch(closeIsNav());
       props.setIsOverlayActive(false);
     }
   };

@@ -3,19 +3,19 @@ import { toggleBodyScroll } from "./helper";
 import emailjs from "emailjs-com";
 import { closeNavbar, showToggler } from "./helper";
 import { closeOverlayEffect } from "./overlayEffect";
+import { useDispatch, useSelector } from "react-redux";
+import { closeIsNav } from "../state/actions";
 
-const useContact = ({
-  isNavOpen,
-  setIsNavOpen,
-  isOverlayActive,
-  setIsOverlayActive,
-}) => {
+const useContact = ({ isOverlayActive, setIsOverlayActive }) => {
+  const isNavOpen = useSelector((state) => state.isNavOpen);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     showToggler();
 
     if (isNavOpen) {
       closeNavbar();
-      setIsNavOpen(false);
+      dispatch(closeIsNav());
     }
 
     if (isOverlayActive) {

@@ -6,11 +6,15 @@ import { useState, useEffect, useRef } from "react";
 import { closeNavbar, showToggler } from "./helper";
 import { closeOverlayEffect } from "./overlayEffect";
 import useDocumentTitle from "../useDocumentTitle";
+import { useDispatch, useSelector } from "react-redux";
+import { closeIsNav } from "../state/actions";
 
 const Portfolio = (props) => {
   const [imgLen, setImgLen] = useState(null);
   const [counter, setCounter] = useState(0);
   const refCounter = useRef(0);
+  const isNavOpen = useSelector((state) => state.isNavOpen);
+  const dispatch = useDispatch();
 
   useDocumentTitle("Portfolio");
   usePortfolio(props);
@@ -18,9 +22,9 @@ const Portfolio = (props) => {
   useEffect(() => {
     showToggler();
 
-    if (props.isNavOpen) {
+    if (isNavOpen) {
       closeNavbar();
-      props.setIsNavOpen(false);
+      dispatch(closeIsNav());
     }
 
     if (props.isOverlayActive) {

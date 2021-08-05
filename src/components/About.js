@@ -2,14 +2,19 @@ import { useEffect } from "react";
 import { closeNavbar, hideToggler, showToggler } from "./helper";
 import { openOverlayEffect, closeOverlayEffect } from "./overlayEffect";
 import { withRouter } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { closeIsNav } from "../state/actions";
 
 const About = (props) => {
+  const isNavOpen = useSelector((state) => state.isNavOpen);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     showToggler();
 
-    if (props.isNavOpen) {
+    if (isNavOpen) {
       closeNavbar();
-      props.setIsNavOpen(false);
+      dispatch(closeIsNav());
     }
 
     if (props.isOverlayActive) {

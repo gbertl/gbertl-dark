@@ -3,17 +3,16 @@ import "./assets/scss/style.scss";
 import About from "./components/About";
 import Header from "./components/Header";
 import Contact from "./components/Contact";
-import {useApp} from "./useApp";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {toggleBodyScroll} from "./components/helper";
+import { useApp } from "./useApp";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { toggleBodyScroll } from "./components/helper";
 
 const App = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
   const [isOverlayActive, setIsOverlayActive] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  useApp({isLoading, setIsLoading});
+  useApp({ isLoading, setIsLoading });
 
   useEffect(() => {
     let timeout;
@@ -46,24 +45,18 @@ const App = () => {
           <div className="bg-animation-effect"></div>
           <div className="overlay-effect"></div>
           <Header
-            isNavOpen={isNavOpen}
-            setIsNavOpen={setIsNavOpen}
             isOverlayActive={isOverlayActive}
             setIsOverlayActive={setIsOverlayActive}
           />
           <Switch>
             <Route path="/contact">
               <Contact
-                isNavOpen={isNavOpen}
-                setIsNavOpen={setIsNavOpen}
                 isOverlayActive={isOverlayActive}
                 setIsOverlayActive={setIsOverlayActive}
               />
             </Route>
             <Route path="/portfolio">
               <Portfolio
-                isNavOpen={isNavOpen}
-                setIsNavOpen={setIsNavOpen}
                 isOverlayActive={isOverlayActive}
                 setIsOverlayActive={setIsOverlayActive}
                 isLoading={isLoading}
@@ -72,8 +65,6 @@ const App = () => {
             </Route>
             <Route path="/">
               <About
-                isNavOpen={isNavOpen}
-                setIsNavOpen={setIsNavOpen}
                 isOverlayActive={isOverlayActive}
                 setIsOverlayActive={setIsOverlayActive}
               />
