@@ -1,6 +1,6 @@
-import {useEffect} from "react";
-import {analytics} from "../firebase";
-import {toggleBodyScroll} from "./helper";
+import { useEffect } from "react";
+import { analytics } from "../firebase";
+import { toggleBodyScroll } from "./helper";
 
 export default function usePortfolio(props) {
   useEffect(() => {
@@ -331,14 +331,14 @@ export default function usePortfolio(props) {
       toggleBodyScroll();
     };
 
-    document.querySelectorAll(".portfolio-item").forEach((item) => {
-      item.addEventListener("click", (e) => {
-        updateModal(e.target.closest(".portfolio-item"));
-        toggleModal();
-        document.querySelector(".modal__overlay").scrollTop = 0;
-      });
-    });
-
+    // document.querySelectorAll(".portfolio-item").forEach((item) => {
+    //   item.addEventListener("click", (e) => {
+    //     updateModal(e.target.closest(".portfolio-item"));
+    //     toggleModal();
+    //     document.querySelector(".modal__overlay").scrollTop = 0;
+    //   });
+    // });
+    //
     const handleNextPrev = (direction) => {
       if (direction === "next") {
         currentItemIndex++;
@@ -364,17 +364,17 @@ export default function usePortfolio(props) {
       }, 1000);
     };
 
-    document
-      .querySelector(".modal__prev-work-btn")
-      .addEventListener("click", () => {
-        handleNextPrev("prev");
-      });
-
-    document
-      .querySelector(".modal__next-work-btn")
-      .addEventListener("click", () => {
-        handleNextPrev("next");
-      });
+    // document
+    //   .querySelector(".modal__prev-work-btn")
+    //   .addEventListener("click", () => {
+    //     handleNextPrev("prev");
+    //   });
+    //
+    // document
+    //   .querySelector(".modal__next-work-btn")
+    //   .addEventListener("click", () => {
+    //     handleNextPrev("next");
+    //   });
 
     // closing of modal
     document
