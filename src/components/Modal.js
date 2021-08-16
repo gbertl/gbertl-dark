@@ -14,6 +14,19 @@ const Modal = ({
   const [direction, setDirection] = useState("");
   const modalOverlayRef = useRef();
 
+  // carousel refs
+  const wrapperRef = useRef();
+  const imagesRef = useRef([]);
+  const btnWrapperRef = useRef();
+  const dotIndicatorsRef = useRef();
+
+  const [isNextActive, setIsNextActive] = useState(false);
+  const [isPrevActive, setIsPrevActive] = useState(false);
+
+  const [counter, setCounter] = useState(0);
+
+  const timer = useRef(null);
+
   const updateModal = () => {
     setCurrProject(projects[currProjectIndex]);
 
@@ -25,7 +38,7 @@ const Modal = ({
       ? setNextWork(projects[currProjectIndex + 1])
       : setNextWork({});
 
-    carousel();
+    // carousel();
   };
 
   useEffect(() => {
@@ -65,6 +78,50 @@ const Modal = ({
     return () => clearTimeout(time);
   }, [currProjectIndex]);
 
+  const handleNextSlide = () => {
+    setIsNextActive(true);
+
+    clearTimeout(timer.current);
+
+    timer.current = setTimeout(() => {
+      setIsNextActive(false);
+    }, 1200);
+
+    if (counter === currProject.screenshots.length - 1) {
+      setCounter(0);
+    } else {
+      setCounter(counter + 1);
+    }
+  };
+
+  useEffect(() => {
+    const size = imagesRef.current[counter].clientWidth;
+
+    wrapperRef.current.style.transition = ".4s";
+    wrapperRef.current.style.transitionDelay = ".8s";
+    wrapperRef.current.style.transform = `translateX(${-size * counter}px)`;
+  }, [counter]);
+
+  const handlePrevSlide = () => {
+    setIsPrevActive(true);
+
+    clearTimeout(timer.current);
+
+    timer.current = setTimeout(() => {
+      setIsPrevActive(false);
+    }, 1200);
+
+    if (counter === 0) {
+      setCounter(currProject.screenshots.length - 1);
+    } else {
+      setCounter(counter - 1);
+    }
+  };
+
+  const handleDotIndicator = (index) => {
+    setCounter(index);
+  };
+
   return (
     <div className="modal modal--open">
       <div
@@ -85,22 +142,61 @@ const Modal = ({
             <button className="modal__close close-btn"></button>
 
             <div className="modal__thumbnails-wrapper">
-              <div className="modal__thumbnails flex">
-                {currProject.screenshots.map((s) => (
-                  <img src={s} alt="thumbnail" key={s} />
+              <div className="modal__thumbnails flex" ref={wrapperRef}>
+                {currProject.screenshots.map((s, index) => (
+                  <img
+                    src={s}
+                    alt="thumbnail"
+                    key={s}
+                    ref={(el) => (imagesRef.current[index] = el)}
+                  />
                 ))}
               </div>
-              <div className="flex justify-between modal__carousel-btn-wrapper hidden">
-                <button className="modal__carousel-prev-btn">
-                  <span className="chevron-left"></span>
+              <div
+                className={`flex justify-between modal__carousel-btn-wrapper${
+                  currProject.screenshots.length === 1 ? " hidden" : ""
+                }`}
+                ref={btnWrapperRef}
+              >
+                <button
+                  className="modal__carousel-prev-btn"
+                  onClick={handlePrevSlide}
+                >
+                  <span
+                    className={`chevron-left${
+                      isPrevActive ? " chevron-left--active" : ""
+                    }`}
+                  ></span>
                 </button>
-                <button className="modal__carousel-next-btn">
-                  <span className="chevron-right"></span>
+                <button
+                  className="modal__carousel-next-btn"
+                  onClick={handleNextSlide}
+                >
+                  <span
+                    className={`chevron-right${
+                      isNextActive ? " chevron-right--active" : ""
+                    }`}
+                  ></span>
                 </button>
               </div>
             </div>
 
-            <ul className="dot-indicators flex justify-center hidden"></ul>
+            <ul
+              className={`dot-indicators flex justify-center${
+                currProject.screenshots.length === 1 ? " hidden" : ""
+              }`}
+            >
+              {currProject.screenshots.map((s, index) => (
+                <li>
+                  <button
+                    className={`dot-indicators__item${
+                      counter === index ? " dot-indicators__item--active" : ""
+                    }`}
+                    onClick={() => handleDotIndicator(index)}
+                  ></button>
+                </li>
+              ))}
+            </ul>
 
             <h1 className="modal__heading">{currProject.title}</h1>
           </div>
