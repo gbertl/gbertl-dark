@@ -12,18 +12,15 @@ const Modal = ({
   const [prevWork, setPrevWork] = useState({});
   const [nextWork, setNextWork] = useState({});
   const [direction, setDirection] = useState("");
-  const modalOverlayRef = useRef();
 
-  // carousel refs
-  const wrapperRef = useRef();
+  const modalOverlayRef = useRef();
   const imagesRef = useRef([]);
-  const btnWrapperRef = useRef();
-  const dotIndicatorsRef = useRef();
 
   const [isNextActive, setIsNextActive] = useState(false);
   const [isPrevActive, setIsPrevActive] = useState(false);
 
   const [counter, setCounter] = useState(0);
+  const [size, setSize] = useState(null);
 
   const timer = useRef(null);
 
@@ -95,12 +92,14 @@ const Modal = ({
   };
 
   useEffect(() => {
-    const size = imagesRef.current[counter].clientWidth;
-
-    wrapperRef.current.style.transition = ".4s";
-    wrapperRef.current.style.transitionDelay = ".8s";
-    wrapperRef.current.style.transform = `translateX(${-size * counter}px)`;
+    setSize(imagesRef.current[counter].clientWidth);
   }, [counter]);
+
+  const modalThumbnailsStyle = {
+    transition: ".4s",
+    transitionDelay: ".8s",
+    transform: `translateX(${-size * counter}px)`,
+  };
 
   const handlePrevSlide = () => {
     setIsPrevActive(true);
@@ -142,7 +141,10 @@ const Modal = ({
             <button className="modal__close close-btn"></button>
 
             <div className="modal__thumbnails-wrapper">
-              <div className="modal__thumbnails flex" ref={wrapperRef}>
+              <div
+                className="modal__thumbnails flex"
+                style={modalThumbnailsStyle}
+              >
                 {currProject.screenshots.map((s, index) => (
                   <img
                     src={s}
@@ -156,7 +158,6 @@ const Modal = ({
                 className={`flex justify-between modal__carousel-btn-wrapper${
                   currProject.screenshots.length === 1 ? " hidden" : ""
                 }`}
-                ref={btnWrapperRef}
               >
                 <button
                   className="modal__carousel-prev-btn"
