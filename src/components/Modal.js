@@ -20,7 +20,8 @@ const Modal = ({
   const [isPrevActive, setIsPrevActive] = useState(false);
 
   const [counter, setCounter] = useState(0);
-  const [size, setSize] = useState(null);
+  const [size, setSize] = useState(0);
+  const [willTransition, setWillTransition] = useState(false);
 
   const timer = useRef(null);
 
@@ -35,7 +36,8 @@ const Modal = ({
       ? setNextWork(projects[currProjectIndex + 1])
       : setNextWork({});
 
-    // carousel();
+    setCounter(0);
+    setSize(0);
   };
 
   useEffect(() => {
@@ -49,6 +51,7 @@ const Modal = ({
   }, []);
 
   const handleNextPrev = (direction) => {
+    setWillTransition(false);
     setDirection(direction);
 
     if (direction === "next") {
@@ -77,6 +80,7 @@ const Modal = ({
 
   const handleNextSlide = () => {
     setIsNextActive(true);
+    setWillTransition(true);
 
     clearTimeout(timer.current);
 
@@ -94,12 +98,6 @@ const Modal = ({
   useEffect(() => {
     setSize(imagesRef.current[counter].clientWidth);
   }, [counter]);
-
-  const modalThumbnailsStyle = {
-    transition: ".4s",
-    transitionDelay: ".8s",
-    transform: `translateX(${-size * counter}px)`,
-  };
 
   const handlePrevSlide = () => {
     setIsPrevActive(true);
@@ -142,8 +140,10 @@ const Modal = ({
 
             <div className="modal__thumbnails-wrapper">
               <div
-                className="modal__thumbnails flex"
-                style={modalThumbnailsStyle}
+                className={`modal__thumbnails flex${
+                  willTransition ? " modal__thumbnails--transition" : ""
+                }`}
+                style={{ transform: `translateX(${-size * counter}px)` }}
               >
                 {currProject.screenshots.map((s, index) => (
                   <img
