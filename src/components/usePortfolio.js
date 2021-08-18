@@ -172,7 +172,7 @@ export default function usePortfolio(props) {
             .classList.remove("chevron-right--active");
         }, 1200);
 
-        resetTimer();
+        resetTimer(); //TODO: implement this
         slideNext();
       };
 

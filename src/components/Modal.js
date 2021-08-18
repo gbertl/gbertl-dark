@@ -23,8 +23,6 @@ const Modal = ({
   const [size, setSize] = useState(0);
   const [willTransition, setWillTransition] = useState(false);
 
-  const timer = useRef(null);
-
   const updateModal = () => {
     setCurrProject(projects[currProjectIndex]);
 
@@ -75,10 +73,14 @@ const Modal = ({
       modalOverlayRef.current.scrollTop = 0;
     }, 400);
 
-    return () => clearTimeout(time);
+    return () => {
+      clearTimeout(time);
+    };
   }, [currProjectIndex]);
 
-  const handleNextSlide = () => {
+  const timer = useRef(0);
+
+  const slideNext = () => {
     setIsNextActive(true);
     setWillTransition(true);
 
@@ -88,18 +90,34 @@ const Modal = ({
       setIsNextActive(false);
     }, 1200);
 
-    if (counter === currProject.screenshots.length - 1) {
-      setCounter(0);
-    } else {
-      setCounter(counter + 1);
+    setCounter((prevCounter) => {
+      return prevCounter === currProject.screenshots.length - 1
+        ? 0
+        : prevCounter + 1;
+    });
+  };
+
+  const intervalTimer = useRef(0);
+
+  const resetTimer = () => {
+    clearInterval(intervalTimer.current);
+
+    if (currProject.screenshots.length > 1) {
+      intervalTimer.current = setInterval(slideNext, 5000);
     }
   };
 
+  const handleNextSlide = () => {
+    resetTimer();
+    slideNext();
+  };
+
   useEffect(() => {
-    setSize(imagesRef.current[counter].clientWidth);
-  }, [counter]);
+    resetTimer(); // starts interval change of project
+  }, [currProject]);
 
   const handlePrevSlide = () => {
+    resetTimer();
     setIsPrevActive(true);
 
     clearTimeout(timer.current);
@@ -108,16 +126,21 @@ const Modal = ({
       setIsPrevActive(false);
     }, 1200);
 
-    if (counter === 0) {
-      setCounter(currProject.screenshots.length - 1);
-    } else {
-      setCounter(counter - 1);
-    }
+    setCounter((prevCounter) => {
+      return prevCounter === 0
+        ? currProject.screenshots.length - 1
+        : prevCounter - 1;
+    });
   };
 
   const handleDotIndicator = (index) => {
+    resetTimer();
     setCounter(index);
   };
+
+  useEffect(() => {
+    setSize(imagesRef.current[counter].clientWidth);
+  }, [counter]);
 
   return (
     <div className="modal modal--open">
