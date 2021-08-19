@@ -133,6 +133,7 @@ const Modal = ({
   const handlePrevSlide = () => {
     resetTimer();
     setIsPrevActive(true);
+    setWillTransition(true);
 
     clearTimeout(timer.current);
 
@@ -150,6 +151,7 @@ const Modal = ({
   const handleDotIndicator = (index) => {
     resetTimer();
     setCounter(index);
+    setWillTransition(true);
   };
 
   useEffect(() => {
