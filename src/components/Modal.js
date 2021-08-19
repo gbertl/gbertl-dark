@@ -5,10 +5,9 @@ const Modal = ({
   currProjectIndex,
   setCurrProjectIndex,
   projects,
-  filterBtnRefs,
+  filterTitle,
   setIsModalOpen,
 }) => {
-  const [activeFilterTitle, setActiveFilterTitle] = useState("");
   const [currProject, setCurrProject] = useState(projects[currProjectIndex]);
   const [prevWork, setPrevWork] = useState({});
   const [nextWork, setNextWork] = useState({});
@@ -44,12 +43,6 @@ const Modal = ({
   };
 
   useEffect(() => {
-    setActiveFilterTitle(
-      filterBtnRefs.current.find((el) =>
-        el.classList.contains("filter__button--active")
-      ).innerHTML
-    );
-
     updateModal();
 
     setIsModalTransition(true);
@@ -184,7 +177,7 @@ const Modal = ({
               <h2 className="modal__counter">
                 {currProjectIndex + 1} of {projects.length}
               </h2>
-              <p className="modal__filter-title">( {activeFilterTitle} )</p>
+              <p className="modal__filter-title">( {filterTitle} )</p>
             </div>
 
             <button

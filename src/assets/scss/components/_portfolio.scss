@@ -76,12 +76,6 @@
 }
 
 .portfolio-item {
-  display: none;
-
-  &--show {
-    display: block;
-  }
-
   &-wrapper {
     display: grid;
     grid-template-columns: 1fr;

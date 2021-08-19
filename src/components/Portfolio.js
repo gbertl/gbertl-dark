@@ -1,6 +1,5 @@
 import img from "../assets/img";
 import data from "../data/items";
-import usePortfolio from "./usePortfolio";
 import Modal from "./Modal";
 import { useState, useEffect, useRef } from "react";
 import { closeNavbar, showToggler } from "./helper";
@@ -12,16 +11,38 @@ import { closeIsNav } from "../state/actions";
 const Portfolio = (props) => {
   const [imgLen, setImgLen] = useState(null);
   const [counter, setCounter] = useState(0);
-  const [projects] = useState(data);
+  const [projects, setProjects] = useState(data);
   const [currProjectIndex, setCurrProjectIndex] = useState(0);
   const refCounter = useRef(0);
   const isNavOpen = useSelector((state) => state.isNavOpen);
   const dispatch = useDispatch();
-  const filterBtnRefs = useRef([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [filterTitle, setFilterTitle] = useState("All");
+
+  const categories = [
+    {
+      title: "All",
+      name: "all",
+    },
+    {
+      title: "React",
+      name: "react",
+    },
+    {
+      title: "HTML/CSS",
+      name: "html-css",
+    },
+    {
+      title: "Bootstrap",
+      name: "bootstrap",
+    },
+    {
+      title: "Full-Stack",
+      name: "full-stack",
+    },
+  ];
 
   useDocumentTitle("Portfolio");
-  usePortfolio(props);
 
   useEffect(() => {
     showToggler();
@@ -59,6 +80,16 @@ const Portfolio = (props) => {
     }
   }, [counter]);
 
+  const handleFilter = (category) => {
+    const filteredProjects = data.filter(
+      (p) => category === "all" || p.categories.includes(category)
+    );
+    const currCategory = categories.find((c) => c.name === category);
+
+    setProjects(filteredProjects);
+    setFilterTitle(currCategory.title);
+  };
+
   return (
     <>
       <section className="portfolio" id="portfolio">
@@ -66,51 +97,18 @@ const Portfolio = (props) => {
           <h2 className="section-heading">Recent Works</h2>
 
           <ul className="flex justify-center filter flex-wrap">
-            <li>
-              <button
-                data-filter="all"
-                className="filter__button filter__button--active"
-                ref={(el) => (filterBtnRefs.current[0] = el)}
-              >
-                All
-              </button>
-            </li>
-            <li>
-              <button
-                data-filter="react"
-                className="filter__button"
-                ref={(el) => (filterBtnRefs.current[1] = el)}
-              >
-                React
-              </button>
-            </li>
-            <li>
-              <button
-                data-filter="html-css"
-                className="filter__button"
-                ref={(el) => (filterBtnRefs.current[2] = el)}
-              >
-                HTML/CSS
-              </button>
-            </li>
-            <li>
-              <button
-                data-filter="bootstrap"
-                className="filter__button"
-                ref={(el) => (filterBtnRefs.current[3] = el)}
-              >
-                Bootstrap
-              </button>
-            </li>
-            <li>
-              <button
-                data-filter="full-stack"
-                className="filter__button"
-                ref={(el) => (filterBtnRefs.current[4] = el)}
-              >
-                Full-Stack
-              </button>
-            </li>
+            {categories.map((c) => (
+              <li key={c.name}>
+                <button
+                  onClick={() => handleFilter(c.name)}
+                  className={`filter__button${
+                    filterTitle === c.title ? " filter__button--active" : ""
+                  }`}
+                >
+                  {c.title}
+                </button>
+              </li>
+            ))}
           </ul>
 
           <div className="portfolio__filter-status center">
@@ -210,7 +208,7 @@ const Portfolio = (props) => {
           currProjectIndex={currProjectIndex}
           setCurrProjectIndex={setCurrProjectIndex}
           projects={projects}
-          filterBtnRefs={filterBtnRefs}
+          filterTitle={filterTitle}
           setIsModalOpen={setIsModalOpen}
         />
       )}
