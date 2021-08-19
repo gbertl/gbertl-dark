@@ -18,6 +18,7 @@ const Portfolio = (props) => {
   const isNavOpen = useSelector((state) => state.isNavOpen);
   const dispatch = useDispatch();
   const filterBtnRefs = useRef([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useDocumentTitle("Portfolio");
   usePortfolio(props);
@@ -122,7 +123,10 @@ const Portfolio = (props) => {
                 data-category={p.categories.join()}
                 className="portfolio-item"
                 key={p.id}
-                onClick={() => setCurrProjectIndex(index)}
+                onClick={() => {
+                  setIsModalOpen(true);
+                  setCurrProjectIndex(index);
+                }}
               >
                 <div className="portfolio-item__thumbnail">
                   <img
@@ -201,12 +205,15 @@ const Portfolio = (props) => {
         </div>
       </section>
 
-      <Modal
-        currProjectIndex={currProjectIndex}
-        setCurrProjectIndex={setCurrProjectIndex}
-        projects={projects}
-        filterBtnRefs={filterBtnRefs}
-      />
+      {isModalOpen && (
+        <Modal
+          currProjectIndex={currProjectIndex}
+          setCurrProjectIndex={setCurrProjectIndex}
+          projects={projects}
+          filterBtnRefs={filterBtnRefs}
+          setIsModalOpen={setIsModalOpen}
+        />
+      )}
     </>
   );
 };

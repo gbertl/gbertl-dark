@@ -377,21 +377,21 @@ export default function usePortfolio(props) {
     //   });
 
     // closing of modal
-    document
-      .querySelector(".modal__close")
-      .addEventListener("click", toggleModal);
-
-    document.querySelector(".modal").addEventListener("click", (e) => {
-      if (!e.target.closest(".modal__content")) {
-        toggleModal();
-      }
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (document.querySelector(".modal--open") && e.key === "Escape") {
-        toggleModal();
-      }
-    });
+    // document
+    //   .querySelector(".modal__close")
+    //   .addEventListener("click", toggleModal);
+    //
+    // document.querySelector(".modal").addEventListener("click", (e) => {
+    //   if (!e.target.closest(".modal__content")) {
+    //     toggleModal();
+    //   }
+    // });
+    //
+    // document.addEventListener("keydown", (e) => {
+    //   if (document.querySelector(".modal--open") && e.key === "Escape") {
+    //     toggleModal();
+    //   }
+    // });
 
     return () => {
       clearInterval(timer);

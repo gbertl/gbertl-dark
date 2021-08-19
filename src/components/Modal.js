@@ -6,6 +6,7 @@ const Modal = ({
   setCurrProjectIndex,
   projects,
   filterBtnRefs,
+  setIsModalOpen,
 }) => {
   const [activeFilterTitle, setActiveFilterTitle] = useState("");
   const [currProject, setCurrProject] = useState(projects[currProjectIndex]);
@@ -22,6 +23,10 @@ const Modal = ({
   const [counter, setCounter] = useState(0);
   const [size, setSize] = useState(0);
   const [willTransition, setWillTransition] = useState(false);
+
+  const [isModalTransition, setIsModalTransition] = useState(false);
+
+  const didMount = useRef(false);
 
   const updateModal = () => {
     setCurrProject(projects[currProjectIndex]);
@@ -46,7 +51,23 @@ const Modal = ({
     );
 
     updateModal();
+
+    setIsModalTransition(true);
   }, []);
+
+  useEffect(() => {
+    if (didMount.current && !isModalTransition) {
+      document.body.classList.remove("overflow-y-hidden");
+
+      setTimeout(() => {
+        setIsModalOpen(false);
+      }, 1000);
+    } else {
+      document.body.classList.add("overflow-y-hidden");
+
+      didMount.current = true;
+    }
+  }, [isModalTransition]);
 
   const handleNextPrev = (direction) => {
     setWillTransition(false);
@@ -143,7 +164,14 @@ const Modal = ({
   }, [counter]);
 
   return (
-    <div className="modal modal--open">
+    <div
+      className={`modal${isModalTransition ? " modal--open" : ""}`}
+      onClick={(e) => {
+        if (!e.target.closest(".modal__content")) {
+          setIsModalTransition(false);
+        }
+      }}
+    >
       <div
         className={`modal__transition${
           direction ? ` modal__transition--${direction}` : ""
@@ -159,7 +187,10 @@ const Modal = ({
               <p className="modal__filter-title">( {activeFilterTitle} )</p>
             </div>
 
-            <button className="modal__close close-btn"></button>
+            <button
+              className="modal__close close-btn"
+              onClick={() => setIsModalTransition(false)}
+            ></button>
 
             <div className="modal__thumbnails-wrapper">
               <div
