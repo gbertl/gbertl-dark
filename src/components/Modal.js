@@ -148,6 +148,14 @@ const Modal = ({
     });
   };
 
+  // clear all timers and intervals on close
+  useEffect(() => {
+    return () => {
+      clearTimeout(timer.current);
+      clearInterval(intervalTimer.current);
+    };
+  }, []);
+
   const handleDotIndicator = (index) => {
     resetTimer();
     setCounter(index);
