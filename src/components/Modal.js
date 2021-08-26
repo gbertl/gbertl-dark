@@ -274,29 +274,29 @@ const Modal = ({
               </li>
               <li className="mb-10">
                 <span className="text-bold mr-5">Role -</span>
-                {currProject.role.join(", ")}
+                {currProject.roles.join(", ")}
               </li>
-              {currProject.livePreview && (
+              {currProject.live_preview && (
                 <li className="mb-10">
                   <span className="text-bold mr-5">Live Preview -</span>
                   <a
-                    href={currProject.livePreview}
+                    href={currProject.live_preview}
                     target="_blank"
                     className="text-primary"
                   >
-                    {currProject.livePreview}
+                    {currProject.live_preview}
                   </a>
                 </li>
               )}
-              {currProject.sourceCode && (
+              {currProject.source_code && (
                 <li className="mb-10">
                   <span className="text-bold mr-5">Source Code -</span>
                   <a
-                    href={currProject.sourceCode}
+                    href={currProject.source_code}
                     target="_blank"
                     className="text-primary"
                   >
-                    {currProject.sourceCode}
+                    {currProject.source_code}
                   </a>
                 </li>
               )}

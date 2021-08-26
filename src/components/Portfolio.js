@@ -1,5 +1,4 @@
 import img from "../assets/img";
-import data from "../data/items";
 import Modal from "./Modal";
 import { useState, useEffect, useRef } from "react";
 import { closeNavbar, showToggler } from "./helper";
@@ -8,16 +7,20 @@ import useDocumentTitle from "../useDocumentTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { closeIsNav } from "../state/actions";
 
+import * as api from "../api/index";
+
 const Portfolio = (props) => {
   const [imgLen, setImgLen] = useState(null);
   const [counter, setCounter] = useState(0);
-  const [projects, setProjects] = useState(data);
+  const [projects, setProjects] = useState([]);
   const [currProjectIndex, setCurrProjectIndex] = useState(0);
   const refCounter = useRef(0);
   const isNavOpen = useSelector((state) => state.isNavOpen);
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterTitle, setFilterTitle] = useState("All");
+
+  const [data, setData] = useState([]);
 
   const categories = [
     {
@@ -57,8 +60,18 @@ const Portfolio = (props) => {
       props.setIsOverlayActive(false);
     }
 
-    setImgLen(document.querySelectorAll(".portfolio-item__screenshots").length);
+    const fetchProjects = async () => {
+      const { data } = await api.getProjects();
+      setProjects(data); // for showing
+      setData(data);
+    };
+
+    fetchProjects();
   }, []);
+
+  useEffect(() => {
+    setImgLen(document.querySelectorAll(".portfolio-item__screenshots").length);
+  }, [data]);
 
   useEffect(() => {
     let timeout = setTimeout(() => {
@@ -151,52 +164,6 @@ const Portfolio = (props) => {
                   </div>
                 </div>
                 <h3 className="portfolio-item__heading">{p.title}</h3>
-                <div className="portfolio-item__details hidden">
-                  <p
-                    className="portfolio-item__desc"
-                    dangerouslySetInnerHTML={{ __html: p.description }}
-                  ></p>
-                  <ul>
-                    <li className="mb-10">
-                      <span className="text-bold mr-5">Created -</span>{" "}
-                      {p.created}
-                    </li>
-                    <li className="mb-10">
-                      <span className="text-bold mr-5">
-                        Technologies Used -
-                      </span>
-                      {p.technologies.join(", ")}
-                    </li>
-                    <li className="mb-10">
-                      <span className="text-bold mr-5">Role -</span>
-                      {p.role.join(", ")}
-                    </li>
-                    {p.livePreview && (
-                      <li className="mb-10">
-                        <span className="text-bold mr-5">Live Preview -</span>
-                        <a
-                          href={p.livePreview}
-                          target="_blank"
-                          className="text-primary"
-                        >
-                          {p.livePreview}
-                        </a>
-                      </li>
-                    )}
-                    {p.sourceCode && (
-                      <li className="mb-10">
-                        <span className="text-bold mr-5">Source Code -</span>
-                        <a
-                          href={p.sourceCode}
-                          target="_blank"
-                          className="text-primary"
-                        >
-                          {p.sourceCode}
-                        </a>
-                      </li>
-                    )}
-                  </ul>
-                </div>
               </div>
             ))}
           </div>
