@@ -21,29 +21,7 @@ const Portfolio = (props) => {
   const [filterTitle, setFilterTitle] = useState("All");
 
   const [data, setData] = useState([]);
-
-  const categories = [
-    {
-      title: "All",
-      name: "all",
-    },
-    {
-      title: "React",
-      name: "react",
-    },
-    {
-      title: "HTML/CSS",
-      name: "html-css",
-    },
-    {
-      title: "Bootstrap",
-      name: "bootstrap",
-    },
-    {
-      title: "Full-Stack",
-      name: "full-stack",
-    },
-  ];
+  const [categories, setCategories] = useState([]);
 
   useDocumentTitle("Portfolio");
 
@@ -66,7 +44,13 @@ const Portfolio = (props) => {
       setData(data);
     };
 
+    const fetchCategories = async () => {
+      const { data } = await api.getCategories();
+      setCategories(data);
+    };
+
     fetchProjects();
+    fetchCategories();
   }, []);
 
   useEffect(() => {
@@ -100,7 +84,7 @@ const Portfolio = (props) => {
     const currCategory = categories.find((c) => c.name === category);
 
     setProjects(filteredProjects);
-    setFilterTitle(currCategory.title);
+    setFilterTitle(category === "all" ? "All" : currCategory.title);
   };
 
   return (
@@ -110,6 +94,16 @@ const Portfolio = (props) => {
           <h2 className="section-heading">Recent Works</h2>
 
           <ul className="flex justify-center filter flex-wrap">
+            <li>
+              <button
+                onClick={() => handleFilter("all")}
+                className={`filter__button${
+                  filterTitle === "All" ? " filter__button--active" : ""
+                }`}
+              >
+                All
+              </button>
+            </li>
             {categories.map((c) => (
               <li key={c.name}>
                 <button
