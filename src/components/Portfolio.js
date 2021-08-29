@@ -10,16 +10,17 @@ import { closeIsNav } from "../state/actions";
 import * as api from "../api/index";
 
 const Portfolio = (props) => {
-  const [imgLen, setImgLen] = useState(null);
+  const imgLen = useRef(0);
+  const counterRef = useRef(0);
+  const dispatch = useDispatch();
+
+  const isNavOpen = useSelector((state) => state.isNavOpen);
+
   const [counter, setCounter] = useState(0);
   const [projects, setProjects] = useState([]);
   const [currProjectIndex, setCurrProjectIndex] = useState(0);
-  const refCounter = useRef(0);
-  const isNavOpen = useSelector((state) => state.isNavOpen);
-  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterTitle, setFilterTitle] = useState("All");
-
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
 
@@ -54,25 +55,21 @@ const Portfolio = (props) => {
   }, []);
 
   useEffect(() => {
-    setImgLen(document.querySelectorAll(".portfolio-item__screenshots").length);
+    imgLen.current = document.querySelectorAll(
+      ".portfolio-item__screenshots"
+    ).length;
+
+    if (imgLen.current) {
+      setTimeout(() => {
+        imgLen.current !== counterRef.current && props.setIsLoading(true);
+      }, 1000);
+    }
   }, [data]);
 
   useEffect(() => {
-    let timeout = setTimeout(() => {
-      if (imgLen !== refCounter.current) {
-        props.setIsLoading(true);
-      }
-    }, 1000);
+    counterRef.current = counter;
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [imgLen]);
-
-  useEffect(() => {
-    refCounter.current = counter;
-
-    if (imgLen === refCounter.current) {
+    if (imgLen.current && imgLen.current === counter) {
       props.setIsLoading(false);
     }
   }, [counter]);
@@ -140,14 +137,14 @@ const Portfolio = (props) => {
                     className="portfolio-item__img"
                   />
                   <div className="hidden portfolio-item__screenshots">
-                    {p.screenshots.map((sc) => (
+                    {p.screenshots.map((sc, i) => (
                       <img
                         src={sc}
                         alt=""
-                        key={sc}
+                        key={i}
                         onLoad={() => {
-                          if (p.screenshots[0] === sc) {
-                            setCounter(counter + 1);
+                          if (i === 0) {
+                            setCounter((prevCounter) => prevCounter + 1);
                           }
                         }}
                       />
