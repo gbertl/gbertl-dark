@@ -45,7 +45,6 @@ const Portfolio = (props) => {
       const { data } = await api.getProjects();
       isDataReady.current = true;
 
-      props.setIsLoading(false);
       setProjects(data); // for showing
       setData(data);
     };
@@ -55,7 +54,6 @@ const Portfolio = (props) => {
       const { data } = await api.getCategories();
       isDataReady.current = true;
 
-      props.setIsLoading(false);
       setCategories(data);
     };
 
