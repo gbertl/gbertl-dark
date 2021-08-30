@@ -1,12 +1,8 @@
-import {useEffect} from "react";
-import {generateOverlayEffect} from "./components/overlayEffect";
+import { useEffect } from "react";
+import { generateOverlayEffect } from "./components/overlayEffect";
 
-export const useApp = ({isLoading, setIsLoading}) => {
+export const useApp = () => {
   useEffect(() => {
-    window.addEventListener("load", () => {
-      setIsLoading(false);
-    });
-
     const bgAnimationItems = () => {
       const rows = 7,
         cols = 10;

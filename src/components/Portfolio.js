@@ -66,13 +66,18 @@ const Portfolio = (props) => {
   }, []);
 
   useEffect(() => {
-    imgLen.current = document.querySelectorAll(
-      ".portfolio-item__screenshots"
-    ).length;
+    if (data.length) {
+      data.forEach((d) => {
+        !!d.screenshots[0] && imgLen.current++;
+      });
+    }
+
+    // only wait for half total of first screenshots
+    imgLen.current = Math.round(imgLen.current / 2);
 
     if (imgLen.current) {
       setTimeout(() => {
-        imgLen.current !== counterRef.current && props.setIsLoading(true);
+        imgLen.current > counterRef.current && props.setIsLoading(true);
       }, 3000);
     }
   }, [data]);
@@ -80,7 +85,7 @@ const Portfolio = (props) => {
   useEffect(() => {
     counterRef.current = counter;
 
-    if (imgLen.current && imgLen.current === counter) {
+    if (imgLen.current && imgLen.current <= counter) {
       props.setIsLoading(false);
     }
   }, [counter]);

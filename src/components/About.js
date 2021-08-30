@@ -10,6 +10,10 @@ const About = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    window.addEventListener("load", () => {
+      props.setIsLoading(false);
+    });
+
     showToggler();
 
     if (isNavOpen) {

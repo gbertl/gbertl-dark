@@ -12,7 +12,7 @@ const App = () => {
   const [isOverlayActive, setIsOverlayActive] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  useApp({ isLoading, setIsLoading });
+  useApp();
 
   useEffect(() => {
     let timeout;
@@ -51,6 +51,7 @@ const App = () => {
           <Switch>
             <Route path="/contact">
               <Contact
+                setIsLoading={setIsLoading}
                 isOverlayActive={isOverlayActive}
                 setIsOverlayActive={setIsOverlayActive}
               />
@@ -65,6 +66,7 @@ const App = () => {
             </Route>
             <Route path="/">
               <About
+                setIsLoading={setIsLoading}
                 isOverlayActive={isOverlayActive}
                 setIsOverlayActive={setIsOverlayActive}
               />

@@ -6,11 +6,15 @@ import { closeOverlayEffect } from "./overlayEffect";
 import { useDispatch, useSelector } from "react-redux";
 import { closeIsNav } from "../state/actions";
 
-const useContact = ({ isOverlayActive, setIsOverlayActive }) => {
+const useContact = ({ isOverlayActive, setIsOverlayActive, ...props }) => {
   const isNavOpen = useSelector((state) => state.isNavOpen);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    window.addEventListener("load", () => {
+      props.setIsLoading(false);
+    });
+
     showToggler();
 
     if (isNavOpen) {
