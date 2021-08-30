@@ -12,6 +12,7 @@ import * as api from "../api/index";
 const Portfolio = (props) => {
   const imgLen = useRef(0);
   const counterRef = useRef(0);
+  const isDataReady = useRef(false);
   const dispatch = useDispatch();
 
   const isNavOpen = useSelector((state) => state.isNavOpen);
@@ -40,15 +41,27 @@ const Portfolio = (props) => {
     }
 
     const fetchProjects = async () => {
+      isDataReady.current = false;
       const { data } = await api.getProjects();
+      isDataReady.current = true;
+
+      props.setIsLoading(false);
       setProjects(data); // for showing
       setData(data);
     };
 
     const fetchCategories = async () => {
+      isDataReady.current = false;
       const { data } = await api.getCategories();
+      isDataReady.current = true;
+
+      props.setIsLoading(false);
       setCategories(data);
     };
+
+    setTimeout(() => {
+      !isDataReady.current && props.setIsLoading(true);
+    }, 3000);
 
     fetchProjects();
     fetchCategories();
@@ -62,7 +75,7 @@ const Portfolio = (props) => {
     if (imgLen.current) {
       setTimeout(() => {
         imgLen.current !== counterRef.current && props.setIsLoading(true);
-      }, 1000);
+      }, 3000);
     }
   }, [data]);
 
