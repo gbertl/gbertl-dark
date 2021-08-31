@@ -37,3 +37,27 @@
     transform: translateY(12.5vh);
   }
 }
+
+
+@media (max-width: 991px){
+  .col-10,
+  .col-9,
+  .col-8 {
+    display: none;
+  }
+
+  .bg-animation-effect div {
+    margin-left: calc((100% - 28px) / 8);
+  }
+}
+
+@media (max-width: 768px) {
+  .col-7,
+  .col-6 {
+    display: none;
+  }
+
+  .bg-animation-effect div {
+    margin-left: calc((100% - 20px) / 6);
+  }
+}
