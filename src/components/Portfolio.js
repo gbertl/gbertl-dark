@@ -4,12 +4,12 @@ import { useState, useEffect, useRef } from 'react';
 import { closeNavbar, showToggler } from './helper';
 import { closeOverlayEffect } from './overlayEffect';
 import useDocumentTitle from '../useDocumentTitle';
-import { useDispatch, useSelector } from 'react-redux';
-import { closeIsNav } from '../store/actions';
+import { useDispatch, useSelector, connect } from 'react-redux';
+import { closeIsNav, fetchProjects } from '../store/actions';
 
 import * as api from '../api/index';
 
-const Portfolio = (props) => {
+const Portfolio = ({ projects: data, ...props }) => {
   const imgLen = useRef(0);
   const counterRef = useRef(0);
   const isDataReady = useRef(false);
@@ -22,7 +22,6 @@ const Portfolio = (props) => {
   const [currProjectIndex, setCurrProjectIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterTitle, setFilterTitle] = useState('All');
-  const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
 
   useDocumentTitle('Portfolio');
@@ -42,19 +41,27 @@ const Portfolio = (props) => {
 
     const fetchProjects = async () => {
       isDataReady.current = false;
-      const { data } = await api.getProjects();
+
+      let rdata;
+
+      if (!data.length) {
+        ({ data: rdata } = await api.getProjects());
+      } else {
+        rdata = data;
+      }
+
       isDataReady.current = true;
 
-      setProjects(data); // for showing
-      setData(data);
+      setProjects(rdata); // for showing
+      props.fetchProjects(rdata);
     };
 
     const fetchCategories = async () => {
       isDataReady.current = false;
-      const { data } = await api.getCategories();
+      const { data: rdata } = await api.getCategories();
       isDataReady.current = true;
 
-      setCategories(data);
+      setCategories(rdata);
     };
 
     setTimeout(() => {
@@ -190,4 +197,16 @@ const Portfolio = (props) => {
   );
 };
 
-export default Portfolio;
+const mapStateToProps = (state) => {
+  return {
+    projects: state.projects,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProjects: (payload) => dispatch(fetchProjects(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);
