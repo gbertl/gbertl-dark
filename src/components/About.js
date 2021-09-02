@@ -1,16 +1,16 @@
-import { useEffect } from "react";
-import { closeNavbar, hideToggler, showToggler } from "./helper";
-import { openOverlayEffect, closeOverlayEffect } from "./overlayEffect";
-import { withRouter } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { closeIsNav } from "../state/actions";
+import { useEffect } from 'react';
+import { closeNavbar, hideToggler, showToggler } from './helper';
+import { openOverlayEffect, closeOverlayEffect } from './overlayEffect';
+import { withRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeIsNav } from '../store/actions';
 
 const About = (props) => {
   const isNavOpen = useSelector((state) => state.isNavOpen);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    window.addEventListener("load", () => {
+    window.addEventListener('load', () => {
       props.setIsLoading(false);
     });
 
@@ -49,19 +49,19 @@ const About = (props) => {
           />
           <h1 className="about__heading">Hi, my name is Gilbert.</h1>
           <p>
-            I'm a <span className="text-bold">Full-Stack Web Developer</span>{" "}
+            I'm a <span className="text-bold">Full-Stack Web Developer</span>{' '}
             based in the Philippines. Feel free to take a look at my latest
-            works on the{" "}
+            works on the{' '}
             <button
               className="text-bold text-primary about__link"
-              onClick={() => handleAboutLink("/portfolio")}
+              onClick={() => handleAboutLink('/portfolio')}
             >
               portfolio page
             </button>
-            . Want to talk about a project? You can get in touch with me{" "}
+            . Want to talk about a project? You can get in touch with me{' '}
             <button
               className="text-bold text-primary about__link"
-              onClick={() => handleAboutLink("/contact")}
+              onClick={() => handleAboutLink('/contact')}
             >
               here
             </button>

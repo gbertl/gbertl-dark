@@ -1,13 +1,13 @@
-import img from "../assets/img";
-import Modal from "./Modal";
-import { useState, useEffect, useRef } from "react";
-import { closeNavbar, showToggler } from "./helper";
-import { closeOverlayEffect } from "./overlayEffect";
-import useDocumentTitle from "../useDocumentTitle";
-import { useDispatch, useSelector } from "react-redux";
-import { closeIsNav } from "../state/actions";
+import img from '../assets/img';
+import Modal from './Modal';
+import { useState, useEffect, useRef } from 'react';
+import { closeNavbar, showToggler } from './helper';
+import { closeOverlayEffect } from './overlayEffect';
+import useDocumentTitle from '../useDocumentTitle';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeIsNav } from '../store/actions';
 
-import * as api from "../api/index";
+import * as api from '../api/index';
 
 const Portfolio = (props) => {
   const imgLen = useRef(0);
@@ -21,11 +21,11 @@ const Portfolio = (props) => {
   const [projects, setProjects] = useState([]);
   const [currProjectIndex, setCurrProjectIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [filterTitle, setFilterTitle] = useState("All");
+  const [filterTitle, setFilterTitle] = useState('All');
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  useDocumentTitle("Portfolio");
+  useDocumentTitle('Portfolio');
 
   useEffect(() => {
     showToggler();
@@ -92,12 +92,12 @@ const Portfolio = (props) => {
 
   const handleFilter = (category) => {
     const filteredProjects = data.filter(
-      (p) => category === "all" || p.categories.includes(category)
+      (p) => category === 'all' || p.categories.includes(category)
     );
     const currCategory = categories.find((c) => c.name === category);
 
     setProjects(filteredProjects);
-    setFilterTitle(category === "all" ? "All" : currCategory.title);
+    setFilterTitle(category === 'all' ? 'All' : currCategory.title);
   };
 
   return (
@@ -109,9 +109,9 @@ const Portfolio = (props) => {
           <ul className="flex justify-center filter flex-wrap">
             <li>
               <button
-                onClick={() => handleFilter("all")}
+                onClick={() => handleFilter('all')}
                 className={`filter__button${
-                  filterTitle === "All" ? " filter__button--active" : ""
+                  filterTitle === 'All' ? ' filter__button--active' : ''
                 }`}
               >
                 All
@@ -122,7 +122,7 @@ const Portfolio = (props) => {
                 <button
                   onClick={() => handleFilter(c.name)}
                   className={`filter__button${
-                    filterTitle === c.title ? " filter__button--active" : ""
+                    filterTitle === c.title ? ' filter__button--active' : ''
                   }`}
                 >
                   {c.title}

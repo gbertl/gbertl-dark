@@ -1,14 +1,14 @@
-import { Link, useLocation } from "react-router-dom";
-import { closeOverlayEffect, openOverlayEffect } from "./overlayEffect";
+import { Link, useLocation } from 'react-router-dom';
+import { closeOverlayEffect, openOverlayEffect } from './overlayEffect';
 import {
   closeNavbar,
   hideBodyScroll,
   openNavbar,
   showBodyScroll,
-} from "./helper";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { closeIsNav, toggleIsNav } from "../state/actions";
+} from './helper';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeIsNav, toggleIsNav } from '../store/actions';
 
 const Header = (props) => {
   const location = useLocation();
@@ -39,7 +39,7 @@ const Header = (props) => {
   };
 
   const handleNavLink = (e) => {
-    if (location.pathname === e.target.getAttribute("href")) {
+    if (location.pathname === e.target.getAttribute('href')) {
       closeNavbar();
       closeOverlayEffect();
       dispatch(closeIsNav());
