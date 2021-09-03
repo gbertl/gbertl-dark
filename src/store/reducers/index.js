@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import isNavOpenReducer from './isNavOpenReducer';
-import projects from './projectReducer';
+import isNavOpen from './isNavOpen';
+import projects from './projects';
 
 const reducers = combineReducers({
-  isNavOpen: isNavOpenReducer,
+  isNavOpen,
   projects,
 });
 

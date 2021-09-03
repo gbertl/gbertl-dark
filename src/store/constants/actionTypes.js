@@ -1,0 +1,3 @@
+export const TOGGLE_ISNAV = 'TOGGLE_ISNAV';
+export const CLOSE_ISNAV = 'CLOSE_ISNAV';
+export const FETCH_PROJECTS = 'FETCH_PROJECTS';

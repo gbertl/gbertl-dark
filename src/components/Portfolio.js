@@ -1,21 +1,22 @@
-import img from '../assets/img';
-import Modal from './Modal';
 import { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Modal from './Modal';
 import { closeNavbar, showToggler } from './helper';
 import { closeOverlayEffect } from './overlayEffect';
 import useDocumentTitle from '../useDocumentTitle';
-import { useDispatch, useSelector, connect } from 'react-redux';
-import { closeIsNav, fetchProjects } from '../store/actions';
+import { closeIsNav, fetchProjects as fProjects } from '../store/actions';
 
 import * as api from '../api/index';
 
-const Portfolio = ({ projects: data, ...props }) => {
+const Portfolio = (props) => {
   const imgLen = useRef(0);
   const counterRef = useRef(0);
   const isDataReady = useRef(false);
   const dispatch = useDispatch();
 
   const isNavOpen = useSelector((state) => state.isNavOpen);
+  const data = useSelector((state) => state.projects);
 
   const [counter, setCounter] = useState(0);
   const [projects, setProjects] = useState([]);
@@ -53,7 +54,7 @@ const Portfolio = ({ projects: data, ...props }) => {
       isDataReady.current = true;
 
       setProjects(rdata); // for showing
-      props.fetchProjects(rdata);
+      dispatch(fProjects(rdata));
     };
 
     const fetchCategories = async () => {
@@ -197,16 +198,4 @@ const Portfolio = ({ projects: data, ...props }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    projects: state.projects,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchProjects: (payload) => dispatch(fetchProjects(payload)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);
+export default Portfolio;
