@@ -70,16 +70,16 @@ const About = (props) => {
 
           <div className="mt-30 flex gap-15 align-center justify-center">
             <a href="https://github.com/gilbertlc" target="_blank">
-              <i class="fab fa-github"></i> Github
+              <i className="fab fa-github"></i> Github
             </a>
             <a
               href="https://www.linkedin.com/in/gilbertlcsndle"
               target="_blank"
             >
-              <i class="fab fa-linkedin"></i> Linkedin
+              <i className="fab fa-linkedin"></i> Linkedin
             </a>
             <a href="mailto:gilbertlcsndle@gmail.com" target="_blank">
-              <i class="fas fa-envelope"></i> Email
+              <i className="fas fa-envelope"></i> Email
             </a>
           </div>
         </div>
