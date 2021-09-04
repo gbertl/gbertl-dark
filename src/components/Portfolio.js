@@ -5,7 +5,11 @@ import Modal from './Modal';
 import { closeNavbar, showToggler } from './helper';
 import { closeOverlayEffect } from './overlayEffect';
 import useDocumentTitle from '../useDocumentTitle';
-import { closeIsNav, fetchProjects as fProjects } from '../store/actions';
+import {
+  closeIsNav,
+  fetchProjects as fProjects,
+  fetchCategories as fCategories,
+} from '../store/actions';
 
 import * as api from '../api/index';
 
@@ -16,14 +20,14 @@ const Portfolio = (props) => {
   const dispatch = useDispatch();
 
   const isNavOpen = useSelector((state) => state.isNavOpen);
-  const data = useSelector((state) => state.projects);
+  const data = useSelector((state) => state.portfolio.projects);
+  const categories = useSelector((state) => state.portfolio.categories);
 
   const [counter, setCounter] = useState(0);
   const [projects, setProjects] = useState([]);
   const [currProjectIndex, setCurrProjectIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterTitle, setFilterTitle] = useState('All');
-  const [categories, setCategories] = useState([]);
 
   useDocumentTitle('Portfolio');
 
@@ -43,26 +47,23 @@ const Portfolio = (props) => {
     const fetchProjects = async () => {
       isDataReady.current = false;
 
-      let rdata;
-
       if (!data.length) {
-        ({ data: rdata } = await api.getProjects());
-      } else {
-        rdata = data;
+        const { data: rdata } = await api.getProjects();
+        dispatch(fProjects(rdata));
       }
 
       isDataReady.current = true;
-
-      setProjects(rdata); // for showing
-      dispatch(fProjects(rdata));
     };
 
     const fetchCategories = async () => {
       isDataReady.current = false;
-      const { data: rdata } = await api.getCategories();
-      isDataReady.current = true;
 
-      setCategories(rdata);
+      if (!categories.length) {
+        const { data: rdata } = await api.getCategories();
+        dispatch(fCategories(rdata));
+      }
+
+      isDataReady.current = true;
     };
 
     setTimeout(() => {
@@ -74,6 +75,8 @@ const Portfolio = (props) => {
   }, []);
 
   useEffect(() => {
+    setProjects(data); // for showing
+
     if (data.length) {
       data.forEach((d) => {
         !!d.screenshots[0] && imgLen.current++;

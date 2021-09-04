@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import isNavOpen from './isNavOpen';
-import projects from './projects';
+import portfolio from './portfolio';
 
 const reducers = combineReducers({
   isNavOpen,
-  projects,
+  portfolio,
 });
 
 export default reducers;
