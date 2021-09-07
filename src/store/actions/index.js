@@ -1,8 +1,8 @@
 import {
   TOGGLE_ISNAV,
   CLOSE_ISNAV,
-  FETCH_PROJECTS,
-  FETCH_CATEGORIES,
+  REPLACE_PROJECTS,
+  REPLACE_CATEGORIES,
 } from '../constants/actionTypes';
 
 export const toggleIsNav = () => {
@@ -17,16 +17,16 @@ export const closeIsNav = () => {
   };
 };
 
-export const fetchProjects = (payload) => {
+export const replaceProjects = (payload) => {
   return {
-    type: FETCH_PROJECTS,
+    type: REPLACE_PROJECTS,
     payload,
   };
 };
 
-export const fetchCategories = (payload) => {
+export const replaceCategories = (payload) => {
   return {
-    type: FETCH_CATEGORIES,
+    type: REPLACE_CATEGORIES,
     payload,
   };
 };

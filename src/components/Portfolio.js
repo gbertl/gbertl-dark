@@ -5,18 +5,13 @@ import Modal from './Modal';
 import { closeNavbar, showToggler } from './helper';
 import { closeOverlayEffect } from './overlayEffect';
 import useDocumentTitle from '../useDocumentTitle';
-import {
-  closeIsNav,
-  fetchProjects as fProjects,
-  fetchCategories as fCategories,
-} from '../store/actions';
+import { closeIsNav } from '../store/actions';
 
-import * as api from '../api/index';
+import { fetchCategories, fetchProjects } from '../store/actions/portfolio';
 
 const Portfolio = (props) => {
   const imgLen = useRef(0);
   const counterRef = useRef(0);
-  const isDataReady = useRef(false);
   const dispatch = useDispatch();
 
   const isNavOpen = useSelector((state) => state.ui.isNavOpen);
@@ -44,34 +39,8 @@ const Portfolio = (props) => {
       props.setIsOverlayActive(false);
     }
 
-    const fetchProjects = async () => {
-      isDataReady.current = false;
-
-      if (!data.length) {
-        const { data: rdata } = await api.getProjects();
-        dispatch(fProjects(rdata));
-      }
-
-      isDataReady.current = true;
-    };
-
-    const fetchCategories = async () => {
-      isDataReady.current = false;
-
-      if (!categories.length) {
-        const { data: rdata } = await api.getCategories();
-        dispatch(fCategories(rdata));
-      }
-
-      isDataReady.current = true;
-    };
-
-    setTimeout(() => {
-      !isDataReady.current && props.setIsLoading(true);
-    }, 3000);
-
-    fetchProjects();
-    fetchCategories();
+    !data.length && dispatch(fetchProjects());
+    !categories.length && dispatch(fetchCategories());
   }, []);
 
   useEffect(() => {
