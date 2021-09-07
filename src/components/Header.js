@@ -12,7 +12,7 @@ import { closeIsNav, toggleIsNav } from '../store/actions';
 
 const Header = (props) => {
   const location = useLocation();
-  const isNavOpen = useSelector((state) => state.isNavOpen);
+  const isNavOpen = useSelector((state) => state.ui.isNavOpen);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeIsNav } from '../store/actions';
 
 const About = (props) => {
-  const isNavOpen = useSelector((state) => state.isNavOpen);
+  const isNavOpen = useSelector((state) => state.ui.isNavOpen);
   const dispatch = useDispatch();
 
   useEffect(() => {

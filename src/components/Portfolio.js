@@ -19,7 +19,7 @@ const Portfolio = (props) => {
   const isDataReady = useRef(false);
   const dispatch = useDispatch();
 
-  const isNavOpen = useSelector((state) => state.isNavOpen);
+  const isNavOpen = useSelector((state) => state.ui.isNavOpen);
   const data = useSelector((state) => state.portfolio.projects);
   const categories = useSelector((state) => state.portfolio.categories);
 

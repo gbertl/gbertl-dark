@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import isNavOpen from './isNavOpen';
+import ui from './ui';
 import portfolio from './portfolio';
 
 const reducers = combineReducers({
-  isNavOpen,
+  ui,
   portfolio,
 });
 
