@@ -8,6 +8,7 @@ import useDocumentTitle from '../useDocumentTitle';
 import { closeIsNav } from '../store/actions';
 
 import { fetchCategories, fetchProjects } from '../store/actions/portfolio';
+import useAnalytics from './useAnalytics';
 
 const Portfolio = (props) => {
   const imgLen = useRef(0);
@@ -24,7 +25,9 @@ const Portfolio = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterTitle, setFilterTitle] = useState('All');
 
-  useDocumentTitle('Portfolio');
+  const pageTitle = 'Portfolio';
+  useDocumentTitle(pageTitle);
+  useAnalytics(pageTitle);
 
   useEffect(() => {
     showToggler();

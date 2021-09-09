@@ -1,12 +1,12 @@
-import Portfolio from "./components/Portfolio";
-import "./assets/scss/style.scss";
-import About from "./components/About";
-import Header from "./components/Header";
-import Contact from "./components/Contact";
-import { useApp } from "./useApp";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { toggleBodyScroll } from "./components/helper";
+import Portfolio from './components/Portfolio';
+import './assets/scss/style.scss';
+import About from './components/About';
+import Header from './components/Header';
+import Contact from './components/Contact';
+import { useApp } from './useApp';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { toggleBodyScroll } from './components/helper';
 
 const App = () => {
   const [isOverlayActive, setIsOverlayActive] = useState(false);
@@ -19,11 +19,11 @@ const App = () => {
 
     if (isLoading) {
       toggleBodyScroll();
-      document.querySelector(".loader").classList.remove("loader--hide");
+      document.querySelector('.loader').classList.remove('loader--hide');
     } else {
       timeout = setTimeout(() => {
         toggleBodyScroll();
-        document.querySelector(".loader").classList.add("loader--hide");
+        document.querySelector('.loader').classList.add('loader--hide');
       }, 500);
     }
 

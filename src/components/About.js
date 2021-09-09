@@ -4,10 +4,13 @@ import { openOverlayEffect, closeOverlayEffect } from './overlayEffect';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeIsNav } from '../store/actions';
+import useAnalytics from './useAnalytics';
 
 const About = (props) => {
   const isNavOpen = useSelector((state) => state.ui.isNavOpen);
   const dispatch = useDispatch();
+
+  useAnalytics('About');
 
   useEffect(() => {
     window.addEventListener('load', () => {

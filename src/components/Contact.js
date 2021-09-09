@@ -1,8 +1,11 @@
-import useDocumentTitle from "../useDocumentTitle";
-import useContact from "./useContact";
+import useDocumentTitle from '../useDocumentTitle';
+import useAnalytics from './useAnalytics';
+import useContact from './useContact';
 
 const Contact = (props) => {
-  useDocumentTitle("Contact");
+  const pageTitle = 'Contact';
+  useDocumentTitle(pageTitle);
+  useAnalytics(pageTitle);
   useContact(props);
 
   return (
@@ -13,14 +16,14 @@ const Contact = (props) => {
           <p className="contact__desc">
             If you wanna get in touch, talk to me about a project collaboration
             or just say hi, click the button below and fill up the awesome form
-            or hire me on{" "}
+            or hire me on{' '}
             <a
               href="https://www.upwork.com/freelancers/~0110dcf905a3a19183"
               target="_blank"
               className="text-bold"
             >
               Upwork
-            </a>{" "}
+            </a>{' '}
             and let's talk.
           </p>
 
