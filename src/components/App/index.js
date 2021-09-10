@@ -1,12 +1,12 @@
-import Portfolio from './components/Portfolio';
-import './assets/scss/style.scss';
-import About from './components/About';
-import Header from './components/Header';
-import Contact from './components/Contact';
-import { useApp } from './useApp';
+import '../../assets/scss/style.scss';
+import About from '../About';
+import Header from '../Header';
+import Contact from '../Contact';
+import Portfolio from '../Portfolio';
+import { useApp } from './hooks';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { toggleBodyScroll } from './components/helper';
+import { toggleBodyScroll } from '../../utils';
 
 const App = () => {
   const [isOverlayActive, setIsOverlayActive] = useState(false);

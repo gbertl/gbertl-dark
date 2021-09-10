@@ -1,6 +1,6 @@
-import useDocumentTitle from '../useDocumentTitle';
-import useAnalytics from './useAnalytics';
-import useContact from './useContact';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
+import useAnalytics from '../../hooks/useAnalytics';
+import useContact from './hooks';
 
 const Contact = (props) => {
   const pageTitle = 'Contact';

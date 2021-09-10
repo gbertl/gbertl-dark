@@ -1,14 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
-import { closeOverlayEffect, openOverlayEffect } from './overlayEffect';
 import {
   closeNavbar,
   hideBodyScroll,
   openNavbar,
   showBodyScroll,
-} from './helper';
+  closeOverlayEffect,
+  openOverlayEffect,
+} from '../../utils';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeIsNav, toggleIsNav } from '../store/actions';
+import { closeIsNav, toggleIsNav } from '../../store/actions';
 
 const Header = (props) => {
   const location = useLocation();

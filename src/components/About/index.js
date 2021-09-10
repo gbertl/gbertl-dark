@@ -1,10 +1,15 @@
 import { useEffect } from 'react';
-import { closeNavbar, hideToggler, showToggler } from './helper';
-import { openOverlayEffect, closeOverlayEffect } from './overlayEffect';
+import {
+  closeNavbar,
+  hideToggler,
+  showToggler,
+  openOverlayEffect,
+  closeOverlayEffect,
+} from '../../utils';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeIsNav } from '../store/actions';
-import useAnalytics from './useAnalytics';
+import { closeIsNav } from '../../store/actions';
+import useAnalytics from '../../hooks/useAnalytics';
 
 const About = (props) => {
   const isNavOpen = useSelector((state) => state.ui.isNavOpen);

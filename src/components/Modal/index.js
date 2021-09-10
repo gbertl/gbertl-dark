@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import { carousel } from "../utils";
+import { useEffect, useRef, useState } from 'react';
 
 const Modal = ({
   currProjectIndex,
@@ -11,7 +10,7 @@ const Modal = ({
   const [currProject, setCurrProject] = useState(projects[currProjectIndex]);
   const [prevWork, setPrevWork] = useState({});
   const [nextWork, setNextWork] = useState({});
-  const [direction, setDirection] = useState("");
+  const [direction, setDirection] = useState('');
 
   const modalOverlayRef = useRef();
   const imagesRef = useRef([]);
@@ -50,13 +49,13 @@ const Modal = ({
 
   useEffect(() => {
     if (didMount.current && !isModalTransition) {
-      document.body.classList.remove("overflow-y-hidden");
+      document.body.classList.remove('overflow-y-hidden');
 
       setTimeout(() => {
         setIsModalOpen(false);
       }, 1000);
     } else {
-      document.body.classList.add("overflow-y-hidden");
+      document.body.classList.add('overflow-y-hidden');
 
       didMount.current = true;
     }
@@ -66,16 +65,16 @@ const Modal = ({
     setWillTransition(false);
     setDirection(direction);
 
-    if (direction === "next") {
+    if (direction === 'next') {
       setCurrProjectIndex(currProjectIndex + 1);
-    } else if (direction === "prev") {
+    } else if (direction === 'prev') {
       setCurrProjectIndex(currProjectIndex - 1);
     }
   };
 
   useEffect(() => {
     const time = setTimeout(() => {
-      setDirection("");
+      setDirection('');
     }, 1000);
 
     return () => clearTimeout(time);
@@ -168,16 +167,16 @@ const Modal = ({
 
   return (
     <div
-      className={`modal${isModalTransition ? " modal--open" : ""}`}
+      className={`modal${isModalTransition ? ' modal--open' : ''}`}
       onClick={(e) => {
-        if (!e.target.closest(".modal__content")) {
+        if (!e.target.closest('.modal__content')) {
           setIsModalTransition(false);
         }
       }}
     >
       <div
         className={`modal__transition${
-          direction ? ` modal__transition--${direction}` : ""
+          direction ? ` modal__transition--${direction}` : ''
         }`}
       ></div>
       <div className="modal__overlay px-15" ref={modalOverlayRef}>
@@ -198,7 +197,7 @@ const Modal = ({
             <div className="modal__thumbnails-wrapper">
               <div
                 className={`modal__thumbnails flex${
-                  willTransition ? " modal__thumbnails--transition" : ""
+                  willTransition ? ' modal__thumbnails--transition' : ''
                 }`}
                 style={{ transform: `translateX(${-size * counter}px)` }}
               >
@@ -213,7 +212,7 @@ const Modal = ({
               </div>
               <div
                 className={`flex justify-between modal__carousel-btn-wrapper${
-                  currProject.screenshots.length === 1 ? " hidden" : ""
+                  currProject.screenshots.length === 1 ? ' hidden' : ''
                 }`}
               >
                 <button
@@ -222,7 +221,7 @@ const Modal = ({
                 >
                   <span
                     className={`chevron-left${
-                      isPrevActive ? " chevron-left--active" : ""
+                      isPrevActive ? ' chevron-left--active' : ''
                     }`}
                   ></span>
                 </button>
@@ -232,7 +231,7 @@ const Modal = ({
                 >
                   <span
                     className={`chevron-right${
-                      isNextActive ? " chevron-right--active" : ""
+                      isNextActive ? ' chevron-right--active' : ''
                     }`}
                   ></span>
                 </button>
@@ -241,14 +240,14 @@ const Modal = ({
 
             <ul
               className={`dot-indicators flex justify-center${
-                currProject.screenshots.length === 1 ? " hidden" : ""
+                currProject.screenshots.length === 1 ? ' hidden' : ''
               }`}
             >
               {currProject.screenshots.map((s, index) => (
                 <li>
                   <button
                     className={`dot-indicators__item${
-                      counter === index ? " dot-indicators__item--active" : ""
+                      counter === index ? ' dot-indicators__item--active' : ''
                     }`}
                     onClick={() => handleDotIndicator(index)}
                   ></button>
@@ -265,16 +264,16 @@ const Modal = ({
             ></p>
             <ul>
               <li className="mb-10">
-                <span className="text-bold mr-5">Created -</span>{" "}
+                <span className="text-bold mr-5">Created -</span>{' '}
                 {currProject.created}
               </li>
               <li className="mb-10">
                 <span className="text-bold mr-5">Technologies Used -</span>
-                {currProject.technologies.join(", ")}
+                {currProject.technologies.join(', ')}
               </li>
               <li className="mb-10">
                 <span className="text-bold mr-5">Role -</span>
-                {currProject.roles.join(", ")}
+                {currProject.roles.join(', ')}
               </li>
               {currProject.live_preview && (
                 <li className="mb-10">
@@ -305,12 +304,12 @@ const Modal = ({
           <div className="modal__footer flex justify-between">
             <div
               className={`modal__prev-work ${
-                !Object.keys(prevWork).length ? "invisible" : ""
+                !Object.keys(prevWork).length ? 'invisible' : ''
               }`}
             >
               <button
                 className="btn btn-primary modal__prev-work-btn"
-                onClick={() => handleNextPrev("prev")}
+                onClick={() => handleNextPrev('prev')}
               >
                 <i className="fas fa-arrow-left"></i>
               </button>
@@ -325,12 +324,12 @@ const Modal = ({
             </div>
             <div
               className={`modal__next-work flex ${
-                !Object.keys(nextWork).length ? "invisible" : ""
+                !Object.keys(nextWork).length ? 'invisible' : ''
               }`}
             >
               <button
                 className="btn btn-primary modal__next-work-btn"
-                onClick={() => handleNextPrev("next")}
+                onClick={() => handleNextPrev('next')}
               >
                 <i className="fas fa-arrow-right"></i>
               </button>

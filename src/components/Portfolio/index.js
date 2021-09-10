@@ -1,14 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Modal from './Modal';
-import { closeNavbar, showToggler } from './helper';
-import { closeOverlayEffect } from './overlayEffect';
-import useDocumentTitle from '../useDocumentTitle';
-import { closeIsNav } from '../store/actions';
+import Modal from '../Modal';
+import { closeOverlayEffect, closeNavbar, showToggler } from '../../utils';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
+import { closeIsNav } from '../../store/actions';
 
-import { fetchCategories, fetchProjects } from '../store/actions/portfolio';
-import useAnalytics from './useAnalytics';
+import { fetchCategories, fetchProjects } from '../../store/actions/portfolio';
+import useAnalytics from '../../hooks/useAnalytics';
 
 const Portfolio = (props) => {
   const imgLen = useRef(0);
