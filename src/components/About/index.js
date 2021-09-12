@@ -86,7 +86,7 @@ const About = (props) => {
             >
               <i className="fab fa-linkedin"></i> Linkedin
             </a>
-            <a href="mailto:gilbertlcsndle@gmail.com" target="_blank">
+            <a href="mailto:gilbertlctest@gmail.com" target="_blank">
               <i className="fas fa-envelope"></i> Email
             </a>
           </div>
