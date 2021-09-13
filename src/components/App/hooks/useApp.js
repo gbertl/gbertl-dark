@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { generateOverlayEffect } from '../../utils';
+import { generateOverlayEffect } from '../../../utils';
 
-export const useApp = () => {
+const useApp = () => {
   useEffect(() => {
     const bgAnimationItems = () => {
       const rows = 7,
@@ -21,3 +21,5 @@ export const useApp = () => {
     generateOverlayEffect();
   }, []);
 };
+
+export default useApp;

@@ -3,10 +3,10 @@ import About from '../About';
 import Header from '../Header';
 import Contact from '../Contact';
 import Portfolio from '../Portfolio';
-import { useApp } from './hooks';
+import useApp from './hooks/useApp';
+import Loader from './Loader';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { toggleBodyScroll } from '../../utils';
+import { useState } from 'react';
 
 const App = () => {
   const [isOverlayActive, setIsOverlayActive] = useState(false);
@@ -14,32 +14,9 @@ const App = () => {
 
   useApp();
 
-  useEffect(() => {
-    let timeout;
-
-    if (isLoading) {
-      toggleBodyScroll();
-      document.querySelector('.loader').classList.remove('loader--hide');
-    } else {
-      timeout = setTimeout(() => {
-        toggleBodyScroll();
-        document.querySelector('.loader').classList.add('loader--hide');
-      }, 500);
-    }
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [isLoading]);
-
   return (
     <>
-      <div className="loader center">
-        <div className="loader__body flex align-center">
-          <div className="loader__icon"></div>
-          <p>Loading</p>
-        </div>
-      </div>
+      <Loader isLoading={isLoading} />
       <Router>
         <div className="App">
           <div className="bg-animation-effect"></div>
