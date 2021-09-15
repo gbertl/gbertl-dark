@@ -7,7 +7,7 @@ import {
   closeOverlayEffect,
   openOverlayEffect,
 } from '../../utils';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeIsNav, toggleIsNav } from '../../store/actions';
 
@@ -15,8 +15,14 @@ const Header = (props) => {
   const location = useLocation();
   const isNavOpen = useSelector((state) => state.ui.isNavOpen);
   const dispatch = useDispatch();
+  const isInitial = useRef(true);
 
   useEffect(() => {
+    if (isInitial.current) {
+      isInitial.current = false;
+      return;
+    }
+
     if (isNavOpen) {
       openNavbar();
       hideBodyScroll();
