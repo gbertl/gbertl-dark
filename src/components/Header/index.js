@@ -9,13 +9,19 @@ import {
 } from '../../utils';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeIsNav, toggleIsNav } from '../../store/actions/ui';
+import {
+  closeIsNav,
+  toggleIsNav,
+  hideOverlay,
+  toggleOverlay,
+} from '../../store/actions/ui';
 
 const Header = (props) => {
   const location = useLocation();
   const isNavOpen = useSelector((state) => state.ui.isNavOpen);
   const dispatch = useDispatch();
   const isInitial = useRef(true);
+  const isOverlayActive = useSelector((state) => state.ui.isOverlayActive);
 
   useEffect(() => {
     if (isInitial.current) {
@@ -31,18 +37,18 @@ const Header = (props) => {
       showBodyScroll();
     }
 
-    if (props.isOverlayActive) {
+    if (isOverlayActive) {
       openOverlayEffect();
       hideBodyScroll();
     } else {
       closeOverlayEffect();
       showBodyScroll();
     }
-  }, [isNavOpen, props.isOverlayActive]);
+  }, [isNavOpen, isOverlayActive]);
 
   const handleToggler = () => {
     dispatch(toggleIsNav());
-    props.setIsOverlayActive(!props.isOverlayActive);
+    dispatch(toggleOverlay());
   };
 
   const handleNavLink = (e) => {
@@ -50,7 +56,7 @@ const Header = (props) => {
       closeNavbar();
       closeOverlayEffect();
       dispatch(closeIsNav());
-      props.setIsOverlayActive(false);
+      dispatch(hideOverlay());
     }
   };
 

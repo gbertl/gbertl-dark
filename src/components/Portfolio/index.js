@@ -7,7 +7,12 @@ import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 import { fetchCategories, fetchProjects } from '../../store/actions/portfolio';
 import useAnalytics from '../../hooks/useAnalytics';
-import { closeIsNav, hideLoader, showLoader } from '../../store/actions/ui';
+import {
+  closeIsNav,
+  hideLoader,
+  showLoader,
+  hideOverlay,
+} from '../../store/actions/ui';
 
 const Portfolio = (props) => {
   const imgLen = useRef(0);
@@ -23,6 +28,7 @@ const Portfolio = (props) => {
   const [currProjectIndex, setCurrProjectIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterTitle, setFilterTitle] = useState('All');
+  const isOverlayActive = useSelector((state) => state.ui.isOverlayActive);
 
   const pageTitle = 'Portfolio';
   useDocumentTitle(pageTitle);
@@ -36,9 +42,9 @@ const Portfolio = (props) => {
       dispatch(closeIsNav());
     }
 
-    if (props.isOverlayActive) {
+    if (isOverlayActive) {
       closeOverlayEffect();
-      props.setIsOverlayActive(false);
+      dispatch(hideOverlay());
     }
 
     !data.length && dispatch(fetchProjects());

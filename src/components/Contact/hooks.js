@@ -7,10 +7,11 @@ import {
   showToggler,
 } from '../../utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeIsNav, hideLoader } from '../../store/actions/ui';
+import { closeIsNav, hideLoader, hideOverlay } from '../../store/actions/ui';
 
-const useContact = ({ isOverlayActive, setIsOverlayActive, ...props }) => {
+const useContact = (props) => {
   const isNavOpen = useSelector((state) => state.ui.isNavOpen);
+  const isOverlayActive = useSelector((state) => state.ui.isOverlayActive);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const useContact = ({ isOverlayActive, setIsOverlayActive, ...props }) => {
 
     if (isOverlayActive) {
       closeOverlayEffect();
-      setIsOverlayActive(false);
+      dispatch(hideOverlay());
     }
 
     const toggleContactForm = () => {

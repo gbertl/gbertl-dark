@@ -8,11 +8,17 @@ import {
 } from '../../utils';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeIsNav, hideLoader } from '../../store/actions/ui';
+import {
+  closeIsNav,
+  hideLoader,
+  hideOverlay,
+  showOverlay,
+} from '../../store/actions/ui';
 import useAnalytics from '../../hooks/useAnalytics';
 
 const About = (props) => {
   const isNavOpen = useSelector((state) => state.ui.isNavOpen);
+  const isOverlayActive = useSelector((state) => state.ui.isOverlayActive);
   const dispatch = useDispatch();
 
   useAnalytics('About');
@@ -29,9 +35,9 @@ const About = (props) => {
       dispatch(closeIsNav());
     }
 
-    if (props.isOverlayActive) {
+    if (isOverlayActive) {
       closeOverlayEffect();
-      props.setIsOverlayActive(false);
+      dispatch(hideOverlay());
     }
   }, []);
 
@@ -39,7 +45,7 @@ const About = (props) => {
     hideToggler();
 
     openOverlayEffect();
-    props.setIsOverlayActive(true);
+    dispatch(showOverlay());
 
     setTimeout(() => {
       props.history.push(path);

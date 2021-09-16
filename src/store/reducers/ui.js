@@ -3,9 +3,15 @@ import {
   CLOSE_ISNAV,
   SHOW_LOADER,
   HIDE_LOADER,
+  SHOW_OVERLAY,
+  HIDE_OVERLAY,
+  TOGGLE_OVERLAY,
 } from '../constants/actionTypes';
 
-const reducer = (state = { isNavOpen: false, isLoading: true }, action) => {
+const reducer = (
+  state = { isNavOpen: false, isLoading: true, isOverlayActive: false },
+  action
+) => {
   switch (action.type) {
     case TOGGLE_ISNAV:
       return { ...state, isNavOpen: !state.isNavOpen };
@@ -15,6 +21,12 @@ const reducer = (state = { isNavOpen: false, isLoading: true }, action) => {
       return { ...state, isLoading: true };
     case HIDE_LOADER:
       return { ...state, isLoading: false };
+    case TOGGLE_OVERLAY:
+      return { ...state, isOverlayActive: !state.isOverlayActive };
+    case SHOW_OVERLAY:
+      return { ...state, isOverlayActive: true };
+    case HIDE_OVERLAY:
+      return { ...state, isOverlayActive: false };
     default:
       return state;
   }
