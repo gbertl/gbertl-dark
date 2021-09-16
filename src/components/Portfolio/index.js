@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../Modal';
-import { showToggler } from '../../utils';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 import { fetchCategories, fetchProjects } from '../../store/actions/portfolio';
@@ -12,6 +11,7 @@ import {
   hideLoader,
   showLoader,
   hideOverlay,
+  showToggler,
 } from '../../store/actions/ui';
 
 const Portfolio = (props) => {
@@ -33,7 +33,7 @@ const Portfolio = (props) => {
   useAnalytics(pageTitle);
 
   useEffect(() => {
-    showToggler();
+    dispatch(showToggler());
     dispatch(closeNav());
     dispatch(hideOverlay());
 

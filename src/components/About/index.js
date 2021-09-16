@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { hideToggler, showToggler } from '../../utils';
 import { withRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
@@ -7,6 +6,8 @@ import {
   hideLoader,
   hideOverlay,
   showOverlay,
+  showToggler,
+  hideToggler,
 } from '../../store/actions/ui';
 import useAnalytics from '../../hooks/useAnalytics';
 
@@ -20,14 +21,13 @@ const About = (props) => {
       dispatch(hideLoader());
     });
 
-    showToggler();
-
+    dispatch(showToggler());
     dispatch(closeNav());
     dispatch(hideOverlay());
   }, []);
 
   const handleAboutLink = (path) => {
-    hideToggler();
+    dispatch(hideToggler());
 
     dispatch(showOverlay());
 

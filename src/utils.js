@@ -10,18 +10,6 @@ export const showBodyScroll = () => {
   document.body.classList.remove('overflow-y-hidden');
 };
 
-export const hideToggler = () => {
-  document
-    .querySelector('.navbar-toggler')
-    .classList.add('navbar-toggler--hide');
-};
-
-export const showToggler = () => {
-  document
-    .querySelector('.navbar-toggler')
-    .classList.remove('navbar-toggler--hide');
-};
-
 export const generateOverlayEffect = () => {
   for (let x = 0; x < 10; x++) {
     const div = document.createElement('div');

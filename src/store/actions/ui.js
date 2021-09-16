@@ -6,6 +6,8 @@ import {
   SHOW_OVERLAY,
   HIDE_OVERLAY,
   TOGGLE_OVERLAY,
+  SHOW_TOGGLER,
+  HIDE_TOGGLER,
 } from '../constants/actionTypes';
 
 export const toggleNav = () => {
@@ -34,4 +36,12 @@ export const showOverlay = () => {
 
 export const hideOverlay = () => {
   return { type: HIDE_OVERLAY };
+};
+
+export const showToggler = () => {
+  return { type: SHOW_TOGGLER };
+};
+
+export const hideToggler = () => {
+  return { type: HIDE_TOGGLER };
 };

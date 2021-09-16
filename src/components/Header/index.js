@@ -15,6 +15,7 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const isInitial = useRef(true);
   const isOverlayActive = useSelector((state) => state.ui.isOverlayActive);
+  const isTogglerEnabled = useSelector((state) => state.ui.isTogglerEnabled);
 
   useEffect(() => {
     if (isInitial.current) {
@@ -47,15 +48,15 @@ const Header = (props) => {
     }
   };
 
+  let togglerClasses = 'navbar-toggler mr-15';
+
+  if (isNavOpen) togglerClasses += ' navbar-toggler--active';
+  if (!isTogglerEnabled) togglerClasses += ' navbar-toggler--hide';
+
   return (
     <header className="header">
       <div className="container flex justify-end">
-        <button
-          className={`navbar-toggler${
-            isNavOpen ? ' navbar-toggler--active' : ''
-          } mr-15`}
-          onClick={handleToggler}
-        >
+        <button className={togglerClasses} onClick={handleToggler}>
           <span className="navbar-toggler__icon"></span>
         </button>
 

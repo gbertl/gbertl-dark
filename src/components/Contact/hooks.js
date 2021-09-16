@@ -1,8 +1,13 @@
 import { useEffect } from 'react';
 import emailjs from 'emailjs-com';
-import { toggleBodyScroll, showToggler } from '../../utils';
+import { toggleBodyScroll } from '../../utils';
 import { useDispatch } from 'react-redux';
-import { closeNav, hideLoader, hideOverlay } from '../../store/actions/ui';
+import {
+  closeNav,
+  showToggler,
+  hideLoader,
+  hideOverlay,
+} from '../../store/actions/ui';
 
 const useContact = (props) => {
   const dispatch = useDispatch();
@@ -12,8 +17,7 @@ const useContact = (props) => {
       dispatch(hideLoader());
     });
 
-    showToggler();
-
+    dispatch(showToggler());
     dispatch(closeNav());
     dispatch(hideOverlay());
 
