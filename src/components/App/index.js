@@ -6,8 +6,11 @@ import Portfolio from '../Portfolio';
 import useApp from './hooks/useApp';
 import Loader from './Loader';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const App = () => {
+  const isOverlayActive = useSelector((state) => state.ui.isOverlayActive);
+
   useApp();
 
   return (
@@ -16,7 +19,11 @@ const App = () => {
       <Router>
         <div className="App">
           <div className="bg-animation-effect"></div>
-          <div className="overlay-effect"></div>
+          <div
+            className={`overlay-effect${
+              isOverlayActive ? ' overlay-effect--active' : ''
+            }`}
+          ></div>
           <Header />
           <Switch>
             <Route path="/contact">

@@ -1,12 +1,7 @@
 import { useEffect } from 'react';
-import {
-  hideToggler,
-  showToggler,
-  openOverlayEffect,
-  closeOverlayEffect,
-} from '../../utils';
+import { hideToggler, showToggler } from '../../utils';
 import { withRouter } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   closeNav,
   hideLoader,
@@ -16,8 +11,6 @@ import {
 import useAnalytics from '../../hooks/useAnalytics';
 
 const About = (props) => {
-  const isNavOpen = useSelector((state) => state.ui.isNavOpen);
-  const isOverlayActive = useSelector((state) => state.ui.isOverlayActive);
   const dispatch = useDispatch();
 
   useAnalytics('About');
@@ -29,20 +22,13 @@ const About = (props) => {
 
     showToggler();
 
-    if (isNavOpen) {
-      dispatch(closeNav());
-    }
-
-    if (isOverlayActive) {
-      closeOverlayEffect();
-      dispatch(hideOverlay());
-    }
+    dispatch(closeNav());
+    dispatch(hideOverlay());
   }, []);
 
   const handleAboutLink = (path) => {
     hideToggler();
 
-    openOverlayEffect();
     dispatch(showOverlay());
 
     setTimeout(() => {

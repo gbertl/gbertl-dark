@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
 import emailjs from 'emailjs-com';
-import { toggleBodyScroll, closeOverlayEffect, showToggler } from '../../utils';
-import { useDispatch, useSelector } from 'react-redux';
+import { toggleBodyScroll, showToggler } from '../../utils';
+import { useDispatch } from 'react-redux';
 import { closeNav, hideLoader, hideOverlay } from '../../store/actions/ui';
 
 const useContact = (props) => {
-  const isNavOpen = useSelector((state) => state.ui.isNavOpen);
-  const isOverlayActive = useSelector((state) => state.ui.isOverlayActive);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,14 +14,8 @@ const useContact = (props) => {
 
     showToggler();
 
-    if (isNavOpen) {
-      dispatch(closeNav());
-    }
-
-    if (isOverlayActive) {
-      closeOverlayEffect();
-      dispatch(hideOverlay());
-    }
+    dispatch(closeNav());
+    dispatch(hideOverlay());
 
     const toggleContactForm = () => {
       document

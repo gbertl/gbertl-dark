@@ -1,10 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import {
-  hideBodyScroll,
-  showBodyScroll,
-  closeOverlayEffect,
-  openOverlayEffect,
-} from '../../utils';
+import { hideBodyScroll, showBodyScroll } from '../../utils';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -34,10 +29,8 @@ const Header = (props) => {
     }
 
     if (isOverlayActive) {
-      openOverlayEffect();
       hideBodyScroll();
     } else {
-      closeOverlayEffect();
       showBodyScroll();
     }
   }, [isNavOpen, isOverlayActive]);
@@ -49,7 +42,6 @@ const Header = (props) => {
 
   const handleNavLink = (e) => {
     if (location.pathname === e.target.getAttribute('href')) {
-      closeOverlayEffect();
       dispatch(closeNav());
       dispatch(hideOverlay());
     }

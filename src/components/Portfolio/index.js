@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../Modal';
-import { closeOverlayEffect, showToggler } from '../../utils';
+import { showToggler } from '../../utils';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 import { fetchCategories, fetchProjects } from '../../store/actions/portfolio';
@@ -19,7 +19,6 @@ const Portfolio = (props) => {
   const counterRef = useRef(0);
   const dispatch = useDispatch();
 
-  const isNavOpen = useSelector((state) => state.ui.isNavOpen);
   const data = useSelector((state) => state.portfolio.projects);
   const categories = useSelector((state) => state.portfolio.categories);
 
@@ -28,7 +27,6 @@ const Portfolio = (props) => {
   const [currProjectIndex, setCurrProjectIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterTitle, setFilterTitle] = useState('All');
-  const isOverlayActive = useSelector((state) => state.ui.isOverlayActive);
 
   const pageTitle = 'Portfolio';
   useDocumentTitle(pageTitle);
@@ -36,15 +34,8 @@ const Portfolio = (props) => {
 
   useEffect(() => {
     showToggler();
-
-    if (isNavOpen) {
-      dispatch(closeNav());
-    }
-
-    if (isOverlayActive) {
-      closeOverlayEffect();
-      dispatch(hideOverlay());
-    }
+    dispatch(closeNav());
+    dispatch(hideOverlay());
 
     !data.length && dispatch(fetchProjects());
     !categories.length && dispatch(fetchCategories());

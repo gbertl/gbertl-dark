@@ -29,15 +29,3 @@ export const generateOverlayEffect = () => {
     document.querySelector('.overlay-effect').appendChild(div);
   }
 };
-
-export const openOverlayEffect = () => {
-  document
-    .querySelector('.overlay-effect')
-    .classList.add('overlay-effect--active');
-};
-
-export const closeOverlayEffect = () => {
-  document
-    .querySelector('.overlay-effect')
-    .classList.remove('overlay-effect--active');
-};
