@@ -7,7 +7,7 @@ import {
   showToggler,
 } from '../../utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeIsNav, hideLoader, hideOverlay } from '../../store/actions/ui';
+import { closeNav, hideLoader, hideOverlay } from '../../store/actions/ui';
 
 const useContact = (props) => {
   const isNavOpen = useSelector((state) => state.ui.isNavOpen);
@@ -23,7 +23,7 @@ const useContact = (props) => {
 
     if (isNavOpen) {
       closeNavbar();
-      dispatch(closeIsNav());
+      dispatch(closeNav());
     }
 
     if (isOverlayActive) {

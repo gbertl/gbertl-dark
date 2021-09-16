@@ -9,7 +9,7 @@ import {
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  closeIsNav,
+  closeNav,
   hideLoader,
   hideOverlay,
   showOverlay,
@@ -32,7 +32,7 @@ const About = (props) => {
 
     if (isNavOpen) {
       closeNavbar();
-      dispatch(closeIsNav());
+      dispatch(closeNav());
     }
 
     if (isOverlayActive) {

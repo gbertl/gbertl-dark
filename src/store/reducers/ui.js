@@ -1,6 +1,6 @@
 import {
-  TOGGLE_ISNAV,
-  CLOSE_ISNAV,
+  TOGGLE_NAV,
+  CLOSE_NAV,
   SHOW_LOADER,
   HIDE_LOADER,
   SHOW_OVERLAY,
@@ -13,9 +13,9 @@ const reducer = (
   action
 ) => {
   switch (action.type) {
-    case TOGGLE_ISNAV:
+    case TOGGLE_NAV:
       return { ...state, isNavOpen: !state.isNavOpen };
-    case CLOSE_ISNAV:
+    case CLOSE_NAV:
       return { ...state, isNavOpen: false };
     case SHOW_LOADER:
       return { ...state, isLoading: true };

@@ -8,7 +8,7 @@ import useDocumentTitle from '../../hooks/useDocumentTitle';
 import { fetchCategories, fetchProjects } from '../../store/actions/portfolio';
 import useAnalytics from '../../hooks/useAnalytics';
 import {
-  closeIsNav,
+  closeNav,
   hideLoader,
   showLoader,
   hideOverlay,
@@ -39,7 +39,7 @@ const Portfolio = (props) => {
 
     if (isNavOpen) {
       closeNavbar();
-      dispatch(closeIsNav());
+      dispatch(closeNav());
     }
 
     if (isOverlayActive) {

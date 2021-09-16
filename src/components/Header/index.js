@@ -10,8 +10,8 @@ import {
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  closeIsNav,
-  toggleIsNav,
+  closeNav,
+  toggleNav,
   hideOverlay,
   toggleOverlay,
 } from '../../store/actions/ui';
@@ -47,7 +47,7 @@ const Header = (props) => {
   }, [isNavOpen, isOverlayActive]);
 
   const handleToggler = () => {
-    dispatch(toggleIsNav());
+    dispatch(toggleNav());
     dispatch(toggleOverlay());
   };
 
@@ -55,7 +55,7 @@ const Header = (props) => {
     if (location.pathname === e.target.getAttribute('href')) {
       closeNavbar();
       closeOverlayEffect();
-      dispatch(closeIsNav());
+      dispatch(closeNav());
       dispatch(hideOverlay());
     }
   };

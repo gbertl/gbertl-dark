@@ -1,19 +1,19 @@
 import {
   SHOW_LOADER,
   HIDE_LOADER,
-  TOGGLE_ISNAV,
-  CLOSE_ISNAV,
+  TOGGLE_NAV,
+  CLOSE_NAV,
   SHOW_OVERLAY,
   HIDE_OVERLAY,
   TOGGLE_OVERLAY,
 } from '../constants/actionTypes';
 
-export const toggleIsNav = () => {
-  return { type: TOGGLE_ISNAV };
+export const toggleNav = () => {
+  return { type: TOGGLE_NAV };
 };
 
-export const closeIsNav = () => {
-  return { type: CLOSE_ISNAV };
+export const closeNav = () => {
+  return { type: CLOSE_NAV };
 };
 
 export const showLoader = () => {

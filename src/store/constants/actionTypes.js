@@ -1,5 +1,5 @@
-export const TOGGLE_ISNAV = 'TOGGLE_ISNAV';
-export const CLOSE_ISNAV = 'CLOSE_ISNAV';
+export const TOGGLE_NAV = 'TOGGLE_NAV';
+export const CLOSE_NAV = 'CLOSE_NAV';
 export const REPLACE_PROJECTS = 'REPLACE_PROJECTS';
 export const REPLACE_CATEGORIES = 'REPLACE_CATEGORIES';
 export const SHOW_LOADER = 'SHOW_LOADER';
