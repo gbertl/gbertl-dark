@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../Modal';
 import { closeOverlayEffect, closeNavbar, showToggler } from '../../utils';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
-import { closeIsNav } from '../../store/actions';
 
 import { fetchCategories, fetchProjects } from '../../store/actions/portfolio';
 import useAnalytics from '../../hooks/useAnalytics';
+import { closeIsNav, hideLoader, showLoader } from '../../store/actions/ui';
 
 const Portfolio = (props) => {
   const imgLen = useRef(0);
@@ -59,7 +59,7 @@ const Portfolio = (props) => {
 
     if (imgLen.current) {
       setTimeout(() => {
-        imgLen.current > counterRef.current && props.setIsLoading(true);
+        imgLen.current > counterRef.current && dispatch(showLoader());
       }, 3000);
     }
   }, [data]);
@@ -68,7 +68,7 @@ const Portfolio = (props) => {
     counterRef.current = counter;
 
     if (imgLen.current && imgLen.current <= counter) {
-      props.setIsLoading(false);
+      dispatch(hideLoader());
     }
   }, [counter]);
 

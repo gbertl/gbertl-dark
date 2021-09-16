@@ -10,13 +10,12 @@ import { useState } from 'react';
 
 const App = () => {
   const [isOverlayActive, setIsOverlayActive] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   useApp();
 
   return (
     <>
-      <Loader isLoading={isLoading} />
+      <Loader />
       <Router>
         <div className="App">
           <div className="bg-animation-effect"></div>
@@ -28,7 +27,6 @@ const App = () => {
           <Switch>
             <Route path="/contact">
               <Contact
-                setIsLoading={setIsLoading}
                 isOverlayActive={isOverlayActive}
                 setIsOverlayActive={setIsOverlayActive}
               />
@@ -37,13 +35,10 @@ const App = () => {
               <Portfolio
                 isOverlayActive={isOverlayActive}
                 setIsOverlayActive={setIsOverlayActive}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
               />
             </Route>
             <Route path="/">
               <About
-                setIsLoading={setIsLoading}
                 isOverlayActive={isOverlayActive}
                 setIsOverlayActive={setIsOverlayActive}
               />

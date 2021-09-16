@@ -8,7 +8,7 @@ import {
 } from '../../utils';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeIsNav } from '../../store/actions';
+import { closeIsNav, hideLoader } from '../../store/actions/ui';
 import useAnalytics from '../../hooks/useAnalytics';
 
 const About = (props) => {
@@ -19,7 +19,7 @@ const About = (props) => {
 
   useEffect(() => {
     window.addEventListener('load', () => {
-      props.setIsLoading(false);
+      dispatch(hideLoader());
     });
 
     showToggler();

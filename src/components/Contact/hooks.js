@@ -7,7 +7,7 @@ import {
   showToggler,
 } from '../../utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeIsNav } from '../../store/actions';
+import { closeIsNav, hideLoader } from '../../store/actions/ui';
 
 const useContact = ({ isOverlayActive, setIsOverlayActive, ...props }) => {
   const isNavOpen = useSelector((state) => state.ui.isNavOpen);
@@ -15,7 +15,7 @@ const useContact = ({ isOverlayActive, setIsOverlayActive, ...props }) => {
 
   useEffect(() => {
     window.addEventListener('load', () => {
-      props.setIsLoading(false);
+      dispatch(hideLoader());
     });
 
     showToggler();

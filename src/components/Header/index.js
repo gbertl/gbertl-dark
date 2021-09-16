@@ -9,7 +9,7 @@ import {
 } from '../../utils';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeIsNav, toggleIsNav } from '../../store/actions';
+import { closeIsNav, toggleIsNav } from '../../store/actions/ui';
 
 const Header = (props) => {
   const location = useLocation();

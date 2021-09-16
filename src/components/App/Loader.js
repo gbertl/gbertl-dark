@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { toggleBodyScroll } from '../../utils';
 
-const Loader = ({ isLoading }) => {
+const Loader = () => {
+  const isLoading = useSelector((state) => state.ui.isLoading);
+
   useEffect(() => {
     let timeout;
 
