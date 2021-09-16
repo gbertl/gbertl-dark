@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../Modal';
-import { closeOverlayEffect, closeNavbar, showToggler } from '../../utils';
+import { closeOverlayEffect, showToggler } from '../../utils';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 import { fetchCategories, fetchProjects } from '../../store/actions/portfolio';
@@ -38,7 +38,6 @@ const Portfolio = (props) => {
     showToggler();
 
     if (isNavOpen) {
-      closeNavbar();
       dispatch(closeNav());
     }
 

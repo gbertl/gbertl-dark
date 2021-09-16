@@ -1,8 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import {
-  closeNavbar,
   hideBodyScroll,
-  openNavbar,
   showBodyScroll,
   closeOverlayEffect,
   openOverlayEffect,
@@ -30,10 +28,8 @@ const Header = (props) => {
     }
 
     if (isNavOpen) {
-      openNavbar();
       hideBodyScroll();
     } else {
-      closeNavbar();
       showBodyScroll();
     }
 
@@ -53,7 +49,6 @@ const Header = (props) => {
 
   const handleNavLink = (e) => {
     if (location.pathname === e.target.getAttribute('href')) {
-      closeNavbar();
       closeOverlayEffect();
       dispatch(closeNav());
       dispatch(hideOverlay());
@@ -63,11 +58,16 @@ const Header = (props) => {
   return (
     <header className="header">
       <div className="container flex justify-end">
-        <button className="navbar-toggler mr-15" onClick={handleToggler}>
+        <button
+          className={`navbar-toggler${
+            isNavOpen ? ' navbar-toggler--active' : ''
+          } mr-15`}
+          onClick={handleToggler}
+        >
           <span className="navbar-toggler__icon"></span>
         </button>
 
-        <nav className="navbar center">
+        <nav className={`navbar${isNavOpen ? ' navbar--open' : ''} center`}>
           <ul className="text-center">
             <li>
               <Link

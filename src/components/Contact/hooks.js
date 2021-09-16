@@ -1,11 +1,6 @@
 import { useEffect } from 'react';
 import emailjs from 'emailjs-com';
-import {
-  toggleBodyScroll,
-  closeOverlayEffect,
-  closeNavbar,
-  showToggler,
-} from '../../utils';
+import { toggleBodyScroll, closeOverlayEffect, showToggler } from '../../utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeNav, hideLoader, hideOverlay } from '../../store/actions/ui';
 
@@ -22,7 +17,6 @@ const useContact = (props) => {
     showToggler();
 
     if (isNavOpen) {
-      closeNavbar();
       dispatch(closeNav());
     }
 

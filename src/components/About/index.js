@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import {
-  closeNavbar,
   hideToggler,
   showToggler,
   openOverlayEffect,
@@ -31,7 +30,6 @@ const About = (props) => {
     showToggler();
 
     if (isNavOpen) {
-      closeNavbar();
       dispatch(closeNav());
     }
 
