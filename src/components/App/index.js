@@ -5,7 +5,12 @@ import Contact from '../Contact';
 import Portfolio from '../Portfolio';
 import useApp from './hooks/useApp';
 import Loader from './Loader';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const App = () => {
@@ -26,14 +31,17 @@ const App = () => {
           ></div>
           <Header />
           <Switch>
-            <Route path="/contact">
-              <Contact />
+            <Route path="/" exact>
+              <About />
             </Route>
             <Route path="/portfolio">
               <Portfolio />
             </Route>
-            <Route path="/">
-              <About />
+            <Route path="/contact">
+              <Contact />
+            </Route>
+            <Route path="*">
+              <Redirect to="/" />
             </Route>
           </Switch>
         </div>
