@@ -12,6 +12,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Login from './Login';
 
 const App = () => {
   const isOverlayActive = useSelector((state) => state.ui.isOverlayActive);
@@ -39,6 +40,9 @@ const App = () => {
             </Route>
             <Route path="/contact">
               <Contact />
+            </Route>
+            <Route path="/login">
+              <Login />
             </Route>
             <Route path="*">
               <Redirect to="/" />
