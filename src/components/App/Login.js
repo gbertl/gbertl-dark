@@ -7,7 +7,13 @@ import { fetchProjects } from '../../store/actions/portfolio';
 const Login = () => {
   const usernameRef = useRef('');
   const passwordRef = useRef('');
+
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [created, setCreated] = useState('');
+  const [livePreview, setLivePreview] = useState('');
+  const [sourceCode, setSourceCode] = useState('');
+
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.portfolio.projects);
   const isInitial = useRef(true);
@@ -25,6 +31,10 @@ const Login = () => {
       isInitial.current = false;
     } else {
       setTitle(projects[0].title);
+      setDescription(projects[0].description);
+      setCreated(projects[0].created);
+      setLivePreview(projects[0].live_preview);
+      setSourceCode(projects[0].source_code);
     }
   }, [projects]);
 
@@ -48,8 +58,25 @@ const Login = () => {
 
     const id = projects[0].id;
 
-    const { data } = await api.updateProject(id, { title });
-    setTitle(data.title);
+    const updatedProject = {
+      title: title,
+      description: description,
+      created: created,
+      live_preview: livePreview,
+      source_code: sourceCode,
+    };
+
+    try {
+      const { data } = await api.updateProject(id, updatedProject);
+      setTitle(data.title);
+      setDescription(data.description);
+      setCreated(data.created);
+      setLivePreview(data.live_preview);
+      setSourceCode(data.source_code);
+      alert('success');
+    } catch (e) {
+      alert(e.message);
+    }
   };
 
   return (
@@ -80,6 +107,37 @@ const Login = () => {
           placeholder="Title"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
+          style={{ color: 'white' }}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Description"
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
+          style={{ color: 'white' }}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Created"
+          onChange={(e) => setCreated(e.target.value)}
+          value={created}
+          style={{ color: 'white' }}
+          required
+        />
+        <input
+          type="url"
+          placeholder="Live preview"
+          onChange={(e) => setLivePreview(e.target.value)}
+          value={livePreview}
+          style={{ color: 'white' }}
+        />
+        <input
+          type="url"
+          placeholder="Source code"
+          onChange={(e) => setSourceCode(e.target.value)}
+          value={sourceCode}
           style={{ color: 'white' }}
         />
         <button
