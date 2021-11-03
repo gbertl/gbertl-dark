@@ -17,4 +17,7 @@ export const login = async (credentials) => {
 };
 
 export const updateProject = (id, updatedProject) =>
-  protectedRoute.patch(`/projects/${id}/`, updatedProject);
+  protectedRoute.put(`/projects/${id}/`, updatedProject);
+
+export const getProjectDetail = (id) => axiosInstance.get(`/projects/${id}/`);
+export const getScreenshots = () => axiosInstance.get('/screenshots/');

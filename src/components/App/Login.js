@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as api from '../../api';
 import { hideLoader } from '../../store/actions/ui';
 import { fetchProjects } from '../../store/actions/portfolio';
+import ArrayField from './ArrayField';
+import './login.css';
+import useMounted from './useMounted';
+import { serialize } from 'object-to-formdata';
 
 const Login = () => {
   const usernameRef = useRef('');
@@ -11,32 +15,64 @@ const Login = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [created, setCreated] = useState('');
+  const [roles, setRoles] = useState([]);
+  const [technologies, setTechnologies] = useState([]);
   const [livePreview, setLivePreview] = useState('');
   const [sourceCode, setSourceCode] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [priorityOrder, setPriorityOrder] = useState('');
+  const [thumbnail, setThumbnail] = useState('');
+  const [screenshots, setScreenshots] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [screenshotList, setScreenshotList] = useState([]);
 
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.portfolio.projects);
-  const isInitial = useRef(true);
+  const [currProject, setCurrProject] = useState({});
+
+  const isMounted = useMounted();
+
+  const fetchScreenshots = async () => {
+    const { data } = await api.getScreenshots();
+    setScreenshotList(data);
+  };
 
   useEffect(() => {
-    window.addEventListener('load', () => {
-      dispatch(hideLoader());
-    });
-
+    dispatch(hideLoader());
     dispatch(fetchProjects());
+    fetchScreenshots();
   }, []);
 
   useEffect(() => {
-    if (isInitial.current) {
-      isInitial.current = false;
-    } else {
-      setTitle(projects[0].title);
-      setDescription(projects[0].description);
-      setCreated(projects[0].created);
-      setLivePreview(projects[0].live_preview);
-      setSourceCode(projects[0].source_code);
+    if (!isMounted) {
+      return;
     }
+
+    const fetchProjectDetail = async () => {
+      const { data } = await api.getProjectDetail(projects[0].id);
+      setCurrProject(data);
+    };
+
+    fetchProjectDetail();
   }, [projects]);
+
+  useEffect(() => {
+    if (!isMounted) {
+      return;
+    }
+
+    setTitle(currProject.title);
+    setDescription(currProject.description);
+    setCreated(currProject.created);
+    setRoles(currProject.roles);
+    setTechnologies(currProject.technologies);
+    setLivePreview(currProject.live_preview);
+    setSourceCode(currProject.source_code);
+    setCategories(currProject.categories);
+    setPriorityOrder(currProject.priority_order);
+    setThumbnail(currProject.thumbnail);
+    setScreenshots(currProject.screenshots);
+  }, [currProject]);
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -56,95 +92,245 @@ const Login = () => {
   const updateProjectHandler = async (e) => {
     e.preventDefault();
 
-    const id = projects[0].id;
-
     const updatedProject = {
-      title: title,
-      description: description,
-      created: created,
+      title,
+      description,
+      created,
+      roles,
+      technologies,
       live_preview: livePreview,
       source_code: sourceCode,
+      categories,
+      priority_order: priorityOrder,
+      thumbnail,
+      screenshots,
     };
 
+    const fd = serialize(updatedProject, {
+      indices: true,
+      allowEmptyArrays: true,
+    });
+
     try {
-      const { data } = await api.updateProject(id, updatedProject);
+      setIsLoading(true);
+
+      const { data } = await api.updateProject(currProject.id, fd);
+
       setTitle(data.title);
       setDescription(data.description);
       setCreated(data.created);
+      setRoles(data.roles);
+      setTechnologies(data.technologies);
       setLivePreview(data.live_preview);
       setSourceCode(data.source_code);
+      setCategories(data.categories);
+      setPriorityOrder(data.priority_order);
+      setThumbnail(data.thumbnail);
+      setScreenshots(data.screenshots);
+      fetchScreenshots();
+      document.querySelector('input[type=file]').value = '';
       alert('success');
     } catch (e) {
-      alert(e.message);
+      alert('error');
+      console.log(e.response.data);
     }
+
+    setIsLoading(false);
   };
 
   return (
-    <div className="login">
+    <div className="login" style={{ margin: '10px' }}>
       <form onSubmit={loginHandler}>
-        <input
-          type="text"
-          placeholder="Username"
-          ref={usernameRef}
-          style={{ color: 'white' }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          ref={passwordRef}
-          style={{ color: 'white' }}
-        />
-        <button
-          style={{ marginTop: '10px', background: 'white', padding: '0 10px' }}
-        >
-          Login
-        </button>
+        <input type="text" placeholder="Username" ref={usernameRef} />
+        <input type="password" placeholder="Password" ref={passwordRef} />
+        <button>Login</button>
       </form>
 
-      <form onSubmit={updateProjectHandler}>
+      <select
+        onChange={async (e) => {
+          const { data } = await api.getProjectDetail(e.target.value);
+          setCurrProject(data);
+        }}
+      >
+        {projects.map((p) => (
+          <option key={p.id} value={p.id}>
+            {p.title}
+          </option>
+        ))}
+      </select>
+      <h1
+        style={{ display: isLoading ? 'block' : 'none' }}
+        onClick={() => setIsLoading(false)}
+      >
+        Updating it ...
+      </h1>
+      <form
+        onSubmit={updateProjectHandler}
+        style={{ display: isLoading ? 'none' : 'block', marginTop: '10px' }}
+      >
+        <label htmlFor="">Title:</label>
         <input
           type="text"
-          placeholder="Title"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
-          style={{ color: 'white' }}
           required
         />
-        <input
-          type="text"
-          placeholder="Description"
+        <label htmlFor="">Description:</label>
+        <textarea
           onChange={(e) => setDescription(e.target.value)}
           value={description}
-          style={{ color: 'white' }}
           required
-        />
+        ></textarea>
+        <label htmlFor="">Created:</label>
         <input
           type="text"
-          placeholder="Created"
           onChange={(e) => setCreated(e.target.value)}
           value={created}
-          style={{ color: 'white' }}
           required
         />
+        <ArrayField
+          name="roles"
+          fieldKeys={['name']}
+          field={roles}
+          setField={setRoles}
+        />
+        <ArrayField
+          name="technologies"
+          fieldKeys={['name']}
+          field={technologies}
+          setField={setTechnologies}
+        />
+        <label htmlFor="">Live preview:</label>
         <input
           type="url"
-          placeholder="Live preview"
           onChange={(e) => setLivePreview(e.target.value)}
           value={livePreview}
-          style={{ color: 'white' }}
         />
+        <label htmlFor="">Source code:</label>
         <input
           type="url"
           placeholder="Source code"
           onChange={(e) => setSourceCode(e.target.value)}
           value={sourceCode}
-          style={{ color: 'white' }}
         />
-        <button
-          style={{ marginTop: '10px', background: 'white', padding: '0 10px' }}
+        <label htmlFor="">Thumbnail:</label>
+        <img
+          src={
+            typeof thumbnail === 'string'
+              ? thumbnail
+              : URL.createObjectURL(thumbnail)
+          }
+          alt=""
+          style={{ width: '40%' }}
+        />
+        <input type="file" onChange={(e) => setThumbnail(e.target.files[0])} />
+        <ArrayField
+          name="categories"
+          fieldKeys={['title', 'name']}
+          field={categories}
+          setField={setCategories}
+        />
+        <label htmlFor="">Priority order:</label>
+        <input
+          type="number"
+          placeholder="priority order"
+          value={priorityOrder}
+          onChange={(e) => setPriorityOrder(e.target.value)}
+        />
+        <h3>Screenshots:</h3>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(5, 1fr)',
+            gap: '5px',
+          }}
         >
-          Submit
+          {screenshotList.map((obj, index) => (
+            <div
+              key={index}
+              style={{
+                border: screenshots.some((s) => s.id === obj.id)
+                  ? '3px solid white'
+                  : 'none',
+              }}
+              onClick={() => {
+                !screenshots.some((s) => s.id === obj.id) &&
+                  setScreenshots((prevState) => [...prevState, { ...obj }]);
+              }}
+            >
+              <img
+                key={index}
+                src={
+                  typeof obj.image == 'string'
+                    ? obj.image
+                    : URL.createObjectURL(obj.image)
+                }
+                alt=""
+              />
+            </div>
+          ))}
+        </div>
+
+        {screenshots.map((f, index) => (
+          <div key={index}>
+            <label htmlFor="">Image:</label>
+            <img
+              key={index}
+              src={
+                typeof f.image == 'string'
+                  ? f.image
+                  : URL.createObjectURL(f.image)
+              }
+              style={{ width: '40%' }}
+              alt=""
+            />
+            <input
+              type="file"
+              onChange={(e) => {
+                let newScreenshots = [...screenshots];
+                newScreenshots[index].image = e.target.files[0];
+                setScreenshots(newScreenshots);
+              }}
+            />
+            <label htmlFor="">Priority order:</label>
+            <input
+              type="number"
+              placeholder="priority order"
+              value={screenshots[index].priority_order}
+              onChange={(e) => {
+                let newScreenshots = [...screenshots];
+                newScreenshots[index].priority_order = e.target.value;
+                setScreenshots(newScreenshots);
+              }}
+            />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                let updatedScreenshots = [...screenshots];
+                updatedScreenshots.splice(index, 1);
+                setScreenshots(updatedScreenshots);
+              }}
+            >
+              -
+            </button>
+          </div>
+        ))}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setScreenshots((prevState) => [
+              ...prevState,
+              {
+                image: '',
+                priority_order: 0,
+              },
+            ]);
+          }}
+        >
+          +
         </button>
+        <br />
+        <button>Submit</button>
       </form>
     </div>
   );
