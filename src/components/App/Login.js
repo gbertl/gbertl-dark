@@ -116,17 +116,7 @@ const Login = () => {
 
       const { data } = await api.updateProject(currProject.id, fd);
 
-      setTitle(data.title);
-      setDescription(data.description);
-      setCreated(data.created);
-      setRoles(data.roles);
-      setTechnologies(data.technologies);
-      setLivePreview(data.live_preview);
-      setSourceCode(data.source_code);
-      setCategories(data.categories);
-      setPriorityOrder(data.priority_order);
-      setThumbnail(data.thumbnail);
-      setScreenshots(data.screenshots);
+      setCurrProject(data);
       fetchScreenshots();
       document.querySelector('input[type=file]').value = '';
       alert('success');
