@@ -119,6 +119,7 @@ const Login = () => {
       setCurrProject(data);
       fetchScreenshots();
       document.querySelector('input[type=file]').value = '';
+      dispatch(fetchProjects());
       alert('success');
     } catch (e) {
       alert('error');
