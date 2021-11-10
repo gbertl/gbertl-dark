@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
+
 import { axiosInstance } from '../../axios';
 
 const ArrayField = ({ name, fieldKeys, field, setField }) => {
   const [fieldList, setFieldList] = useState([]);
 
-  const fetchFieldList = async () => {
-    const response = await axiosInstance.get(`/${name}/`);
-    setFieldList(response.data);
-  };
-
   useEffect(() => {
+    const fetchFieldList = async () => {
+      const { data } = await axiosInstance.get(`/${name}/`);
+      setFieldList(data);
+    };
     fetchFieldList();
-  }, [field]);
+  }, [name]);
 
   const fieldKeyHandler = (e, index, key) => {
     let newFields = [...field];
@@ -45,39 +45,35 @@ const ArrayField = ({ name, fieldKeys, field, setField }) => {
           .join('')}
         :
       </h3>
-      {field.map((f, index) => {
-        return (
-          <div key={index} style={{ display: 'flex' }}>
-            {Object.entries(f)
-              .filter(([k, v]) => k !== 'id')
-              .map(([fKey, fValue]) => {
-                return (
-                  <div key={fKey}>
-                    <label>{`${name} ${fKey}`}:</label>
-                    <input
-                      type="text"
-                      placeholder={fKey}
-                      value={fValue}
-                      onChange={(e) => fieldKeyHandler(e, index, fKey)}
-                    />
-                  </div>
-                );
-              })}
+      {field.map((f, index) => (
+        <div key={index} style={{ display: 'flex' }}>
+          {Object.entries(f)
+            .filter(([k, v]) => k !== 'id')
+            .map(([fKey, fValue]) => (
+              <div key={fKey}>
+                <label>{`${name} ${fKey}`}:</label>
+                <input
+                  type="text"
+                  placeholder={fKey}
+                  value={fValue}
+                  onChange={(e) => fieldKeyHandler(e, index, fKey)}
+                />
+              </div>
+            ))}
 
-            <button
-              style={{
-                marginTop: '10px',
-                background: 'black',
-                color: 'white',
-                padding: '5px 20px',
-              }}
-              onClick={(e) => minusRemoveFieldHandler(e, index)}
-            >
-              -
-            </button>
-          </div>
-        );
-      })}
+          <button
+            style={{
+              marginTop: '10px',
+              background: 'black',
+              color: 'white',
+              padding: '5px 20px',
+            }}
+            onClick={(e) => minusRemoveFieldHandler(e, index)}
+          >
+            -
+          </button>
+        </div>
+      ))}
       <button
         onClick={plusNewFieldHandler}
         style={{
@@ -91,29 +87,27 @@ const ArrayField = ({ name, fieldKeys, field, setField }) => {
       </button>
       <br />
 
-      {fieldList.map((f) => {
-        return (
-          <span key={f.id}>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                !field.some((prevState) => prevState.id === f.id) &&
-                  setField((prevState) => [...prevState, f]);
-              }}
-              style={{
-                marginRight: '10px',
-                background: field.some((prevState) => prevState.id === f.id)
-                  ? '#1b1b22'
-                  : 'black',
-                color: 'white',
-                padding: '5px 20px',
-              }}
-            >
-              + {f.name}
-            </button>
-          </span>
-        );
-      })}
+      {fieldList.map((f) => (
+        <span key={f.id}>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              !field.some((prevState) => prevState.id === f.id) &&
+                setField((prevState) => [...prevState, f]);
+            }}
+            style={{
+              marginRight: '10px',
+              background: field.some((prevState) => prevState.id === f.id)
+                ? '#1b1b22'
+                : 'black',
+              color: 'white',
+              padding: '5px 20px',
+            }}
+          >
+            + {f.name}
+          </button>
+        </span>
+      ))}
     </div>
   );
 };

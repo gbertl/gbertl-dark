@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { serialize } from 'object-to-formdata';
+
 import * as api from '../../api';
 import { hideLoader } from '../../store/actions/ui';
 import { fetchProjects } from '../../store/actions/portfolio';
 import ArrayField from './ArrayField';
 import './login.css';
 import useMounted from './useMounted';
-import { serialize } from 'object-to-formdata';
 
 const Login = () => {
   const usernameRef = useRef('');
@@ -84,6 +85,7 @@ const Login = () => {
       });
 
       e.target.reset();
+      alert('done login!');
     } catch (e) {
       alert(e.message);
     }
@@ -120,10 +122,8 @@ const Login = () => {
       fetchScreenshots();
       document.querySelector('input[type=file]').value = '';
       dispatch(fetchProjects());
-      alert('success');
     } catch (e) {
-      alert('error');
-      console.log(e.response.data);
+      alert(e.message);
     }
 
     setIsLoading(false);
@@ -149,12 +149,14 @@ const Login = () => {
           </option>
         ))}
       </select>
+
       <h1
         style={{ display: isLoading ? 'block' : 'none' }}
         onClick={() => setIsLoading(false)}
       >
-        Updating it ...
+        Please wait ..
       </h1>
+
       <form
         onSubmit={updateProjectHandler}
         style={{ display: isLoading ? 'none' : 'block', marginTop: '10px' }}
@@ -200,7 +202,6 @@ const Login = () => {
         <label htmlFor="">Source code:</label>
         <input
           type="url"
-          placeholder="Source code"
           onChange={(e) => setSourceCode(e.target.value)}
           value={sourceCode}
         />
@@ -224,7 +225,6 @@ const Login = () => {
         <label htmlFor="">Priority order:</label>
         <input
           type="number"
-          placeholder="priority order"
           value={priorityOrder}
           onChange={(e) => setPriorityOrder(e.target.value)}
         />
@@ -252,7 +252,7 @@ const Login = () => {
               <img
                 key={index}
                 src={
-                  typeof obj.image == 'string'
+                  typeof obj.image === 'string'
                     ? obj.image
                     : URL.createObjectURL(obj.image)
                 }
@@ -268,7 +268,7 @@ const Login = () => {
             <img
               key={index}
               src={
-                typeof f.image == 'string'
+                typeof f.image === 'string'
                   ? f.image
                   : URL.createObjectURL(f.image)
               }
@@ -286,7 +286,6 @@ const Login = () => {
             <label htmlFor="">Priority order:</label>
             <input
               type="number"
-              placeholder="priority order"
               value={screenshots[index].priority_order}
               onChange={(e) => {
                 let newScreenshots = [...screenshots];
