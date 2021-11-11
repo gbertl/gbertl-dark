@@ -1,4 +1,6 @@
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+import dayjs from 'dayjs';
 
 const baseURL =
   process.env.NODE_ENV === 'development'
@@ -21,7 +23,10 @@ protectedRoute.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response.status === 401) {
+    const user = jwt_decode(localStorage.getItem('accessToken'));
+    const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
+
+    if (isExpired) {
       try {
         const { data } = await axiosInstance.post('/token/refresh/', {
           refresh: localStorage.getItem('refreshToken'),
@@ -35,7 +40,7 @@ protectedRoute.interceptors.response.use(
         return protectedRoute(originalRequest);
       } catch (e) {
         console.log(e);
-        alert('redirect to login');
+        alert('login again!');
       }
     }
 
