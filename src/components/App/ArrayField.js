@@ -13,13 +13,13 @@ const ArrayField = ({ name, fieldKeys, field, setField }) => {
     fetchFieldList();
   }, [name]);
 
-  const fieldKeyHandler = (e, index, key) => {
+  const handleChange = (e, index) => {
     let newFields = [...field];
-    newFields[index][key] = e.target.value;
+    newFields[index][e.target.name] = e.target.value;
     setField(newFields);
   };
 
-  const plusNewFieldHandler = (e) => {
+  const handleAddInput = (e) => {
     e.preventDefault();
 
     let obj = {};
@@ -29,7 +29,7 @@ const ArrayField = ({ name, fieldKeys, field, setField }) => {
     setField([...field, obj]);
   };
 
-  const minusRemoveFieldHandler = (e, index) => {
+  const handleRemoveInput = (e, index) => {
     e.preventDefault();
     let updatedFields = [...field];
     updatedFields.splice(index, 1);
@@ -54,9 +54,10 @@ const ArrayField = ({ name, fieldKeys, field, setField }) => {
                 <label>{`${name} ${fKey}`}:</label>
                 <input
                   type="text"
-                  placeholder={fKey}
+                  name={fKey}
                   value={fValue}
-                  onChange={(e) => fieldKeyHandler(e, index, fKey)}
+                  placeholder={fKey}
+                  onChange={(e) => handleChange(e, index)}
                 />
               </div>
             ))}
@@ -68,14 +69,14 @@ const ArrayField = ({ name, fieldKeys, field, setField }) => {
               color: 'white',
               padding: '5px 20px',
             }}
-            onClick={(e) => minusRemoveFieldHandler(e, index)}
+            onClick={(e) => handleRemoveInput(e, index)}
           >
             -
           </button>
         </div>
       ))}
       <button
-        onClick={plusNewFieldHandler}
+        onClick={handleAddInput}
         style={{
           margin: '10px 0',
           background: 'black',

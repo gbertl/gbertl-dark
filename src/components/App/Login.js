@@ -75,7 +75,7 @@ const Login = () => {
     setScreenshots(currProject.screenshots);
   }, [currProject]);
 
-  const loginHandler = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
@@ -91,7 +91,7 @@ const Login = () => {
     }
   };
 
-  const updateProjectHandler = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
 
     const updatedProject = {
@@ -131,7 +131,7 @@ const Login = () => {
 
   return (
     <div className="login" style={{ margin: '10px' }}>
-      <form onSubmit={loginHandler}>
+      <form onSubmit={handleLogin}>
         <input type="text" placeholder="Username" ref={usernameRef} />
         <input type="password" placeholder="Password" ref={passwordRef} />
         <button>Login</button>
@@ -158,7 +158,7 @@ const Login = () => {
       </h1>
 
       <form
-        onSubmit={updateProjectHandler}
+        onSubmit={handleUpdate}
         style={{ display: isLoading ? 'none' : 'block', marginTop: '10px' }}
       >
         <label htmlFor="">Title:</label>
