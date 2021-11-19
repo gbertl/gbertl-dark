@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { axiosInstance } from '../../axios';
 
-const ArrayField = ({ name, fieldKeys, field, setField }) => {
+const ArrayField = ({ name, fieldKeys, field, setFieldParent }) => {
   const [fieldList, setFieldList] = useState([]);
 
   useEffect(() => {
@@ -11,12 +11,12 @@ const ArrayField = ({ name, fieldKeys, field, setField }) => {
       setFieldList(data);
     };
     fetchFieldList();
-  }, [name]);
+  }, [field]);
 
   const handleChange = (e, index) => {
     let newFields = [...field];
     newFields[index][e.target.name] = e.target.value;
-    setField(newFields);
+    setFieldParent((prevState) => ({ ...prevState, [name]: newFields }));
   };
 
   const handleAddInput = (e) => {
@@ -26,14 +26,14 @@ const ArrayField = ({ name, fieldKeys, field, setField }) => {
     for (const key of fieldKeys) {
       obj[key] = '';
     }
-    setField([...field, obj]);
+    setFieldParent((prevState) => ({ ...prevState, [name]: [...field, obj] }));
   };
 
   const handleRemoveInput = (e, index) => {
     e.preventDefault();
     let updatedFields = [...field];
     updatedFields.splice(index, 1);
-    setField(updatedFields);
+    setFieldParent((prevState) => ({ ...prevState, [name]: updatedFields }));
   };
 
   return (
@@ -45,7 +45,7 @@ const ArrayField = ({ name, fieldKeys, field, setField }) => {
           .join('')}
         :
       </h3>
-      {field.map((f, index) => (
+      {field?.map((f, index) => (
         <div key={index} style={{ display: 'flex' }}>
           {Object.entries(f)
             .filter(([k, v]) => k !== 'id')
@@ -93,12 +93,15 @@ const ArrayField = ({ name, fieldKeys, field, setField }) => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              !field.some((prevState) => prevState.id === f.id) &&
-                setField((prevState) => [...prevState, f]);
+              !field?.some((prevState) => prevState.id === f.id) &&
+                setFieldParent((prevState) => ({
+                  ...prevState,
+                  [name]: [...field, f],
+                }));
             }}
             style={{
               marginRight: '10px',
-              background: field.some((prevState) => prevState.id === f.id)
+              background: field?.some((prevState) => prevState.id === f.id)
                 ? '#1b1b22'
                 : 'black',
               color: 'white',

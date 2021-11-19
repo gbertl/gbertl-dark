@@ -12,25 +12,11 @@ import useMounted from './useMounted';
 const Login = () => {
   const usernameRef = useRef('');
   const passwordRef = useRef('');
-
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [created, setCreated] = useState('');
-  const [roles, setRoles] = useState([]);
-  const [technologies, setTechnologies] = useState([]);
-  const [livePreview, setLivePreview] = useState('');
-  const [sourceCode, setSourceCode] = useState('');
-  const [categories, setCategories] = useState([]);
-  const [priorityOrder, setPriorityOrder] = useState('');
-  const [thumbnail, setThumbnail] = useState('');
-  const [screenshots, setScreenshots] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [screenshotList, setScreenshotList] = useState([]);
-
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.portfolio.projects);
   const [currProject, setCurrProject] = useState({});
-
   const isMounted = useMounted();
 
   const fetchScreenshots = async () => {
@@ -50,30 +36,14 @@ const Login = () => {
     }
 
     const fetchProjectDetail = async () => {
-      const { data } = await api.getProjectDetail(projects[0].id);
+      const { data } = await api.getProjectDetail(
+        Object.keys(currProject).length ? currProject.id : projects[0].id
+      );
       setCurrProject(data);
     };
 
     fetchProjectDetail();
   }, [projects]);
-
-  useEffect(() => {
-    if (!isMounted) {
-      return;
-    }
-
-    setTitle(currProject.title);
-    setDescription(currProject.description);
-    setCreated(currProject.created);
-    setRoles(currProject.roles);
-    setTechnologies(currProject.technologies);
-    setLivePreview(currProject.live_preview);
-    setSourceCode(currProject.source_code);
-    setCategories(currProject.categories);
-    setPriorityOrder(currProject.priority_order);
-    setThumbnail(currProject.thumbnail);
-    setScreenshots(currProject.screenshots);
-  }, [currProject]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -94,34 +64,17 @@ const Login = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    const updatedProject = {
-      title,
-      description,
-      created,
-      roles,
-      technologies,
-      live_preview: livePreview,
-      source_code: sourceCode,
-      categories,
-      priority_order: priorityOrder,
-      thumbnail,
-      screenshots,
-    };
-
-    const fd = serialize(updatedProject, {
+    const fd = serialize(currProject, {
       indices: true,
       allowEmptyArrays: true,
     });
 
     try {
       setIsLoading(true);
-
-      const { data } = await api.updateProject(currProject.id, fd);
-
-      setCurrProject(data);
+      await api.updateProject(currProject.id, fd);
       fetchScreenshots();
-      document.querySelector('input[type=file]').value = '';
       dispatch(fetchProjects());
+      document.querySelector('input[type=file]').value = '';
     } catch (e) {
       alert(e.message);
     }
@@ -164,69 +117,107 @@ const Login = () => {
         <label htmlFor="">Title:</label>
         <input
           type="text"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
+          onChange={(e) =>
+            setCurrProject((prevState) => ({
+              ...prevState,
+              title: e.target.value,
+            }))
+          }
+          value={currProject.title}
           required
         />
         <label htmlFor="">Description:</label>
         <textarea
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
+          onChange={(e) =>
+            setCurrProject((prevState) => ({
+              ...prevState,
+              description: e.target.value,
+            }))
+          }
+          value={currProject.description}
           required
         ></textarea>
         <label htmlFor="">Created:</label>
         <input
           type="text"
-          onChange={(e) => setCreated(e.target.value)}
-          value={created}
+          onChange={(e) =>
+            setCurrProject((prevState) => ({
+              ...prevState,
+              created: e.target.value,
+            }))
+          }
+          value={currProject.created}
           required
         />
         <ArrayField
           name="roles"
           fieldKeys={['name']}
-          field={roles}
-          setField={setRoles}
+          field={currProject.roles}
+          setFieldParent={setCurrProject}
         />
         <ArrayField
           name="technologies"
           fieldKeys={['name']}
-          field={technologies}
-          setField={setTechnologies}
+          field={currProject.technologies}
+          setFieldParent={setCurrProject}
         />
         <label htmlFor="">Live preview:</label>
         <input
           type="url"
-          onChange={(e) => setLivePreview(e.target.value)}
-          value={livePreview}
+          onChange={(e) =>
+            setCurrProject((prevState) => ({
+              ...prevState,
+              live_preview: e.target.value,
+            }))
+          }
+          value={currProject.live_preview}
         />
         <label htmlFor="">Source code:</label>
         <input
           type="url"
-          onChange={(e) => setSourceCode(e.target.value)}
-          value={sourceCode}
+          onChange={(e) =>
+            setCurrProject((prevState) => ({
+              ...prevState,
+              source_code: e.target.value,
+            }))
+          }
+          value={currProject.source_code}
         />
         <label htmlFor="">Thumbnail:</label>
         <img
           src={
-            typeof thumbnail === 'string'
-              ? thumbnail
-              : URL.createObjectURL(thumbnail)
+            typeof currProject.thumbnail === 'string' || !currProject.thumbnail
+              ? currProject.thumbnail
+              : URL.createObjectURL(currProject.thumbnail)
           }
           alt=""
           style={{ width: '40%' }}
         />
-        <input type="file" onChange={(e) => setThumbnail(e.target.files[0])} />
+        <input
+          type="file"
+          onChange={(e) =>
+            setCurrProject((prevState) => ({
+              ...prevState,
+              thumbnail: e.target.files[0],
+            }))
+          }
+        />
         <ArrayField
           name="categories"
           fieldKeys={['title', 'name']}
-          field={categories}
-          setField={setCategories}
+          field={currProject.categories}
+          setFieldParent={setCurrProject}
         />
         <label htmlFor="">Priority order:</label>
         <input
           type="number"
-          value={priorityOrder}
-          onChange={(e) => setPriorityOrder(e.target.value)}
+          value={currProject.priority_order}
+          onChange={(e) =>
+            setCurrProject((prevState) => ({
+              ...prevState,
+              priority_order: e.target.value,
+            }))
+          }
         />
         <h3>Screenshots:</h3>
         <div
@@ -240,13 +231,16 @@ const Login = () => {
             <div
               key={index}
               style={{
-                border: screenshots.some((s) => s.id === obj.id)
+                border: currProject.screenshots?.some((s) => s.id === obj.id)
                   ? '3px solid white'
                   : 'none',
               }}
               onClick={() => {
-                !screenshots.some((s) => s.id === obj.id) &&
-                  setScreenshots((prevState) => [...prevState, { ...obj }]);
+                !currProject.screenshots.some((s) => s.id === obj.id) &&
+                  setCurrProject((prevState) => ({
+                    ...prevState,
+                    screenshots: [...prevState.screenshots, { ...obj }],
+                  }));
               }}
             >
               <img
@@ -262,7 +256,7 @@ const Login = () => {
           ))}
         </div>
 
-        {screenshots.map((f, index) => (
+        {currProject.screenshots?.map((f, index) => (
           <div key={index}>
             <label htmlFor="">Image:</label>
             <img
@@ -278,27 +272,37 @@ const Login = () => {
             <input
               type="file"
               onChange={(e) => {
-                let newScreenshots = [...screenshots];
+                let newScreenshots = [...currProject.screenshots];
                 newScreenshots[index].image = e.target.files[0];
-                setScreenshots(newScreenshots);
+                setCurrProject((prevState) => ({
+                  ...prevState,
+                  screenshots: newScreenshots,
+                }));
               }}
             />
             <label htmlFor="">Priority order:</label>
             <input
               type="number"
-              value={screenshots[index].priority_order}
+              value={currProject.screenshots[index].priority_order}
               onChange={(e) => {
-                let newScreenshots = [...screenshots];
+                let newScreenshots = [...currProject.screenshots];
                 newScreenshots[index].priority_order = e.target.value;
-                setScreenshots(newScreenshots);
+                setCurrProject((prevState) => ({
+                  ...prevState,
+                  screenshots: newScreenshots,
+                }));
               }}
             />
             <button
               onClick={(e) => {
                 e.preventDefault();
-                let updatedScreenshots = [...screenshots];
+                let updatedScreenshots = [...currProject.screenshots];
                 updatedScreenshots.splice(index, 1);
-                setScreenshots(updatedScreenshots);
+
+                setCurrProject((prevState) => ({
+                  ...prevState,
+                  screenshots: updatedScreenshots,
+                }));
               }}
             >
               -
@@ -308,13 +312,16 @@ const Login = () => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            setScreenshots((prevState) => [
+            setCurrProject((prevState) => ({
               ...prevState,
-              {
-                image: '',
-                priority_order: 0,
-              },
-            ]);
+              screenshots: [
+                ...prevState.screenshots,
+                {
+                  image: '',
+                  priority_order: 0,
+                },
+              ],
+            }));
           }}
         >
           +
