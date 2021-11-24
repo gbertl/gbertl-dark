@@ -1,0 +1,80 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  background-color: var(--clr-dark);
+  color: var(--clr-light-white);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--clr-white);
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4d4d5a;
+}
+
+button {
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: 16px;
+  display: inline-block;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+input,
+textarea {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-family: inherit;
+}
