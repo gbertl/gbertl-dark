@@ -48,7 +48,7 @@ const ArrayField = ({ name, fieldKeys, field, setFieldParent }) => {
       {field?.map((f, index) => (
         <div key={index} style={{ display: 'flex' }}>
           {Object.entries(f)
-            .filter(([k, v]) => k !== 'id')
+            .filter(([k]) => k !== 'id')
             .map(([fKey, fValue]) => (
               <div key={fKey}>
                 <label>{`${name} ${fKey}`}:</label>

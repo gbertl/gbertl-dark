@@ -2,9 +2,9 @@
 import Head from 'next/head';
 import useContact from './hooks';
 
-const Contact = (props) => {
+const Contact = () => {
   // useAnalytics(pageTitle);
-  useContact(props);
+  useContact();
 
   return (
     <>

@@ -9,7 +9,7 @@ import {
   hideOverlay,
 } from '../../store/actions/ui';
 
-const useContact = (props) => {
+const useContact = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const useContact = (props) => {
             'user_jmQ3lowI4xMVTboiORnz4'
           )
           .then(
-            (result) => {
+            () => {
               alert(
                 'Your message has been sent successfully, I hope to respond within 24 hours. Thanks!'
               );
