@@ -1,75 +1,43 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../Modal';
-import useDocumentTitle from '../../hooks/useDocumentTitle';
 
-import { fetchCategories, fetchProjects } from '../../store/actions/portfolio';
-import useAnalytics from '../../hooks/useAnalytics';
+// import useAnalytics from '../../hooks/useAnalytics';
 import {
   closeNav,
   hideLoader,
-  showLoader,
   hideOverlay,
   showToggler,
 } from '../../store/actions/ui';
+import Head from 'next/head';
 
-const Portfolio = (props) => {
-  const imgLen = useRef(0);
-  const counterRef = useRef(0);
+const Portfolio = () => {
   const dispatch = useDispatch();
 
-  const data = useSelector((state) => state.portfolio.projects);
+  const projectsData = useSelector((state) => state.portfolio.projects);
   const categories = useSelector((state) => state.portfolio.categories);
 
-  const [counter, setCounter] = useState(0);
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(projectsData);
   const [currProjectIndex, setCurrProjectIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterTitle, setFilterTitle] = useState('All');
 
-  const pageTitle = 'Portfolio';
-  useDocumentTitle(pageTitle);
-  useAnalytics(pageTitle);
+  // useAnalytics(pageTitle);
 
   useEffect(() => {
+    window.addEventListener('load', () => {
+      dispatch(hideLoader());
+    });
+
     dispatch(showToggler());
     dispatch(closeNav());
     dispatch(hideOverlay());
-
-    !data.length && dispatch(fetchProjects());
-    !categories.length && dispatch(fetchCategories());
   }, []);
 
-  useEffect(() => {
-    setProjects(data); // for showing
-
-    if (data.length) {
-      data.forEach((d) => {
-        !!d.screenshots[0] && imgLen.current++;
-      });
-    }
-
-    // only wait for half total of first screenshots
-    imgLen.current = Math.round(imgLen.current / 2);
-
-    if (imgLen.current) {
-      setTimeout(() => {
-        imgLen.current > counterRef.current && dispatch(showLoader());
-      }, 3000);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    counterRef.current = counter;
-
-    if (imgLen.current && imgLen.current <= counter) {
-      dispatch(hideLoader());
-    }
-  }, [counter]);
-
   const handleFilter = (category) => {
-    const filteredProjects = data.filter(
+    const filteredProjects = projectsData.filter(
       (p) => category === 'all' || p.categories.includes(category)
     );
     const currCategory = categories.find((c) => c.name === category);
@@ -80,6 +48,9 @@ const Portfolio = (props) => {
 
   return (
     <>
+      <Head>
+        <title>Portfolio | Full-Stack Web Developer | Gilbert L.</title>
+      </Head>
       <section className="portfolio" id="portfolio">
         <div className="container portfolio__container">
           <h2 className="section-heading">Recent Works</h2>
@@ -125,25 +96,13 @@ const Portfolio = (props) => {
                 }}
               >
                 <div className="portfolio-item__thumbnail">
-                  <img
+                  <Image
                     src={p.thumbnail}
                     alt=""
+                    layout="fill"
+                    objectFit="cover"
                     className="portfolio-item__img"
                   />
-                  <div className="hidden portfolio-item__screenshots">
-                    {p.screenshots.map((sc, i) => (
-                      <img
-                        src={sc}
-                        alt=""
-                        key={i}
-                        onLoad={() => {
-                          if (i === 0) {
-                            setCounter((prevCounter) => prevCounter + 1);
-                          }
-                        }}
-                      />
-                    ))}
-                  </div>
                   <div className="portfolio-item__btn center">
                     <button className="btn btn-primary">More Info</button>
                   </div>
