@@ -244,7 +244,7 @@ const Modal = ({
               }`}
             >
               {currProject.screenshots.map((s, index) => (
-                <li>
+                <li key={index}>
                   <button
                     className={`dot-indicators__item${
                       counter === index ? ' dot-indicators__item--active' : ''
@@ -279,6 +279,7 @@ const Modal = ({
                 <li className="mb-10">
                   <span className="text-bold mr-5">Live Preview -</span>
                   <a
+                    rel="noreferrer"
                     href={currProject.live_preview}
                     target="_blank"
                     className="text-primary"
@@ -291,6 +292,7 @@ const Modal = ({
                 <li className="mb-10">
                   <span className="text-bold mr-5">Source Code -</span>
                   <a
+                    rel="noreferrer"
                     href={currProject.source_code}
                     target="_blank"
                     className="text-primary"
