@@ -1,3 +1,4 @@
+import { HYDRATE } from 'next-redux-wrapper';
 import {
   TOGGLE_NAV,
   CLOSE_NAV,
@@ -10,16 +11,27 @@ import {
   HIDE_TOGGLER,
 } from '../constants/actionTypes';
 
-const reducer = (
-  state = {
-    isLoading: true,
-    isTogglerEnabled: true,
-    isNavOpen: false,
-    isOverlayActive: false,
-  },
-  action
-) => {
+const initialState = {
+  isLoading: true,
+  isTogglerEnabled: true,
+  isNavOpen: false,
+  isOverlayActive: false,
+};
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case HYDRATE: {
+      let nextState = {
+        ...state,
+        ...action.payload.ui,
+      };
+
+      for (const [key, value] of Object.entries(state)) {
+        if (initialState[key] !== value) nextState[key] = value;
+      }
+
+      return nextState;
+    }
     case SHOW_LOADER:
       return { ...state, isLoading: true };
     case HIDE_LOADER:
