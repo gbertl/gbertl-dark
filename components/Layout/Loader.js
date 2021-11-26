@@ -1,9 +1,21 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { hideLoader } from '../../store/actions/ui';
 import { toggleBodyScroll } from '../../utils';
 
 const Loader = () => {
   const isLoading = useSelector((state) => state.ui.isLoading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const dispatchHideLoader = () => dispatch(hideLoader());
+
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', dispatchHideLoader);
+    } else {
+      dispatchHideLoader();
+    }
+  }, []);
 
   useEffect(() => {
     let timeout;

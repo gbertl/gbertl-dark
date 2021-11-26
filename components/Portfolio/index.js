@@ -5,12 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../Modal';
 
 // import useAnalytics from '../../hooks/useAnalytics';
-import {
-  closeNav,
-  hideLoader,
-  hideOverlay,
-  showToggler,
-} from '../../store/actions/ui';
+import { closeNav, hideOverlay, showToggler } from '../../store/actions/ui';
 import Head from 'next/head';
 
 const Portfolio = () => {
@@ -27,10 +22,6 @@ const Portfolio = () => {
   // useAnalytics(pageTitle);
 
   useEffect(() => {
-    window.addEventListener('load', () => {
-      dispatch(hideLoader());
-    });
-
     dispatch(showToggler());
     dispatch(closeNav());
     dispatch(hideOverlay());

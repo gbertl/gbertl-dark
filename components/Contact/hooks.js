@@ -2,21 +2,12 @@ import { useEffect } from 'react';
 import emailjs from 'emailjs-com';
 import { toggleBodyScroll } from '../../utils';
 import { useDispatch } from 'react-redux';
-import {
-  closeNav,
-  showToggler,
-  hideLoader,
-  hideOverlay,
-} from '../../store/actions/ui';
+import { closeNav, showToggler, hideOverlay } from '../../store/actions/ui';
 
 const useContact = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    window.addEventListener('load', () => {
-      dispatch(hideLoader());
-    });
-
     dispatch(showToggler());
     dispatch(closeNav());
     dispatch(hideOverlay());

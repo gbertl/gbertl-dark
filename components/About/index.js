@@ -5,7 +5,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 import {
   closeNav,
-  hideLoader,
   hideOverlay,
   showOverlay,
   showToggler,
@@ -20,10 +19,6 @@ const About = () => {
   // useAnalytics('About');
 
   useEffect(() => {
-    window.addEventListener('load', () => {
-      dispatch(hideLoader());
-    });
-
     dispatch(showToggler());
     dispatch(closeNav());
     dispatch(hideOverlay());
