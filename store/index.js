@@ -13,4 +13,6 @@ if (typeof window !== 'undefined') {
 const makeStore = () =>
   createStore(reducers, compose(applyMiddleware(thunk), devTools));
 
-export const wrapper = createWrapper(makeStore, { debug: true });
+export const wrapper = createWrapper(makeStore, {
+  debug: process.env.NODE_ENV === 'development',
+});
