@@ -1,0 +1,41 @@
+.about {
+  &__details {
+    text-align: center;
+  }
+
+  &__img {
+    border-radius: 50%;
+    border: 5px solid var(--clr-light-dark) !important;
+  }
+
+  &__container {
+    max-width: 620px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__heading {
+    margin-bottom: 8px;
+  }
+
+  &__link {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--clr-primary);
+      transition: width 0.3s;
+    }
+
+    &:hover::before {
+      width: 100%;
+    }
+  }
+}
