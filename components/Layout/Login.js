@@ -1,49 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { serialize } from 'object-to-formdata';
 
 import * as api from '../../api';
-import { hideLoader } from '../../store/actions/ui';
 import { fetchProjects } from '../../store/actions/portfolio';
 import ArrayField from './ArrayField';
-import './login.css';
-import useMounted from './useMounted';
+import classes from './login.module.css';
 
-const Login = () => {
+const Login = ({ screenshotListData, currProjectData }) => {
   const usernameRef = useRef('');
   const passwordRef = useRef('');
   const [isLoading, setIsLoading] = useState(false);
-  const [screenshotList, setScreenshotList] = useState([]);
+  const [screenshotList, setScreenshotList] = useState(screenshotListData);
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.portfolio.projects);
-  const [currProject, setCurrProject] = useState({});
-  const isMounted = useMounted();
-
-  const fetchScreenshots = async () => {
-    const { data } = await api.getScreenshots();
-    setScreenshotList(data);
-  };
-
-  useEffect(() => {
-    dispatch(hideLoader());
-    dispatch(fetchProjects());
-    fetchScreenshots();
-  }, []);
-
-  useEffect(() => {
-    if (!isMounted) {
-      return;
-    }
-
-    const fetchProjectDetail = async () => {
-      const { data } = await api.getProjectDetail(
-        Object.keys(currProject).length ? currProject.id : projects[0].id
-      );
-      setCurrProject(data);
-    };
-
-    fetchProjectDetail();
-  }, [projects]);
+  const [currProject, setCurrProject] = useState(currProjectData);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -71,8 +42,16 @@ const Login = () => {
 
     try {
       setIsLoading(true);
-      await api.updateProject(currProject.id, fd);
-      fetchScreenshots();
+
+      const { data: currProjectData } = await api.updateProject(
+        currProject.id,
+        fd
+      );
+      setCurrProject(currProjectData);
+
+      const { data: screenshotListData } = await api.getScreenshots();
+      setScreenshotList(screenshotListData);
+
       dispatch(fetchProjects());
       document.querySelector('input[type=file]').value = '';
     } catch (e) {
@@ -83,7 +62,7 @@ const Login = () => {
   };
 
   return (
-    <div className="login" style={{ margin: '10px' }}>
+    <div className={classes.login} style={{ margin: '10px' }}>
       <form onSubmit={handleLogin}>
         <input type="text" placeholder="Username" ref={usernameRef} />
         <input type="password" placeholder="Password" ref={passwordRef} />
@@ -227,7 +206,7 @@ const Login = () => {
             gap: '5px',
           }}
         >
-          {screenshotList.map((obj, index) => (
+          {screenshotList?.map((obj, index) => (
             <div
               key={index}
               style={{
