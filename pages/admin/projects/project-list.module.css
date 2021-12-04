@@ -1,0 +1,15 @@
+.projectListPage {
+  margin-top: 50px;
+}
+
+.projectListPage a {
+  text-decoration: underline;
+  display: block;
+  cursor: pointer;
+}
+
+.projectListPage li {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}

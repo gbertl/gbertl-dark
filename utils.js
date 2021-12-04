@@ -1,3 +1,6 @@
+import jwt_decode from 'jwt-decode';
+import dayjs from 'dayjs';
+
 export const toggleBodyScroll = () => {
   document.body.classList.toggle('overflow-y-hidden');
 };
@@ -16,4 +19,13 @@ export const generateOverlayEffect = () => {
     div.className = 'overlay-effect__item';
     document.querySelector('.overlay-effect').appendChild(div);
   }
+};
+
+export const checkExpiredToken = () => {
+  let isExpired = true;
+  if (localStorage.getItem('accessToken')) {
+    const user = jwt_decode(localStorage.getItem('accessToken'));
+    isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
+  }
+  return isExpired;
 };

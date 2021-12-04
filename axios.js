@@ -1,6 +1,7 @@
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-import dayjs from 'dayjs';
+import Router from 'next/router';
+import { checkExpiredToken } from './utils';
+import * as api from './api';
 
 const baseURL =
   process.env.NODE_ENV === 'development'
@@ -25,24 +26,21 @@ protectedRoute.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    const user = jwt_decode(localStorage.getItem('accessToken'));
-    const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
+    const tokenExpired = checkExpiredToken();
 
-    if (isExpired) {
+    if (tokenExpired) {
       try {
-        const { data } = await axiosInstance.post('/token/refresh/', {
-          refresh: localStorage.getItem('refreshToken'),
-        });
-
-        localStorage.setItem('accessToken', data.access);
-
-        protectedRoute.defaults.headers['Authorization'] =
-          originalRequest.headers['Authorization'] = `Bearer ${data.access}`;
+        await api.refreshToken();
+        originalRequest.headers[
+          'Authorization'
+        ] = `Bearer ${localStorage.getItem('accessToken')}`;
 
         return protectedRoute(originalRequest);
-      } catch (e) {
-        console.log(e);
-        alert('login again!');
+      } catch {
+        Router.push({
+          pathname: '/login',
+          query: { ...Router.query, goBack: Router.pathname },
+        });
       }
     }
 
