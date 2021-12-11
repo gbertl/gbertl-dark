@@ -3,17 +3,25 @@ import Link from 'next/link';
 import { wrapper } from '../../../store';
 import { fetchProjects } from '../../../store/actions/portfolio';
 import classes from './project-list.module.css';
-import useAuthenticatedUser from '../../../hooks/useAuthenticatedUser';
+import { isAuthenticated } from '../../../utils';
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async () => {
+  (store) => async (context) => {
+    const authenticated = await isAuthenticated(context);
+
+    if (!authenticated) {
+      return {
+        redirect: {
+          destination: `/login?goBack=${context.resolvedUrl}`,
+        },
+      };
+    }
+
     await store.dispatch(fetchProjects());
   }
 );
 
 const ProjectListPage = () => {
-  useAuthenticatedUser();
-
   const projects = useSelector((state) => state.portfolio.projects);
 
   return (

@@ -1,17 +1,23 @@
 import { protectedRoute, axiosInstance } from '../axios';
+import Cookies from 'universal-cookie';
 
 export const getProjects = () => axiosInstance.get('/projects/');
 
 export const getCategories = () => axiosInstance.get('/categories/');
 
 export const login = async (credentials) => {
+  const cookies = new Cookies();
+
   try {
     const response = await axiosInstance.post('/token/', credentials);
-    localStorage.setItem('accessToken', response.data.access);
-    localStorage.setItem('refreshToken', response.data.refresh);
-    protectedRoute.defaults.headers[
-      'Authorization'
-    ] = `Bearer ${response.data.access}`;
+
+    cookies.set('accessToken', response.data.access, { path: '/' });
+    cookies.set('refreshToken', response.data.refresh, { path: '/' });
+
+    protectedRoute.defaults.headers['Authorization'] = `Bearer ${cookies.get(
+      'accessToken'
+    )}`;
+
     return response;
   } catch (e) {
     throw new Error(e.message);
@@ -25,13 +31,12 @@ export const getProjectDetail = (id) => axiosInstance.get(`/projects/${id}/`);
 
 export const getScreenshots = () => axiosInstance.get('/screenshots/');
 
-export const refreshToken = async () => {
+export const refreshToken = async (refreshToken) => {
   try {
     const { data } = await axiosInstance.post('/token/refresh/', {
-      refresh: localStorage.getItem('refreshToken'),
+      refresh: refreshToken,
     });
-    localStorage.setItem('accessToken', data.access);
-    protectedRoute.defaults.headers['Authorization'] = `Bearer ${data.access}`;
+    return data.access;
   } catch (e) {
     throw new Error(e.message);
   }

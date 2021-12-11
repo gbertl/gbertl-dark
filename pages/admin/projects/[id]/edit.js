@@ -5,9 +5,19 @@ import { useDispatch } from 'react-redux';
 import { serialize } from 'object-to-formdata';
 import ArrayField from '../../../../components/Layout/ArrayField';
 import classes from './edit-project.module.css';
-import useAuthenticatedUser from '../../../../hooks/useAuthenticatedUser';
+import { isAuthenticated } from '../../../../utils';
 
 export const getServerSideProps = async (context) => {
+  const authenticated = await isAuthenticated(context);
+
+  if (!authenticated) {
+    return {
+      redirect: {
+        destination: `/login?goBack=${context.resolvedUrl}`,
+      },
+    };
+  }
+
   const { data: screenshotListData } = await api.getScreenshots();
   const { data: currProjectData } = await api.getProjectDetail(
     context.params.id
@@ -22,8 +32,6 @@ export const getServerSideProps = async (context) => {
 };
 
 const EditProject = ({ screenshotListData, currProjectData }) => {
-  useAuthenticatedUser();
-
   const [isLoading, setIsLoading] = useState(false);
   const [screenshotList, setScreenshotList] = useState(screenshotListData);
   const dispatch = useDispatch();
