@@ -42,7 +42,10 @@ export const isAuthenticated = async ({ req }) => {
   if (tokenExpired) {
     try {
       const accessToken = await api.refreshToken(cookies.get('refreshToken'));
-      cookies.set('accessToken', accessToken, { path: '/' });
+      cookies.set('accessToken', accessToken, {
+        path: '/',
+        expires: dayjs.unix(jwt_decode(accessToken).exp).toDate(),
+      });
 
       protectedRoute.defaults.headers['Authorization'] = `Bearer ${cookies.get(
         'accessToken'

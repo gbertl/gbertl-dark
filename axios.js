@@ -3,6 +3,8 @@ import Router from 'next/router';
 import { checkExpiredToken } from './utils';
 import * as api from './api';
 import Cookies from 'universal-cookie';
+import dayjs from 'dayjs';
+import jwt_decode from 'jwt-decode';
 
 const baseURL =
   process.env.NODE_ENV === 'development'
@@ -34,7 +36,10 @@ protectedRoute.interceptors.response.use(
     if (tokenExpired) {
       try {
         const accessToken = await api.refreshToken(cookies.get('refreshToken'));
-        cookies.set('accessToken', accessToken, { path: '/' });
+        cookies.set('accessToken', accessToken, {
+          path: '/',
+          expires: dayjs.unix(jwt_decode(accessToken).exp).toDate(),
+        });
 
         protectedRoute.defaults.headers['Authorization'] =
           originalRequest.headers['Authorization'] = `Bearer ${cookies.get(

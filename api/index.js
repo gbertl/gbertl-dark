@@ -1,5 +1,7 @@
 import { protectedRoute, axiosInstance } from '../axios';
 import Cookies from 'universal-cookie';
+import jwt_decode from 'jwt-decode';
+import dayjs from 'dayjs';
 
 export const getProjects = () => axiosInstance.get('/projects/');
 
@@ -11,8 +13,16 @@ export const login = async (credentials) => {
   try {
     const response = await axiosInstance.post('/token/', credentials);
 
-    cookies.set('accessToken', response.data.access, { path: '/' });
-    cookies.set('refreshToken', response.data.refresh, { path: '/' });
+    const { access, refresh } = response.data;
+
+    cookies.set('accessToken', access, {
+      path: '/',
+      expires: dayjs.unix(jwt_decode(access).exp).toDate(),
+    });
+    cookies.set('refreshToken', refresh, {
+      path: '/',
+      expires: dayjs.unix(jwt_decode(refresh).exp).toDate(),
+    });
 
     protectedRoute.defaults.headers['Authorization'] = `Bearer ${cookies.get(
       'accessToken'
