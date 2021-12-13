@@ -1,8 +1,8 @@
 import jwt_decode from 'jwt-decode';
 import dayjs from 'dayjs';
-import Cookies from 'universal-cookie';
 import * as api from './api';
 import { protectedRoute } from './axios';
+import nookies from 'nookies';
 
 export const toggleBodyScroll = () => {
   document.body.classList.toggle('overflow-y-hidden');
@@ -35,21 +35,21 @@ export const checkExpiredToken = (accessToken) => {
   return isExpired;
 };
 
-export const isAuthenticated = async ({ req }) => {
-  const cookies = new Cookies(req.headers.cookie);
-  const tokenExpired = checkExpiredToken(cookies.get('accessToken'));
+export const isAuthenticated = async (context) => {
+  const cookies = nookies.get(context);
+  const tokenExpired = checkExpiredToken(cookies.accessToken);
 
   if (tokenExpired) {
     try {
-      const accessToken = await api.refreshToken(cookies.get('refreshToken'));
-      cookies.set('accessToken', accessToken, {
+      const accessToken = await api.refreshToken(cookies.refreshToken);
+      nookies.set(context, 'accessToken', accessToken, {
         path: '/',
         expires: dayjs.unix(jwt_decode(accessToken).exp).toDate(),
       });
 
-      protectedRoute.defaults.headers['Authorization'] = `Bearer ${cookies.get(
-        'accessToken'
-      )}`;
+      protectedRoute.defaults.headers[
+        'Authorization'
+      ] = `Bearer ${accessToken}`;
 
       return true;
     } catch {
