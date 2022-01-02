@@ -2,8 +2,6 @@ import { HYDRATE } from 'next-redux-wrapper';
 import {
   TOGGLE_NAV,
   CLOSE_NAV,
-  SHOW_LOADER,
-  HIDE_LOADER,
   SHOW_OVERLAY,
   HIDE_OVERLAY,
   TOGGLE_OVERLAY,
@@ -12,7 +10,6 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-  isLoading: true,
   isTogglerEnabled: true,
   isNavOpen: false,
   isOverlayActive: false,
@@ -32,10 +29,6 @@ const reducer = (state = initialState, action) => {
 
       return nextState;
     }
-    case SHOW_LOADER:
-      return { ...state, isLoading: true };
-    case HIDE_LOADER:
-      return { ...state, isLoading: false };
     case SHOW_TOGGLER:
       return { ...state, isTogglerEnabled: true };
     case HIDE_TOGGLER:

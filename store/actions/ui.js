@@ -1,6 +1,4 @@
 import {
-  SHOW_LOADER,
-  HIDE_LOADER,
   TOGGLE_NAV,
   CLOSE_NAV,
   SHOW_OVERLAY,
@@ -12,8 +10,6 @@ import {
 
 export const toggleNav = () => ({ type: TOGGLE_NAV });
 export const closeNav = () => ({ type: CLOSE_NAV });
-export const showLoader = () => ({ type: SHOW_LOADER });
-export const hideLoader = () => ({ type: HIDE_LOADER });
 export const toggleOverlay = () => ({ type: TOGGLE_OVERLAY });
 export const showOverlay = () => ({ type: SHOW_OVERLAY });
 export const hideOverlay = () => ({ type: HIDE_OVERLAY });

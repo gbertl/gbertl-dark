@@ -1,6 +1,5 @@
 import Header from '../Header';
 import useLayout from './hooks/useLayout';
-import Loader from './Loader';
 import { useSelector } from 'react-redux';
 
 const Layout = (props) => {
@@ -10,7 +9,6 @@ const Layout = (props) => {
 
   return (
     <>
-      <Loader />
       <div className="bg-animation-effect"></div>
       <div
         className={`overlay-effect${
