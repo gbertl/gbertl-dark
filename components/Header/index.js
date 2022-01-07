@@ -8,6 +8,7 @@ import {
   toggleNav,
   hideOverlay,
   toggleOverlay,
+  showLoader,
 } from '../../store/actions/ui';
 
 const Header = () => {
@@ -46,6 +47,10 @@ const Header = () => {
     if (router.pathname === e.target.getAttribute('href')) {
       dispatch(closeNav());
       dispatch(hideOverlay());
+    } else {
+      if (e.target.getAttribute('href') === '/portfolio') {
+        setTimeout(() => dispatch(showLoader()), 3000);
+      }
     }
   };
 

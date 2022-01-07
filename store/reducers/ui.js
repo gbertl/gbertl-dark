@@ -7,12 +7,15 @@ import {
   TOGGLE_OVERLAY,
   SHOW_TOGGLER,
   HIDE_TOGGLER,
+  SHOW_LOADER,
+  HIDE_LOADER,
 } from '../constants/actionTypes';
 
 const initialState = {
   isTogglerEnabled: true,
   isNavOpen: false,
   isOverlayActive: false,
+  isLoading: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,6 +46,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, isOverlayActive: true };
     case HIDE_OVERLAY:
       return { ...state, isOverlayActive: false };
+    case SHOW_LOADER:
+      return { ...state, isLoading: true };
+    case HIDE_LOADER:
+      return { ...state, isLoading: false };
     default:
       return state;
   }

@@ -7,3 +7,5 @@ export const HIDE_OVERLAY = 'HIDE_OVERLAY';
 export const TOGGLE_OVERLAY = 'TOGGLE_OVERLAY';
 export const SHOW_TOGGLER = 'SHOW_TOGGLER';
 export const HIDE_TOGGLER = 'HIDE_TOGGLER';
+export const SHOW_LOADER = 'SHOW_LOADER';
+export const HIDE_LOADER = 'HIDE_LOADER';

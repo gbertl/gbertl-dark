@@ -9,6 +9,7 @@ import {
   showOverlay,
   showToggler,
   hideToggler,
+  showLoader,
 } from '../../store/actions/ui';
 // import useAnalytics from '../../hooks/useAnalytics';
 
@@ -32,6 +33,8 @@ const About = () => {
     setTimeout(() => {
       router.push(path);
     }, 950);
+
+    if (path === '/portfolio') setTimeout(() => dispatch(showLoader()), 3000);
   };
 
   return (
