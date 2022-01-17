@@ -1,16 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
-
-import Modal from '../Modal';
-
-// import useAnalytics from '../../hooks/useAnalytics';
-import { closeNav, hideOverlay, showToggler } from '../../store/actions/ui';
+import { useSelector } from 'react-redux';
 import Head from 'next/head';
 
-const Portfolio = () => {
-  const dispatch = useDispatch();
+import Modal from '../Modal';
+// import useAnalytics from '../../hooks/useAnalytics';
+import useResetUI from '../../hooks/useResetUI';
 
+const Portfolio = () => {
   const projectsData = useSelector((state) => state.portfolio.projects);
   const categories = useSelector((state) => state.portfolio.categories);
 
@@ -20,12 +17,7 @@ const Portfolio = () => {
   const [filterTitle, setFilterTitle] = useState('All');
 
   // useAnalytics(pageTitle);
-
-  useEffect(() => {
-    dispatch(showToggler());
-    dispatch(closeNav());
-    dispatch(hideOverlay());
-  }, []);
+  useResetUI();
 
   const handleFilter = (category) => {
     const filteredProjects = projectsData.filter(

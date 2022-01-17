@@ -1,8 +1,11 @@
-// import useAnalytics from '../../hooks/useAnalytics';
 import Head from 'next/head';
+
+// import useAnalytics from '../../hooks/useAnalytics';
+import useResetUI from '../../hooks/useResetUI';
 import useContact from './hooks';
 
 const Contact = () => {
+  useResetUI();
   // useAnalytics(pageTitle);
   useContact();
 

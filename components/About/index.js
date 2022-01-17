@@ -1,16 +1,10 @@
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import Head from 'next/head';
 import Image from 'next/image';
-import {
-  closeNav,
-  hideOverlay,
-  showOverlay,
-  showToggler,
-  hideToggler,
-  showLoader,
-} from '../../store/actions/ui';
+
+import { showOverlay, hideToggler, showLoader } from '../../store/actions/ui';
+import useResetUI from '../../hooks/useResetUI';
 // import useAnalytics from '../../hooks/useAnalytics';
 
 const About = () => {
@@ -19,11 +13,7 @@ const About = () => {
 
   // useAnalytics('About');
 
-  useEffect(() => {
-    dispatch(showToggler());
-    dispatch(closeNav());
-    dispatch(hideOverlay());
-  }, []);
+  useResetUI();
 
   const handleAboutLink = (path) => {
     dispatch(hideToggler());
