@@ -1,13 +1,49 @@
 import Head from 'next/head';
+import { useState } from 'react';
+import emailjs from 'emailjs-com';
 
 // import useAnalytics from '../../hooks/useAnalytics';
 import useResetUI from '../../hooks/useResetUI';
-import useContact from './hooks';
+import { toggleBodyScroll } from '../../utils';
 
 const Contact = () => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   useResetUI();
   // useAnalytics(pageTitle);
-  useContact();
+
+  const handleShowForm = () => {
+    setIsFormOpen(true);
+    toggleBodyScroll();
+  };
+
+  const handleHideForm = () => {
+    setIsFormOpen(false);
+    toggleBodyScroll();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        'service_2ml4lwk',
+        'template_e0ppieo',
+        e.target,
+        'user_jmQ3lowI4xMVTboiORnz4'
+      )
+      .then(
+        () => {
+          alert(
+            'Your message has been sent successfully, I hope to respond within 24 hours. Thanks!'
+          );
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    e.target.reset();
+  };
 
   return (
     <>
@@ -34,17 +70,30 @@ const Contact = () => {
               and let&apos;s talk.
             </p>
 
-            <button className="btn btn-primary mt-15 contact__send-btn">
+            <button
+              className="btn btn-primary mt-15 contact__send-btn"
+              onClick={handleShowForm}
+            >
               Send Message
             </button>
           </div>
         </div>
 
-        <div className="contact-form">
+        <div
+          className={`contact-form${isFormOpen ? ' contact-form--open' : ''}`}
+          onClick={(e) => {
+            if (!e.target.closest('.contact-form__content')) {
+              handleHideForm();
+            }
+          }}
+        >
           <div className="contact-form__container min-h-screen px-15">
             <div className="w-full contact-form__content">
-              <button className="close-btn contact-form__close"></button>
-              <form className="contact-form__form" action="">
+              <button
+                className="close-btn contact-form__close"
+                onClick={handleHideForm}
+              ></button>
+              <form className="contact-form__form" onSubmit={handleSubmit}>
                 <div className="contact-form__input-wrapper">
                   <input
                     type="text"
