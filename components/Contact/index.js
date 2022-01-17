@@ -9,6 +9,7 @@ import { toggleBodyScroll } from '../../utils';
 const Contact = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState({ type: '', text: '' });
 
   useResetUI();
   // useAnalytics(pageTitle);
@@ -38,14 +39,15 @@ const Contact = () => {
       .then(
         () => {
           setIsLoading(false);
-          alert(
-            'Your message has been sent successfully, I hope to respond within 24 hours. Thanks!'
-          );
+          setMessage({
+            type: 'success',
+            text: 'Your message has been sent successfully, I hope to respond within 24 hours. Thanks!',
+          });
           e.target.reset();
         },
         (error) => {
           setIsLoading(false);
-          console.log(error.text);
+          setMessage({ type: 'error', text: error.text });
         }
       );
   };
@@ -131,7 +133,20 @@ const Contact = () => {
                     <span className="contact-form__span">Message</span>
                   </label>
                 </div>
-                <button className="btn btn-primary mt-15 contact-form__send-form">
+                {message.text && (
+                  <p
+                    className={`${
+                      message.type === 'success' ? 'text-primary' : ''
+                    }`}
+                  >
+                    {message.text}
+                  </p>
+                )}
+                <button
+                  className={`btn btn-primary${
+                    isLoading ? ' btn--active' : ''
+                  } mt-15 contact-form__send-form`}
+                >
                   {isLoading && (
                     <span className="contact-form__send-loader"></span>
                   )}
