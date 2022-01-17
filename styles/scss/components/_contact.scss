@@ -82,7 +82,7 @@
 
   &__label {
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
@@ -129,5 +129,32 @@
 
   &__form {
     padding-top: 45px;
+  }
+
+  &__send-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__send-loader {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid var(--clr-white);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }

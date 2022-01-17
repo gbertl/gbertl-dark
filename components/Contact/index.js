@@ -8,6 +8,7 @@ import { toggleBodyScroll } from '../../utils';
 
 const Contact = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useResetUI();
   // useAnalytics(pageTitle);
@@ -25,6 +26,8 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
+
     emailjs
       .sendForm(
         'service_2ml4lwk',
@@ -34,15 +37,17 @@ const Contact = () => {
       )
       .then(
         () => {
+          setIsLoading(false);
           alert(
             'Your message has been sent successfully, I hope to respond within 24 hours. Thanks!'
           );
+          e.target.reset();
         },
         (error) => {
+          setIsLoading(false);
           console.log(error.text);
         }
       );
-    e.target.reset();
   };
 
   return (
@@ -127,6 +132,9 @@ const Contact = () => {
                   </label>
                 </div>
                 <button className="btn btn-primary mt-15 contact-form__send-form">
+                  {isLoading && (
+                    <span className="contact-form__send-loader"></span>
+                  )}
                   Send
                 </button>
               </form>
