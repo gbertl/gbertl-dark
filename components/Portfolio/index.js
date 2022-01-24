@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import Head from 'next/head';
 
 import Modal from '../Modal';
-// import useAnalytics from '../../hooks/useAnalytics';
 import useResetUI from '../../hooks/useResetUI';
 
 const Portfolio = () => {
@@ -16,7 +15,6 @@ const Portfolio = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterTitle, setFilterTitle] = useState('All');
 
-  // useAnalytics(pageTitle);
   useResetUI();
 
   const handleFilter = (category) => {

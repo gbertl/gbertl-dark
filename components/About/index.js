@@ -5,13 +5,10 @@ import Image from 'next/image';
 
 import { showOverlay, hideToggler, showLoader } from '../../store/actions/ui';
 import useResetUI from '../../hooks/useResetUI';
-// import useAnalytics from '../../hooks/useAnalytics';
 
 const About = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-
-  // useAnalytics('About');
 
   useResetUI();
 

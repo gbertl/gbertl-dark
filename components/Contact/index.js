@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { useState } from 'react';
 import emailjs from 'emailjs-com';
 
-// import useAnalytics from '../../hooks/useAnalytics';
 import useResetUI from '../../hooks/useResetUI';
 import { toggleBodyScroll } from '../../utils';
 
@@ -12,7 +11,6 @@ const Contact = () => {
   const [message, setMessage] = useState({ type: '', text: '' });
 
   useResetUI();
-  // useAnalytics(pageTitle);
 
   const handleShowForm = () => {
     setIsFormOpen(true);
