@@ -57,7 +57,7 @@
 .filter {
   row-gap: 10px;
   column-gap: 8px;
-  margin-bottom: 30px;
+  margin: 0 15px 30px 15px;
 
   &__button {
     padding: 4px 10px;
@@ -97,7 +97,7 @@
 
     &::before,
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       height: 0;
