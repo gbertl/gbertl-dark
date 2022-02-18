@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
+import Thumbnails from './Thumbnails';
+
 const Modal = ({
   currProjectIndex,
   setCurrProjectIndex,
@@ -13,10 +15,6 @@ const Modal = ({
   const [direction, setDirection] = useState('');
 
   const modalOverlayRef = useRef();
-  const imagesRef = useRef([]);
-
-  const [isNextActive, setIsNextActive] = useState(false);
-  const [isPrevActive, setIsPrevActive] = useState(false);
 
   const [counter, setCounter] = useState(0);
   const [size, setSize] = useState(0);
@@ -91,80 +89,6 @@ const Modal = ({
     };
   }, [currProjectIndex]);
 
-  const timer = useRef(0);
-
-  const slideNext = () => {
-    setIsNextActive(true);
-    setWillTransition(true);
-
-    clearTimeout(timer.current);
-
-    timer.current = setTimeout(() => {
-      setIsNextActive(false);
-    }, 1200);
-
-    setCounter((prevCounter) => {
-      return prevCounter === currProject.screenshots.length - 1
-        ? 0
-        : prevCounter + 1;
-    });
-  };
-
-  const intervalTimer = useRef(0);
-
-  const resetTimer = () => {
-    clearInterval(intervalTimer.current);
-
-    if (currProject.screenshots.length > 1) {
-      intervalTimer.current = setInterval(slideNext, 5000);
-    }
-  };
-
-  const handleNextSlide = () => {
-    resetTimer();
-    slideNext();
-  };
-
-  useEffect(() => {
-    resetTimer(); // starts interval change of project
-  }, [currProject]);
-
-  const handlePrevSlide = () => {
-    resetTimer();
-    setIsPrevActive(true);
-    setWillTransition(true);
-
-    clearTimeout(timer.current);
-
-    timer.current = setTimeout(() => {
-      setIsPrevActive(false);
-    }, 1200);
-
-    setCounter((prevCounter) => {
-      return prevCounter === 0
-        ? currProject.screenshots.length - 1
-        : prevCounter - 1;
-    });
-  };
-
-  // clear all timers and intervals on close
-  useEffect(() => {
-    return () => {
-      clearTimeout(timer.current);
-      clearInterval(intervalTimer.current);
-    };
-  }, []);
-
-  const handleDotIndicator = (index) => {
-    resetTimer();
-    setCounter(index);
-    setWillTransition(true);
-  };
-
-  useEffect(() => {
-    setSize(imagesRef.current[counter].clientWidth);
-  }, [counter]);
-
   return (
     <div
       className={`modal${isModalTransition ? ' modal--open' : ''}`}
@@ -194,66 +118,15 @@ const Modal = ({
               onClick={() => setIsModalTransition(false)}
             ></button>
 
-            <div className="modal__thumbnails-wrapper">
-              <div
-                className={`modal__thumbnails flex${
-                  willTransition ? ' modal__thumbnails--transition' : ''
-                }`}
-                style={{ transform: `translateX(${-size * counter}px)` }}
-              >
-                {currProject.screenshots.map((s, index) => (
-                  <img
-                    src={s}
-                    alt="thumbnail"
-                    key={s}
-                    ref={(el) => (imagesRef.current[index] = el)}
-                  />
-                ))}
-              </div>
-              <div
-                className={`flex justify-between modal__carousel-btn-wrapper${
-                  currProject.screenshots.length === 1 ? ' hidden' : ''
-                }`}
-              >
-                <button
-                  className="modal__carousel-prev-btn"
-                  onClick={handlePrevSlide}
-                >
-                  <span
-                    className={`chevron-left${
-                      isPrevActive ? ' chevron-left--active' : ''
-                    }`}
-                  ></span>
-                </button>
-                <button
-                  className="modal__carousel-next-btn"
-                  onClick={handleNextSlide}
-                >
-                  <span
-                    className={`chevron-right${
-                      isNextActive ? ' chevron-right--active' : ''
-                    }`}
-                  ></span>
-                </button>
-              </div>
-            </div>
-
-            <ul
-              className={`dot-indicators flex justify-center${
-                currProject.screenshots.length === 1 ? ' hidden' : ''
-              }`}
-            >
-              {currProject.screenshots.map((s, index) => (
-                <li key={index}>
-                  <button
-                    className={`dot-indicators__item${
-                      counter === index ? ' dot-indicators__item--active' : ''
-                    }`}
-                    onClick={() => handleDotIndicator(index)}
-                  ></button>
-                </li>
-              ))}
-            </ul>
+            <Thumbnails
+              currProject={currProject}
+              size={size}
+              setSize={setSize}
+              counter={counter}
+              setCounter={setCounter}
+              willTransition={willTransition}
+              setWillTransition={setWillTransition}
+            />
 
             <h1 className="modal__heading">{currProject.title}</h1>
           </div>

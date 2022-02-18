@@ -333,6 +333,8 @@
 .modal__thumbnails-wrapper {
   position: relative;
   margin: 30px 0 15px;
+  user-select: none;
+  cursor: grab;
 }
 
 .dot-indicators {
