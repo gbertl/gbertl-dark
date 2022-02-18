@@ -134,7 +134,10 @@ const Thumbnails = ({
 
   const gestureStart = (e) => {
     if (
-      e.target.closest('.modal__carousel-prev-btn, .modal__carousel-next-btn')
+      e.target.closest(
+        '.modal__carousel-prev-btn, .modal__carousel-next-btn'
+      ) ||
+      currProject.screenshots.length === 1
     )
       return;
 
@@ -146,6 +149,16 @@ const Thumbnails = ({
   };
 
   const gestureMove = (e) => {
+    if (
+      e.target.closest(
+        '.modal__carousel-prev-btn, .modal__carousel-next-btn'
+      ) ||
+      currProject.screenshots.length === 1
+    )
+      return;
+
+    e.target.style.cursor = 'grab';
+
     if (drag) {
       const moved = getPosX(e) - initPos;
       e.target.style.cursor = 'grabbing';
@@ -159,7 +172,10 @@ const Thumbnails = ({
 
   const gestureEnd = (e) => {
     if (
-      e.target.closest('.modal__carousel-prev-btn, .modal__carousel-next-btn')
+      e.target.closest(
+        '.modal__carousel-prev-btn, .modal__carousel-next-btn'
+      ) ||
+      currProject.screenshots.length === 1
     )
       return;
     restartAutoPlay();
@@ -200,6 +216,7 @@ const Thumbnails = ({
         >
           {currProject.screenshots.map((s, index) => (
             <img
+              onDragStart={(e) => e.preventDefault()}
               src={s}
               alt="thumbnail"
               key={s}
