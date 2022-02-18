@@ -16,8 +16,6 @@ const Thumbnails = ({
   const [isNextActive, setIsNextActive] = useState(false);
   const [isPrevActive, setIsPrevActive] = useState(false);
 
-  const [thumbnailsStyles, setThumbnailsStyles] = useState({});
-
   const [noDelay, setNoDelay] = useState(false);
 
   const timer = useRef(0);
@@ -105,12 +103,14 @@ const Thumbnails = ({
 
   const translateXByCounter = `translateX(-${size * counter}px)`;
 
+  let thumbnailsStyles = { transform: translateXByCounter };
+
   useEffect(() => {
     if (mounted)
-      setThumbnailsStyles((prev) => ({
-        ...prev,
+      thumbnailsStyles = {
+        ...thumbnailsStyles,
         transform: translateXByCounter,
-      }));
+      };
   }, [size, counter]);
 
   const [drag, setDrag] = useState(false);
@@ -163,10 +163,9 @@ const Thumbnails = ({
       const moved = getPosX(e) - initPos;
       e.target.style.cursor = 'grabbing';
 
-      setThumbnailsStyles((prev) => ({
-        ...prev,
-        transform: `translateX(${transformed + moved}px)`,
-      }));
+      thumbnailsRef.current.style.transform = `translateX(${
+        transformed + moved
+      }px)`;
     }
   };
 
@@ -189,11 +188,7 @@ const Thumbnails = ({
     if (movedAfter < -100 && counter < currProject.screenshots.length - 1)
       setCounter((prev) => prev + 1);
     else if (movedAfter > 100 && counter > 0) setCounter((prev) => prev - 1);
-    else
-      setThumbnailsStyles((prev) => ({
-        ...prev,
-        transform: translateXByCounter,
-      }));
+    else thumbnailsRef.current.style.transform = translateXByCounter;
   };
 
   return (
