@@ -40,8 +40,8 @@ const Portfolio = () => {
             <li>
               <button
                 onClick={() => handleFilter('all')}
-                className={`filter__button${
-                  filterTitle === 'All' ? ' filter__button--active' : ''
+                className={`btn-secondary${
+                  filterTitle === 'All' ? ' btn-secondary--active' : ''
                 }`}
               >
                 All
@@ -51,8 +51,8 @@ const Portfolio = () => {
               <li key={c.name}>
                 <button
                   onClick={() => handleFilter(c.name)}
-                  className={`filter__button${
-                    filterTitle === c.title ? ' filter__button--active' : ''
+                  className={`btn-secondary${
+                    filterTitle === c.title ? ' btn-secondary--active' : ''
                   }`}
                 >
                   {c.title}
