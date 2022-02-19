@@ -63,11 +63,12 @@ const About = () => {
               .
             </p>
 
-            <div className="mt-30 flex gap-15 align-center justify-center">
+            <div className="about__social-wrapper mt-30 flex align-center justify-center">
               <a
                 rel="noreferrer"
                 href="https://github.com/gilbertlc"
                 target="_blank"
+                className="about__social"
               >
                 <i className="fab fa-github"></i> Github
               </a>
@@ -75,6 +76,7 @@ const About = () => {
                 rel="noreferrer"
                 href="https://www.linkedin.com/in/gilbertlcsndle"
                 target="_blank"
+                className="about__social"
               >
                 <i className="fab fa-linkedin"></i> Linkedin
               </a>
@@ -82,6 +84,7 @@ const About = () => {
                 rel="noreferrer"
                 href="mailto:gilbertlctest@gmail.com"
                 target="_blank"
+                className="about__social"
               >
                 <i className="fas fa-envelope"></i> Email
               </a>
