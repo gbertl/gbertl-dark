@@ -212,7 +212,7 @@
     transform-origin: left;
   }
 
-  @include mq(small) {
+  @include mq(medium) {
     &:hover::before,
     &:hover::after {
       transform: scaleX(1);
