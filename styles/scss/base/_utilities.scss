@@ -212,19 +212,17 @@
     transform-origin: left;
   }
 
-  &:hover::before,
-  &:hover::after {
-    transform: scaleX(1);
-  }
+  @include mq(small) {
+    &:hover::before,
+    &:hover::after {
+      transform: scaleX(1);
+    }
 
-  &:hover {
-    transition: 0.5s;
-    border-color: var(--clr-light-dark);
-  }
-
-  &:hover,
-  &--active {
-    color: var(--clr-white);
+    &:hover {
+      transition: 0.5s;
+      border-color: var(--clr-light-dark);
+      color: var(--clr-white);
+    }
   }
 
   &--active {
