@@ -79,6 +79,7 @@
   &__thumbnail {
     position: relative;
     height: 200px;
+    cursor: pointer;
 
     &::before,
     &::after {
