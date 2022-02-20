@@ -54,6 +54,7 @@ const Portfolio = () => {
                   className={`btn-secondary${
                     filterTitle === c.title ? ' btn-secondary--active' : ''
                   }`}
+                  title={`Filter By ${c.title}`}
                 >
                   {c.title}
                 </button>
