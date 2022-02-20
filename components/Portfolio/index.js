@@ -43,6 +43,7 @@ const Portfolio = () => {
                 className={`outline-button${
                   filterTitle === 'All' ? ' outline-button--active' : ''
                 }`}
+                title="Show All"
               >
                 All
               </button>
