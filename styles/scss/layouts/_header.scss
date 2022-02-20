@@ -30,7 +30,7 @@
 
     &::before,
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       width: 50%;
       height: 2px;
@@ -49,9 +49,11 @@
     }
   }
 
-  &:hover &__icon::before,
-  &:hover &__icon::after {
-    width: 100%;
+  @include mq(medium) {
+    &:hover &__icon::before,
+    &:hover &__icon::after {
+      width: 100%;
+    }
   }
 
   &--active &__icon {
@@ -112,7 +114,7 @@
     }
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       // (vertical align) 50% parent's height - 50px elem height
       top: calc(50% - 50px);
