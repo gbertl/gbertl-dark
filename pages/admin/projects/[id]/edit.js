@@ -148,25 +148,6 @@ const EditProject = ({ screenshotListData, currProjectData }) => {
           }
           value={currProject.source_code}
         />
-        <label htmlFor="">Thumbnail:</label>
-        <img
-          src={
-            typeof currProject.thumbnail === 'string' || !currProject.thumbnail
-              ? currProject.thumbnail
-              : URL.createObjectURL(currProject.thumbnail)
-          }
-          alt=""
-          style={{ width: '40%' }}
-        />
-        <input
-          type="file"
-          onChange={(e) =>
-            setCurrProject((prevState) => ({
-              ...prevState,
-              thumbnail: e.target.files[0],
-            }))
-          }
-        />
         <ArrayField
           name="categories"
           fieldKeys={['title', 'name']}
