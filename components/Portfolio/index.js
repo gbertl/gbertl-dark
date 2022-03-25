@@ -80,7 +80,7 @@ const Portfolio = () => {
               >
                 <div className="portfolio-item__thumbnail">
                   <Image
-                    src={p.thumbnail}
+                    src={p.screenshots[0]}
                     alt=""
                     layout="fill"
                     objectFit="cover"

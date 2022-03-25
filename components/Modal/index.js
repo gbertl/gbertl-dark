@@ -192,7 +192,7 @@ const Modal = ({
                 {prevWork.title}
               </h2>
               <img
-                src={prevWork.thumbnail}
+                src={prevWork.screenshots?.[0]}
                 alt=""
                 className="modal__small-img"
               />
@@ -212,7 +212,7 @@ const Modal = ({
                 {nextWork.title}
               </h2>
               <img
-                src={nextWork.thumbnail}
+                src={nextWork.screenshots?.[0]}
                 alt=""
                 className="modal__small-img"
               />
