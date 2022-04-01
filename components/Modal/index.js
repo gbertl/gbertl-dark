@@ -155,7 +155,6 @@ const Modal = ({
                     rel="noreferrer"
                     href={currProject.live_preview}
                     target="_blank"
-                    className="text-primary"
                   >
                     {currProject.live_preview}
                   </a>

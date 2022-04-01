@@ -157,6 +157,10 @@
 
   &__body {
     padding: 15px 0;
+
+    a:hover {
+      text-decoration: underline;
+    }
   }
 
   &__footer {
@@ -324,10 +328,6 @@
 
 .portfolio-item__desc {
   margin-bottom: 30px;
-
-  a {
-    color: var(--clr-primary);
-  }
 }
 
 .modal__thumbnails-wrapper {

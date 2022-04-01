@@ -178,48 +178,44 @@
 .outline-button {
   position: relative;
   padding: 4px 10px;
-  border-radius: 4px;
-  background-color: var(--clr-light-dark);
-  color: var(--clr-light-white);
+  color: var(--clr-primary);
   display: flex;
   align-items: center;
   gap: 5px;
   overflow: hidden;
   z-index: 1;
-  border: 1px solid transparent;
+  border: 1px solid var(--clr-primary);
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 50%;
-    background-color: var(--clr-dark);
-    transform: scaleX(0);
-    transition: transform 500ms;
-    z-index: -1;
-  }
+  transition: 300ms;
 
   &::before {
+    content: '';
+    display: block;
+    position: absolute;
     top: 0;
     left: 0;
-    transform-origin: right;
-  }
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: var(--clr-primary);
 
-  &::after {
-    bottom: 0;
-    right: 0;
-    transform-origin: left;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 300ms;
   }
 
   @include mq(medium) {
-    &:hover::before,
-    &:hover::after {
+    &:hover::before {
       transform: scaleX(1);
+      transform-origin: left;
     }
 
     &:hover {
-      border-color: var(--clr-light-dark);
+      color: #ffff;
     }
   }
 
