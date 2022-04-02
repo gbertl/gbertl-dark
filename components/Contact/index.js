@@ -68,7 +68,7 @@ const Contact = () => {
                 rel="noreferrer"
                 href="https://www.upwork.com/freelancers/~0110dcf905a3a19183"
                 target="_blank"
-                className="text-bold"
+                className="text-link"
               >
                 Upwork
               </a>{' '}

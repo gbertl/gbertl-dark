@@ -140,9 +140,15 @@ const Modal = ({
                 <span className="text-bold mr-5">Created -</span>{' '}
                 {currProject.created}
               </li>
-              <li className="mb-10">
+              <li className="mb-10 modal__item">
                 <span className="text-bold mr-5">Technologies Used -</span>
-                {currProject.technologies.join(', ')}
+                <div className="modal__techs-wrapper">
+                  {currProject.technologies.map((technology, idx) => (
+                    <span className="modal__tech" key={idx}>
+                      {technology}
+                    </span>
+                  ))}
+                </div>
               </li>
               <li className="mb-10">
                 <span className="text-bold mr-5">Role -</span>
@@ -167,7 +173,6 @@ const Modal = ({
                     rel="noreferrer"
                     href={currProject.source_code}
                     target="_blank"
-                    className="text-primary"
                   >
                     {currProject.source_code}
                   </a>

@@ -158,9 +158,34 @@
   &__body {
     padding: 15px 0;
 
-    a:hover {
-      text-decoration: underline;
+    a {
+      color: var(--clr-primary);
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+
+  &__techs-wrapper {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__tech {
+    display: block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    color: var(--clr-light-white);
+    font-size: 12px;
+    font-weight: 600;
+    background-color: var(--clr-dark);
   }
 
   &__footer {

@@ -48,14 +48,14 @@ const About = () => {
               in the Philippines. Feel free to take a look at my latest works on
               the{' '}
               <button
-                className="text-bold text-primary about__link"
+                className="text-link"
                 onClick={() => handleAboutLink('/portfolio')}
               >
                 portfolio page
               </button>
               . Want to talk about a project? You can get in touch with me{' '}
               <button
-                className="text-bold text-primary about__link"
+                className="text-link"
                 onClick={() => handleAboutLink('/contact')}
               >
                 here
