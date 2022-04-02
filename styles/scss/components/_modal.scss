@@ -115,6 +115,7 @@
   &__header {
     position: relative;
     overflow-x: hidden;
+    margin-bottom: 30px;
   }
 
   &__heading {
@@ -156,8 +157,6 @@
   }
 
   &__body {
-    padding: 15px 0;
-
     a {
       color: var(--clr-primary);
 
@@ -165,6 +164,12 @@
         text-decoration: underline;
       }
     }
+  }
+
+  &__btns-wrapper {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
   }
 
   &__item {
@@ -190,6 +195,7 @@
 
   &__footer {
     padding: 40px 0 0;
+    align-items: center;
   }
 
   &__small-img {
@@ -352,7 +358,7 @@
 }
 
 .portfolio-item__desc {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .modal__thumbnails-wrapper {

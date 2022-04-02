@@ -102,24 +102,6 @@ const EditProject = ({ screenshotListData, currProjectData }) => {
           value={currProject.description}
           required
         ></textarea>
-        <label htmlFor="">Created:</label>
-        <input
-          type="text"
-          onChange={(e) =>
-            setCurrProject((prevState) => ({
-              ...prevState,
-              created: e.target.value,
-            }))
-          }
-          value={currProject.created}
-          required
-        />
-        <ArrayField
-          name="roles"
-          fieldKeys={['name']}
-          field={currProject.roles}
-          setFieldParent={setCurrProject}
-        />
         <ArrayField
           name="technologies"
           fieldKeys={['name']}

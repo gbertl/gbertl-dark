@@ -129,56 +129,49 @@ const Modal = ({
             />
 
             <h1 className="modal__heading">{currProject.title}</h1>
+
+            {currProject.live_preview || currProject.source_code ? (
+              <div className="modal__btns-wrapper">
+                {currProject.live_preview && (
+                  <a
+                    rel="noreferrer"
+                    href={currProject.live_preview}
+                    target="_blank"
+                    className="outline-button"
+                  >
+                    <i className="fa-solid fa-globe"></i> Demo
+                  </a>
+                )}
+                {currProject.source_code && (
+                  <a
+                    rel="noreferrer"
+                    href={currProject.source_code}
+                    target="_blank"
+                    className="outline-button"
+                  >
+                    <i className="fa-brands fa-github"></i> Github
+                  </a>
+                )}
+              </div>
+            ) : (
+              ''
+            )}
           </div>
           <div className="modal__body">
             <p
               className="portfolio-item__desc"
               dangerouslySetInnerHTML={{ __html: currProject.description }}
             ></p>
-            <ul>
-              <li className="mb-10">
-                <span className="text-bold mr-5">Created -</span>{' '}
-                {currProject.created}
-              </li>
-              <li className="mb-10 modal__item">
-                <span className="text-bold mr-5">Technologies Used -</span>
-                <div className="modal__techs-wrapper">
-                  {currProject.technologies.map((technology, idx) => (
-                    <span className="modal__tech" key={idx}>
-                      {technology}
-                    </span>
-                  ))}
-                </div>
-              </li>
-              <li className="mb-10">
-                <span className="text-bold mr-5">Role -</span>
-                {currProject.roles.join(', ')}
-              </li>
-              {currProject.live_preview && (
-                <li className="mb-10">
-                  <span className="text-bold mr-5">Live Preview -</span>
-                  <a
-                    rel="noreferrer"
-                    href={currProject.live_preview}
-                    target="_blank"
-                  >
-                    {currProject.live_preview}
-                  </a>
-                </li>
-              )}
-              {currProject.source_code && (
-                <li className="mb-10">
-                  <span className="text-bold mr-5">Source Code -</span>
-                  <a
-                    rel="noreferrer"
-                    href={currProject.source_code}
-                    target="_blank"
-                  >
-                    {currProject.source_code}
-                  </a>
-                </li>
-              )}
-            </ul>
+
+            <div className="modal__item">
+              <div className="modal__techs-wrapper">
+                {currProject.technologies.map((technology, idx) => (
+                  <span className="modal__tech" key={idx}>
+                    {technology}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="modal__footer flex justify-between">
             <div
