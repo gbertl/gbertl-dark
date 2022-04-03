@@ -109,7 +109,10 @@
 
   &__content {
     max-width: 850px;
-    margin: 50px auto 60px;
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 25px;
   }
 
   &__header {
@@ -194,7 +197,7 @@
   }
 
   &__footer {
-    padding: 40px 0 0;
+    margin-top: 60px;
     align-items: center;
   }
 

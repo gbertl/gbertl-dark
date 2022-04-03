@@ -103,7 +103,7 @@ const Modal = ({
           direction ? ` modal__transition--${direction}` : ''
         }`}
       ></div>
-      <div className="modal__overlay px-15" ref={modalOverlayRef}>
+      <div className="modal__overlay" ref={modalOverlayRef}>
         <div className="modal__content">
           <div className="modal__header">
             <div className="modal__counter-wrapper flex align-center flex-wrap">
