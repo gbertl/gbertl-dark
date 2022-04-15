@@ -30,7 +30,7 @@ const Portfolio = () => {
   return (
     <>
       <Head>
-        <title>Portfolio | Full-Stack Web Developer | Gilbert L.</title>
+        <title>Web developer Portfolio, Gilbert L.</title>
       </Head>
       <section className="portfolio" id="portfolio">
         <div className="container portfolio__container">

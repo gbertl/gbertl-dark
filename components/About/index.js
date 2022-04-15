@@ -27,7 +27,7 @@ const About = () => {
   return (
     <>
       <Head>
-        <title>Full-Stack Web Developer Portfolio | Gilbert L.</title>
+        <title>Web developer portfolio, Gilbert L.</title>
       </Head>
       <section className="about" id="about">
         <div className="container about__container">
@@ -44,7 +44,7 @@ const About = () => {
             <h1 className="about__heading">Hi, my name is Gilbert.</h1>
             <p>
               I&apos;m a{' '}
-              <span className="text-bold">Full-Stack Web Developer</span> based
+              <span className="text-bold">Front-End Web Developer</span> based
               in the Philippines. Feel free to take a look at my latest works on
               the{' '}
               <button

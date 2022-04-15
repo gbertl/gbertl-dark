@@ -53,7 +53,7 @@ const Contact = () => {
   return (
     <>
       <Head>
-        <title>Contact | Full-Stack Web Developer | Gilbert L.</title>
+        <title>Let&apos;s talk | Web developer portfolio, Gilbert L.</title>
       </Head>
 
       <section className="contact" id="contact">
