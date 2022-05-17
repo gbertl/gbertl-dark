@@ -177,7 +177,7 @@
 
 .outline-button {
   position: relative;
-  padding: 6px 12px;
+  padding: 4px 10px;
   color: var(--clr-light-white);
   display: flex;
   align-items: center;
@@ -202,7 +202,7 @@
 .text-link {
   position: relative;
   font-weight: 600;
-  color: var(--clr-primary);
+  color: var(--clr-light-white);
 
   &::before {
     content: '';

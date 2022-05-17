@@ -79,7 +79,7 @@ const Contact = () => {
               className="btn btn-primary mt-15 contact__send-btn"
               onClick={handleShowForm}
             >
-              Send Message
+              Send A Message
             </button>
           </div>
         </div>

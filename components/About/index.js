@@ -41,12 +41,10 @@ const About = () => {
                 className="about__img"
               />
             </div>
-            <h1 className="about__heading">Hi, my name is Gilbert.</h1>
+            <h1 className="about__heading">Hi 👋 , my name is Gilbert.</h1>
             <p>
-              I&apos;m a{' '}
-              <span className="text-bold">Front-End Web Developer</span> based
-              in the Philippines. Feel free to take a look at my latest works on
-              the{' '}
+              I&apos;m a Front-End Web Developer based in the Philippines. Feel
+              free to take a look at my latest works on the{' '}
               <button
                 className="text-link"
                 onClick={() => handleAboutLink('/portfolio')}

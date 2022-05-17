@@ -90,7 +90,6 @@ const Portfolio = () => {
                     <button className="btn btn-primary">More Info</button>
                   </div>
                 </div>
-                <h3 className="portfolio-item__heading">{p.title}</h3>
               </div>
             ))}
           </div>

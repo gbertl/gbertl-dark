@@ -357,10 +357,10 @@
   margin-bottom: 15px;
 
   a {
-    color: var(--clr-primary);
+    text-decoration: underline;
 
     &:hover {
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 }
