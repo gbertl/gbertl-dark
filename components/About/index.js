@@ -27,7 +27,7 @@ const About = () => {
   return (
     <>
       <Head>
-        <title>Web developer portfolio, Gilbert L.</title>
+        <title>Gilbert L. | React Front-end Dev & HTML-Dev</title>
       </Head>
       <section className="about" id="about">
         <div className="container about__container">

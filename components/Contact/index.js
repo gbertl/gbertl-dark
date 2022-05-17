@@ -53,7 +53,7 @@ const Contact = () => {
   return (
     <>
       <Head>
-        <title>Let&apos;s talk | Web developer portfolio, Gilbert L.</title>
+        <title>Contact | React Front-end Dev & HTML-Dev | Gilbert L.</title>
       </Head>
 
       <section className="contact" id="contact">
