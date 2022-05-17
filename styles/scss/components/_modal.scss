@@ -160,17 +160,11 @@
   }
 
   &__body {
-    a {
-      color: var(--clr-primary);
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
   }
 
   &__btns-wrapper {
     display: flex;
+    align-items: center;
     gap: 8px;
     margin-top: 15px;
   }
@@ -361,6 +355,14 @@
 
 .portfolio-item__desc {
   margin-bottom: 15px;
+
+  a {
+    color: var(--clr-primary);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .modal__thumbnails-wrapper {

@@ -137,9 +137,9 @@ const Modal = ({
                     rel="noreferrer"
                     href={currProject.live_preview}
                     target="_blank"
-                    className="outline-button"
+                    className="outline-button outline-button--dark"
                   >
-                    <i className="fa-solid fa-globe"></i> Demo
+                    <i className="fa-solid fa-link"></i> Live demo
                   </a>
                 )}
                 {currProject.source_code && (
@@ -147,7 +147,7 @@ const Modal = ({
                     rel="noreferrer"
                     href={currProject.source_code}
                     target="_blank"
-                    className="outline-button"
+                    className="outline-button outline-button--dark"
                   >
                     <i className="fa-brands fa-github"></i> Github
                   </a>

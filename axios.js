@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import jwt_decode from 'jwt-decode';
 
 const baseURL =
-  process.env.NODE_ENV === 'development'
+  process.env.NODE_ENV !== 'production'
     ? 'http://localhost:8000/api'
     : 'https://gilbertlc-api.herokuapp.com/api';
 
