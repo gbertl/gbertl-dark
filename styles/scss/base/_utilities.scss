@@ -90,20 +90,7 @@
     &:hover,
     &--active {
       background-color: var(--clr-primary);
-      color: #ffff;
-    }
-  }
-
-  &--outline {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: 1px solid var(--clr-primary);
-
-    &:hover,
-    &--active {
-      background-color: var(--clr-primary);
-      color: #ffff;
+      color: var(--clr-white);
     }
   }
 }

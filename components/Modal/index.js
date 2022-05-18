@@ -128,51 +128,50 @@ const Modal = ({
               setWillTransition={setWillTransition}
             />
 
-            <h1 className="modal__heading">{currProject.title}</h1>
+            <h1 className="modal__heading">
+              {currProject.title}
 
-            {currProject.live_preview || currProject.source_code ? (
-              <div className="modal__btns-wrapper">
-                {currProject.live_preview && (
-                  <a
-                    rel="noreferrer"
-                    href={currProject.live_preview}
-                    target="_blank"
-                    className="btn btn--outline"
-                  >
-                    <i className="fa-solid fa-link"></i> Live demo
-                  </a>
-                )}
-                {currProject.source_code && (
-                  <a
-                    rel="noreferrer"
-                    href={currProject.source_code}
-                    target="_blank"
-                    className="modal__btn-github"
-                  >
-                    <i className="fa-brands fa-github"></i>
-                  </a>
-                )}
-              </div>
-            ) : (
-              ''
-            )}
+              {currProject.live_preview || currProject.source_code ? (
+                <div className="modal__btns-wrapper">
+                  {currProject.live_preview && (
+                    <a
+                      rel="noreferrer"
+                      href={currProject.live_preview}
+                      target="_blank"
+                    >
+                      <i className="fa-solid fa-link"></i>
+                    </a>
+                  )}
+                  {currProject.source_code && (
+                    <a
+                      rel="noreferrer"
+                      href={currProject.source_code}
+                      target="_blank"
+                    >
+                      <i className="fa-brands fa-github"></i>
+                    </a>
+                  )}
+                </div>
+              ) : (
+                ''
+              )}
+            </h1>
           </div>
-          <div className="modal__body">
-            <p
-              className="portfolio-item__desc"
-              dangerouslySetInnerHTML={{ __html: currProject.description }}
-            ></p>
+          <p
+            className="portfolio-item__desc"
+            dangerouslySetInnerHTML={{ __html: currProject.description }}
+          ></p>
 
-            <div className="modal__item">
-              <div className="modal__techs-wrapper">
-                {currProject.technologies.map((technology, idx) => (
-                  <span className="modal__tech" key={idx}>
-                    {technology}
-                  </span>
-                ))}
-              </div>
+          <div className="modal__item">
+            <div className="modal__techs-wrapper">
+              {currProject.technologies.map((technology, idx) => (
+                <span className="modal__tech" key={idx}>
+                  {technology}
+                </span>
+              ))}
             </div>
           </div>
+
           <div className="modal__footer flex justify-between">
             <div
               className={`modal__prev-work ${

@@ -122,6 +122,9 @@
   }
 
   &__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 30px;
   }
 
@@ -159,21 +162,13 @@
     transition: 0.4s 0.8s;
   }
 
-  &__body {
-  }
-
   &__btns-wrapper {
     display: flex;
-    align-items: center;
-    gap: 1.5em;
-    margin-top: 15px;
-  }
+    gap: 1em;
+    font-size: 24px;
 
-  &__btn-github {
-    font-size: 22px;
-
-    &:hover {
-      color: var(--clr-light-white-hover);
+    a:hover {
+      color: var(--clr-white-hover);
     }
   }
 
