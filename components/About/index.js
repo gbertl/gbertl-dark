@@ -66,7 +66,7 @@ const About = () => {
                 rel="noreferrer"
                 href="https://github.com/gilbertlc"
                 target="_blank"
-                className="outline-button"
+                className="btn btn--secondary"
               >
                 <i className="fab fa-github"></i> Github
               </a>
@@ -74,7 +74,7 @@ const About = () => {
                 rel="noreferrer"
                 href="https://www.linkedin.com/in/gilbertlcsndle"
                 target="_blank"
-                className="outline-button"
+                className="btn btn--secondary"
               >
                 <i className="fab fa-linkedin"></i> Linkedin
               </a>
@@ -82,7 +82,7 @@ const About = () => {
                 rel="noreferrer"
                 href="mailto:gilbertlctest@gmail.com"
                 target="_blank"
-                className="outline-button"
+                className="btn btn--secondary"
               >
                 <i className="fas fa-envelope"></i> Email
               </a>

@@ -165,8 +165,16 @@
   &__btns-wrapper {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 1.5em;
     margin-top: 15px;
+  }
+
+  &__btn-github {
+    font-size: 22px;
+
+    &:hover {
+      color: var(--clr-light-white-hover);
+    }
   }
 
   &__item {

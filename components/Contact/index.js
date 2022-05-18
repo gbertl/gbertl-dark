@@ -76,7 +76,7 @@ const Contact = () => {
             </p>
 
             <button
-              className="btn btn-primary mt-15 contact__send-btn"
+              className="btn btn--primary mt-15 contact__send-btn"
               onClick={handleShowForm}
             >
               Send A Message
@@ -141,7 +141,7 @@ const Contact = () => {
                   </p>
                 )}
                 <button
-                  className={`btn btn-primary${
+                  className={`btn btn--primary${
                     isLoading ? ' btn--active' : ''
                   } mt-15 contact-form__send-form`}
                 >

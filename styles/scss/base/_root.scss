@@ -1,7 +1,10 @@
+@use '../variables' as v;
+
 :root {
   --clr-primary: #9e9e9e;
   --clr-dark: #1b1b22;
   --clr-light-dark: #32323a;
   --clr-white: #ffffff;
-  --clr-light-white: #c8c8c8;
+  --clr-light-white: #{v.$clr-light-white};
+  --clr-light-white-hover: #{v.$clr-light-white-hover};
 }

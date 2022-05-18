@@ -40,8 +40,8 @@ const Portfolio = () => {
             <li>
               <button
                 onClick={() => handleFilter('all')}
-                className={`outline-button${
-                  filterTitle === 'All' ? ' outline-button--active' : ''
+                className={`btn btn--secondary${
+                  filterTitle === 'All' ? ' btn btn--secondary--active' : ''
                 }`}
                 title="Show All"
               >
@@ -52,8 +52,8 @@ const Portfolio = () => {
               <li key={c.name}>
                 <button
                   onClick={() => handleFilter(c.name)}
-                  className={`outline-button${
-                    filterTitle === c.title ? ' outline-button--active' : ''
+                  className={`btn btn--secondary${
+                    filterTitle === c.title ? ' btn btn--secondary--active' : ''
                   }`}
                   title={`Filter By ${c.title}`}
                 >
@@ -87,7 +87,7 @@ const Portfolio = () => {
                     className="portfolio-item__img"
                   />
                   <div className="portfolio-item__btn center">
-                    <button className="btn btn-primary">More Info</button>
+                    <button className="btn btn--primary">More Info</button>
                   </div>
                 </div>
               </div>

@@ -137,7 +137,7 @@ const Modal = ({
                     rel="noreferrer"
                     href={currProject.live_preview}
                     target="_blank"
-                    className="outline-button outline-button--dark"
+                    className="btn btn--outline"
                   >
                     <i className="fa-solid fa-link"></i> Live demo
                   </a>
@@ -147,9 +147,9 @@ const Modal = ({
                     rel="noreferrer"
                     href={currProject.source_code}
                     target="_blank"
-                    className="outline-button outline-button--dark"
+                    className="modal__btn-github"
                   >
-                    <i className="fa-brands fa-github"></i> Github
+                    <i className="fa-brands fa-github"></i>
                   </a>
                 )}
               </div>
@@ -180,7 +180,7 @@ const Modal = ({
               }`}
             >
               <button
-                className="btn btn-primary modal__prev-work-btn"
+                className="btn btn--primary modal__prev-work-btn"
                 onClick={() => handleNextPrev('prev')}
               >
                 <i className="fas fa-arrow-left"></i>
@@ -200,7 +200,7 @@ const Modal = ({
               }`}
             >
               <button
-                className="btn btn-primary modal__next-work-btn"
+                className="btn btn--primary modal__next-work-btn"
                 onClick={() => handleNextPrev('next')}
               >
                 <i className="fas fa-arrow-right"></i>
