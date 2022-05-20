@@ -1,5 +1,7 @@
 import About from '../components/About';
 
-export default function Home() {
+const Home = () => {
   return <About />;
-}
+};
+
+export default Home;

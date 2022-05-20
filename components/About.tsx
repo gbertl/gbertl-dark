@@ -2,9 +2,15 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import Head from 'next/head';
 import Image from 'next/image';
+import React from 'react';
 
-import { showOverlay, hideToggler, showLoader } from '../../store/actions/ui';
-import useResetUI from '../../hooks/useResetUI';
+import { showOverlay, hideToggler, showLoader } from '../store/actions/ui';
+import useResetUI from '../hooks/useResetUI';
+
+enum Paths {
+  Portfolio = '/portfolio',
+  Contact = '/contact',
+}
 
 const About = () => {
   const dispatch = useDispatch();
@@ -12,7 +18,7 @@ const About = () => {
 
   useResetUI();
 
-  const handleAboutLink = (path) => {
+  const handleAboutLink = (path: Paths) => {
     dispatch(hideToggler());
 
     dispatch(showOverlay());
@@ -21,7 +27,8 @@ const About = () => {
       router.push(path);
     }, 950);
 
-    if (path === '/portfolio') setTimeout(() => dispatch(showLoader()), 3000);
+    if (path === Paths.Portfolio)
+      setTimeout(() => dispatch(showLoader()), 3000);
   };
 
   return (
@@ -47,14 +54,14 @@ const About = () => {
               free to take a look at my latest works on the{' '}
               <button
                 className="text-link"
-                onClick={() => handleAboutLink('/portfolio')}
+                onClick={() => handleAboutLink(Paths.Portfolio)}
               >
                 portfolio page
               </button>
               . Want to talk about a project? You can get in touch with me{' '}
               <button
                 className="text-link"
-                onClick={() => handleAboutLink('/contact')}
+                onClick={() => handleAboutLink(Paths.Contact)}
               >
                 here
               </button>
