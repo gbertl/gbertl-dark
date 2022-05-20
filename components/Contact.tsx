@@ -1,14 +1,27 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 
-import useResetUI from '../../hooks/useResetUI';
-import { toggleBodyScroll } from '../../utils';
+import useResetUI from '../hooks/useResetUI';
+import { toggleBodyScroll } from '../utils';
+
+enum MessageTypes {
+  Ok = 'ok',
+  Invalid = 'invalid',
+}
+
+interface MessageNode {
+  type: MessageTypes;
+  text: string;
+}
 
 const Contact = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState({ type: '', text: '' });
+  const [message, setMessage] = useState<MessageNode>({
+    type: MessageTypes.Invalid,
+    text: '',
+  });
 
   useResetUI();
 
@@ -22,30 +35,31 @@ const Contact = () => {
     toggleBodyScroll();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     setIsLoading(true);
+
+    const target = e.target as HTMLFormElement;
 
     emailjs
       .sendForm(
         'service_2ml4lwk',
         'template_e0ppieo',
-        e.target,
+        target,
         'user_jmQ3lowI4xMVTboiORnz4'
       )
       .then(
         () => {
           setIsLoading(false);
           setMessage({
-            type: 'success',
+            type: MessageTypes.Ok,
             text: 'Your message has been sent successfully, I hope to respond within 24 hours. Thanks!',
           });
-          e.target.reset();
+          target.reset();
         },
         (error) => {
           setIsLoading(false);
-          setMessage({ type: 'error', text: error.text });
+          setMessage({ type: MessageTypes.Invalid, text: error.text });
         }
       );
   };
@@ -87,7 +101,7 @@ const Contact = () => {
         <div
           className={`contact-form${isFormOpen ? ' contact-form--open' : ''}`}
           onClick={(e) => {
-            if (!e.target.closest('.contact-form__content')) {
+            if (!(e.target as Element).closest('.contact-form__content')) {
               handleHideForm();
             }
           }}
@@ -134,7 +148,7 @@ const Contact = () => {
                 {message.text && (
                   <p
                     className={`${
-                      message.type === 'success' ? 'text-primary' : ''
+                      message.type === MessageTypes.Invalid ? 'text-danger' : ''
                     }`}
                   >
                     {message.text}
