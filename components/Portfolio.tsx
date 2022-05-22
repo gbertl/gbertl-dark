@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
 
-import Modal from '../Modal';
-import useResetUI from '../../hooks/useResetUI';
-import { selectCategories, selectProjects } from '../../store/slices/portfolio';
+import Modal from './Modal';
+import useResetUI from '../hooks/useResetUI';
+import { selectCategories, selectProjects } from '../store/slices/portfolio';
 
 const Portfolio = () => {
   const projectsData = useSelector(selectProjects);
@@ -18,14 +18,14 @@ const Portfolio = () => {
 
   useResetUI();
 
-  const handleFilter = (category) => {
+  const handleFilter = (category: string) => {
     const filteredProjects = projectsData.filter(
       (p) => category === 'all' || p.categories.includes(category)
     );
     const currCategory = categories.find((c) => c.name === category);
 
     setProjects(filteredProjects);
-    setFilterTitle(category === 'all' ? 'All' : currCategory.title);
+    setFilterTitle(category === 'all' ? 'All' : currCategory!.title);
   };
 
   return (
