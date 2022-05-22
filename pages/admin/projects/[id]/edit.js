@@ -1,4 +1,4 @@
-import { fetchProjects } from '../../../../store/actions/portfolio';
+import { fetchProjects } from '../../../../store/slices/portfolio';
 import * as api from '../../../../api';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';

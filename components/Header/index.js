@@ -9,15 +9,18 @@ import {
   hideOverlay,
   toggleOverlay,
   showLoader,
-} from '../../store/actions/ui';
+  selectIsNavOpen,
+  selectIsOverlayActive,
+  selectIsTogglerEnabled,
+} from '../../store/slices/ui';
 
 const Header = () => {
   const router = useRouter();
-  const isNavOpen = useSelector((state) => state.ui.isNavOpen);
+  const isNavOpen = useSelector(selectIsNavOpen);
   const dispatch = useDispatch();
   const isInitial = useRef(true);
-  const isOverlayActive = useSelector((state) => state.ui.isOverlayActive);
-  const isTogglerEnabled = useSelector((state) => state.ui.isTogglerEnabled);
+  const isOverlayActive = useSelector(selectIsOverlayActive);
+  const isTogglerEnabled = useSelector(selectIsTogglerEnabled);
 
   useEffect(() => {
     if (isInitial.current) {

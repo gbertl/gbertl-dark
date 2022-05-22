@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import React from 'react';
 
-import { showOverlay, hideToggler, showLoader } from '../store/actions/ui';
+import { showOverlay, hideToggler, showLoader } from '../store/slices/ui';
 import useResetUI from '../hooks/useResetUI';
 
 enum Paths {

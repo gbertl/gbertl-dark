@@ -1,16 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { hideLoader } from '../../store/actions/ui';
+import { hideLoader, selectIsLoading } from '../../store/slices/ui';
+import { selectProjects } from '../../store/slices/portfolio';
 
 const Loader = () => {
-  const isLoading = useSelector((state) => state.ui.isLoading);
+  const isLoading = useSelector(selectIsLoading);
   const [sec, setSec] = useState(10);
   const countDownRef = useRef();
 
-  const areProjectsFetched = useSelector(
-    (state) => state.portfolio.projects
-  ).length;
+  const areProjectsFetched = useSelector(selectProjects).length;
   const dispatch = useDispatch();
 
   useEffect(() => {

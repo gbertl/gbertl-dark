@@ -1,6 +1,6 @@
 import Portfolio from '../components/Portfolio';
 import { wrapper } from '../store';
-import { fetchCategories, fetchProjects } from '../store/actions/portfolio';
+import { fetchCategories, fetchProjects } from '../store/slices/portfolio';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   ({ dispatch }) =>

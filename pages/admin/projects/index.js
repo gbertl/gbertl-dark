@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import { wrapper } from '../../../store';
-import { fetchProjects } from '../../../store/actions/portfolio';
 import classes from './project-list.module.css';
 import { isAuthenticated } from '../../../utils';
+import { fetchProjects, selectProjects } from '../../../store/slices/portfolio';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
@@ -22,7 +22,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const ProjectListPage = () => {
-  const projects = useSelector((state) => state.portfolio.projects);
+  const projects = useSelector(selectProjects);
 
   return (
     <div className={classes.projectListPage}>
