@@ -2,8 +2,9 @@ import '../styles/scss/style.scss';
 import { wrapper } from '../store';
 import Layout from '../components/Layout';
 import Script from 'next/script';
+import type { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       {process.env.NODE_ENV === 'production' && (

@@ -1,8 +1,8 @@
 import uiReducer, { uiSlice } from './slices/ui';
 import portfolioReducer, { portfolioSlice } from './slices/portfolio';
-import thunk from 'redux-thunk';
 import { createWrapper } from 'next-redux-wrapper';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction } from '@reduxjs/toolkit';
+import { Action } from 'redux';
 
 const makeStore = () =>
   configureStore({
@@ -13,6 +13,15 @@ const makeStore = () =>
     devTools: true,
   });
 
-export const wrapper = createWrapper(makeStore, {
+export type AppStore = ReturnType<typeof makeStore>;
+export type AppState = ReturnType<AppStore['getState']>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  AppState,
+  unknown,
+  Action
+>;
+
+export const wrapper = createWrapper<AppStore>(makeStore, {
   debug: process.env.NODE_ENV === 'development',
 });

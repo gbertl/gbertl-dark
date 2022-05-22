@@ -13,11 +13,16 @@ export const getServerSideProps = wrapper.getServerSideProps(
       return {
         redirect: {
           destination: `/login?goBack=${context.resolvedUrl}`,
+          permanent: false,
         },
       };
     }
 
     await store.dispatch(fetchProjects());
+
+    return {
+      props: {},
+    };
   }
 );
 

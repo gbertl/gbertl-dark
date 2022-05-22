@@ -1,14 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
+import { AppState } from '..';
+
+interface uiSliceState {
+  isTogglerEnabled: boolean;
+  isNavOpen: boolean;
+  isOverlayActive: boolean;
+  isLoading: boolean;
+}
+
+const initialState: uiSliceState = {
+  isTogglerEnabled: true,
+  isNavOpen: false,
+  isOverlayActive: false,
+  isLoading: false,
+};
 
 export const uiSlice = createSlice({
   name: 'ui',
-  initialState: {
-    isTogglerEnabled: true,
-    isNavOpen: false,
-    isOverlayActive: false,
-    isLoading: false,
-  },
+  initialState,
   reducers: {
     showToggler: (state) => {
       state.isTogglerEnabled = true;
@@ -45,11 +55,13 @@ export const uiSlice = createSlice({
   },
 });
 
-export const selectUI = (state) => state.ui;
-export const selectIsTogglerEnabled = (state) => state.ui.isTogglerEnabled;
-export const selectIsNavOpen = (state) => state.ui.isNavOpen;
-export const selectIsOverlayActive = (state) => state.ui.isOverlayActive;
-export const selectIsLoading = (state) => state.ui.isLoading;
+export const selectUI = (state: AppState) => state.ui;
+export const selectIsTogglerEnabled = (state: AppState) =>
+  state.ui.isTogglerEnabled;
+export const selectIsNavOpen = (state: AppState) => state.ui.isNavOpen;
+export const selectIsOverlayActive = (state: AppState) =>
+  state.ui.isOverlayActive;
+export const selectIsLoading = (state: AppState) => state.ui.isLoading;
 
 export const {
   showToggler,

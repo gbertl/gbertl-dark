@@ -1,26 +1,29 @@
 import { fetchProjects } from '../../../../store/slices/portfolio';
 import * as api from '../../../../api';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { serialize } from 'object-to-formdata';
 import ArrayField from '../../../../components/Layout/ArrayField';
 import classes from './edit-project.module.css';
 import { isAuthenticated } from '../../../../utils';
+import { GetServerSideProps, NextPage } from 'next';
+import { Project, Screenshot } from '../../../../types';
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const authenticated = await isAuthenticated(context);
 
   if (!authenticated) {
     return {
       redirect: {
         destination: `/login?goBack=${context.resolvedUrl}`,
+        permanent: false,
       },
     };
   }
 
   const { data: screenshotListData } = await api.getScreenshots();
   const { data: currProjectData } = await api.getProjectDetail(
-    context.params.id
+    context?.params?.id
   );
 
   return {
@@ -31,13 +34,21 @@ export const getServerSideProps = async (context) => {
   };
 };
 
-const EditProject = ({ screenshotListData, currProjectData }) => {
+interface Props {
+  screenshotListData: Screenshot[];
+  currProjectData: Project;
+}
+
+const EditProject: NextPage<Props> = ({
+  screenshotListData,
+  currProjectData,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [screenshotList, setScreenshotList] = useState(screenshotListData);
   const dispatch = useDispatch();
   const [currProject, setCurrProject] = useState(currProjectData);
 
-  const handleUpdate = async (e) => {
+  const handleUpdate = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const fd = serialize(currProject, {
@@ -58,7 +69,8 @@ const EditProject = ({ screenshotListData, currProjectData }) => {
       setScreenshotList(screenshotListData);
 
       dispatch(fetchProjects());
-      document.querySelector('input[type=file]').value = '';
+      (document.querySelector('input[type=file]') as HTMLInputElement).value =
+        '';
     } catch (e) {
       console.log(e);
     }
@@ -143,7 +155,7 @@ const EditProject = ({ screenshotListData, currProjectData }) => {
           onChange={(e) =>
             setCurrProject((prevState) => ({
               ...prevState,
-              priority_order: e.target.value,
+              priority_order: parseInt(e.target.value),
             }))
           }
         />
@@ -176,7 +188,7 @@ const EditProject = ({ screenshotListData, currProjectData }) => {
                 src={
                   typeof obj.image === 'string'
                     ? obj.image
-                    : URL.createObjectURL(obj.image)
+                    : URL.createObjectURL(obj.image as File)
                 }
                 alt=""
               />
@@ -192,7 +204,7 @@ const EditProject = ({ screenshotListData, currProjectData }) => {
               src={
                 typeof f.image === 'string'
                   ? f.image
-                  : URL.createObjectURL(f.image)
+                  : URL.createObjectURL(f.image as File)
               }
               style={{ width: '40%' }}
               alt=""
@@ -200,6 +212,7 @@ const EditProject = ({ screenshotListData, currProjectData }) => {
             <input
               type="file"
               onChange={(e) => {
+                if (!e.target.files) return;
                 let newScreenshots = [...currProject.screenshots];
                 newScreenshots[index].image = e.target.files[0];
                 setCurrProject((prevState) => ({
@@ -214,7 +227,7 @@ const EditProject = ({ screenshotListData, currProjectData }) => {
               value={currProject.screenshots[index].priority_order}
               onChange={(e) => {
                 let newScreenshots = [...currProject.screenshots];
-                newScreenshots[index].priority_order = e.target.value;
+                newScreenshots[index].priority_order = parseInt(e.target.value);
                 setCurrProject((prevState) => ({
                   ...prevState,
                   screenshots: newScreenshots,
@@ -245,7 +258,7 @@ const EditProject = ({ screenshotListData, currProjectData }) => {
               screenshots: [
                 ...prevState.screenshots,
                 {
-                  image: '',
+                  image: undefined,
                   priority_order: 0,
                 },
               ],

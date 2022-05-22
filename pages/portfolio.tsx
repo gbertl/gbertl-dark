@@ -7,6 +7,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
     async () => {
       await dispatch(fetchProjects());
       await dispatch(fetchCategories());
+
+      return {
+        props: {},
+      };
     }
 );
 
