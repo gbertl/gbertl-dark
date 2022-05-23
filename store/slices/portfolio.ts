@@ -2,8 +2,9 @@ import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 import { AppState } from '..';
 import * as api from '../../api';
+import { Category } from '../../types';
 
-export interface Projects {
+export interface Project {
   id: number;
   technologies: string[];
   categories: string[];
@@ -15,16 +16,9 @@ export interface Projects {
   priority_order: number;
 }
 
-interface Categories {
-  id: number;
-  title: string;
-  name: string;
-  priority_order: number;
-}
-
 interface PortfolioSliceState {
-  projects: Projects[];
-  categories: Categories[];
+  projects: Project[];
+  categories: Category[];
 }
 
 const hydrate = createAction<AppState>(HYDRATE);

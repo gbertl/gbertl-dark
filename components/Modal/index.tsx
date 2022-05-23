@@ -1,6 +1,25 @@
-import { useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
 import Thumbnails from './Thumbnails';
+import { Project } from '../../store/slices/portfolio';
+
+interface Props {
+  currProjectIndex: number;
+  setCurrProjectIndex: Dispatch<SetStateAction<number>>;
+  projects: Project[];
+  filterTitle: string;
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+interface IWork {
+  title: string;
+  screenshot: string;
+}
+
+const initialWork = {
+  title: '',
+  screenshot: '',
+};
 
 const Modal = ({
   currProjectIndex,
@@ -8,13 +27,13 @@ const Modal = ({
   projects,
   filterTitle,
   setIsModalOpen,
-}) => {
+}: Props) => {
   const [currProject, setCurrProject] = useState(projects[currProjectIndex]);
-  const [prevWork, setPrevWork] = useState({});
-  const [nextWork, setNextWork] = useState({});
+  const [prevWork, setPrevWork] = useState<IWork>(initialWork);
+  const [nextWork, setNextWork] = useState<IWork>(initialWork);
   const [direction, setDirection] = useState('');
 
-  const modalOverlayRef = useRef();
+  const modalOverlayRef = useRef<HTMLDivElement>(null);
 
   const [counter, setCounter] = useState(0);
   const [size, setSize] = useState(0);
@@ -27,13 +46,17 @@ const Modal = ({
   const updateModal = () => {
     setCurrProject(projects[currProjectIndex]);
 
+    const pWork = projects[currProjectIndex - 1];
+
     currProjectIndex !== 0
-      ? setPrevWork(projects[currProjectIndex - 1])
-      : setPrevWork({});
+      ? setPrevWork({ title: pWork.title, screenshot: pWork.screenshots[0] })
+      : setPrevWork(initialWork);
+
+    const nWork = projects[currProjectIndex + 1];
 
     currProjectIndex !== projects.length - 1
-      ? setNextWork(projects[currProjectIndex + 1])
-      : setNextWork({});
+      ? setNextWork({ title: nWork.title, screenshot: nWork.screenshots[0] })
+      : setNextWork(initialWork);
 
     setCounter(0);
     setSize(0);
@@ -59,7 +82,7 @@ const Modal = ({
     }
   }, [isModalTransition]);
 
-  const handleNextPrev = (direction) => {
+  const handleNextPrev = (direction: 'prev' | 'next') => {
     setWillTransition(false);
     setDirection(direction);
 
@@ -80,6 +103,8 @@ const Modal = ({
 
   useEffect(() => {
     const time = setTimeout(() => {
+      if (!modalOverlayRef.current) return;
+
       updateModal();
       modalOverlayRef.current.scrollTop = 0;
     }, 400);
@@ -93,7 +118,7 @@ const Modal = ({
     <div
       className={`modal${isModalTransition ? ' modal--open' : ''}`}
       onClick={(e) => {
-        if (!e.target.closest('.modal__content')) {
+        if (!(e.target as Element).closest('.modal__content')) {
           setIsModalTransition(false);
         }
       }}
@@ -175,7 +200,7 @@ const Modal = ({
           <div className="modal__footer flex justify-between">
             <div
               className={`modal__prev-work ${
-                !Object.keys(prevWork).length ? 'invisible' : ''
+                !prevWork.title ? 'invisible' : ''
               }`}
             >
               <button
@@ -188,14 +213,14 @@ const Modal = ({
                 {prevWork.title}
               </h2>
               <img
-                src={prevWork.screenshots?.[0]}
+                src={prevWork.screenshot}
                 alt=""
                 className="modal__small-img"
               />
             </div>
             <div
               className={`modal__next-work flex ${
-                !Object.keys(nextWork).length ? 'invisible' : ''
+                !nextWork.title ? 'invisible' : ''
               }`}
             >
               <button
@@ -208,7 +233,7 @@ const Modal = ({
                 {nextWork.title}
               </h2>
               <img
-                src={nextWork.screenshots?.[0]}
+                src={nextWork.screenshot}
                 alt=""
                 className="modal__small-img"
               />

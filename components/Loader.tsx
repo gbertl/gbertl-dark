@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { hideLoader, selectIsLoading } from '../../store/slices/ui';
-import { selectProjects } from '../../store/slices/portfolio';
+import { hideLoader, selectIsLoading } from '../store/slices/ui';
+import { selectProjects } from '../store/slices/portfolio';
 
 const Loader = () => {
   const isLoading = useSelector(selectIsLoading);
   const [sec, setSec] = useState(10);
-  const countDownRef = useRef();
+  const countDownRef = useRef(0);
 
   const areProjectsFetched = useSelector(selectProjects).length;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    countDownRef.current = setInterval(() => {
+    countDownRef.current = window.setInterval(() => {
       setSec((prevSec) => {
         if (prevSec > 0) {
           return prevSec - 1;

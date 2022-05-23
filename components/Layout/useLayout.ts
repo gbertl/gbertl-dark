@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { generateOverlayEffect } from '../../../utils';
+import { generateOverlayEffect } from '../../utils';
 
 const useLayout = () => {
   useEffect(() => {
@@ -11,7 +11,7 @@ const useLayout = () => {
         for (let j = 0; j < cols; j++) {
           const div = document.createElement('div');
           div.className = `col-${j + 1}`;
-          document.querySelector('.bg-animation-effect').appendChild(div);
+          document.querySelector('.bg-animation-effect')?.appendChild(div);
         }
       }
     };

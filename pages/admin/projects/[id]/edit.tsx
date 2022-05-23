@@ -3,11 +3,11 @@ import * as api from '../../../../api';
 import { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { serialize } from 'object-to-formdata';
-import ArrayField from '../../../../components/Layout/ArrayField';
+import ArrayField from '../../../../components/admin/ArrayField';
 import classes from './edit-project.module.css';
 import { isAuthenticated } from '../../../../utils';
 import { GetServerSideProps, NextPage } from 'next';
-import { Project, Screenshot } from '../../../../types';
+import { ProjectSingle, Screenshot } from '../../../../types';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const authenticated = await isAuthenticated(context);
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 interface Props {
   screenshotListData: Screenshot[];
-  currProjectData: Project;
+  currProjectData: ProjectSingle;
 }
 
 const EditProject: NextPage<Props> = ({

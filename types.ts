@@ -1,4 +1,4 @@
-export interface Project {
+export interface ProjectSingle {
   id: number;
   technologies: Technology[];
   categories: Category[];

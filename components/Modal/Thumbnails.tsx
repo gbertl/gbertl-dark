@@ -1,6 +1,23 @@
-import { useEffect, useRef, useState } from 'react';
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import useMounted from '../../hooks/useMounted';
+import { Project } from '../../store/slices/portfolio';
+
+interface Props {
+  currProject: Project;
+  size: number;
+  setSize: Dispatch<SetStateAction<number>>;
+  counter: number;
+  setCounter: Dispatch<SetStateAction<number>>;
+  willTransition: boolean;
+  setWillTransition: Dispatch<SetStateAction<boolean>>;
+}
 
 const Thumbnails = ({
   currProject,
@@ -10,8 +27,8 @@ const Thumbnails = ({
   setCounter,
   willTransition,
   setWillTransition,
-}) => {
-  const imagesRef = useRef([]);
+}: Props) => {
+  const imagesRef = useRef<HTMLImageElement[]>([]);
 
   const [isNextActive, setIsNextActive] = useState(false);
   const [isPrevActive, setIsPrevActive] = useState(false);
@@ -28,7 +45,7 @@ const Thumbnails = ({
 
     clearTimeout(timer.current);
 
-    timer.current = setTimeout(() => {
+    timer.current = window.setTimeout(() => {
       setIsNextActive(false);
     }, 1200);
 
@@ -45,7 +62,7 @@ const Thumbnails = ({
     clearInterval(intervalTimer.current);
 
     if (currProject.screenshots.length > 1) {
-      intervalTimer.current = setInterval(slideNext, 5000);
+      intervalTimer.current = window.setInterval(slideNext, 5000);
     }
   };
 
@@ -66,7 +83,7 @@ const Thumbnails = ({
 
     clearTimeout(timer.current);
 
-    timer.current = setTimeout(() => {
+    timer.current = window.setTimeout(() => {
       setIsPrevActive(false);
     }, 1200);
 
@@ -93,7 +110,7 @@ const Thumbnails = ({
     restartAutoPlay(); // starts interval change of project
   }, [currProject]);
 
-  const handleDotIndicator = (index) => {
+  const handleDotIndicator = (index: number) => {
     restartAutoPlay();
     setCounter(index);
     setWillTransition(true);
@@ -117,10 +134,12 @@ const Thumbnails = ({
   const [initPos, setInitPos] = useState(0);
   const [transformed, setTransformed] = useState(0);
 
-  const thumbnailsRef = useRef();
+  const thumbnailsRef = useRef<HTMLDivElement>(null);
 
   // utils
   const getTransformed = () => {
+    if (!thumbnailsRef.current) return 0;
+
     const matrix = window
       .getComputedStyle(thumbnailsRef.current)
       .getPropertyValue('transform');
@@ -129,12 +148,21 @@ const Thumbnails = ({
     return 0;
   };
 
-  const getPosX = (e) =>
-    e.type.includes('touch') ? e.touches[0].pageX : e.pageX;
+  const getPosX = (e: React.TouchEvent | React.MouseEvent) => {
+    if (e.nativeEvent instanceof TouchEvent) {
+      return e.nativeEvent.touches[0].pageX;
+    }
 
-  const gestureStart = (e) => {
+    if (e.nativeEvent instanceof MouseEvent) {
+      return e.nativeEvent.pageX;
+    }
+
+    return 0;
+  };
+
+  const gestureStart = (e: React.MouseEvent | React.TouchEvent) => {
     if (
-      e.target.closest(
+      (e.target as HTMLElement).closest(
         '.modal__carousel-prev-btn, .modal__carousel-next-btn'
       ) ||
       currProject.screenshots.length === 1
@@ -148,20 +176,21 @@ const Thumbnails = ({
     setTransformed(getTransformed());
   };
 
-  const gestureMove = (e) => {
+  const gestureMove = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!thumbnailsRef.current) return;
+
+    const target = e.target as HTMLElement;
     if (
-      e.target.closest(
-        '.modal__carousel-prev-btn, .modal__carousel-next-btn'
-      ) ||
+      target.closest('.modal__carousel-prev-btn, .modal__carousel-next-btn') ||
       currProject.screenshots.length === 1
     )
       return;
 
-    e.target.style.cursor = 'grab';
+    target.style.cursor = 'grab';
 
     if (drag) {
       const moved = getPosX(e) - initPos;
-      e.target.style.cursor = 'grabbing';
+      target.style.cursor = 'grabbing';
 
       thumbnailsRef.current.style.transform = `translateX(${
         transformed + moved
@@ -169,11 +198,13 @@ const Thumbnails = ({
     }
   };
 
-  const gestureEnd = (e) => {
+  const gestureEnd = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!thumbnailsRef.current) return;
+
+    const target = e.target as HTMLElement;
+
     if (
-      e.target.closest(
-        '.modal__carousel-prev-btn, .modal__carousel-next-btn'
-      ) ||
+      target.closest('.modal__carousel-prev-btn, .modal__carousel-next-btn') ||
       currProject.screenshots.length === 1
     )
       return;
@@ -181,7 +212,7 @@ const Thumbnails = ({
     setWillTransition(true);
     setNoDelay(true);
     setDrag(false);
-    e.target.style.cursor = 'grab';
+    target.style.cursor = 'grab';
 
     const movedAfter = getTransformed() - transformed;
 
@@ -215,7 +246,7 @@ const Thumbnails = ({
               src={s}
               alt="thumbnail"
               key={s}
-              ref={(el) => (imagesRef.current[index] = el)}
+              ref={(el: HTMLImageElement) => (imagesRef.current[index] = el)}
             />
           ))}
         </div>

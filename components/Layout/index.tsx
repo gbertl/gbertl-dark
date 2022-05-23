@@ -1,11 +1,15 @@
 import { useSelector } from 'react-redux';
 
 import Header from '../Header';
-import useLayout from './hooks/useLayout';
+import useLayout from './useLayout';
 import Loader from '../Loader';
 import { selectIsLoading, selectIsOverlayActive } from '../../store/slices/ui';
 
-const Layout = (props) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const Layout = (props: Props) => {
   const isLoading = useSelector(selectIsLoading);
   const isOverlayActive = useSelector(selectIsOverlayActive);
 
