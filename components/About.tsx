@@ -71,7 +71,7 @@ const About = () => {
             <div className="about__social-wrapper mt-30 flex align-center justify-center">
               <a
                 rel="noreferrer"
-                href="https://github.com/gilbertlc"
+                href="https://github.com/gbertl"
                 target="_blank"
                 className="btn btn--secondary"
               >
