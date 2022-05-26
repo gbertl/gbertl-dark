@@ -5,22 +5,22 @@ export interface ProjectSingle {
   screenshots: Screenshot[];
   title: string;
   description: string;
-  live_preview: string;
-  source_code: string;
-  priority_order: number;
+  livePreview: string;
+  sourceCode: string;
+  priorityOrder: number;
 }
 
 export interface Category {
   id: number;
   title: string;
   name: string;
-  priority_order: number;
+  priorityOrder: number;
 }
 
 export interface Screenshot {
   id?: number;
   image: File | undefined;
-  priority_order: number;
+  priorityOrder: number;
   project?: number;
 }
 

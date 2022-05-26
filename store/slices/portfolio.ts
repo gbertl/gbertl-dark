@@ -6,14 +6,14 @@ import { Category } from '../../types';
 
 export interface Project {
   id: number;
-  technologies: string[];
-  categories: string[];
-  screenshots: string[];
+  technologyList: string[];
+  categoryList: string[];
+  screenshotList: string[];
   title: string;
   description: string;
-  live_preview: string;
-  source_code: string;
-  priority_order: number;
+  livePreview: string;
+  sourceCode: string;
+  priorityOrder: number;
 }
 
 interface PortfolioSliceState {
@@ -72,13 +72,13 @@ export const portfolioSlice = createSlice({
         return nextState;
       })
       .addCase(fetchProjects.fulfilled, (state, action) => {
-        state.projects = action.payload;
+        state.projects = action.payload.projects;
       })
       .addCase(fetchProjects.rejected, (_, action) => {
         console.log(action.error);
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
-        state.categories = action.payload;
+        state.categories = action.payload.categories;
       })
       .addCase(fetchCategories.rejected, (_, action) => {
         console.log(action.error);

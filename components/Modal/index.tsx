@@ -49,13 +49,13 @@ const Modal = ({
     const pWork = projects[currProjectIndex - 1];
 
     currProjectIndex !== 0
-      ? setPrevWork({ title: pWork.title, screenshot: pWork.screenshots[0] })
+      ? setPrevWork({ title: pWork.title, screenshot: pWork.screenshotList[0] })
       : setPrevWork(initialWork);
 
     const nWork = projects[currProjectIndex + 1];
 
     currProjectIndex !== projects.length - 1
-      ? setNextWork({ title: nWork.title, screenshot: nWork.screenshots[0] })
+      ? setNextWork({ title: nWork.title, screenshot: nWork.screenshotList[0] })
       : setNextWork(initialWork);
 
     setCounter(0);
@@ -156,21 +156,21 @@ const Modal = ({
             <h1 className="modal__heading">
               {currProject.title}
 
-              {currProject.live_preview || currProject.source_code ? (
+              {currProject.livePreview || currProject.sourceCode ? (
                 <div className="modal__btns-wrapper">
-                  {currProject.live_preview && (
+                  {currProject.livePreview && (
                     <a
                       rel="noreferrer"
-                      href={currProject.live_preview}
+                      href={currProject.livePreview}
                       target="_blank"
                     >
                       <i className="fa-solid fa-link"></i>
                     </a>
                   )}
-                  {currProject.source_code && (
+                  {currProject.sourceCode && (
                     <a
                       rel="noreferrer"
-                      href={currProject.source_code}
+                      href={currProject.sourceCode}
                       target="_blank"
                     >
                       <i className="fa-brands fa-github"></i>
@@ -189,7 +189,7 @@ const Modal = ({
 
           <div className="modal__item">
             <div className="modal__techs-wrapper">
-              {currProject.technologies.map((technology, idx) => (
+              {currProject.technologyList.map((technology, idx) => (
                 <span className="modal__tech" key={idx}>
                   {technology}
                 </span>

@@ -20,7 +20,7 @@ const Portfolio = () => {
 
   const handleFilter = (category: string) => {
     const filteredProjects = projectsData.filter(
-      (p) => category === 'all' || p.categories.includes(category)
+      (p) => category === 'all' || p.categoryList.includes(category)
     );
     const currCategory = categories.find((c) => c.name === category);
 
@@ -71,9 +71,9 @@ const Portfolio = () => {
           <div className="portfolio-item-wrapper">
             {projects.map((p, index) => (
               <div
-                data-category={p.categories.join()}
+                data-category={p.categoryList.join()}
                 className="portfolio-item"
-                key={p.id}
+                key={index}
                 onClick={() => {
                   setIsModalOpen(true);
                   setCurrProjectIndex(index);
@@ -81,7 +81,7 @@ const Portfolio = () => {
               >
                 <div className="portfolio-item__thumbnail">
                   <Image
-                    src={p.screenshots[0]}
+                    src={p.screenshotList[0]}
                     alt=""
                     layout="fill"
                     objectFit="cover"

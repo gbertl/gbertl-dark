@@ -126,10 +126,10 @@ const EditProject: NextPage<Props> = ({
           onChange={(e) =>
             setCurrProject((prevState) => ({
               ...prevState,
-              live_preview: e.target.value,
+              livePreview: e.target.value,
             }))
           }
-          value={currProject.live_preview}
+          value={currProject.livePreview}
         />
         <label htmlFor="">Source code:</label>
         <input
@@ -137,10 +137,10 @@ const EditProject: NextPage<Props> = ({
           onChange={(e) =>
             setCurrProject((prevState) => ({
               ...prevState,
-              source_code: e.target.value,
+              sourceCode: e.target.value,
             }))
           }
-          value={currProject.source_code}
+          value={currProject.sourceCode}
         />
         <ArrayField
           name="categories"
@@ -151,11 +151,11 @@ const EditProject: NextPage<Props> = ({
         <label htmlFor="">Priority order:</label>
         <input
           type="number"
-          value={currProject.priority_order}
+          value={currProject.priorityOrder}
           onChange={(e) =>
             setCurrProject((prevState) => ({
               ...prevState,
-              priority_order: parseInt(e.target.value),
+              priorityOrder: parseInt(e.target.value),
             }))
           }
         />
@@ -224,10 +224,10 @@ const EditProject: NextPage<Props> = ({
             <label htmlFor="">Priority order:</label>
             <input
               type="number"
-              value={currProject.screenshots[index].priority_order}
+              value={currProject.screenshots[index].priorityOrder}
               onChange={(e) => {
                 let newScreenshots = [...currProject.screenshots];
-                newScreenshots[index].priority_order = parseInt(e.target.value);
+                newScreenshots[index].priorityOrder = parseInt(e.target.value);
                 setCurrProject((prevState) => ({
                   ...prevState,
                   screenshots: newScreenshots,
@@ -259,7 +259,7 @@ const EditProject: NextPage<Props> = ({
                 ...prevState.screenshots,
                 {
                   image: undefined,
-                  priority_order: 0,
+                  priorityOrder: 0,
                 },
               ],
             }));

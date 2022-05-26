@@ -50,7 +50,7 @@ const Thumbnails = ({
     }, 1200);
 
     setCounter((prevCounter) => {
-      return prevCounter === currProject.screenshots.length - 1
+      return prevCounter === currProject.screenshotList.length - 1
         ? 0
         : prevCounter + 1;
     });
@@ -61,7 +61,7 @@ const Thumbnails = ({
   const restartAutoPlay = () => {
     clearInterval(intervalTimer.current);
 
-    if (currProject.screenshots.length > 1) {
+    if (currProject.screenshotList.length > 1) {
       intervalTimer.current = window.setInterval(slideNext, 5000);
     }
   };
@@ -89,7 +89,7 @@ const Thumbnails = ({
 
     setCounter((prevCounter) => {
       return prevCounter === 0
-        ? currProject.screenshots.length - 1
+        ? currProject.screenshotList.length - 1
         : prevCounter - 1;
     });
   };
@@ -165,7 +165,7 @@ const Thumbnails = ({
       (e.target as HTMLElement).closest(
         '.modal__carousel-prev-btn, .modal__carousel-next-btn'
       ) ||
-      currProject.screenshots.length === 1
+      currProject.screenshotList.length === 1
     )
       return;
 
@@ -182,7 +182,7 @@ const Thumbnails = ({
     const target = e.target as HTMLElement;
     if (
       target.closest('.modal__carousel-prev-btn, .modal__carousel-next-btn') ||
-      currProject.screenshots.length === 1
+      currProject.screenshotList.length === 1
     )
       return;
 
@@ -205,7 +205,7 @@ const Thumbnails = ({
 
     if (
       target.closest('.modal__carousel-prev-btn, .modal__carousel-next-btn') ||
-      currProject.screenshots.length === 1
+      currProject.screenshotList.length === 1
     )
       return;
     restartAutoPlay();
@@ -216,7 +216,7 @@ const Thumbnails = ({
 
     const movedAfter = getTransformed() - transformed;
 
-    if (movedAfter < -100 && counter < currProject.screenshots.length - 1)
+    if (movedAfter < -100 && counter < currProject.screenshotList.length - 1)
       setCounter((prev) => prev + 1);
     else if (movedAfter > 100 && counter > 0) setCounter((prev) => prev - 1);
     else thumbnailsRef.current.style.transform = translateXByCounter;
@@ -240,7 +240,7 @@ const Thumbnails = ({
           ref={thumbnailsRef}
           style={thumbnailsStyles}
         >
-          {currProject.screenshots.map((s, index) => (
+          {currProject.screenshotList.map((s, index) => (
             <img
               onDragStart={(e) => e.preventDefault()}
               src={s}
@@ -252,7 +252,7 @@ const Thumbnails = ({
         </div>
         <div
           className={`flex justify-between modal__carousel-btn-wrapper${
-            currProject.screenshots.length === 1 ? ' hidden' : ''
+            currProject.screenshotList.length === 1 ? ' hidden' : ''
           }`}
         >
           <button
@@ -280,10 +280,10 @@ const Thumbnails = ({
 
       <ul
         className={`dot-indicators flex justify-center${
-          currProject.screenshots.length === 1 ? ' hidden' : ''
+          currProject.screenshotList.length === 1 ? ' hidden' : ''
         }`}
       >
-        {currProject.screenshots.map((s, index) => (
+        {currProject.screenshotList.map((s, index) => (
           <li key={index}>
             <button
               className={`dot-indicators__item${

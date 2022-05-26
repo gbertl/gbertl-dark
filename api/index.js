@@ -2,10 +2,38 @@ import { protectedRoute, axiosInstance } from '../axios';
 import Cookies from 'universal-cookie';
 import jwt_decode from 'jwt-decode';
 import dayjs from 'dayjs';
+import client from '../apollo-client';
+import { gql } from '@apollo/client';
 
-export const getProjects = () => axiosInstance.get('/projects/');
+export const getProjects = () =>
+  client.query({
+    query: gql`
+      query {
+        projects {
+          title
+          description
+          livePreview
+          sourceCode
+          priorityOrder
+          technologyList
+          categoryList
+          screenshotList
+        }
+      }
+    `,
+  });
 
-export const getCategories = () => axiosInstance.get('/categories/');
+export const getCategories = () =>
+  client.query({
+    query: gql`
+      query {
+        categories {
+          name
+          title
+        }
+      }
+    `,
+  });
 
 export const login = async (credentials) => {
   const cookies = new Cookies();
