@@ -9,15 +9,14 @@ export const getProjects = () =>
   client.query({
     query: gql`
       query {
-        projects {
+        projects(orderBy: ["priority_order"]) {
           title
           description
           livePreview
           sourceCode
-          priorityOrder
           technologyList
           categoryList
-          screenshotList
+          screenshotList(orderBy: ["priority_order"])
         }
       }
     `,
@@ -27,7 +26,7 @@ export const getCategories = () =>
   client.query({
     query: gql`
       query {
-        categories {
+        categories(orderBy: ["priority_order"]) {
           name
           title
         }
