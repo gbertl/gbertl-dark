@@ -56,27 +56,11 @@ const Thumbnails = ({
     });
   };
 
-  const intervalTimer = useRef(0);
-
-  const restartAutoPlay = () => {
-    clearInterval(intervalTimer.current);
-
-    if (currProject.screenshotList.length > 1) {
-      intervalTimer.current = window.setInterval(slideNext, 5000);
-    }
-  };
-
-  const stopAutoPlay = () => {
-    clearInterval(intervalTimer.current);
-  };
-
   const handleNextSlide = () => {
-    restartAutoPlay();
     slideNext();
   };
 
   const handlePrevSlide = () => {
-    restartAutoPlay();
     setIsPrevActive(true);
     setWillTransition(true);
     setNoDelay(false);
@@ -94,24 +78,13 @@ const Thumbnails = ({
     });
   };
 
-  // clear all timers and intervals on close
-  useEffect(() => {
-    return () => {
-      clearTimeout(timer.current);
-      clearInterval(intervalTimer.current);
-    };
-  }, []);
+  useEffect(() => () => clearTimeout(timer.current), []);
 
   useEffect(() => {
     setSize(imagesRef.current[counter].clientWidth);
   }, [counter]);
 
-  useEffect(() => {
-    restartAutoPlay(); // starts interval change of project
-  }, [currProject]);
-
   const handleDotIndicator = (index: number) => {
-    restartAutoPlay();
     setCounter(index);
     setWillTransition(true);
   };
@@ -169,7 +142,6 @@ const Thumbnails = ({
     )
       return;
 
-    stopAutoPlay();
     setWillTransition(false);
     setDrag(true);
     setInitPos(getPosX(e));
@@ -208,7 +180,6 @@ const Thumbnails = ({
       currProject.screenshotList.length === 1
     )
       return;
-    restartAutoPlay();
     setWillTransition(true);
     setNoDelay(true);
     setDrag(false);
