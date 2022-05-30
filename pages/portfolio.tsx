@@ -5,8 +5,10 @@ import { fetchCategories, fetchProjects } from '../store/slices/portfolio';
 export const getServerSideProps = wrapper.getServerSideProps(
   ({ dispatch }) =>
     async () => {
-      await dispatch(fetchProjects());
-      await dispatch(fetchCategories());
+      await Promise.all([
+        dispatch(fetchProjects()),
+        dispatch(fetchCategories()),
+      ]);
 
       return {
         props: {},
