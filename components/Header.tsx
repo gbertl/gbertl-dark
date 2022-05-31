@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { hideBodyScroll, showBodyScroll } from '../../utils';
+import { hideBodyScroll, showBodyScroll } from '../utils';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -12,7 +12,7 @@ import {
   selectIsNavOpen,
   selectIsOverlayActive,
   selectIsTogglerEnabled,
-} from '../../store/slices/ui';
+} from '../store/slices/ui';
 
 const Header = () => {
   const router = useRouter();
@@ -46,12 +46,14 @@ const Header = () => {
     dispatch(toggleOverlay());
   };
 
-  const handleNavLink = (e) => {
-    if (router.pathname === e.target.getAttribute('href')) {
+  const handleNavLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const target = e.target as HTMLAnchorElement;
+
+    if (router.pathname === target.getAttribute('href')) {
       dispatch(closeNav());
       dispatch(hideOverlay());
     } else {
-      if (e.target.getAttribute('href') === '/portfolio') {
+      if (target.getAttribute('href') === '/portfolio') {
         setTimeout(() => dispatch(showLoader()), 3000);
       }
     }

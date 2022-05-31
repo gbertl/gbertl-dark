@@ -1,15 +1,3 @@
-export interface ProjectSingle {
-  id: number;
-  technologies: Technology[];
-  categories: Category[];
-  screenshots: Screenshot[];
-  title: string;
-  description: string;
-  livePreview: string;
-  sourceCode: string;
-  priorityOrder: number;
-}
-
 export interface Category {
   id: number;
   title: string;

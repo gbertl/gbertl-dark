@@ -2,7 +2,7 @@ import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 import { AppState } from '..';
 import * as api from '../../api';
-import { Category } from '../../types';
+import { Category } from '../../typings';
 
 export interface Project {
   id: number;
