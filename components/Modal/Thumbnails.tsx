@@ -7,10 +7,9 @@ import React, {
 } from 'react';
 
 import useMounted from '../../hooks/useMounted';
-import { Project } from '../../store/slices/portfolio';
 
 interface Props {
-  currProject: Project;
+  screenshotList: string[];
   size: number;
   setSize: Dispatch<SetStateAction<number>>;
   counter: number;
@@ -20,7 +19,7 @@ interface Props {
 }
 
 const Thumbnails = ({
-  currProject,
+  screenshotList,
   size,
   setSize,
   counter,
@@ -50,9 +49,7 @@ const Thumbnails = ({
     }, 1200);
 
     setCounter((prevCounter) => {
-      return prevCounter === currProject.screenshotList.length - 1
-        ? 0
-        : prevCounter + 1;
+      return prevCounter === screenshotList.length - 1 ? 0 : prevCounter + 1;
     });
   };
 
@@ -72,9 +69,7 @@ const Thumbnails = ({
     }, 1200);
 
     setCounter((prevCounter) => {
-      return prevCounter === 0
-        ? currProject.screenshotList.length - 1
-        : prevCounter - 1;
+      return prevCounter === 0 ? screenshotList.length - 1 : prevCounter - 1;
     });
   };
 
@@ -138,7 +133,7 @@ const Thumbnails = ({
       (e.target as HTMLElement).closest(
         '.modal__carousel-prev-btn, .modal__carousel-next-btn'
       ) ||
-      currProject.screenshotList.length === 1
+      screenshotList.length === 1
     )
       return;
 
@@ -154,7 +149,7 @@ const Thumbnails = ({
     const target = e.target as HTMLElement;
     if (
       target.closest('.modal__carousel-prev-btn, .modal__carousel-next-btn') ||
-      currProject.screenshotList.length === 1
+      screenshotList.length === 1
     )
       return;
 
@@ -177,7 +172,7 @@ const Thumbnails = ({
 
     if (
       target.closest('.modal__carousel-prev-btn, .modal__carousel-next-btn') ||
-      currProject.screenshotList.length === 1
+      screenshotList.length === 1
     )
       return;
     setWillTransition(true);
@@ -187,7 +182,7 @@ const Thumbnails = ({
 
     const movedAfter = getTransformed() - transformed;
 
-    if (movedAfter < -100 && counter < currProject.screenshotList.length - 1)
+    if (movedAfter < -100 && counter < screenshotList.length - 1)
       setCounter((prev) => prev + 1);
     else if (movedAfter > 100 && counter > 0) setCounter((prev) => prev - 1);
     else thumbnailsRef.current.style.transform = translateXByCounter;
@@ -211,19 +206,19 @@ const Thumbnails = ({
           ref={thumbnailsRef}
           style={thumbnailsStyles}
         >
-          {currProject.screenshotList.map((s, index) => (
+          {screenshotList.map((s, index) => (
             <img
               onDragStart={(e) => e.preventDefault()}
               src={s}
               alt="thumbnail"
-              key={s}
+              key={index}
               ref={(el: HTMLImageElement) => (imagesRef.current[index] = el)}
             />
           ))}
         </div>
         <div
           className={`flex justify-between modal__carousel-btn-wrapper${
-            currProject.screenshotList.length === 1 ? ' hidden' : ''
+            screenshotList.length === 1 ? ' hidden' : ''
           }`}
         >
           <button
@@ -251,10 +246,10 @@ const Thumbnails = ({
 
       <ul
         className={`dot-indicators flex justify-center${
-          currProject.screenshotList.length === 1 ? ' hidden' : ''
+          screenshotList.length === 1 ? ' hidden' : ''
         }`}
       >
-        {currProject.screenshotList.map((s, index) => (
+        {screenshotList.map((s, index) => (
           <li key={index}>
             <button
               className={`dot-indicators__item${

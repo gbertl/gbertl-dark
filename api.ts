@@ -7,6 +7,7 @@ export const getProjects = () =>
       query {
         projects(orderBy: ["priority_order"]) {
           id
+          title
           categoryList
           thumbnail
         }

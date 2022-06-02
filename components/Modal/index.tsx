@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
 import Thumbnails from './Thumbnails';
 import { Project } from '../../store/slices/portfolio';
+import { gql, useLazyQuery } from '@apollo/client';
 
 interface Props {
   currProjectIndex: number;
@@ -11,16 +12,6 @@ interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-interface IWork {
-  title: string;
-  screenshot: string;
-}
-
-const initialWork = {
-  title: '',
-  screenshot: '',
-};
-
 const Modal = ({
   currProjectIndex,
   setCurrProjectIndex,
@@ -28,9 +19,23 @@ const Modal = ({
   filterTitle,
   setIsModalOpen,
 }: Props) => {
-  const [currProject, setCurrProject] = useState(projects[currProjectIndex]);
-  const [prevWork, setPrevWork] = useState<IWork>(initialWork);
-  const [nextWork, setNextWork] = useState<IWork>(initialWork);
+  const GET_PROJECT = gql`
+    query {
+      project(id: ${projects[currProjectIndex].id}) {
+        title
+        livePreview
+        sourceCode
+        description
+        technologyList
+        screenshotList
+      }
+    }
+  `;
+
+  const [getProject, { loading, data }] = useLazyQuery(GET_PROJECT);
+  const [currProject, setCurrProject] = useState<Project | null>(null);
+  const [prevWork, setPrevWork] = useState<Project | null>(null);
+  const [nextWork, setNextWork] = useState<Project | null>(null);
   const [direction, setDirection] = useState('');
 
   const modalOverlayRef = useRef<HTMLDivElement>(null);
@@ -43,20 +48,20 @@ const Modal = ({
 
   const didMount = useRef(false);
 
+  const [covering, setCovering] = useState(false);
+  const [counterText, setCounterText] = useState(
+    `${currProjectIndex + 1} of ${projects.length}`
+  );
+
   const updateModal = () => {
-    setCurrProject(projects[currProjectIndex]);
-
-    const pWork = projects[currProjectIndex - 1];
-
+    getProject();
     currProjectIndex !== 0
-      ? setPrevWork({ title: pWork.title, screenshot: pWork.screenshotList[0] })
-      : setPrevWork(initialWork);
-
-    const nWork = projects[currProjectIndex + 1];
+      ? setPrevWork(projects[currProjectIndex - 1])
+      : setPrevWork(null);
 
     currProjectIndex !== projects.length - 1
-      ? setNextWork({ title: nWork.title, screenshot: nWork.screenshotList[0] })
-      : setNextWork(initialWork);
+      ? setNextWork(projects[currProjectIndex + 1])
+      : setNextWork(null);
 
     setCounter(0);
     setSize(0);
@@ -67,6 +72,15 @@ const Modal = ({
 
     setIsModalTransition(true);
   }, []);
+
+  useEffect(() => {
+    if (!covering)
+      setCounterText(`${currProjectIndex + 1} of ${projects.length}`);
+  }, [covering]);
+
+  useEffect(() => {
+    if (data?.project && !covering) setCurrProject(data.project);
+  }, [data, covering]);
 
   useEffect(() => {
     if (didMount.current && !isModalTransition) {
@@ -83,6 +97,7 @@ const Modal = ({
   }, [isModalTransition]);
 
   const handleNextPrev = (direction: 'prev' | 'next') => {
+    setCovering(true);
     setWillTransition(false);
     setDirection(direction);
 
@@ -106,6 +121,7 @@ const Modal = ({
       if (!modalOverlayRef.current) return;
 
       updateModal();
+      setCovering(false);
       modalOverlayRef.current.scrollTop = 0;
     }, 400);
 
@@ -132,9 +148,7 @@ const Modal = ({
         <div className="modal__content">
           <div className="modal__header">
             <div className="modal__counter-wrapper flex align-center flex-wrap">
-              <h2 className="modal__counter">
-                {currProjectIndex + 1} of {projects.length}
-              </h2>
+              <h2 className="modal__counter">{counterText}</h2>
               <p className="modal__filter-title">( {filterTitle} )</p>
             </div>
 
@@ -143,34 +157,36 @@ const Modal = ({
               onClick={() => setIsModalTransition(false)}
             ></button>
 
-            <Thumbnails
-              currProject={currProject}
-              size={size}
-              setSize={setSize}
-              counter={counter}
-              setCounter={setCounter}
-              willTransition={willTransition}
-              setWillTransition={setWillTransition}
-            />
+            {currProject?.screenshotList && (
+              <Thumbnails
+                screenshotList={currProject?.screenshotList}
+                size={size}
+                setSize={setSize}
+                counter={counter}
+                setCounter={setCounter}
+                willTransition={willTransition}
+                setWillTransition={setWillTransition}
+              />
+            )}
 
             <h1 className="modal__heading">
-              {currProject.title}
+              {currProject?.title}
 
-              {currProject.livePreview || currProject.sourceCode ? (
+              {currProject?.livePreview || currProject?.sourceCode ? (
                 <div className="modal__btns-wrapper">
-                  {currProject.livePreview && (
+                  {currProject?.livePreview && (
                     <a
                       rel="noreferrer"
-                      href={currProject.livePreview}
+                      href={currProject?.livePreview}
                       target="_blank"
                     >
                       <i className="fa-solid fa-link"></i>
                     </a>
                   )}
-                  {currProject.sourceCode && (
+                  {currProject?.sourceCode && (
                     <a
                       rel="noreferrer"
-                      href={currProject.sourceCode}
+                      href={currProject?.sourceCode}
                       target="_blank"
                     >
                       <i className="fa-brands fa-github"></i>
@@ -184,12 +200,14 @@ const Modal = ({
           </div>
           <p
             className="portfolio-item__desc"
-            dangerouslySetInnerHTML={{ __html: currProject.description }}
+            dangerouslySetInnerHTML={{
+              __html: currProject ? currProject.description : '',
+            }}
           ></p>
 
           <div className="modal__item">
             <div className="modal__techs-wrapper">
-              {currProject.technologyList.map((technology, idx) => (
+              {currProject?.technologyList.map((technology, idx) => (
                 <span className="modal__tech" key={idx}>
                   {technology}
                 </span>
@@ -198,11 +216,7 @@ const Modal = ({
           </div>
 
           <div className="modal__footer flex justify-between">
-            <div
-              className={`modal__prev-work ${
-                !prevWork.title ? 'invisible' : ''
-              }`}
-            >
+            <div className={`modal__prev-work ${!prevWork ? 'invisible' : ''}`}>
               <button
                 className="btn btn--primary modal__prev-work-btn"
                 onClick={() => handleNextPrev('prev')}
@@ -210,17 +224,17 @@ const Modal = ({
                 <i className="fas fa-arrow-left"></i>
               </button>
               <h2 className="mt-30 mb-15 modal__prev-work-title">
-                {prevWork.title}
+                {prevWork?.title}
               </h2>
               <img
-                src={prevWork.screenshot}
+                src={prevWork?.thumbnail}
                 alt=""
                 className="modal__small-img"
               />
             </div>
             <div
               className={`modal__next-work flex ${
-                !nextWork.title ? 'invisible' : ''
+                !nextWork ? 'invisible' : ''
               }`}
             >
               <button
@@ -230,10 +244,10 @@ const Modal = ({
                 <i className="fas fa-arrow-right"></i>
               </button>
               <h2 className="mt-30 mb-15 modal__next-work-title">
-                {nextWork.title}
+                {nextWork?.title}
               </h2>
               <img
-                src={nextWork.screenshot}
+                src={nextWork?.thumbnail}
                 alt=""
                 className="modal__small-img"
               />
