@@ -81,7 +81,7 @@ const Portfolio = () => {
               >
                 <div className="portfolio-item__thumbnail">
                   <Image
-                    src={p.screenshotList[0]}
+                    src={p.thumbnail}
                     alt=""
                     layout="fill"
                     objectFit="cover"

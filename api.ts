@@ -6,13 +6,9 @@ export const getProjects = () =>
     query: gql`
       query {
         projects(orderBy: ["priority_order"]) {
-          title
-          description
-          livePreview
-          sourceCode
-          technologyList
+          id
           categoryList
-          screenshotList(orderBy: ["priority_order"])
+          thumbnail
         }
       }
     `,
