@@ -1,5 +1,6 @@
 import React, {
   Dispatch,
+  MutableRefObject,
   SetStateAction,
   useEffect,
   useRef,
@@ -9,6 +10,7 @@ import React, {
 import useMounted from '../../hooks/useMounted';
 
 interface Props {
+  imagesRef: MutableRefObject<HTMLImageElement[]>;
   screenshotList: string[];
   size: number;
   setSize: Dispatch<SetStateAction<number>>;
@@ -19,6 +21,7 @@ interface Props {
 }
 
 const Thumbnails = ({
+  imagesRef,
   screenshotList,
   size,
   setSize,
@@ -27,8 +30,6 @@ const Thumbnails = ({
   willTransition,
   setWillTransition,
 }: Props) => {
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-
   const [isNextActive, setIsNextActive] = useState(false);
   const [isPrevActive, setIsPrevActive] = useState(false);
 
@@ -213,6 +214,7 @@ const Thumbnails = ({
               alt="thumbnail"
               key={index}
               ref={(el: HTMLImageElement) => (imagesRef.current[index] = el)}
+              onLoad={() => (imagesRef.current[0].style.filter = 'blur(0)')}
             />
           ))}
         </div>

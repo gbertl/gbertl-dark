@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Thumbnails from './Thumbnails';
 import { Project } from '../../store/slices/portfolio';
 import { gql, useLazyQuery } from '@apollo/client';
+import useMounted from '../../hooks/useMounted';
 
 interface Props {
   currProjectIndex: number;
@@ -52,6 +53,8 @@ const Modal = ({
   const [counterText, setCounterText] = useState(
     `${currProjectIndex + 1} of ${projects.length}`
   );
+
+  const imagesRef = useRef<HTMLImageElement[]>([]);
 
   const updateModal = () => {
     getProject();
@@ -116,8 +119,14 @@ const Modal = ({
     return () => clearTimeout(time);
   }, [direction]);
 
+  const mounted = useMounted();
+
   useEffect(() => {
+    if (!mounted) return;
+
     const time = setTimeout(() => {
+      imagesRef.current[0].style.filter = 'blur(8px)';
+
       if (!modalOverlayRef.current) return;
 
       updateModal();
@@ -159,6 +168,7 @@ const Modal = ({
 
             {currProject?.screenshotList && (
               <Thumbnails
+                imagesRef={imagesRef}
                 screenshotList={currProject?.screenshotList}
                 size={size}
                 setSize={setSize}
