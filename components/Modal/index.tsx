@@ -13,6 +13,19 @@ interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
+const GET_PROJECT = gql`
+  query GetProject($id: ID!) {
+    project(id: $id) {
+      title
+      livePreview
+      sourceCode
+      description
+      technologyList
+      screenshotList
+    }
+  }
+`;
+
 const Modal = ({
   currProjectIndex,
   setCurrProjectIndex,
@@ -20,19 +33,6 @@ const Modal = ({
   filterTitle,
   setIsModalOpen,
 }: Props) => {
-  const GET_PROJECT = gql`
-    query {
-      project(id: ${projects[currProjectIndex].id}) {
-        title
-        livePreview
-        sourceCode
-        description
-        technologyList
-        screenshotList
-      }
-    }
-  `;
-
   const [getProject, { loading, data }] = useLazyQuery(GET_PROJECT);
   const [currProject, setCurrProject] = useState<Project | null>(null);
   const [prevWork, setPrevWork] = useState<Project | null>(null);
@@ -57,7 +57,12 @@ const Modal = ({
   const imagesRef = useRef<HTMLImageElement[]>([]);
 
   const updateModal = () => {
-    getProject();
+    getProject({
+      variables: {
+        id: projects[currProjectIndex].id,
+      },
+    });
+
     currProjectIndex !== 0
       ? setPrevWork(projects[currProjectIndex - 1])
       : setPrevWork(null);
