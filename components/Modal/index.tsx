@@ -33,7 +33,8 @@ const Modal = ({
   filterTitle,
   setIsModalOpen,
 }: Props) => {
-  const [getProject, { loading, data }] = useLazyQuery(GET_PROJECT);
+  const [getProject, { data }] = useLazyQuery(GET_PROJECT);
+
   const [currProject, setCurrProject] = useState<Project | null>(null);
   const [prevWork, setPrevWork] = useState<Project | null>(null);
   const [nextWork, setNextWork] = useState<Project | null>(null);
@@ -47,14 +48,14 @@ const Modal = ({
 
   const [isModalTransition, setIsModalTransition] = useState(false);
 
-  const didMount = useRef(false);
-
   const [covering, setCovering] = useState(false);
   const [counterText, setCounterText] = useState(
     `${currProjectIndex + 1} of ${projects.length}`
   );
 
   const imagesRef = useRef<HTMLImageElement[]>([]);
+
+  const mounted = useMounted();
 
   const updateModal = () => {
     getProject({
@@ -75,15 +76,26 @@ const Modal = ({
     setSize(0);
   };
 
+  const handleNextPrev = (direction: 'prev' | 'next') => {
+    setCovering(true);
+    setWillTransition(false);
+    setDirection(direction);
+
+    direction === 'next'
+      ? setCurrProjectIndex(currProjectIndex + 1)
+      : direction === 'prev'
+      ? setCurrProjectIndex(currProjectIndex - 1)
+      : null;
+  };
+
   useEffect(() => {
     updateModal();
-
     setIsModalTransition(true);
   }, []);
 
   useEffect(() => {
-    if (!covering)
-      setCounterText(`${currProjectIndex + 1} of ${projects.length}`);
+    if (covering) return;
+    setCounterText(`${currProjectIndex + 1} of ${projects.length}`);
   }, [covering]);
 
   useEffect(() => {
@@ -91,40 +103,20 @@ const Modal = ({
   }, [data, covering]);
 
   useEffect(() => {
-    if (didMount.current && !isModalTransition) {
-      document.body.classList.remove('overflow-y-hidden');
+    if (!mounted) return;
 
-      setTimeout(() => {
-        setIsModalOpen(false);
-      }, 1000);
+    if (!isModalTransition) {
+      document.body.classList.remove('overflow-y-hidden');
+      setTimeout(() => setIsModalOpen(false), 1000);
     } else {
       document.body.classList.add('overflow-y-hidden');
-
-      didMount.current = true;
     }
   }, [isModalTransition]);
 
-  const handleNextPrev = (direction: 'prev' | 'next') => {
-    setCovering(true);
-    setWillTransition(false);
-    setDirection(direction);
-
-    if (direction === 'next') {
-      setCurrProjectIndex(currProjectIndex + 1);
-    } else if (direction === 'prev') {
-      setCurrProjectIndex(currProjectIndex - 1);
-    }
-  };
-
   useEffect(() => {
-    const time = setTimeout(() => {
-      setDirection('');
-    }, 1000);
-
+    const time = setTimeout(() => setDirection(''), 1000);
     return () => clearTimeout(time);
   }, [direction]);
-
-  const mounted = useMounted();
 
   useEffect(() => {
     if (!mounted) return;
@@ -132,32 +124,32 @@ const Modal = ({
     const time = setTimeout(() => {
       imagesRef.current[0].style.filter = 'blur(8px)';
 
-      if (!modalOverlayRef.current) return;
-
       updateModal();
       setCovering(false);
+
+      if (!modalOverlayRef.current) return;
       modalOverlayRef.current.scrollTop = 0;
     }, 400);
 
-    return () => {
-      clearTimeout(time);
-    };
+    return () => clearTimeout(time);
   }, [currProjectIndex]);
+
+  const modalTransitionClasses = direction
+    ? `modal__transition--${direction}`
+    : '';
+
+  const modalClasses = isModalTransition ? 'modal--open' : '';
 
   return (
     <div
-      className={`modal${isModalTransition ? ' modal--open' : ''}`}
+      className={`modal ${modalClasses}`}
       onClick={(e) => {
         if (!(e.target as Element).closest('.modal__content')) {
           setIsModalTransition(false);
         }
       }}
     >
-      <div
-        className={`modal__transition${
-          direction ? ` modal__transition--${direction}` : ''
-        }`}
-      ></div>
+      <div className={`modal__transition ${modalTransitionClasses}`} />
       <div className="modal__overlay" ref={modalOverlayRef}>
         <div className="modal__content">
           <div className="modal__header">
