@@ -10,7 +10,6 @@ import React, {
 import useMounted from '../../hooks/useMounted';
 
 interface Props {
-  imagesRef: MutableRefObject<HTMLImageElement[]>;
   screenshotList: string[];
   size: number;
   setSize: Dispatch<SetStateAction<number>>;
@@ -18,10 +17,10 @@ interface Props {
   setCounter: Dispatch<SetStateAction<number>>;
   willTransition: boolean;
   setWillTransition: Dispatch<SetStateAction<boolean>>;
+  setImageLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const Thumbnails = ({
-  imagesRef,
   screenshotList,
   size,
   setSize,
@@ -29,6 +28,7 @@ const Thumbnails = ({
   setCounter,
   willTransition,
   setWillTransition,
+  setImageLoading,
 }: Props) => {
   const [isNextActive, setIsNextActive] = useState(false);
   const [isPrevActive, setIsPrevActive] = useState(false);
@@ -36,6 +36,8 @@ const Thumbnails = ({
   const [noDelay, setNoDelay] = useState(false);
 
   const timer = useRef(0);
+
+  const imagesRef = useRef<HTMLImageElement[]>([]);
 
   // handlers
   const slideNext = () => {
@@ -214,7 +216,9 @@ const Thumbnails = ({
               alt="thumbnail"
               key={index}
               ref={(el: HTMLImageElement) => (imagesRef.current[index] = el)}
-              onLoad={() => (imagesRef.current[0].style.filter = 'blur(0)')}
+              onLoad={() => {
+                if (index === 0) setImageLoading(false);
+              }}
             />
           ))}
         </div>

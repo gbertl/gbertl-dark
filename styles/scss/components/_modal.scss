@@ -46,50 +46,27 @@
     height: 100%;
     z-index: 1;
     background-color: var(--clr-dark);
-    display: none;
+    transition: transform 400ms;
+    transform: scaleX(0);
 
-    &--prev,
     &--next {
-      display: block;
+      transform: scaleX(1);
+      transform-origin: left;
     }
 
-    &--next {
-      animation: nextItem 1s forwards;
+    &--next-close {
+      transform: scaleX(0);
+      transform-origin: right;
     }
 
     &--prev {
-      animation: prevItem 1s forwards;
+      transform: scaleX(1);
+      transform-origin: right;
     }
 
-    // 0 -> from left to right 40 (covered) -> wait 60 -> to the right 100
-    @keyframes nextItem {
-      0% {
-        transform: translateX(-100%);
-      }
-
-      40%,
-      60% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(100%);
-      }
-    }
-
-    @keyframes prevItem {
-      0% {
-        transform: translateX(100%);
-      }
-
-      40%,
-      60% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-100%);
-      }
+    &--prev-close {
+      transform: scaleX(0);
+      transform-origin: left;
     }
   }
 

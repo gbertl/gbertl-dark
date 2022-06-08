@@ -48,16 +48,17 @@ const Modal = ({
 
   const [isModalTransition, setIsModalTransition] = useState(false);
 
-  const [covering, setCovering] = useState(false);
-  const [counterText, setCounterText] = useState(
-    `${currProjectIndex + 1} of ${projects.length}`
-  );
-
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-
   const mounted = useMounted();
 
+  const [loading, setLoading] = useState(false);
+  const [imageLoading, setImageLoading] = useState(false);
+  const [isClose, setIsClose] = useState(false);
+  const [counterText, setCounterText] = useState('');
+
   const updateModal = () => {
+    setLoading(true);
+    setImageLoading(true);
+    setCounterText(`${currProjectIndex + 1} of ${projects.length}`);
     getProject({
       variables: {
         id: projects[currProjectIndex].id,
@@ -77,7 +78,6 @@ const Modal = ({
   };
 
   const handleNextPrev = (direction: 'prev' | 'next') => {
-    setCovering(true);
     setWillTransition(false);
     setDirection(direction);
 
@@ -94,13 +94,20 @@ const Modal = ({
   }, []);
 
   useEffect(() => {
-    if (covering) return;
-    setCounterText(`${currProjectIndex + 1} of ${projects.length}`);
-  }, [covering]);
+    if (data) {
+      setCurrProject(data.project);
+
+      if (!imageLoading) {
+        setLoading(false);
+      }
+    }
+  }, [data, imageLoading]);
 
   useEffect(() => {
-    if (data?.project && !covering) setCurrProject(data.project);
-  }, [data, covering]);
+    // should only run for next/prev situation
+    if (!mounted || !direction) return;
+    if (!loading) setIsClose(true);
+  }, [loading]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -114,29 +121,33 @@ const Modal = ({
   }, [isModalTransition]);
 
   useEffect(() => {
-    const time = setTimeout(() => setDirection(''), 1000);
-    return () => clearTimeout(time);
-  }, [direction]);
-
-  useEffect(() => {
     if (!mounted) return;
 
     const time = setTimeout(() => {
-      imagesRef.current[0].style.filter = 'blur(8px)';
-
       updateModal();
-      setCovering(false);
 
       if (!modalOverlayRef.current) return;
       modalOverlayRef.current.scrollTop = 0;
-    }, 400);
+    }, 500);
 
     return () => clearTimeout(time);
   }, [currProjectIndex]);
 
-  const modalTransitionClasses = direction
-    ? `modal__transition--${direction}`
-    : '';
+  useEffect(() => {
+    if (!direction || !isClose) return;
+
+    const timeout = setTimeout(() => {
+      setDirection('');
+      setIsClose(false);
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [direction, isClose]);
+
+  let modalTransitionClasses: string = '';
+  if (direction) modalTransitionClasses += ` modal__transition--${direction}`;
+  if (isClose && direction)
+    modalTransitionClasses += ` modal__transition--${direction}-close`;
 
   const modalClasses = isModalTransition ? 'modal--open' : '';
 
@@ -165,7 +176,6 @@ const Modal = ({
 
             {currProject?.screenshotList && (
               <Thumbnails
-                imagesRef={imagesRef}
                 screenshotList={currProject?.screenshotList}
                 size={size}
                 setSize={setSize}
@@ -173,6 +183,7 @@ const Modal = ({
                 setCounter={setCounter}
                 willTransition={willTransition}
                 setWillTransition={setWillTransition}
+                setImageLoading={setImageLoading}
               />
             )}
 
