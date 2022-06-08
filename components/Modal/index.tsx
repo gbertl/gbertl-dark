@@ -50,13 +50,12 @@ const Modal = ({
 
   const mounted = useMounted();
 
-  const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
-  const [isClose, setIsClose] = useState(false);
   const [counterText, setCounterText] = useState('');
 
+  const modalTransitionRef = useRef<HTMLDivElement>(null);
+
   const updateModal = () => {
-    setLoading(true);
     setImageLoading(true);
     setCounterText(`${currProjectIndex + 1} of ${projects.length}`);
     getProject({
@@ -98,16 +97,16 @@ const Modal = ({
       setCurrProject(data.project);
 
       if (!imageLoading) {
-        setLoading(false);
+        modalTransitionRef.current?.style.setProperty(
+          '--tr-origin',
+          `${
+            direction === 'next' ? 'right' : direction === 'prev' ? 'left' : ''
+          }`
+        );
+        setDirection('');
       }
     }
   }, [data, imageLoading]);
-
-  useEffect(() => {
-    // should only run for next/prev situation
-    if (!mounted || !direction) return;
-    if (!loading) setIsClose(true);
-  }, [loading]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -133,21 +132,9 @@ const Modal = ({
     return () => clearTimeout(time);
   }, [currProjectIndex]);
 
-  useEffect(() => {
-    if (!direction || !isClose) return;
-
-    const timeout = setTimeout(() => {
-      setDirection('');
-      setIsClose(false);
-    }, 500);
-
-    return () => clearTimeout(timeout);
-  }, [direction, isClose]);
-
-  let modalTransitionClasses: string = '';
-  if (direction) modalTransitionClasses += ` modal__transition--${direction}`;
-  if (isClose && direction)
-    modalTransitionClasses += ` modal__transition--${direction}-close`;
+  const modalTransitionClasses = direction
+    ? `modal__transition--${direction}`
+    : '';
 
   const modalClasses = isModalTransition ? 'modal--open' : '';
 
@@ -160,7 +147,10 @@ const Modal = ({
         }
       }}
     >
-      <div className={`modal__transition ${modalTransitionClasses}`} />
+      <div
+        className={`modal__transition ${modalTransitionClasses}`}
+        ref={modalTransitionRef}
+      />
       <div className="modal__overlay" ref={modalOverlayRef}>
         <div className="modal__content">
           <div className="modal__header">

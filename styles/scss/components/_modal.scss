@@ -48,25 +48,16 @@
     background-color: var(--clr-dark);
     transition: transform 400ms;
     transform: scaleX(0);
+    transform-origin: var(--tr-origin);
 
     &--next {
       transform: scaleX(1);
       transform-origin: left;
     }
 
-    &--next-close {
-      transform: scaleX(0);
-      transform-origin: right;
-    }
-
     &--prev {
       transform: scaleX(1);
       transform-origin: right;
-    }
-
-    &--prev-close {
-      transform: scaleX(0);
-      transform-origin: left;
     }
   }
 
