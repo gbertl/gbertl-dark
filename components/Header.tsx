@@ -12,7 +12,9 @@ import {
   selectIsNavOpen,
   selectIsOverlayActive,
   selectIsTogglerEnabled,
+  hideToggler,
 } from '../store/slices/ui';
+import { selectProjects } from '../store/slices/portfolio';
 
 const Header = () => {
   const router = useRouter();
@@ -21,6 +23,12 @@ const Header = () => {
   const isInitial = useRef(true);
   const isOverlayActive = useSelector(selectIsOverlayActive);
   const isTogglerEnabled = useSelector(selectIsTogglerEnabled);
+  const areProjectsFetched = useSelector(selectProjects).length;
+  const areProjectsFetchedRef = useRef(0);
+
+  useEffect(() => {
+    areProjectsFetchedRef.current = areProjectsFetched;
+  }, [areProjectsFetched]);
 
   useEffect(() => {
     if (isInitial.current) {
@@ -49,13 +57,18 @@ const Header = () => {
   const handleNavLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const target = e.target as HTMLAnchorElement;
 
-    if (router.pathname === target.getAttribute('href')) {
+    if (target.getAttribute('href') === router.pathname) {
       dispatch(closeNav());
       dispatch(hideOverlay());
-    } else {
-      if (target.getAttribute('href') === '/portfolio') {
-        setTimeout(() => dispatch(showLoader()), 3000);
-      }
+    } else if (target.getAttribute('href') === '/portfolio') {
+      if (areProjectsFetchedRef.current) return;
+
+      setTimeout(() => {
+        if (areProjectsFetchedRef.current) return;
+        dispatch(hideToggler());
+        dispatch(closeNav());
+        dispatch(showLoader());
+      }, 3000);
     }
   };
 
