@@ -216,3 +216,22 @@
     transform-origin: left;
   }
 }
+
+.spinner {
+  display: block;
+  width: 1.5em;
+  height: 1.5em;
+  border: 2px solid var(--clr-light-white);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

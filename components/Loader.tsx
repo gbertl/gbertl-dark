@@ -39,7 +39,7 @@ const Loader = () => {
   return (
     <div className="loader">
       <div className="loader__container">
-        <span className="loader__icon"></span>
+        <span className="spinner"></span>
         <h2>Waking up my API from Heroku&apos;s free tier.</h2>
         <p>
           Please allow up to {sec} second{sec > 1 ? 's' : ''}...
