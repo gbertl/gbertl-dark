@@ -55,6 +55,10 @@ const Modal = ({
 
   const modalTransitionRef = useRef<HTMLDivElement>(null);
 
+  const [isSlideLoading, setIsSlideLoading] = useState(false);
+  const slideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const imageLoadingRef = useRef(false);
+
   const updateModal = () => {
     setImageLoading(true);
     setCounterText(`${currProjectIndex + 1} of ${projects.length}`);
@@ -85,6 +89,12 @@ const Modal = ({
       : direction === 'prev'
       ? setCurrProjectIndex(currProjectIndex - 1)
       : null;
+
+    // will show loader after 3sec if slide isnt ready
+    if (slideTimeoutRef.current) clearTimeout(slideTimeoutRef.current);
+    slideTimeoutRef.current = setTimeout(() => {
+      if (imageLoadingRef.current) setIsSlideLoading(true);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -93,6 +103,8 @@ const Modal = ({
   }, []);
 
   useEffect(() => {
+    imageLoadingRef.current = imageLoading;
+
     if (data) {
       setCurrProject(data.project);
 
@@ -104,6 +116,8 @@ const Modal = ({
           }`
         );
         setDirection('');
+
+        setIsSlideLoading(false);
       }
     }
   }, [data, imageLoading]);
@@ -150,7 +164,9 @@ const Modal = ({
       <div
         className={`modal__transition ${modalTransitionClasses}`}
         ref={modalTransitionRef}
-      />
+      >
+        {isSlideLoading && <span className="spinner"></span>}
+      </div>
       <div className="modal__overlay" ref={modalOverlayRef}>
         <div className="modal__content">
           <div className="modal__header">

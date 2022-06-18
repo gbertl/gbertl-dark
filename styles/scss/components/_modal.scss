@@ -49,6 +49,13 @@
     transition: transform 400ms;
     transform: scaleX(0);
     transform-origin: var(--tr-origin);
+    display: grid;
+    place-items: center;
+
+    .spinner {
+      width: 2em;
+      height: 2em;
+    }
 
     &--next {
       transform: scaleX(1);
