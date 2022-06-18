@@ -6,7 +6,7 @@ import { selectProjects } from '../store/slices/portfolio';
 
 const Loader = () => {
   const isLoading = useSelector(selectIsLoading);
-  const [sec, setSec] = useState(10);
+  const [sec, setSec] = useState(8);
   const countDownRef = useRef(0);
 
   const areProjectsFetched = useSelector(selectProjects).length;
@@ -40,7 +40,7 @@ const Loader = () => {
     <div className="loader">
       <div className="loader__container">
         <span className="loader__icon"></span>
-        <h2>Waking up my API hosted on heroku&apos;s free tier.</h2>
+        <h2>Waking up my API from Heroku&apos;s free tier.</h2>
         <p>
           Please allow up to {sec} second{sec > 1 ? 's' : ''}...
         </p>
