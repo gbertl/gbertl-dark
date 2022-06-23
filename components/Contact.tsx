@@ -73,7 +73,7 @@ const Contact = () => {
       <section className="contact" id="contact">
         <div className="container text-center min-h-screen contact__container px-15 center">
           <div>
-            <h1 className="section-heading">Contact Me</h1>
+            <h1 className="section-heading contact__heading">Contact Me</h1>
             <p className="contact__desc">
               If you wanna get in touch, talk to me about a project
               collaboration or just say hi, click the button below and fill up

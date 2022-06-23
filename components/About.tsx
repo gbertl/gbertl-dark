@@ -51,7 +51,7 @@ const About = () => {
             <h1 className="about__heading">Hi 👋 , my name is Gilbert.</h1>
             <p>
               I&apos;m a Front-End Web Developer based in the Philippines. Feel
-              free to take a look at my latest works on the{' '}
+              free to take a look at my selected works on the{' '}
               <button
                 className="text-link"
                 onClick={() => handleAboutLink(Paths.Portfolio)}
