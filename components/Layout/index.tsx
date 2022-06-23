@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import useAppSelector from '../../hooks/useAppSelector';
 
 import Header from '../Header';
 import useLayout from './useLayout';
@@ -10,8 +10,8 @@ interface Props {
 }
 
 const Layout = (props: Props) => {
-  const isLoading = useSelector(selectIsLoading);
-  const isOverlayActive = useSelector(selectIsOverlayActive);
+  const isLoading = useAppSelector(selectIsLoading);
+  const isOverlayActive = useAppSelector(selectIsOverlayActive);
 
   useLayout();
 

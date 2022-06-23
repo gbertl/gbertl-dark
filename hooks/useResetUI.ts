@@ -1,4 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import useAppSelector from './useAppSelector';
 import { useEffect } from 'react';
 import {
   closeNav,
@@ -10,7 +11,7 @@ import {
 const useResetUI = () => {
   const dispatch = useDispatch();
   const { isTogglerEnabled, isNavOpen, isOverlayActive } =
-    useSelector(selectUI);
+    useAppSelector(selectUI);
 
   useEffect(() => {
     if (!isTogglerEnabled) dispatch(showToggler());

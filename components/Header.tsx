@@ -2,7 +2,8 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { hideBodyScroll, showBodyScroll } from '../utils';
 import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import useAppSelector from '../hooks/useAppSelector';
 import {
   closeNav,
   toggleNav,
@@ -18,12 +19,12 @@ import { selectProjects } from '../store/slices/portfolio';
 
 const Header = () => {
   const router = useRouter();
-  const isNavOpen = useSelector(selectIsNavOpen);
+  const isNavOpen = useAppSelector(selectIsNavOpen);
   const dispatch = useDispatch();
   const isInitial = useRef(true);
-  const isOverlayActive = useSelector(selectIsOverlayActive);
-  const isTogglerEnabled = useSelector(selectIsTogglerEnabled);
-  const areProjectsFetched = useSelector(selectProjects).length;
+  const isOverlayActive = useAppSelector(selectIsOverlayActive);
+  const isTogglerEnabled = useAppSelector(selectIsTogglerEnabled);
+  const areProjectsFetched = useAppSelector(selectProjects).length;
   const areProjectsFetchedRef = useRef(0);
 
   useEffect(() => {

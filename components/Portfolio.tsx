@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
+import useAppSelector from '../hooks/useAppSelector';
 import Head from 'next/head';
 
 import Modal from './Modal';
@@ -8,8 +8,8 @@ import useResetUI from '../hooks/useResetUI';
 import { selectCategories, selectProjects } from '../store/slices/portfolio';
 
 const Portfolio = () => {
-  const projectsData = useSelector(selectProjects);
-  const categories = useSelector(selectCategories);
+  const projectsData = useAppSelector(selectProjects);
+  const categories = useAppSelector(selectCategories);
 
   const [projects, setProjects] = useState(projectsData);
   const [currProjectIndex, setCurrProjectIndex] = useState(0);

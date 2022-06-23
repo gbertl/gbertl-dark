@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import useAppSelector from '../hooks/useAppSelector';
 
 import { hideLoader, selectIsLoading } from '../store/slices/ui';
 import { selectProjects } from '../store/slices/portfolio';
 
 const Loader = () => {
-  const isLoading = useSelector(selectIsLoading);
+  const isLoading = useAppSelector(selectIsLoading);
 
-  const areProjectsFetched = useSelector(selectProjects).length;
+  const areProjectsFetched = useAppSelector(selectProjects).length;
   const dispatch = useDispatch();
 
   useEffect(() => {
