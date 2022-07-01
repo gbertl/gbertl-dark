@@ -21,7 +21,7 @@ const GET_PROJECT = gql`
       sourceCode
       description
       technologyList
-      screenshotList
+      screenshotList(orderBy: ["priority_order"])
     }
   }
 `;
