@@ -65,111 +65,105 @@ const Contact = () => {
   };
 
   return (
-    <>
-      <Head>
-        <title>Contact | React Front-end Dev & HTML-Dev | Gilbert L.</title>
-      </Head>
-
-      <section className="contact" id="contact">
-        <div className="container text-center min-h-screen contact__container px-15 center">
-          <div>
-            <h1 className="section-heading contact__heading">Contact Me</h1>
-            <p className="contact__desc">
-              If you wanna get in touch, talk to me about a project
-              collaboration or just say hi, click the button below and fill up
-              the awesome form or hire me on{' '}
-              <a
-                rel="noreferrer"
-                href="https://www.upwork.com/freelancers/~0110dcf905a3a19183"
-                target="_blank"
-                className="text-link"
-              >
-                Upwork
-              </a>{' '}
-              and let&apos;s talk.
-            </p>
-
-            <button
-              className="btn btn--primary mt-15 contact__send-btn"
-              onClick={handleShowForm}
+    <section className="contact" id="contact">
+      <div className="container text-center min-h-screen contact__container px-15 center">
+        <div>
+          <h1 className="section-heading contact__heading">Contact Me</h1>
+          <p className="contact__desc">
+            If you wanna get in touch, talk to me about a project collaboration
+            or just say hi, click the button below and fill up the awesome form
+            or hire me on{' '}
+            <a
+              rel="noreferrer"
+              href="https://www.upwork.com/freelancers/~0110dcf905a3a19183"
+              target="_blank"
+              className="text-link"
             >
-              Send A Message
-            </button>
-          </div>
-        </div>
+              Upwork
+            </a>{' '}
+            and let&apos;s talk.
+          </p>
 
-        <div
-          className={`contact-form${isFormOpen ? ' contact-form--open' : ''}`}
-          onClick={(e) => {
-            if (!(e.target as Element).closest('.contact-form__content')) {
-              handleHideForm();
-            }
-          }}
-        >
-          <div className="contact-form__container min-h-screen px-15">
-            <div className="w-full contact-form__content">
-              <button
-                className="close-btn contact-form__close"
-                onClick={handleHideForm}
-              ></button>
-              <form className="contact-form__form" onSubmit={handleSubmit}>
-                <div className="contact-form__input-wrapper">
-                  <input
-                    type="text"
-                    name="name"
-                    className="contact-form__input"
-                    required
-                  />
-                  <label className="contact-form__label">
-                    <span className="contact-form__span">Your Name</span>
-                  </label>
-                </div>
-                <div className="contact-form__input-wrapper">
-                  <input
-                    type="email"
-                    name="email"
-                    className="contact-form__input"
-                    required
-                  />
-                  <label className="contact-form__label">
-                    <span className="contact-form__span">Your Email</span>
-                  </label>
-                </div>
-                <div className="contact-form__input-wrapper">
-                  <textarea
-                    name="message"
-                    className="contact-form__input contact-form__textarea"
-                    required
-                  ></textarea>
-                  <label className="contact-form__label">
-                    <span className="contact-form__span">Message</span>
-                  </label>
-                </div>
-                {message.text && (
-                  <p
-                    className={`${
-                      message.type === MessageTypes.Invalid ? 'text-danger' : ''
-                    }`}
-                  >
-                    {message.text}
-                  </p>
-                )}
-                <button
-                  className={`btn btn--primary${
-                    isLoading ? ' btn--active' : ''
-                  } mt-15 contact-form__send-form`}
+          <button
+            className="btn btn--primary mt-15 contact__send-btn"
+            onClick={handleShowForm}
+          >
+            Send A Message
+          </button>
+        </div>
+      </div>
+
+      <div
+        className={`contact-form${isFormOpen ? ' contact-form--open' : ''}`}
+        onClick={(e) => {
+          if (!(e.target as Element).closest('.contact-form__content')) {
+            handleHideForm();
+          }
+        }}
+      >
+        <div className="contact-form__container min-h-screen px-15">
+          <div className="w-full contact-form__content">
+            <button
+              className="close-btn contact-form__close"
+              onClick={handleHideForm}
+            ></button>
+            <form className="contact-form__form" onSubmit={handleSubmit}>
+              <div className="contact-form__input-wrapper">
+                <input
+                  type="text"
+                  name="name"
+                  className="contact-form__input"
+                  required
+                />
+                <label className="contact-form__label">
+                  <span className="contact-form__span">Your Name</span>
+                </label>
+              </div>
+              <div className="contact-form__input-wrapper">
+                <input
+                  type="email"
+                  name="email"
+                  className="contact-form__input"
+                  required
+                />
+                <label className="contact-form__label">
+                  <span className="contact-form__span">Your Email</span>
+                </label>
+              </div>
+              <div className="contact-form__input-wrapper">
+                <textarea
+                  name="message"
+                  className="contact-form__input contact-form__textarea"
+                  required
+                ></textarea>
+                <label className="contact-form__label">
+                  <span className="contact-form__span">Message</span>
+                </label>
+              </div>
+              {message.text && (
+                <p
+                  className={`${
+                    message.type === MessageTypes.Invalid ? 'text-danger' : ''
+                  }`}
                 >
-                  {isLoading && (
-                    <span className="contact-form__send-loader"></span>
-                  )}
-                  Send
-                </button>
-              </form>
-            </div>
+                  {message.text}
+                </p>
+              )}
+              <button
+                className={`btn btn--primary${
+                  isLoading ? ' btn--active' : ''
+                } mt-15 contact-form__send-form`}
+              >
+                {isLoading && (
+                  <span className="contact-form__send-loader"></span>
+                )}
+                Send
+              </button>
+            </form>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

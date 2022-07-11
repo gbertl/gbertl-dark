@@ -1,7 +1,13 @@
 import About from '../components/About';
+import HeadTitle from '../components/HeadTitle';
 
 const Home = () => {
-  return <About />;
+  return (
+    <>
+      <HeadTitle />
+      <About />
+    </>
+  );
 };
 
 export default Home;
