@@ -205,14 +205,13 @@
     height: 1px;
     background-color: var(--clr-primary);
 
-    transform: scaleX(0);
-    transform-origin: right;
+    transform-origin: left;
     transition: transform 300ms;
   }
 
   &:hover::before {
-    transform: scaleX(1);
-    transform-origin: left;
+    transform: scaleX(0);
+    transform-origin: right;
   }
 }
 
