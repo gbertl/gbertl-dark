@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { useQuery } from 'react-query';
 
 import Thumbnails from './Thumbnails';
-import { Project } from '../../store/slices/portfolio';
-import { gql, useLazyQuery } from '@apollo/client';
 import useMounted from '../../hooks/useMounted';
+import * as api from '../../api';
+import { Project } from '../../typings';
 
 interface Props {
   currProjectIndex: number;
@@ -13,19 +14,6 @@ interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const GET_PROJECT = gql`
-  query GetProject($id: ID!) {
-    project(id: $id) {
-      title
-      livePreview
-      sourceCode
-      description
-      technologyList
-      screenshotList(orderBy: ["priority_order"])
-    }
-  }
-`;
-
 const Modal = ({
   currProjectIndex,
   setCurrProjectIndex,
@@ -33,7 +21,17 @@ const Modal = ({
   filterTitle,
   setIsModalOpen,
 }: Props) => {
-  const [getProject, { data }] = useLazyQuery(GET_PROJECT);
+  const { data } = useQuery(
+    ['project', projects[currProjectIndex]._id],
+    async () =>
+      (
+        await api.getProject(projects[currProjectIndex]._id, [
+          'technologies',
+          'screenshots',
+        ])
+      ).data,
+    { enabled: !!projects[currProjectIndex]._id }
+  );
 
   const [currProject, setCurrProject] = useState<Project | null>(null);
   const [prevWork, setPrevWork] = useState<Project | null>(null);
@@ -50,23 +48,14 @@ const Modal = ({
 
   const mounted = useMounted();
 
-  const [imageLoading, setImageLoading] = useState(false);
   const [counterText, setCounterText] = useState('');
 
   const modalTransitionRef = useRef<HTMLDivElement>(null);
 
-  const [isSlideLoading, setIsSlideLoading] = useState(false);
-  const slideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const imageLoadingRef = useRef(false);
+  const [covered, setCovered] = useState(false);
 
   const updateModal = () => {
-    setImageLoading(true);
     setCounterText(`${currProjectIndex + 1} of ${projects.length}`);
-    getProject({
-      variables: {
-        id: projects[currProjectIndex].id,
-      },
-    });
 
     currProjectIndex !== 0
       ? setPrevWork(projects[currProjectIndex - 1])
@@ -89,12 +78,6 @@ const Modal = ({
       : direction === 'prev'
       ? setCurrProjectIndex(currProjectIndex - 1)
       : null;
-
-    // will show loader after 3sec if slide isnt ready
-    if (slideTimeoutRef.current) clearTimeout(slideTimeoutRef.current);
-    slideTimeoutRef.current = setTimeout(() => {
-      if (imageLoadingRef.current) setIsSlideLoading(true);
-    }, 3000);
   };
 
   useEffect(() => {
@@ -103,24 +86,21 @@ const Modal = ({
   }, []);
 
   useEffect(() => {
-    imageLoadingRef.current = imageLoading;
-
     if (data) {
-      setCurrProject(data.project);
+      if (direction && !covered) return;
 
-      if (!imageLoading) {
+      setCurrProject(data);
+
+      if (direction)
         modalTransitionRef.current?.style.setProperty(
           '--tr-origin',
-          `${
-            direction === 'next' ? 'right' : direction === 'prev' ? 'left' : ''
-          }`
+          `${direction === 'next' ? 'right' : 'left'}`
         );
-        setDirection('');
 
-        setIsSlideLoading(false);
-      }
+      setDirection('');
+      setCovered(false);
     }
-  }, [data, imageLoading]);
+  }, [data, covered, direction]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -146,6 +126,12 @@ const Modal = ({
     return () => clearTimeout(time);
   }, [currProjectIndex]);
 
+  useEffect(() => {
+    if (!direction) return;
+    let timeout = setTimeout(() => setCovered(true), 500);
+    return () => clearTimeout(timeout);
+  }, [direction]);
+
   const modalTransitionClasses = direction
     ? `modal__transition--${direction}`
     : '';
@@ -164,9 +150,7 @@ const Modal = ({
       <div
         className={`modal__transition ${modalTransitionClasses}`}
         ref={modalTransitionRef}
-      >
-        {isSlideLoading && <span className="spinner"></span>}
-      </div>
+      ></div>
       <div className="modal__overlay" ref={modalOverlayRef}>
         <div className="modal__content">
           <div className="modal__header">
@@ -180,16 +164,15 @@ const Modal = ({
               onClick={() => setIsModalTransition(false)}
             ></button>
 
-            {currProject?.screenshotList && (
+            {currProject?.screenshots && (
               <Thumbnails
-                screenshotList={currProject?.screenshotList}
+                screenshots={currProject?.screenshots}
                 size={size}
                 setSize={setSize}
                 counter={counter}
                 setCounter={setCounter}
                 willTransition={willTransition}
                 setWillTransition={setWillTransition}
-                setImageLoading={setImageLoading}
               />
             )}
 
@@ -231,9 +214,9 @@ const Modal = ({
 
           <div className="modal__item">
             <div className="modal__techs-wrapper">
-              {currProject?.technologyList.map((technology, idx) => (
-                <span className="modal__tech" key={idx}>
-                  {technology}
+              {currProject?.technologies.map((technology) => (
+                <span className="modal__tech" key={technology._id}>
+                  {technology.name}
                 </span>
               ))}
             </div>
@@ -251,7 +234,7 @@ const Modal = ({
                 {prevWork?.title}
               </h2>
               <img
-                src={prevWork?.thumbnail}
+                src={prevWork?.screenshots[0].image}
                 alt=""
                 className="modal__small-img"
               />
@@ -271,7 +254,7 @@ const Modal = ({
                 {nextWork?.title}
               </h2>
               <img
-                src={nextWork?.thumbnail}
+                src={nextWork?.screenshots[0].image}
                 alt=""
                 className="modal__small-img"
               />

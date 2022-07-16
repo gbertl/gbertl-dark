@@ -1,10 +1,12 @@
+import Script from 'next/script';
+import type { AppProps } from 'next/app';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 import '../styles/scss/style.scss';
 import { wrapper } from '../store';
 import Layout from '../components/Layout';
-import Script from 'next/script';
-import type { AppProps } from 'next/app';
-import { ApolloProvider } from '@apollo/client';
-import client from '../apollo-client';
+
+const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -25,11 +27,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Script>
         </>
       )}
-      <ApolloProvider client={client}>
+      <QueryClientProvider client={queryClient}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </ApolloProvider>
+      </QueryClientProvider>
     </>
   );
 }

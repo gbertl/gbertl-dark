@@ -1,28 +1,28 @@
-import client from './apollo-client';
-import { gql } from '@apollo/client';
+import axios from './axios';
 
-export const getProjects = () =>
-  client.query({
-    query: gql`
-      query GetProjects {
-        projects(orderBy: ["priority_order"]) {
-          id
-          title
-          categoryList
-          thumbnail
-        }
-      }
-    `,
+export const getProject = (id: string, populating: string[] = []) =>
+  axios.get(`/projects/${id}`, {
+    params: {
+      populating,
+    },
   });
 
-export const getCategories = () =>
-  client.query({
-    query: gql`
-      query GetCategories {
-        categories(orderBy: ["priority_order"]) {
-          name
-          title
-        }
-      }
-    `,
+export const getProjects = (
+  ordering: string[] = [],
+  populating: string[] = [],
+  selects: string[] = []
+) =>
+  axios.get('/projects', {
+    params: {
+      ordering,
+      populating,
+      selects,
+    },
+  });
+
+export const getCategories = (ordering: string[] = []) =>
+  axios.get('/categories', {
+    params: {
+      ordering,
+    },
   });

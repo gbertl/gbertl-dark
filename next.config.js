@@ -3,7 +3,7 @@ module.exports = {
   images: {
     domains: [
       'avatars.githubusercontent.com',
-      'gilbertlc-api-files.s3.eu-central-1.amazonaws.com',
+      'api-gbertl-dev-bucket.s3.eu-central-1.amazonaws.com',
     ],
   },
 };

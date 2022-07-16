@@ -52,11 +52,6 @@
     display: grid;
     place-items: center;
 
-    .spinner {
-      width: 2em;
-      height: 2em;
-    }
-
     &--next {
       transform: scaleX(1);
       transform-origin: left;

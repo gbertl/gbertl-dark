@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import useAppSelector from '../hooks/useAppSelector';
-import Head from 'next/head';
 
 import Modal from './Modal';
 import useResetUI from '../hooks/useResetUI';
@@ -20,7 +19,8 @@ const Portfolio = () => {
 
   const handleFilter = (category: string) => {
     const filteredProjects = projectsData.filter(
-      (p) => category === 'all' || p.categoryList.includes(category)
+      (p) =>
+        category === 'all' || p.categories.some((pc) => pc.name === category)
     );
     const currCategory = categories.find((c) => c.name === category);
 
@@ -68,7 +68,7 @@ const Portfolio = () => {
           <div className="portfolio-item-wrapper">
             {projects.map((p, index) => (
               <div
-                data-category={p.categoryList.join()}
+                data-category={p.categories.join()}
                 className="portfolio-item"
                 key={index}
                 onClick={() => {
@@ -78,7 +78,7 @@ const Portfolio = () => {
               >
                 <div className="portfolio-item__thumbnail">
                   <Image
-                    src={p.thumbnail}
+                    src={p.screenshots[0].image}
                     alt=""
                     layout="fill"
                     objectFit="cover"
