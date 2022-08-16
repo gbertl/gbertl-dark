@@ -46,11 +46,9 @@ const About = () => {
           </div>
           <h1 className="about__heading">Hi 👋 , my name is Gilbert.</h1>
           <p>
-            Welcome to my portfolio! I'm a web developer based in the
-            Philippines. I specialize in <b>ReactJS</b>, <b>Django</b> and{' '}
-            <b>NodeJS</b> development. I enjoy building web applications, on all
-            levels of the tech stack from building web components to developing
-            server-side logic. Check out my projects{' '}
+            A freelance front-end developer based in the Philippines. Interested
+            in working together? Let's have talk. You can check out my past
+            works{' '}
             <button
               className="text-link"
               onClick={() => handleAboutLink(Paths.Portfolio)}
