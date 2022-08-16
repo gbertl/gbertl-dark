@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
+import { BsFillEyeFill, BsGithub } from 'react-icons/bs';
 
 import Thumbnails from './Thumbnails';
 import useMounted from '../../hooks/useMounted';
@@ -187,7 +188,7 @@ const Modal = ({
                       href={currProject?.livePreview}
                       target="_blank"
                     >
-                      <i className="fa-solid fa-link"></i>
+                      <BsFillEyeFill />
                     </a>
                   )}
                   {currProject?.sourceCode && (
@@ -196,7 +197,7 @@ const Modal = ({
                       href={currProject?.sourceCode}
                       target="_blank"
                     >
-                      <i className="fa-brands fa-github"></i>
+                      <BsGithub />
                     </a>
                   )}
                 </div>
