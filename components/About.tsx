@@ -6,6 +6,7 @@ import React from 'react';
 
 import { showOverlay, hideToggler, showLoader } from '../store/slices/ui';
 import useResetUI from '../hooks/useResetUI';
+import { BsFillEnvelopeFill, BsGithub, BsLinkedin } from 'react-icons/bs';
 
 enum Paths {
   Portfolio = '/portfolio',
@@ -72,7 +73,7 @@ const About = () => {
               target="_blank"
               className="btn btn--secondary"
             >
-              <i className="fab fa-github"></i> Github
+              <BsGithub /> Github
             </a>
             <a
               rel="noreferrer"
@@ -80,7 +81,7 @@ const About = () => {
               target="_blank"
               className="btn btn--secondary"
             >
-              <i className="fab fa-linkedin"></i> Linkedin
+              <BsLinkedin /> Linkedin
             </a>
             <a
               rel="noreferrer"
@@ -88,7 +89,7 @@ const About = () => {
               target="_blank"
               className="btn btn--secondary"
             >
-              <i className="fas fa-envelope"></i> Email
+              <BsFillEnvelopeFill /> Email
             </a>
           </div>
         </div>
