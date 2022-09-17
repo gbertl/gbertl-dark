@@ -21,11 +21,7 @@ const Loader = () => {
     <div className="loader">
       <div className="loader__container">
         <span className="spinner"></span>
-        <h2>Please wait for my API to boot up.</h2>
-        <p>
-          I only use free web hosting for my API so it sleeps after 30 minutes
-          of inactivity.
-        </p>
+        <h2>Please wait ...</h2>
       </div>
     </div>
   );
