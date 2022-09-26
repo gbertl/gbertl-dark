@@ -52,10 +52,13 @@
   &__container {
     max-width: 600px;
     margin: 0 auto;
-    margin-top: 80px;
+    margin-top: -40px;
     transform: scale(0.8);
     opacity: 0;
     transition: 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &--open &__container {
