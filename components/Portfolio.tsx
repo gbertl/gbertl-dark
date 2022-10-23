@@ -32,7 +32,7 @@ const Portfolio = () => {
     <>
       <section className="portfolio" id="portfolio">
         <div className="container portfolio__container">
-          <h1 className="section-heading">Featured Works</h1>
+          <h1 className="section-heading">Portfolio</h1>
 
           <ul className="flex justify-center filter flex-wrap">
             <li>
